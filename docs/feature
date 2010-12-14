@@ -1,0 +1,22 @@
+- Custumer:
+    - Melihat tagihan perlayanan yang di ambil
+    - Melakukan Komplaint (dengan menampilkan jumlah sisa ticket komplain)
+    - Melihat Ticket yang sudah/belum di respon oleh custumer services
+    - Notifikasi Ticket yang mendapatkan respon
+
+- Costumer Service:
+    - Melihat Daftar semua Custumer dan dan tagihannya, dengan ketentuan
+        - Daftar yg di tampilkan adalah tagihan bulan bersangkutan
+        - Terdapat menu dropdown untuk melihat melihat bulan sebelumnya
+        - Menampilakn total Jumlah tagihan keseluruhan
+        - Column yang di tampilkan adalah:
+            - Nama Pelanggan
+            - Layanan yang digunakan, terbagi menjadi:
+                - Jumlah dan sisa tiket Komplain
+                - Jumlah tagihan
+            - Total Tagihan (setelah mendapat kompensasi)
+            - Link menuju detail tagihan
+    - Melihat Detail tagihan, yang perlu ditampilan:
+        - Total Tagihan Awal untuk setiap layanan
+        - Komplain dan pengurangan tagihan
+
