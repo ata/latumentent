@@ -1,2 +1,4 @@
 *.geany
 *.~
+*.bak
+.geanyprj
