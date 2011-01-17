@@ -17,6 +17,8 @@
  */
 class User extends ActiveRecord
 {
+	const STATUS_ACTIVE = 1;
+	const STATUS_DELETED = 2;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return User the static model class
