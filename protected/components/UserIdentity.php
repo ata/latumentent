@@ -9,6 +9,7 @@ class UserIdentity extends CUserIdentity
 {
 	private $_id;
 	private $_name;
+	private $_role;
 	/**
 	 * Authenticates a user.
 	 * The example implementation makes sure if the username and password
@@ -29,6 +30,7 @@ class UserIdentity extends CUserIdentity
 		if($user){
 			$this->_id = $user->id;
 			$this->_name = $user->username;
+			$this->_role = $user->role->name;
 			$this->errorCode = self::ERROR_NONE;
 			return true;
 		}
@@ -43,5 +45,10 @@ class UserIdentity extends CUserIdentity
 	public function getName()
 	{
 		return $this->_name;
+	}
+	
+	public function getRole()
+	{
+		return $this->_role;
 	}
 }
