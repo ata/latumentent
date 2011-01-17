@@ -82,4 +82,5 @@ class Service extends ActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
 }
