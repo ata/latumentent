@@ -20,6 +20,9 @@ class Customer extends ActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * @return Customer the static model class
 	 */
+
+	public $customerServices;
+	
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -41,7 +44,7 @@ class Customer extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('number, user_id', 'required'),
+			array('number, user_id,customerServices', 'required'),
 			array('user_id', 'numerical', 'integerOnly'=>true),
 			array('number', 'length', 'max'=>255),
 			// The following rule is used by search().
@@ -62,7 +65,7 @@ class Customer extends ActiveRecord
 			'invoices' => array(self::HAS_MANY, 'Invoice', 'customer_id'),
 			'invoiceItems' => array(self::HAS_MANY, 'InvoiceItem', 'customer_id'),
 			'tickets' => array(self::HAS_MANY, 'Ticket', 'customer_id'),
-			'service'=>array(self::MANY_MANY,'Service','customer_has_service(customer_id,service_id)')
+			'services'=>array(self::MANY_MANY,'Service','customer_has_service(customer_id,service_id)')
 		);
 	}
 
@@ -73,8 +76,9 @@ class Customer extends ActiveRecord
 	{
 		return array(
 			'id' => Yii::t('app','ID'),
-			'number' => Yii::t('app','Number'),
+			'number' => Yii::t('app','No Apartement'),
 			'user_id' => Yii::t('app','User'),
+			'customerServices'=>Yii::t('app','Service'),
 		);
 	}
 
@@ -96,5 +100,26 @@ class Customer extends ActiveRecord
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	protected function afterSave()
+	{
+	    $this->saveCustomerService();
+	    return parent::afterSave();
+	}
+
+	private function saveCustomerService()
+	{
+	    foreach ($this->customerServices as $customerServices){
+		$this->dbConnection->createCommand("
+		    INSERT IGNORE into customer_has_service (customer_id,service_id)
+		    VALUES (:customer_id,:service_id)
+		    ")->query(array('customer_id'=>$this->id,'service_id'=>$customerServices));
+	    }
+	}
+
+	public function getSelectedService()
+	{
+	    return implode(',', CHtml::listData($this->services,'id','name'));
 	}
 }
