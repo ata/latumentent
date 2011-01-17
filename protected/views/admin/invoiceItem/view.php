@@ -19,8 +19,9 @@ $this->menu=array(
 	'attributes'=>array(
 		'id',
 		'amount',
-		'invoice_id',
-		'service_id',
 		'subtotal_compensation',
+		'invoice_id',
+		'period_id',
+		'customer_id',
 	),
 )); ?>

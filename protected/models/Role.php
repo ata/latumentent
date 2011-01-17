@@ -4,8 +4,9 @@
  * This is the model class for table "role".
  *
  * The followings are the available columns in table 'role':
- * @property string $id
+ * @property integer $id
  * @property string $name
+ * @property string $display
  *
  * The followings are the available model relations:
  * @property User[] $users
@@ -37,10 +38,11 @@ class Role extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'length', 'max'=>255),
+			array('name, display', 'required'),
+			array('name, display', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name', 'safe', 'on'=>'search'),
+			array('id, name, display', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,6 +66,7 @@ class Role extends ActiveRecord
 		return array(
 			'id' => Yii::t('app','ID'),
 			'name' => Yii::t('app','Name'),
+			'display' => Yii::t('app','Display'),
 		);
 	}
 
@@ -78,8 +81,9 @@ class Role extends ActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
+		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
+		$criteria->compare('display',$this->display,true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

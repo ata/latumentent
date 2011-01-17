@@ -4,16 +4,17 @@
  * This is the model class for table "invoice".
  *
  * The followings are the available columns in table 'invoice':
- * @property string $id
- * @property string $total_amount
- * @property string $total_compensation
- * @property string $period_id
- * @property string $customer_id
+ * @property integer $id
+ * @property double $total_amount
+ * @property double $total_compensation
+ * @property integer $period_id
+ * @property integer $customer_id
  *
  * The followings are the available model relations:
- * @property Period $period
  * @property Customer $customer
+ * @property Period $period
  * @property InvoiceItem[] $invoiceItems
+ * @property Ticket[] $tickets
  */
 class Invoice extends ActiveRecord
 {
@@ -42,9 +43,9 @@ class Invoice extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('period_id, customer_id', 'required'),
-			array('total_amount, period_id, customer_id', 'length', 'max'=>20),
-			array('total_compensation', 'length', 'max'=>255),
+			array('total_amount, total_compensation, period_id, customer_id', 'required'),
+			array('period_id, customer_id', 'numerical', 'integerOnly'=>true),
+			array('total_amount, total_compensation', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, total_amount, total_compensation, period_id, customer_id', 'safe', 'on'=>'search'),
@@ -59,9 +60,10 @@ class Invoice extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'period' => array(self::BELONGS_TO, 'Period', 'period_id'),
 			'customer' => array(self::BELONGS_TO, 'Customer', 'customer_id'),
+			'period' => array(self::BELONGS_TO, 'Period', 'period_id'),
 			'invoiceItems' => array(self::HAS_MANY, 'InvoiceItem', 'invoice_id'),
+			'tickets' => array(self::HAS_MANY, 'Ticket', 'invoice_id'),
 		);
 	}
 
@@ -90,11 +92,11 @@ class Invoice extends ActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('total_amount',$this->total_amount,true);
-		$criteria->compare('total_compensation',$this->total_compensation,true);
-		$criteria->compare('period_id',$this->period_id,true);
-		$criteria->compare('customer_id',$this->customer_id,true);
+		$criteria->compare('id',$this->id);
+		$criteria->compare('total_amount',$this->total_amount);
+		$criteria->compare('total_compensation',$this->total_compensation);
+		$criteria->compare('period_id',$this->period_id);
+		$criteria->compare('customer_id',$this->customer_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

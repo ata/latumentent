@@ -11,26 +11,32 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($invoiceItem,'amount'); ?>
-		<?php echo $form->textField($invoiceItem,'amount',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($invoiceItem,'amount'); ?>
 		<?php echo $form->error($invoiceItem,'amount'); ?>
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($invoiceItem,'subtotal_compensation'); ?>
+		<?php echo $form->textField($invoiceItem,'subtotal_compensation'); ?>
+		<?php echo $form->error($invoiceItem,'subtotal_compensation'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($invoiceItem,'invoice_id'); ?>
-		<?php echo $form->textField($invoiceItem,'invoice_id',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($invoiceItem,'invoice_id'); ?>
 		<?php echo $form->error($invoiceItem,'invoice_id'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($invoiceItem,'service_id'); ?>
-		<?php echo $form->textField($invoiceItem,'service_id',array('size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->error($invoiceItem,'service_id'); ?>
+		<?php echo $form->labelEx($invoiceItem,'period_id'); ?>
+		<?php echo $form->textField($invoiceItem,'period_id'); ?>
+		<?php echo $form->error($invoiceItem,'period_id'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($invoiceItem,'subtotal_compensation'); ?>
-		<?php echo $form->textField($invoiceItem,'subtotal_compensation',array('size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->error($invoiceItem,'subtotal_compensation'); ?>
+		<?php echo $form->labelEx($invoiceItem,'customer_id'); ?>
+		<?php echo $form->textField($invoiceItem,'customer_id'); ?>
+		<?php echo $form->error($invoiceItem,'customer_id'); ?>
 	</div>
 
 	<div class="row buttons">

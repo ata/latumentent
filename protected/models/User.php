@@ -4,15 +4,15 @@
  * This is the model class for table "user".
  *
  * The followings are the available columns in table 'user':
- * @property string $id
- * @property string $fullname
+ * @property integer $id
  * @property string $username
  * @property string $password
  * @property string $email
- * @property string $role_id
+ * @property integer $role_id
  *
  * The followings are the available model relations:
  * @property Customer[] $customers
+ * @property Ticket[] $tickets
  * @property Role $role
  */
 class User extends ActiveRecord
@@ -42,12 +42,12 @@ class User extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('role_id', 'required'),
-			array('fullname, username, password, email', 'length', 'max'=>255),
-			array('role_id', 'length', 'max'=>20),
+			array('username, password, email, role_id', 'required'),
+			array('role_id', 'numerical', 'integerOnly'=>true),
+			array('username, password, email', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, fullname, username, password, email, role_id', 'safe', 'on'=>'search'),
+			array('id, username, password, email, role_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,6 +60,7 @@ class User extends ActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'customers' => array(self::HAS_MANY, 'Customer', 'user_id'),
+			'tickets' => array(self::HAS_MANY, 'Ticket', 'technician_id'),
 			'role' => array(self::BELONGS_TO, 'Role', 'role_id'),
 		);
 	}
@@ -71,7 +72,6 @@ class User extends ActiveRecord
 	{
 		return array(
 			'id' => Yii::t('app','ID'),
-			'fullname' => Yii::t('app','Fullname'),
 			'username' => Yii::t('app','Username'),
 			'password' => Yii::t('app','Password'),
 			'email' => Yii::t('app','Email'),
@@ -90,12 +90,11 @@ class User extends ActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('fullname',$this->fullname,true);
+		$criteria->compare('id',$this->id);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('email',$this->email,true);
-		$criteria->compare('role_id',$this->role_id,true);
+		$criteria->compare('role_id',$this->role_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

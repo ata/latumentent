@@ -4,12 +4,15 @@
  * This is the model class for table "period".
  *
  * The followings are the available columns in table 'period':
- * @property string $id
+ * @property integer $id
  * @property string $month
  * @property string $year
+ * @property string $raw_date
  *
  * The followings are the available model relations:
  * @property Invoice[] $invoices
+ * @property InvoiceItem[] $invoiceItems
+ * @property Ticket[] $tickets
  */
 class Period extends ActiveRecord
 {
@@ -38,10 +41,12 @@ class Period extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('month, year', 'required'),
 			array('month, year', 'length', 'max'=>255),
+			array('raw_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, month, year', 'safe', 'on'=>'search'),
+			array('id, month, year, raw_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,6 +59,8 @@ class Period extends ActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'invoices' => array(self::HAS_MANY, 'Invoice', 'period_id'),
+			'invoiceItems' => array(self::HAS_MANY, 'InvoiceItem', 'period_id'),
+			'tickets' => array(self::HAS_MANY, 'Ticket', 'period_id'),
 		);
 	}
 
@@ -66,6 +73,7 @@ class Period extends ActiveRecord
 			'id' => Yii::t('app','ID'),
 			'month' => Yii::t('app','Month'),
 			'year' => Yii::t('app','Year'),
+			'raw_date' => Yii::t('app','Raw Date'),
 		);
 	}
 
@@ -80,9 +88,10 @@ class Period extends ActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
+		$criteria->compare('id',$this->id);
 		$criteria->compare('month',$this->month,true);
 		$criteria->compare('year',$this->year,true);
+		$criteria->compare('raw_date',$this->raw_date,true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

@@ -15,6 +15,12 @@
 		<?php echo $form->error($role,'name'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($role,'display'); ?>
+		<?php echo $form->textField($role,'display',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($role,'display'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($role->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

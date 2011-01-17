@@ -43,12 +43,15 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'id',
 		'title',
 		'body',
-		'compensation',
 		'status',
+		'compensation',
 		'invoice_id',
 		/*
 		'invoice_item_id',
+		'period_id',
+		'customer_id',
 		'technician_id',
+		'author_id',
 		*/
 		array(
 			'class'=>'CButtonColumn',

@@ -42,9 +42,10 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		'id',
 		'amount',
-		'invoice_id',
-		'service_id',
 		'subtotal_compensation',
+		'invoice_id',
+		'period_id',
+		'customer_id',
 		array(
 			'class'=>'CButtonColumn',
 		),

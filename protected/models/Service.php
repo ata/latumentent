@@ -4,11 +4,8 @@
  * This is the model class for table "service".
  *
  * The followings are the available columns in table 'service':
- * @property string $id
+ * @property integer $id
  * @property string $name
- *
- * The followings are the available model relations:
- * @property InvoiceItem[] $invoiceItems
  */
 class Service extends ActiveRecord
 {
@@ -37,6 +34,7 @@ class Service extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('name', 'required'),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -52,7 +50,6 @@ class Service extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'invoiceItems' => array(self::HAS_MANY, 'InvoiceItem', 'service_id'),
 		);
 	}
 
@@ -78,7 +75,7 @@ class Service extends ActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
+		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 
 		return new CActiveDataProvider(get_class($this), array(

@@ -4,13 +4,15 @@
  * This is the model class for table "customer".
  *
  * The followings are the available columns in table 'customer':
- * @property string $id
+ * @property integer $id
  * @property string $number
- * @property string $user_id
+ * @property integer $user_id
  *
  * The followings are the available model relations:
  * @property User $user
  * @property Invoice[] $invoices
+ * @property InvoiceItem[] $invoiceItems
+ * @property Ticket[] $tickets
  */
 class Customer extends ActiveRecord
 {
@@ -39,9 +41,9 @@ class Customer extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id', 'required'),
+			array('number, user_id', 'required'),
+			array('user_id', 'numerical', 'integerOnly'=>true),
 			array('number', 'length', 'max'=>255),
-			array('user_id', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, number, user_id', 'safe', 'on'=>'search'),
@@ -58,6 +60,8 @@ class Customer extends ActiveRecord
 		return array(
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 			'invoices' => array(self::HAS_MANY, 'Invoice', 'customer_id'),
+			'invoiceItems' => array(self::HAS_MANY, 'InvoiceItem', 'customer_id'),
+			'tickets' => array(self::HAS_MANY, 'Ticket', 'customer_id'),
 		);
 	}
 
@@ -84,9 +88,9 @@ class Customer extends ActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
+		$criteria->compare('id',$this->id);
 		$criteria->compare('number',$this->number,true);
-		$criteria->compare('user_id',$this->user_id,true);
+		$criteria->compare('user_id',$this->user_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

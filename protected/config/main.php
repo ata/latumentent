@@ -7,8 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Billing Apartement',
-	'language' => 'id',
+	'name'=>'My Web Application',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -25,16 +24,11 @@ return array(
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'rahasia',
-			// 'ipFilters'=>array(...a list of IPs...),
-			'newFileMode'=>0644,
-			'newDirMode'=>0755,
-			 'generatorPaths'=>array(
-				'application.gii',   // a path alias
-			),
+		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
+			'ipFilters'=>array('127.0.0.1','::1'),
 		),
 		
 	),
-	
 
 	// application components
 	'components'=>array(
@@ -53,18 +47,12 @@ return array(
 			),
 		),
 		*/
-		// uncomment the following to use a MySQL database
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=billing_dev',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => 'root',
 			'charset' => 'utf8',
-		),
-		
-		'authManager'=>array(
-			'class'=>'CDbAuthManager',
-			'connectionID'=>'db',
 		),
 		
 		'errorHandler'=>array(

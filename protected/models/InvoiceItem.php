@@ -4,15 +4,18 @@
  * This is the model class for table "invoice_item".
  *
  * The followings are the available columns in table 'invoice_item':
- * @property string $id
- * @property string $amount
- * @property string $invoice_id
- * @property string $service_id
- * @property string $subtotal_compensation
+ * @property integer $id
+ * @property double $amount
+ * @property double $subtotal_compensation
+ * @property integer $invoice_id
+ * @property integer $period_id
+ * @property integer $customer_id
  *
  * The followings are the available model relations:
+ * @property Customer $customer
  * @property Invoice $invoice
- * @property Service $service
+ * @property Period $period
+ * @property Ticket[] $tickets
  */
 class InvoiceItem extends ActiveRecord
 {
@@ -41,11 +44,12 @@ class InvoiceItem extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('invoice_id, service_id', 'required'),
-			array('amount, invoice_id, service_id, subtotal_compensation', 'length', 'max'=>20),
+			array('amount, subtotal_compensation, invoice_id, period_id, customer_id', 'required'),
+			array('invoice_id, period_id, customer_id', 'numerical', 'integerOnly'=>true),
+			array('amount, subtotal_compensation', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, amount, invoice_id, service_id, subtotal_compensation', 'safe', 'on'=>'search'),
+			array('id, amount, subtotal_compensation, invoice_id, period_id, customer_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,8 +61,10 @@ class InvoiceItem extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'customer' => array(self::BELONGS_TO, 'Customer', 'customer_id'),
 			'invoice' => array(self::BELONGS_TO, 'Invoice', 'invoice_id'),
-			'service' => array(self::BELONGS_TO, 'Service', 'service_id'),
+			'period' => array(self::BELONGS_TO, 'Period', 'period_id'),
+			'tickets' => array(self::HAS_MANY, 'Ticket', 'invoice_item_id'),
 		);
 	}
 
@@ -70,9 +76,10 @@ class InvoiceItem extends ActiveRecord
 		return array(
 			'id' => Yii::t('app','ID'),
 			'amount' => Yii::t('app','Amount'),
-			'invoice_id' => Yii::t('app','Invoice'),
-			'service_id' => Yii::t('app','Service'),
 			'subtotal_compensation' => Yii::t('app','Subtotal Compensation'),
+			'invoice_id' => Yii::t('app','Invoice'),
+			'period_id' => Yii::t('app','Period'),
+			'customer_id' => Yii::t('app','Customer'),
 		);
 	}
 
@@ -87,11 +94,12 @@ class InvoiceItem extends ActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('amount',$this->amount,true);
-		$criteria->compare('invoice_id',$this->invoice_id,true);
-		$criteria->compare('service_id',$this->service_id,true);
-		$criteria->compare('subtotal_compensation',$this->subtotal_compensation,true);
+		$criteria->compare('id',$this->id);
+		$criteria->compare('amount',$this->amount);
+		$criteria->compare('subtotal_compensation',$this->subtotal_compensation);
+		$criteria->compare('invoice_id',$this->invoice_id);
+		$criteria->compare('period_id',$this->period_id);
+		$criteria->compare('customer_id',$this->customer_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
