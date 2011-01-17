@@ -34,6 +34,7 @@
     <div>
 	<?php echo $form->labelEx($customer,'customerServices');?>
 	<?php echo $form->checkBoxList($customer,'customerServices',$services);?>
+    <?php echo $form->error($customer,'customerServices')?>
     </div>
 
     <div>

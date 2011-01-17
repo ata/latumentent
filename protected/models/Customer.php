@@ -68,7 +68,7 @@ class Customer extends ActiveRecord
 			'invoices' => array(self::HAS_MANY, 'Invoice', 'customer_id'),
 			'invoiceItems' => array(self::HAS_MANY, 'InvoiceItem', 'customer_id'),
 			'tickets' => array(self::HAS_MANY, 'Ticket', 'customer_id'),
-			'services'=>array(self::MANY_MANY,'Service','customer_has_service(customer_id,service_id)')
+			'services'=>array(self::MANY_MANY,'Service','customer_has_service(customer_id,service_id)','index'=>'id')
 		);
 	}
 
@@ -125,4 +125,9 @@ class Customer extends ActiveRecord
 	{
 	    return implode(',', CHtml::listData($this->services,'id','name'));
 	}
+
+    public function afterFind() {
+        $this->customerServices = array_keys($this->services);
+        return parent::afterFind();
+    }
 }

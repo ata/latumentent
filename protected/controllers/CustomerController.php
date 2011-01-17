@@ -41,6 +41,16 @@ class CustomerController extends Controller
         ));
     }
 
+    public function actionUpdate()
+    {
+        $customer = Customer::model()->findByPk($_GET['id']);
+        $services = CHtml::listData(Service::model()->findAll(),'id','name');
+        $this->render('update',array(
+               'customer'=>$customer,
+               'services'=>$services,
+            ));
+    }
+
 
 }
 
