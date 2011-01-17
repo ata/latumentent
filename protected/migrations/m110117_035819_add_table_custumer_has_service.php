@@ -19,13 +19,11 @@ class m110117_035819_add_table_custumer_has_service extends CDbMigration
         $this->insert('service',array(
             'name' => 'Internet',
         ));
-        
         $this->insert('service',array(
             'name' => 'TV',
         ));
     }
 
-    
     public function down()
     {
         $this->truncateTable('service');

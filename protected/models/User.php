@@ -78,6 +78,14 @@ class User extends ActiveRecord
 			'role_id' => Yii::t('app','Role'),
 		);
 	}
+	
+	protected function beforeSave()
+	{
+		if($this->isNewRecord){
+			$this->password = md5($this->password);
+		}
+		return parent::beforeSave();
+	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -100,4 +108,5 @@ class User extends ActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
 }
