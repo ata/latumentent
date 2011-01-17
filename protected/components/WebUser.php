@@ -19,6 +19,16 @@ class WebUser extends CWebUser
 	{
 		return $this->getState('__role');
 	}
+	/**
+	 * @override
+	 */
+	public function checkAccess($operation,$params=array(),$allowCaching=true)
+	{
+		if ($operation === $this->role) {
+			return true;
+		}
+		return false;
+	}
 	/*
 	public function setUserIdentity($identity)
 	{
