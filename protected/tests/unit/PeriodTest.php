@@ -31,6 +31,7 @@ class PeriodTest extends CDbTestCase
 		$active_customers = Customer::model()->findAllActive();
 		$invoices = Invoice::model()->findAllByAttributes(array('period_id' => $period->id));
 		$this->assertEquals(count($active_customers), count($invoices));
+		
 	}
 	
 }

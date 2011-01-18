@@ -127,7 +127,11 @@ class Period extends ActiveRecord
 				$invoiceItem->period_id = $this->id;
 				$invoiceItem->invoice_id = $invoice->id;
 				$invoiceItem->save();
+				$invoice->total_amount += $invoiceItem->amount;
+				$invoice->total_compensation += $invoiceItem->subtotal_compensation;
 			}
+			
+			$invoice->save();
 		}
 	}
 	

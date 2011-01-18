@@ -15,6 +15,7 @@
  * @property integer $customer_id
  * @property integer $technician_id
  * @property integer $author_id
+ * @property integer $service_id
  *
  * The followings are the available model relations:
  * @property User $author
@@ -51,13 +52,13 @@ class Ticket extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, body, status, compensation, invoice_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'required'),
-			array('status, invoice_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'numerical', 'integerOnly'=>true),
+			array('title, body, status, compensation, service_id, invoice_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'required'),
+			array('status, invoice_id, service_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'numerical', 'integerOnly'=>true),
 			array('compensation', 'numerical'),
 			array('title, body', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, title, body, status, compensation, invoice_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'safe', 'on'=>'search'),
+			array('id, title, body, status, compensation, service_id, invoice_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,6 +76,7 @@ class Ticket extends ActiveRecord
 			'invoiceItem' => array(self::BELONGS_TO, 'InvoiceItem', 'invoice_item_id'),
 			'period' => array(self::BELONGS_TO, 'Period', 'period_id'),
 			'technician' => array(self::BELONGS_TO, 'User', 'technician_id'),
+			'service' => array(self::BELONGS_TO, 'Service', 'service_id'),
 		);
 	}
 
@@ -95,6 +97,7 @@ class Ticket extends ActiveRecord
 			'customer_id' => Yii::t('app','Customer'),
 			'technician_id' => Yii::t('app','Technician'),
 			'author_id' => Yii::t('app','Author'),
+			'service_id' => Yii::t('app','Service'),
 		);
 	}
 
@@ -120,6 +123,7 @@ class Ticket extends ActiveRecord
 		$criteria->compare('customer_id',$this->customer_id);
 		$criteria->compare('technician_id',$this->technician_id);
 		$criteria->compare('author_id',$this->author_id);
+		$criteria->compare('service_id',$this->author_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
