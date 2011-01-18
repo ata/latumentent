@@ -90,7 +90,7 @@ class MigrateCommand extends CConsoleCommand
 			echo "Total $n out of $total new ".($total===1 ? 'migration':'migrations')." to be applied:\n";
 
 		foreach($migrations as $migration)
-			echo "    $migration\n";
+			echo "	$migration\n";
 		echo "\n";
 
 		if($this->confirm('Apply the above '.($n===1 ? 'migration':'migrations')."?"))
@@ -117,7 +117,7 @@ class MigrateCommand extends CConsoleCommand
 		$n=count($migrations);
 		echo "Total $n ".($n===1 ? 'migration':'migrations')." to be reverted:\n";
 		foreach($migrations as $migration)
-			echo "    $migration\n";
+			echo "	$migration\n";
 		echo "\n";
 
 		if($this->confirm('Revert the above '.($n===1 ? 'migration':'migrations')."?"))
@@ -144,7 +144,7 @@ class MigrateCommand extends CConsoleCommand
 		$n=count($migrations);
 		echo "Total $n ".($n===1 ? 'migration':'migrations')." to be redone:\n";
 		foreach($migrations as $migration)
-			echo "    $migration\n";
+			echo "	$migration\n";
 		echo "\n";
 
 		if($this->confirm('Redo the above '.($n===1 ? 'migration':'migrations')."?"))
@@ -270,7 +270,7 @@ class MigrateCommand extends CConsoleCommand
 			else
 				echo "Total $n ".($n===1 ? 'migration has' : 'migrations have')." been applied before:\n";
 			foreach($migrations as $version=>$time)
-				echo "    (".date('Y-m-d H:i:s',$time).') '.$version."\n";
+				echo "	(".date('Y-m-d H:i:s',$time).') '.$version."\n";
 		}
 	}
 
@@ -292,7 +292,7 @@ class MigrateCommand extends CConsoleCommand
 				echo "Found $n new ".($n===1 ? 'migration' : 'migrations').":\n";
 
 			foreach($migrations as $migration)
-				echo "    ".$migration."\n";
+				echo "	".$migration."\n";
 		}
 	}
 
@@ -484,15 +484,15 @@ EOD;
 
 class {ClassName} extends CDbMigration
 {
-    public function up()
-    {
-    }
+	public function up()
+	{
+	}
 
-    /*
-    public function down()
-    {
-    }
-    */
+	/*
+	public function down()
+	{
+	}
+	*/
 }
 EOD;
 	}

@@ -97,4 +97,39 @@ class Period extends ActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function addPeriod()
+	{
+		$period = new Period();
+		$period->year = date('Y');
+		$period->month = date('m');
+		$period->raw_date = date('Y-m');
+		$period->save();
+		return $period;
+	}
+	
+	public function generateInvoices()
+	{
+		
+		foreach(Customer::model()->findAllActive() as $customer) {
+			$invoice = new Invoice();
+			$invoice->total_amount = 0;
+			$invoice->total_compensation = 0;
+			$invoice->customer_id = $customer->id;
+			$invoice->period_id = $this->id;
+			$invoice->save();
+			
+			foreach($customer->services as $service) {
+				$invoiceItem = new InvoiceItem;
+				$invoiceItem->amount = $service->price;
+				$invoiceItem->subtotal_compensation = 0;
+				$invoiceItem->customer_id = $customer->id;
+				$invoiceItem->period_id = $this->id;
+				$invoiceItem->invoice_id = $invoice->id;
+				$invoiceItem->save();
+			}
+		}
+	}
+	
+	
 }

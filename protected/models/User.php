@@ -7,6 +7,8 @@
  * @property integer $id
  * @property string $username
  * @property string $password
+ * @property integer $status
+ * @property string $fullname
  * @property string $email
  * @property integer $role_id
  *
@@ -44,12 +46,12 @@ class User extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, email, role_id', 'required'),
-			array('role_id,status', 'numerical', 'integerOnly'=>true),
-			array('username, password, email, fullname', 'length', 'max'=>255),
+			array('username, password, fullname, email, role_id', 'required'),
+			array('role_id, status', 'numerical', 'integerOnly'=>true),
+			array('username, password, fullname, email', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, password, email, role_id,status,fullname', 'safe', 'on'=>'search'),
+			array('id, username, status, fullname, password, email, role_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,6 +78,7 @@ class User extends ActiveRecord
 			'id' => Yii::t('app','ID'),
 			'username' => Yii::t('app','Username'),
 			'password' => Yii::t('app','Password'),
+			'fullname' => Yii::t('app','Full Name'),
 			'email' => Yii::t('app','Email'),
 			'role_id' => Yii::t('app','Role'),
             'fullname'=>Yii::t('app','Full Name'),
@@ -102,14 +105,28 @@ class User extends ActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('username',$this->username,true);
+		$criteria->compare('username',$this->username);
 		$criteria->compare('password',$this->password,true);
+		$criteria->compare('fullname',$this->password,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('role_id',$this->role_id);
+		$criteria->compare('status', $this->status);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function findAllActive()
+	{
+		return $this->findAllByAttributes(array('status' => self::STATUS_ACTIVE));
+	}
+	
+	
+	public function softDelete()
+	{
+		$this->status = self::STATUS_DELETED;
+		$this->save();
 	}
 	
 }

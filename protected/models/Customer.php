@@ -6,8 +6,8 @@
  * The followings are the available columns in table 'customer':
  * @property integer $id
  * @property string $number
+ * @property interger $status
  * @property integer $user_id
- *
  * The followings are the available model relations:
  * @property User $user
  * @property Invoice[] $invoices
@@ -47,8 +47,8 @@ class Customer extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('number, user_id,customerServices', 'required'),
-			array('user_id', 'numerical', 'integerOnly'=>true),
+			array('number, user_id, status, customerServices', 'required'),
+			array('user_id, status', 'numerical', 'integerOnly'=>true),
 			array('number', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -81,6 +81,7 @@ class Customer extends ActiveRecord
 			'id' => Yii::t('app','ID'),
 			'number' => Yii::t('app','No Apartement'),
 			'user_id' => Yii::t('app','User'),
+			'status' => Yii::t('app','Status'),
 			'customerServices'=>Yii::t('app','Service'),
 		);
 	}
@@ -99,7 +100,8 @@ class Customer extends ActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('number',$this->number,true);
 		$criteria->compare('user_id',$this->user_id);
-
+		$criteria->compare('status', $this->status);
+		
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
@@ -107,27 +109,44 @@ class Customer extends ActiveRecord
 
 	protected function afterSave()
 	{
-	    $this->saveCustomerService();
-	    return parent::afterSave();
+		$this->saveCustomerService();
+		return parent::afterSave();
+	}
+	
+	protected function beforeSave()
+	{
+		$this->user->status = $this->status;
+		return parent::beforeSave();
 	}
 
 	private function saveCustomerService()
 	{
-	    foreach ($this->customerServices as $customerServices){
+		foreach ($this->customerServices as $customerServices){
 		$this->dbConnection->createCommand("
-		    INSERT IGNORE into customer_has_service (customer_id,service_id)
-		    VALUES (:customer_id,:service_id)
-		    ")->query(array('customer_id'=>$this->id,'service_id'=>$customerServices));
-	    }
+			INSERT IGNORE into customer_has_service (customer_id,service_id)
+			VALUES (:customer_id,:service_id)
+			")->query(array('customer_id'=>$this->id,'service_id'=>$customerServices));
+		}
 	}
 
 	public function getSelectedService()
 	{
-	    return implode(',', CHtml::listData($this->services,'id','name'));
+		return implode(',', CHtml::listData($this->services,'id','name'));
 	}
 
-    public function afterFind() {
-        $this->customerServices = array_keys($this->services);
-        return parent::afterFind();
-    }
+	public function afterFind() {
+		$this->customerServices = array_keys($this->services);
+		return parent::afterFind();
+	}
+
+	public function findAllActive()
+	{
+		return $this->findAllByAttributes(array('status' => 1));
+	}
+	
+	public function softDelete()
+	{
+		$this->status = self::STATUS_DELETED;
+		$this->save();
+	}
 }
