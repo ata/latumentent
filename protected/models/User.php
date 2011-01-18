@@ -45,11 +45,11 @@ class User extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('username, password, email, role_id', 'required'),
-			array('role_id', 'numerical', 'integerOnly'=>true),
-			array('username, password, email', 'length', 'max'=>255),
+			array('role_id,status', 'numerical', 'integerOnly'=>true),
+			array('username, password, email, fullname', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, password, email, role_id', 'safe', 'on'=>'search'),
+			array('id, username, password, email, role_id,status,fullname', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -78,6 +78,7 @@ class User extends ActiveRecord
 			'password' => Yii::t('app','Password'),
 			'email' => Yii::t('app','Email'),
 			'role_id' => Yii::t('app','Role'),
+            'fullname'=>Yii::t('app','Full Name'),
 		);
 	}
 	
