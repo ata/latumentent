@@ -1,17 +1,17 @@
 <?php
 
 /**
- * This is the model class for table "service".
+ * This is the model class for table "customer_has_service".
  *
- * The followings are the available columns in table 'service':
- * @property integer $id
- * @property string $name
+ * The followings are the available columns in table 'customer_has_service':
+ * @property integer $customer_id
+ * @property integer $service_id
  */
-class Service extends ActiveRecord
+class CustomerHasService extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Service the static model class
+	 * @return CustomerHasService the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -23,7 +23,7 @@ class Service extends ActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'service';
+		return 'customer_has_service';
 	}
 
 	/**
@@ -34,12 +34,11 @@ class Service extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, price', 'required'),
-			array('name', 'length', 'max'=>255),
-			array('price', 'numerical'),
+			array('customer_id, service_id', 'required'),
+			array('customer_id, service_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, price', 'safe', 'on'=>'search'),
+			array('customer_id, service_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,6 +50,8 @@ class Service extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'service' => array(self::BELONGS_TO, 'Service', 'service_id'),
+			'customer' => array(self::BELONGS_TO, 'Customer', 'customer_id'),
 		);
 	}
 
@@ -60,8 +61,8 @@ class Service extends ActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => Yii::t('app','ID'),
-			'name' => Yii::t('app','Name'),
+			'customer_id' => 'Customer',
+			'service_id' => 'Service',
 		);
 	}
 
@@ -76,12 +77,12 @@ class Service extends ActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
+		$criteria->compare('customer_id',$this->customer_id);
 
-		return new CActiveDataProvider(get_class($this), array(
+		$criteria->compare('service_id',$this->service_id);
+
+		return new CActiveDataProvider('CustomerHasService', array(
 			'criteria'=>$criteria,
 		));
 	}
-
 }
