@@ -5,14 +5,19 @@
  */
 class CustomerController extends Controller
 {
-	public function actionIndex()
-	{
-		$customer = new Customer('search');
-	
-	$this->render('index',array(
-		'customer'=>$customer,
-	));
-	}
+    public function actionIndex()
+    {
+        $criteria = new CDbCriteria;
+        $criteria->with = "user";
+        $criteria->condition = "user.status=1";
+
+        $customer = new CActiveDataProvider("Customer");
+        $customer->criteria = $criteria;
+        
+        $this->render('index',array(
+            'customer'=>$customer,
+        ));
+    }
 
 	public function actionCreate()
 	{
@@ -41,15 +46,31 @@ class CustomerController extends Controller
 		));
 	}
 
-	public function actionUpdate()
-	{
-		$customer = Customer::model()->findByPk($_GET['id']);
-		$services = CHtml::listData(Service::model()->findAll(),'id','name');
-		$this->render('update',array(
-			'customer'=>$customer,
-			'services'=>$services,
-		));
-	}
+    public function actionUpdate()
+    {
+        $customer = Customer::model()->findByPk($_GET['id']);
+        $services = CHtml::listData(Service::model()->findAll(),'id','name');
+        //$customer->user->unsetAttributes();
+        //$customer->unsetAttributes();
+        if(isset($_POST['User'])){
+            $customer->user->attributes = $_POST['User'];
+            if($customer->user->update()){
+                $customer->attributes = $_POST['Customer'];
+                $customer->update();
+            }
+        }
+        $this->render('update',array(
+               'customer'=>$customer,
+               'services'=>$services,
+            ));
+    }
+
+    public function actionDelete()
+    {
+        $customer = Customer::model()->findByPk($_GET['id']);
+        $customer->user->status = 2;
+        $customer->user->save();
+    }
 
 
 }

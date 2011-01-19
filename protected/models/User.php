@@ -81,6 +81,7 @@ class User extends ActiveRecord
 			'fullname' => Yii::t('app','Full Name'),
 			'email' => Yii::t('app','Email'),
 			'role_id' => Yii::t('app','Role'),
+            'fullname'=>Yii::t('app','Full Name'),
 		);
 	}
 	

@@ -1,7 +1,7 @@
 
 <?php $this->widget('zii.widgets.grid.CGridView',array(
     'id'=>'customer-list',
-    'dataProvider'=>$customer->search(),
+    'dataProvider'=>$customer,
     'columns'=>array(
 	array(
 	    'header' => 'No',
@@ -11,8 +11,8 @@
 	'number',
 	array(
 	    //'name'=>'user_id',
-	    'header'=>Yii::t('app','Nama'),
-	    'value'=>'$data->user->username'
+	    'header'=>Yii::t('app','Full Name'),
+	    'value'=>'$data->user->fullname'
 	),
 	array(
 	    'header'=>Yii::t('app','Services'),

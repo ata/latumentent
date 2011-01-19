@@ -20,6 +20,12 @@
     </div>
 
     <div>
+    <?php echo $form->labelEx($customer->user,'fullname');?>
+    <?php echo $form->textField($customer->user,'fullname');?>
+    <?php echo $form->error($customer->user,'fullname');?>
+    </div>
+
+    <div>
 	<?php echo $form->labelEx($customer->user,'email');?>
 	<?php echo $form->textField($customer->user,'email');?>
 	<?php echo $form->error($customer->user,'email');?>
