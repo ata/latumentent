@@ -1,16 +1,52 @@
-<?php $this->pageTitle=Yii::app()->name; ?>
+<div id="slideshow">
+	<div class="image-container">
+		<img src="<?php echo Yii::app()->request->baseUrl?>/images/front-image.jpg" alt="image" title="image"/>
+	</div>
+	<div class="info">
+		<div class="row">
+			<span class="title">Room Type:</span>
+			<span class="value">Duluxe</span>
+		</div>
+		<div class="row">
+			<span class="title">Land Area:</span>
+			<span class="value">2800 sq/ft</span>
+		</div>
+		<div class="row">
+			<span class="title">Baths:</span>
+			<span class="value">2</span>
+		</div>
+		<div class="row">
+			<span class="title">Beds:</span>
+			<span class="value">3</span>
+		</div>
+	</div>
+</div>
+<div class="posts span-16">
+	<div class="post">
+		<h2 class="ptitle">Lorem Ipsum </h2>
+		<div class="pcontent">
+			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
+			nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
+			sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea 
+			rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem 
+			ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing 
+			elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna 
+			aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo 
+			duo dolores et ea reb <a href="#" class="read-more">Read More</a>
+		</div>
+	</div>
+</div>
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+<div class="span-8 last sidebar">
+	<h3>Menu Lorem</h3>
+	<ul>
+		<li>Lorem Ipsum dolor sit amet, consetetur sadipscing elitr,</li>
+		<li>Lorem Ipsum dolor sit amet, consetetur sadipscing elitr,</li>
+		<li>Lorem Ipsum dolor sit amet, consetetur sadipscing elitr,</li>
+		<li>Lorem Ipsum dolor sit amet, consetetur sadipscing elitr,</li>
+		<li>Lorem Ipsum dolor sit amet, consetetur sadipscing elitr,</li>
+		<li>Lorem Ipsum dolor sit amet, consetetur sadipscing elitr,</li>
+	</ul>
+</div>
 
-<p>Congratulations! You have successfully created your Yii application.</p>
 
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <tt><?php echo __FILE__; ?></tt></li>
-	<li>Layout file: <tt><?php echo $this->getLayoutFile('main'); ?></tt></li>
-</ul>
-
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>

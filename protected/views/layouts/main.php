@@ -41,13 +41,15 @@
 				)); ?>
 			</div><!-- mainmenu -->
 		</div><!-- header -->
-
 		
-
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-
+		<div class="span-24">
+			<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+				'links'=>$this->breadcrumbs,
+			)); ?><!-- breadcrumbs -->
+		</div>
+		
+		
+		
 		<?php echo $content; ?>
 
 		<div id="footer">
@@ -56,6 +58,55 @@
 
 	</div><!-- page -->
 
+</div>
+
+<div id="footbar">
+	<div class="container">
+		<div class="span-6">
+			<h3>Menu Lorem</h3>
+			<ul>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet,</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+			</ul>
+		</div>
+		<div class="span-6">
+			<h3>Menu Lorem</h3>
+			<ul>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet,</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+			</ul>
+		</div>
+		<div class="span-6">
+			<h3>Menu Lorem</h3>
+			<ul>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet,</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+			</ul>
+		</div>
+		<div class="span-6 last">
+			<h3>Menu Lorem</h3>
+			<ul>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet,</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Lorem Ipsum dolor sit amet</li>
+			</ul>
+		</div>
+	</div>
 </div>
 
 <div id="footersite">

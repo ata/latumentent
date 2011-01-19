@@ -16,8 +16,19 @@ body {
 }
 
 #bodysite{
-	background-color:#ffffff;
+	background-color:#F5F5F5;
 }
+
+
+#footbar {
+	background-color: #4D4D4D;
+	color: #FFFFFF;
+}
+
+#footbar h3{
+	color: #FFFFFF;
+}
+
 #footersite {
 	background-color: #000000;
 	color: #FFFFFF;
@@ -76,6 +87,27 @@ body {
 #content {
 	
 }
+
+#slideshow{
+	
+	
+}
+
+#slideshow img{
+	
+}
+#slideshow .info{
+	
+}
+	
+#slideshow .info .row{
+	
+}
+#slideshow .info .row .title{
+}
+#slideshow .info .row .value{
+}
+
 #sidebar {
 	padding: 20px 20px 20px 0;
 }
