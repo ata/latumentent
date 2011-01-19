@@ -19,6 +19,7 @@ class CustomerController extends Controller
 		));
 	}
 
+<<<<<<< HEAD
 	public function actionCreate()
 	{
 		$customer = new Customer;

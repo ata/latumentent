@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="new-customer">
     <?php echo CHtml::link(Yii::t('app','Tambah Customer'),array('create'))?>
 </div>
@@ -19,6 +20,10 @@
 
 <div class="list-customer">
     <!-->list customer<-->
+=======
+<div class="list-customer">
+    <!--> list buat customer<-->
+>>>>>>> 997bedac72dd4ca09aa5189e0192e4e2c0d95108
     <?php $this->widget('zii.widgets.grid.CGridView',array(
 	'id'=>'customer-list',
 	'dataProvider'=>$customer,
@@ -32,7 +37,12 @@
 	    array(
 		//'name'=>'user_id',
 		'header'=>Yii::t('app','Full Name'),
+<<<<<<< HEAD
 		'value'=>'$data->user->fullname'
+=======
+		'type'=>'raw',
+		'value'=>'CHtml::link($data->user->fullname,array("detail"))'
+>>>>>>> 997bedac72dd4ca09aa5189e0192e4e2c0d95108
 	    ),
 	    array(
 		'header'=>Yii::t('app','Services'),
@@ -42,5 +52,18 @@
 		'class'=>'CButtonColumn',
 	    ),
 	),
+<<<<<<< HEAD
     ))?><!--><-->
 </div>
+=======
+    ))
+    ?>
+    <!-->end list customer<-->
+</div>
+
+<div class="customer-new">
+    <!-->link buat customer<-->
+    <?php echo CHtml::link(Yii::t('app','Tambah Customer'),array('create'));?>
+    <!-->end link<-->
+</div>
+>>>>>>> 997bedac72dd4ca09aa5189e0192e4e2c0d95108
