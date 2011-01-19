@@ -79,6 +79,10 @@ body {
 	border-right:2px solid #ffffff;
 }
 
+#mainmenu ul li a.last {
+	border-right:none;
+}
+
 #mainmenu ul li a:hover, #mainmenu ul li.active a {
 	background-color: #CCCCCC;
 	color: #000000;
@@ -164,6 +168,7 @@ div.search-form {
 	padding: 10px;
 }
 .portlet {
+
 }
 .portlet-decoration {
 	background: none repeat scroll 0 0 #B7D6E7;
