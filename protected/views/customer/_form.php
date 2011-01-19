@@ -7,44 +7,44 @@
     
     <?php echo $form->errorSummary($customer); ?>
 
-    <div>
-	<?php echo $form->labelEx($customer->user,'username'); ?>
-	<?php echo $form->textField($customer->user,'username');?>
-	<?php echo $form->error($customer->user,'usernane')?>
+    <div class="row">
+        <?php echo $form->labelEx($customer->user,'username'); ?>
+        <?php echo $form->textField($customer->user,'username');?>
+        <?php echo $form->error($customer->user,'usernane')?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($customer->user,'password');?>
+        <?php echo $form->passwordField($customer->user,'password');?>
+        <?php echo $form->error($customer->user,'password')?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($customer->user,'fullname');?>
+        <?php echo $form->textField($customer->user,'fullname');?>
+        <?php echo $form->error($customer->user,'fullname');?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($customer->user,'email');?>
+        <?php echo $form->textField($customer->user,'email');?>
+        <?php echo $form->error($customer->user,'email');?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($customer,'number');?>
+        <?php echo $form->textField($customer,'number');?>
+        <?php echo $form->error($customer,'number');?>
     </div>
 
     <div>
-	<?php echo $form->labelEx($customer->user,'password');?>
-	<?php echo $form->passwordField($customer->user,'password');?>
-	<?php echo $form->error($customer->user,'password')?>
+        <?php echo $form->labelEx($customer,'customerServices');?>
+        <?php echo $form->checkBoxList($customer,'customerServices',$services);?>
+        <?php echo $form->error($customer,'customerServices')?>
     </div>
 
     <div>
-    <?php echo $form->labelEx($customer->user,'fullname');?>
-    <?php echo $form->textField($customer->user,'fullname');?>
-    <?php echo $form->error($customer->user,'fullname');?>
-    </div>
-
-    <div>
-	<?php echo $form->labelEx($customer->user,'email');?>
-	<?php echo $form->textField($customer->user,'email');?>
-	<?php echo $form->error($customer->user,'email');?>
-    </div>
-
-    <div>
-	<?php echo $form->labelEx($customer,'number');?>
-	<?php echo $form->textField($customer,'number');?>
-	<?php echo $form->error($customer,'number');?>
-    </div>
-
-    <div>
-	<?php echo $form->labelEx($customer,'customerServices');?>
-	<?php echo $form->checkBoxList($customer,'customerServices',$services);?>
-    <?php echo $form->error($customer,'customerServices')?>
-    </div>
-
-    <div>
-	<?php echo CHtml::submitButton($customer->isNewRecord ? 'Create' : 'Save'); ?>
+        <?php echo CHtml::submitButton($customer->isNewRecord ? 'Create' : 'Save'); ?>
     </div>
     <?php $this->endWidget();?>
 </div>

@@ -49,6 +49,7 @@ class User extends ActiveRecord
 			array('username, password, fullname, email, role_id', 'required'),
 			array('role_id, status', 'numerical', 'integerOnly'=>true),
 			array('username, password, fullname, email', 'length', 'max'=>255),
+			array('status','default','value'=>self::STATUS_ACTIVE),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, username, status, fullname, password, email, role_id', 'safe', 'on'=>'search'),
