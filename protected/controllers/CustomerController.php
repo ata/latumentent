@@ -35,16 +35,18 @@ class CustomerController extends Controller
 		if(isset($_POST['Customer'])){
 		    $customer->attributes = $_POST['Customer'];
 		    $customer->user_id = Yii::app()->db->getLastInsertId();
-		    $customer->save();
+		    if($customer->save()){
+			$this->redirect(array('index'));
+		    }
 		}
 	    }
-
+	}
+	
 	$services = CHtml::listData(Service::model()->findAll(),'id','name');
 	$this->render('create',array(
 		'customer'=>$customer,
 		'services'=>$services,
 	));
-	}
     }
 
     public function actionUpdate()
@@ -57,7 +59,9 @@ class CustomerController extends Controller
             $customer->user->attributes = $_POST['User'];
             if($customer->user->update()){
                 $customer->attributes = $_POST['Customer'];
-                $customer->update();
+                if($customer->update()){
+		    $this->redirect(array('index'));
+		}
             }
         }
         $this->render('update',array(
@@ -72,6 +76,10 @@ class CustomerController extends Controller
         $customer->user->softDelete();
     }
 
+    public function actionDetailInvoice()
+    {
+	$this->render('detail');
+    }
 
 }
 
