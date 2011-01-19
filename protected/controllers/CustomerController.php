@@ -31,12 +31,12 @@ class CustomerController extends Controller
 	    $customer->user->attributes = $_POST['User'];
 	    $customer->user->role_id = '2';
 	    if($customer->user->save()){
-		if(isset($_POST['Customer'])){
+            if(isset($_POST['Customer'])){
 		    $customer->attributes = $_POST['Customer'];
 		    $customer->user_id = Yii::app()->db->getLastInsertId();
 		    $customer->save();
 		    //var_dump($customer->attributes);
-		}
+            }
 	    }
 	}
 	$services = CHtml::listData(Service::model()->findAll(),'id','name');
@@ -68,8 +68,7 @@ class CustomerController extends Controller
     public function actionDelete()
     {
         $customer = Customer::model()->findByPk($_GET['id']);
-        $customer->user->status = 2;
-        $customer->user->save();
+        $customer->user->softDelete();
     }
 
 
