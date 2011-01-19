@@ -47,9 +47,10 @@ class Customer extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('number, user_id, status, customerServices', 'required'),
+			array('number, user_id, customerServices', 'required'),
 			array('user_id, status', 'numerical', 'integerOnly'=>true),
 			array('number', 'length', 'max'=>255),
+			array('status','default','value'=>self::STATUS_ACTIVE),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, number, user_id', 'safe', 'on'=>'search'),
