@@ -78,6 +78,27 @@ return array(
 				
 			),
 		),
+		
+		 'widgetFactory'=>array(
+			'widgets'=>array(
+				'CListView' => array(
+					'cssFile' => false,
+				),
+				'CLinkPager' => array(
+					'cssFile' => false,
+				),
+				'CGridView'=>array(
+					'cssFile' => false,
+				),
+				'CDetailView'=>array(
+					'cssFile' => false,
+				),
+				'CListView'=>array(
+					'cssFile' => false,
+				),
+				
+			),
+		),
 	),
 
 	// application-level parameters that can be accessed
