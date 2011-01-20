@@ -41,10 +41,18 @@ p, h1, h2, h3, h4, h5 {
 }
 
 #headersite h2 {
-	color: #FFFFFF;
-	line-height: 40px;
 	margin: 0;
 	padding: 0;
+	line-height: 40px;
+}
+
+#headersite a{
+	text-decoration: none;
+	color: #CCCCCC;
+}
+
+#headersite a:hover{
+	color: #FFFFFF;
 }
 
 #top-menu li{
@@ -308,19 +316,19 @@ div.search-form {
 
 }
 .portlet-decoration {
-	background: none repeat scroll 0 0 #B7D6E7;
-	border-left: 5px solid #6FACCF;
+	background: none repeat scroll 0 0 #4D4D4D;
+	border-left: 5px solid #000000;
 	padding: 3px 8px;
 }
 .portlet-title {
-	color: #298DCD;
+	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
 	margin: 0;
 	padding: 0;
 }
 .portlet-content {
-	background: none repeat scroll 0 0 #EFFDFF;
+	background: none repeat scroll 0 0 #CCCCCC;
 	font-size: 0.9em;
 	margin: 0 0 15px;
 	padding: 5px 8px;
@@ -342,17 +350,18 @@ div.search-form {
 	padding-bottom: 2px;
 }
 .operations li a {
-	color: #0066A4;
+	color: #FFFFFF;
 	display: block;
 	font: bold 12px/15px Arial;
 	padding: 2px 0 2px 8px;
 	text-decoration: none;
 }
 .operations li a:visited {
-	color: #0066A4;
+	color: #000000;
 }
 .operations li a:hover {
-	background: none repeat scroll 0 0 #80CFFF;
+	background: none repeat scroll 0 0 #FFFFFF;
+	color: #000000;
 }
 
 #customer-filter .row{
