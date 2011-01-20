@@ -24,7 +24,7 @@ class Customer extends ActiveRecord
 	 * @return Customer the static model class
 	 */
 	
-	public $customerIds;
+	public $serviceIds;
 	
 	public static function model($className=__CLASS__)
 	{
@@ -47,7 +47,7 @@ class Customer extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('number, user_id, customerIds', 'required'),
+			array('number, user_id, serviceIds', 'required'),
 			array('user_id, status', 'numerical', 'integerOnly'=>true),
 			array('number', 'length', 'max'=>255),
 			array('status','default','value'=>self::STATUS_ACTIVE),
@@ -83,7 +83,7 @@ class Customer extends ActiveRecord
 			'number' => Yii::t('app','No. Apartment'),
 			'user_id' => Yii::t('app','User'),
 			'status' => Yii::t('app','Status'),
-			'customerIds'=>Yii::t('app','Service'),
+			'serviceIds'=>Yii::t('app','Service'),
 		);
 	}
 
@@ -108,26 +108,25 @@ class Customer extends ActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-
-	protected function afterSave()
-	{
-		$this->saveCustomerService();
-		return parent::afterSave();
-	}
 	
 	protected function beforeSave()
 	{
 		$this->user->status = $this->status;
 		return parent::beforeSave();
 	}
+	
+	protected function afterSave()
+	{
+		$this->saveCustomerService();
+	}
 
 	private function saveCustomerService()
 	{
-		foreach ($this->customerIds as $customerIds){
+		foreach ($this->serviceIds as $serviceIds){
 			$this->dbConnection->createCommand("
 				INSERT IGNORE into customer_has_service (customer_id,service_id)
 				VALUES (:customer_id,:service_id)
-			")->query(array('customer_id'=>$this->id,'service_id'=>$customerIds));
+			")->query(array('customer_id'=>$this->id,'service_id'=>$serviceIds));
 		}
 	}
 
@@ -137,7 +136,7 @@ class Customer extends ActiveRecord
 	}
 
 	public function afterFind() {
-		$this->customerIds = array_keys($this->services);
+		$this->serviceIds = array_keys($this->services);
 		return parent::afterFind();
 	}
 
@@ -150,5 +149,34 @@ class Customer extends ActiveRecord
 	{
 		$this->status = self::STATUS_DELETED;
 		$this->save();
+	}
+	
+	public function generateInvoices($period_id)
+	{
+		$invoice = new Invoice();
+		$invoice->total_amount = 0;
+		$invoice->total_compensation = 0;
+		$invoice->customer_id = $this->id;
+		$invoice->period_id = $period_id;
+		if(!$invoice->save()){
+			return false;
+		}
+		
+		foreach($this->services as $service) {
+			$invoiceItem = new InvoiceItem;
+			$invoiceItem->amount = $service->price;
+			$invoiceItem->subtotal_compensation = 0;
+			$invoiceItem->customer_id = $this->id;
+			$invoiceItem->period_id = $period_id;
+			$invoiceItem->invoice_id = $invoice->id;
+			$invoiceItem->service_id = $service->id;
+			if (!$invoiceItem->save()) {
+				return false;
+			}
+			$invoice->total_amount += $invoiceItem->amount;
+			$invoice->total_compensation += $invoiceItem->subtotal_compensation;
+		}
+		
+		$invoice->save();
 	}
 }

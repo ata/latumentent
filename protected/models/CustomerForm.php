@@ -13,7 +13,7 @@ class CustomerForm extends CFormModel
 	public $password;
 	public $confirmPassword;
 	public $apartmentNumber;
-	public $serviceIds = array();
+	public $serviceIds;
 
 	/**
 	 * Declares the validation rules.
@@ -22,9 +22,10 @@ class CustomerForm extends CFormModel
 	{
 		return array(
 			// name, email, subject and body are required
-			array('fullname, username, password, confirmPassword', 'required'),
+			array('fullname, username, password, apartmentNumber, confirmPassword, serviceIds', 'required'),
 			array('confirmPassword', 'compare', 'compareAttribute'=>'password'),
 			array('username', 'unique', 'className' => 'User'),
+			array('apartmentNumber', 'unique', 'className' => 'Customer','attributeName' => 'number'),
 			// email has to be a valid email address
 			array('email', 'email'),
 			array('servicesIds','safe'),
@@ -46,6 +47,7 @@ class CustomerForm extends CFormModel
 			'confirmPassword' => Yii::t('app','Confirm Password'),
 			'email' => Yii::t('app','Email'),
 			'apartmentNumber' => Yii::t('app','Apartment Number'),
+			'serviceIds' => Yii::t('app','Services'),
 		);
 	}
 	
@@ -55,8 +57,34 @@ class CustomerForm extends CFormModel
 			return false;
 		}
 		
+		$user = new User;
+		$user->fullname = $this->fullname;
+		$user->username = $this->username;
+		$user->password = $this->password;
+		$user->role_id = Role::model()->findByName('customer')->id;
+		$user->email = $this->email;
 		
+		if (!$user->save()) {
+			var_dump($user->errors);
+			die();
+			return false;
+		}
 		
-		return false;
+		$customer = new Customer;
+		$customer->user_id = $user->id;
+		$customer->number = $this->apartmentNumber;
+		$customer->serviceIds = $this->serviceIds;
+		if (!$customer->save()) {
+			var_dump($customer->errors);
+			die();
+			return false;
+		}
+		
+
+		if(!$customer->generateInvoices(Period::model()->last()->find()->id)) {
+			return false;
+		}
+		
+		return true;
 	}
 }
