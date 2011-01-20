@@ -381,13 +381,11 @@ div.search-form {
 }
 
 .bills th.title, .summary-bills th.title{
-	padding: 5px;
-	border-right: 1px solid #FFFFFF;
-	width: 500px;
+	background: #CCCCCC;
 }
 
 .bills th.value, .summary-bills th.value{
-	text-align: left;
+	background: #CCCCCC;
 }
 
 
