@@ -15,6 +15,12 @@
 		<?php echo $form->error($service,'name'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($service,'price'); ?>
+		<?php echo $form->textField($service,'price'); ?>
+		<?php echo $form->error($service,'price'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($service->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

@@ -7,12 +7,17 @@
 
 	<div class="row">
 		<?php echo $form->label($service,'id'); ?>
-		<?php echo $form->textField($service,'id',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($service,'id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($service,'name'); ?>
 		<?php echo $form->textField($service,'name',array('size'=>60,'maxlength'=>255)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($service,'price'); ?>
+		<?php echo $form->textField($service,'price'); ?>
 	</div>
 
 	<div class="row buttons">
