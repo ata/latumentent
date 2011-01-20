@@ -19,8 +19,7 @@ class PeriodTest extends CDbTestCase
 		Period::model()->addPeriod();
 		$period = Period::model()->find(array('order' => 'id DESC'));
 		$this->assertNotNull($period);
-		$this->assertEquals($period->year, date('Y'));
-		$this->assertEquals($period->month, date('m'));
+		$this->assertEquals($period->name, date('F Y'));
 	}
 	
 	

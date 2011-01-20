@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	Yii::t('app','Periods')=>array('index'),
-	$period->id,
+	$period->name,
 );
 
 $this->menu=array(
@@ -12,13 +12,12 @@ $this->menu=array(
 );
 ?>
 
-<h2><?php echo Yii::t('app','View {name}',array('{name}' => $period->id)); ?></h2>
+<h2><?php echo Yii::t('app','View {name}',array('{name}' => $period->name)); ?></h2>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$period,
 	'attributes'=>array(
 		'id',
-		'month',
-		'year',
+		'name',
 	),
 )); ?>

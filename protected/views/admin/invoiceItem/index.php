@@ -46,6 +46,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'invoice_id',
 		'period_id',
 		'customer_id',
+		/*
+		'service_id',
+		*/
 		array(
 			'class'=>'CButtonColumn',
 		),

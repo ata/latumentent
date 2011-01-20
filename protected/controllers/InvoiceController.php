@@ -2,41 +2,68 @@
 
 class InvoiceController extends Controller
 {
+
+	/**
+	 * @return array action filters
+	 */
+	public function filters()
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+		);
+	}
+
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('index','view'),
+				'roles'=>array('admin','customer_service'),
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
+		);
+	}
+
 	public function actionIndex()
 	{
-		$this->render('index');
+		
+		
+		$invoice = new Invoice('search');
+		$invoice->unsetAttributes();
+		if (isset($_GET['Invoice'])) {
+			$invoice->attributes = $_GET['Invoice'];
+		}
+		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
+		$periodList = CHtml::listData(Period::model()->findAll(),'id','name');
+		$this->render('index',array(
+			'invoice' => $invoice,
+			'serviceList' => $serviceList,
+			'periodList' => $periodList,
+		));
 	}
 
 	public function actionView()
 	{
-		$this->render('view');
+		$this->render('view',array(
+			'invoice' => $this->loadInvoice($_GET['id']),
+		));
+	}
+	
+	
+	public function loadInvoice($id)
+	{
+		$invoice=Invoice::model()->findByPk((int)$id);
+		if($invoice===null)
+			throw new CHttpException(404,Yii::t('app','The requested page does not exist.'));
+		return $invoice;
 	}
 
-	// -----------------------------------------------------------
-	// Uncomment the following methods and override them if needed
-	/*
-	public function filters()
-	{
-		// return the filter configuration for this controller, e.g.:
-		return array(
-			'inlineFilterName',
-			array(
-				'class'=>'path.to.FilterClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
 
-	public function actions()
-	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-	*/
 }

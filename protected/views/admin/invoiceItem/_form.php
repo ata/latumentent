@@ -39,6 +39,12 @@
 		<?php echo $form->error($invoiceItem,'customer_id'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($invoiceItem,'service_id'); ?>
+		<?php echo $form->textField($invoiceItem,'service_id'); ?>
+		<?php echo $form->error($invoiceItem,'service_id'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($invoiceItem->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

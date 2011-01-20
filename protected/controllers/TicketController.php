@@ -6,21 +6,19 @@
 class TicketController extends Controller
 {
 
-    public function actionIndex()
-    {
-	$this->render('index');
-    }
+	public function actionIndex()
+	{
+		$this->render('index');
+	}
 
-    public function actionCustomerComplaint()
-    {
-	$this->render('customer_complaint');
-    }
+	public function actionCreate()
+	{
+		$this->render('create');
+	}
 
-    public function actionReplyTicket()
-    {
-	$this->render('replyticket');
-    }
-
-
+	public function actionReply()
+	{
+		$this->render('reply');
+	}
 }
 

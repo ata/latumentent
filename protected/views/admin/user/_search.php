@@ -7,12 +7,7 @@
 
 	<div class="row">
 		<?php echo $form->label($user,'id'); ?>
-		<?php echo $form->textField($user,'id',array('size'=>20,'maxlength'=>20)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($user,'fullname'); ?>
-		<?php echo $form->textField($user,'fullname',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textField($user,'id'); ?>
 	</div>
 
 	<div class="row">
@@ -27,7 +22,17 @@
 
 	<div class="row">
 		<?php echo $form->label($user,'role_id'); ?>
-		<?php echo $form->textField($user,'role_id',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($user,'role_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($user,'status'); ?>
+		<?php echo $form->textField($user,'status'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($user,'fullname'); ?>
+		<?php echo $form->textField($user,'fullname',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
 	<div class="row buttons">

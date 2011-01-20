@@ -17,8 +17,14 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($customer,'user_id'); ?>
-		<?php echo $form->textField($customer,'user_id',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($customer,'user_id'); ?>
 		<?php echo $form->error($customer,'user_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($customer,'status'); ?>
+		<?php echo $form->textField($customer,'status'); ?>
+		<?php echo $form->error($customer,'status'); ?>
 	</div>
 
 	<div class="row buttons">

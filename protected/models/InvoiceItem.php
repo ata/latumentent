@@ -109,4 +109,24 @@ class InvoiceItem extends ActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function getSubTotalCompensationLocale() 
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->subtotal_compensation,'IDR');
+	}
+	
+	public function getAmountLocale() 
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->amount,'IDR');
+	}
+	
+	public function getAmountPay()
+	{
+		return $this->amount = $this->subtotal_compensation;
+	}
+	
+	public function getAmountPayLocale() 
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->amountPay,'IDR');
+	}
 }

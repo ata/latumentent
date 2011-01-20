@@ -20,5 +20,6 @@ $this->menu=array(
 		'id',
 		'number',
 		'user_id',
+		'status',
 	),
 )); ?>

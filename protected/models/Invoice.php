@@ -18,6 +18,8 @@
  */
 class Invoice extends ActiveRecord
 {
+	
+	public $serviceIds = array();
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Invoice the static model class
@@ -48,7 +50,7 @@ class Invoice extends ActiveRecord
 			array('total_amount, total_compensation', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, total_amount, total_compensation, period_id, customer_id', 'safe', 'on'=>'search'),
+			array('id, total_amount, serviceIds, total_compensation, period_id, customer_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,6 +66,7 @@ class Invoice extends ActiveRecord
 			'period' => array(self::BELONGS_TO, 'Period', 'period_id'),
 			'invoiceItems' => array(self::HAS_MANY, 'InvoiceItem', 'invoice_id'),
 			'tickets' => array(self::HAS_MANY, 'Ticket', 'invoice_id'),
+			'services' => array(self::MANY_MANY, 'Service', 'invoice_item(invoice_id, service_id)', 'index' => 'id'),
 		);
 	}
 
@@ -101,5 +104,20 @@ class Invoice extends ActiveRecord
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function getTotalAmountLocale() 
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->total_amount,'IDR');
+	}
+	
+	public function getRawServices()
+	{
+		return implode(', ', CHtml::listData($this->services,'id','name'));
+	}
+	
+	public function getTotalCompensationLocale() 
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->total_compensation,'IDR');
 	}
 }

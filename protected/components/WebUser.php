@@ -6,6 +6,7 @@ class WebUser extends CWebUser
 	public function login($identity,$duration=0)
 	{
 		$this->setRole($identity);
+		$this->setFullname($identity);
 		parent::login($identity,$duration);
 	}
 	
@@ -19,6 +20,17 @@ class WebUser extends CWebUser
 	{
 		return $this->getState('__role');
 	}
+	
+	public function setFullname($identity)
+	{
+		$this->setState('__fullname',$identity->fullname);
+	}
+	
+	public function getFullname()
+	{
+		return $this->getState('__fullname');
+	}
+	
 	/**
 	 * @override
 	 */

@@ -35,6 +35,11 @@
 		<?php echo $form->textField($invoiceItem,'customer_id'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($invoiceItem,'service_id'); ?>
+		<?php echo $form->textField($invoiceItem,'service_id'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>
