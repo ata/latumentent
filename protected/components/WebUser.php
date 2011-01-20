@@ -51,11 +51,12 @@ class WebUser extends CWebUser
 	{
 		return $this->getState('__userIdentity');
 	}
+	*/
 	
 	public function getReturnUrl()
 	{
-		return $this->getState('__returnUrl',Yii::app()->createUrl('/dashboard/default/index'));
+		return $this->getState('__returnUrl',Yii::app()->createUrl('site/dashboard'));
 	}
-	*/
+
 
 }
