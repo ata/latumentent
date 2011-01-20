@@ -8,6 +8,12 @@
 			<p class="note">Fields with <span class="required">*</span> are required.</p>
 			
 			<?php echo $form->errorSummary($customerForm); ?>
+			
+			<div class="row">
+				<?php echo $form->labelEx($customerForm,'apartmentNumber'); ?>
+				<?php echo $form->textField($customerForm,'apartmentNumber'); ?>
+				<?php echo $form->error($customerForm,'apartmentNumber'); ?>
+			</div>
 
 			<div class="row">
 				<?php echo $form->labelEx($customerForm,'fullname'); ?>
@@ -23,13 +29,13 @@
 
 			<div class="row">
 				<?php echo $form->labelEx($customerForm,'password'); ?>
-				<?php echo $form->textField($customerForm,'password'); ?>
+				<?php echo $form->passwordField($customerForm,'password'); ?>
 				<?php echo $form->error($customerForm,'password'); ?>
 			</div>
 			
 			<div class="row">
 				<?php echo $form->labelEx($customerForm,'confirmPassword'); ?>
-				<?php echo $form->textField($customerForm,'confirmPassword'); ?>
+				<?php echo $form->passwordField($customerForm,'confirmPassword'); ?>
 				<?php echo $form->error($customerForm,'confirmPassword'); ?>
 			</div>
 			
@@ -37,6 +43,12 @@
 				<?php echo $form->labelEx($customerForm,'email'); ?>
 				<?php echo $form->textField($customerForm,'email'); ?>
 				<?php echo $form->error($customerForm,'email'); ?>
+			</div>
+			
+			<div class="row checkbox">
+				<?php echo $form->labelEx($customerForm,'serviceIds'); ?>
+				<?php echo CHtml::activeCheckBoxList($customerForm, 'serviceIds', $serviceList, array('separator' => '')); ?>
+				<?php echo $form->error($customerForm,'serviceIds'); ?>
 			</div>
 
 			<div class="row buttons">

@@ -15,7 +15,9 @@ class CustomerController extends Controller
 	
 	public function actionCreate()
 	{
+		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
 		$customerForm=new CustomerForm;
+		
 
 		if(isset($_POST['ajax']) && $_POST['ajax']==='customer-form')
 		{
@@ -26,13 +28,16 @@ class CustomerController extends Controller
 		if(isset($_POST['CustomerForm']))
 		{
 			$customerForm->attributes=$_POST['CustomerForm'];
-			if($customerForm->validate())
-			{
-				// form inputs are valid, do something here
-				return;
+			if ($customerForm->submit()) {
+				
 			}
+		} else {
+			$customerForm->serviceIds = array_keys($serviceList);
 		}
-		$this->render('create',array('customerForm'=>$customerForm));
+		$this->render('create',array(
+			'customerForm' => $customerForm,
+			'serviceList' => $serviceList,
+		));
 	}
 
 

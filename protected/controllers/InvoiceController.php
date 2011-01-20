@@ -34,14 +34,18 @@ class InvoiceController extends Controller
 	public function actionIndex()
 	{
 		
+		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
+		$periodList = CHtml::listData(Period::model()->findAll(),'id','name');
 		
 		$invoice = new Invoice('search');
 		$invoice->unsetAttributes();
+		
 		if (isset($_GET['Invoice'])) {
 			$invoice->attributes = $_GET['Invoice'];
+		} else {
+			$invoice->serviceIds = array_keys($serviceList);
 		}
-		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
-		$periodList = CHtml::listData(Period::model()->findAll(),'id','name');
+		
 		$this->render('index',array(
 			'invoice' => $invoice,
 			'serviceList' => $serviceList,
