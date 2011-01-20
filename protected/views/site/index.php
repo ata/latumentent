@@ -29,27 +29,26 @@
 <div class="content">
 	<div class="posts span-15 colborder">
 		<div class="post">
-			<h2 class="ptitle">Lorem Ipsum </h2>
+			<h2 class="ptitle">Recent News</h2>
 			<div class="pcontent">
 				<div id="post-image" class="floatLeft">
 					<img src="<?php echo Yii::app()->request->baseUrl?>/images/news.jpg" alt="image" title="image"/>
 				</div>
 				
 				<div class="">
-					Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
-					nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
-					sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea 
-					rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem 
-					ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing 
-					elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna 
-					aliquyam erat, sed diamvoluptua. <a href="#" class="read-more">Read More</a>
+					We've enhanced our new homes section so you can search our 
+					range of new home designs, apartment projects, house & land 
+					packages and land estates, faster and easier. NameSite offers 
+					the largest online directory of New Land Estates from Indonesia's 
+					leading property developers. We make finding and comparing 
+					land estates simple.<a href="#" class="read-more">Read More</a>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="span-8 last sidebar">
-		<h2 class="stitle">Menu Lorem</h2>
+		<h2 class="stitle">Menu Sidebar</h2>
 		<ul class="scontent">
 			<li>Lorem Ipsum dolor sit amet, consetetur sadipscing elitr,</li>
 			<li>Lorem Ipsum dolor sit amet, consetetur sadipscing elitr,</li>

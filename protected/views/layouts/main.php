@@ -46,47 +46,47 @@
 <div id="footbar">
 	<div class="container">
 		<div class="span-6">
-			<h3>Menu Lorem</h3>
+			<h3>Interior</h3>
 			<ul>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet,</li>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Interior Design</li>
+				<li>Free Interior Design</li>
+				<li>Interior Design</li>
+				<li>Free Interior Design</li>
+				<li>Interior Design</li>
+				<li>Free Interior Design</li>
 			</ul>
 		</div>
 		<div class="span-6">
-			<h3>Menu Lorem</h3>
+			<h3>Furniture</h3>
 			<ul>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet,</li>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Wooden Furniture</li>
+				<li>Plastic Furniture</li>
+				<li>Wooden Furniture</li>
+				<li>Plastic Furniture</li>
+				<li>Wooden Furniture</li>
+				<li>Plastic Furniture</li>
 			</ul>
 		</div>
 		<div class="span-6">
-			<h3>Menu Lorem</h3>
+			<h3>Wallpaper</h3>
 			<ul>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet,</li>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet</li>
+				<li>Kids Wallpaper</li>
+				<li>Nature Wallpaper</li>
+				<li>Kids Wallpaper</li>
+				<li>Nature Wallpaper</li>
+				<li>Kids Wallpaper</li>
+				<li>Nature Wallpaper</li>
 			</ul>
 		</div>
 		<div class="span-6 last">
-			<h3>Menu Lorem</h3>
+			<h3>Property</h3>
 			<ul>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet,</li>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet</li>
-				<li>Lorem Ipsum dolor sit amet</li>
+				<li>New Property</li>
+				<li>Used Property</li>
+				<li>New Property</li>
+				<li>Used Property</li>
+				<li>New Property</li>
+				<li>Used Property</li>
 			</ul>
 		</div>
 	</div>
