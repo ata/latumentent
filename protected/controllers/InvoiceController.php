@@ -70,7 +70,7 @@ class InvoiceController extends Controller
 	{
 		
 		if(!isset($_GET['id'])) {
-			$id = Yii::app()->user->id;
+			$id = Customer::model()->findByAttributes(array('user_id' => Yii::app()->user->id))->id;
 		} else {
 			$id = $_GET['id'];
 		}
