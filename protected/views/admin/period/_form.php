@@ -10,15 +10,9 @@
 	<?php echo $form->errorSummary($period); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($period,'month'); ?>
-		<?php echo $form->textField($period,'month',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($period,'month'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($period,'year'); ?>
-		<?php echo $form->textField($period,'year',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($period,'year'); ?>
+		<?php echo $form->labelEx($period,'name'); ?>
+		<?php echo $form->textField($period,'name',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($period,'name'); ?>
 	</div>
 
 	<div class="row buttons">

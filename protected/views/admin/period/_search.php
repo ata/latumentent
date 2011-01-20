@@ -7,17 +7,12 @@
 
 	<div class="row">
 		<?php echo $form->label($period,'id'); ?>
-		<?php echo $form->textField($period,'id',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($period,'id'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($period,'month'); ?>
-		<?php echo $form->textField($period,'month',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($period,'year'); ?>
-		<?php echo $form->textField($period,'year',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->label($period,'name'); ?>
+		<?php echo $form->textField($period,'name',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
 	<div class="row buttons">

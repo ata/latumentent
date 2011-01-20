@@ -69,6 +69,12 @@
 		<?php echo $form->error($ticket,'author_id'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($ticket,'service_id'); ?>
+		<?php echo $form->textField($ticket,'service_id'); ?>
+		<?php echo $form->error($ticket,'service_id'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($ticket->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

@@ -18,10 +18,11 @@ $this->menu=array(
 	'data'=>$user,
 	'attributes'=>array(
 		'id',
-		'fullname',
 		'username',
 		'password',
 		'email',
 		'role_id',
+		'status',
+		'fullname',
 	),
 )); ?>

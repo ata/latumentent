@@ -6,7 +6,7 @@ return array(
 		'price' => '100000',
 	),
 	'sample2'=>array(
-		'name' => '',
+		'name' => 'TV',
 		'price' => '80000',
 	),
 	

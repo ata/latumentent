@@ -23,8 +23,8 @@ class Customer extends ActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * @return Customer the static model class
 	 */
-
-	public $customerServices;
+	
+	public $customerIds;
 	
 	public static function model($className=__CLASS__)
 	{
@@ -47,7 +47,7 @@ class Customer extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('number, user_id, customerServices', 'required'),
+			array('number, user_id, customerIds', 'required'),
 			array('user_id, status', 'numerical', 'integerOnly'=>true),
 			array('number', 'length', 'max'=>255),
 			array('status','default','value'=>self::STATUS_ACTIVE),
@@ -80,10 +80,10 @@ class Customer extends ActiveRecord
 	{
 		return array(
 			'id' => Yii::t('app','ID'),
-			'number' => Yii::t('app','No Apartement'),
+			'number' => Yii::t('app','No. Apartment'),
 			'user_id' => Yii::t('app','User'),
 			'status' => Yii::t('app','Status'),
-			'customerServices'=>Yii::t('app','Service'),
+			'customerIds'=>Yii::t('app','Service'),
 		);
 	}
 
@@ -91,17 +91,18 @@ class Customer extends ActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($all = false)
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
 		$criteria->compare('id',$this->id);
 		$criteria->compare('number',$this->number,true);
 		$criteria->compare('user_id',$this->user_id);
-		$criteria->compare('status', $this->status);
+		if (!$all) {
+			$criteria->compare('status', self::STATUS_ACTIVE);
+		}
 		
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
@@ -122,11 +123,11 @@ class Customer extends ActiveRecord
 
 	private function saveCustomerService()
 	{
-		foreach ($this->customerServices as $customerServices){
-		$this->dbConnection->createCommand("
-			INSERT IGNORE into customer_has_service (customer_id,service_id)
-			VALUES (:customer_id,:service_id)
-			")->query(array('customer_id'=>$this->id,'service_id'=>$customerServices));
+		foreach ($this->customerIds as $customerIds){
+			$this->dbConnection->createCommand("
+				INSERT IGNORE into customer_has_service (customer_id,service_id)
+				VALUES (:customer_id,:service_id)
+			")->query(array('customer_id'=>$this->id,'service_id'=>$customerIds));
 		}
 	}
 
@@ -136,13 +137,13 @@ class Customer extends ActiveRecord
 	}
 
 	public function afterFind() {
-		$this->customerServices = array_keys($this->services);
+		$this->customerIds = array_keys($this->services);
 		return parent::afterFind();
 	}
 
 	public function findAllActive()
 	{
-		return $this->findAllByAttributes(array('status' => 1));
+		return $this->findAllByAttributes(array('status' => self::STATUS_ACTIVE));
 	}
 	
 	public function softDelete()

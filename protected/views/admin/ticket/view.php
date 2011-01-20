@@ -28,5 +28,6 @@ $this->menu=array(
 		'customer_id',
 		'technician_id',
 		'author_id',
+		'service_id',
 	),
 )); ?>

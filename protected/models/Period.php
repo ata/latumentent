@@ -5,9 +5,7 @@
  *
  * The followings are the available columns in table 'period':
  * @property integer $id
- * @property string $month
- * @property string $year
- * @property string $raw_date
+ * @property string $name
  *
  * The followings are the available model relations:
  * @property Invoice[] $invoices
@@ -41,12 +39,12 @@ class Period extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('month, year', 'required'),
-			array('month, year', 'length', 'max'=>255),
+			array('name', 'required'),
+			array('name', 'length', 'max'=>255),
 			array('raw_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, month, year, raw_date', 'safe', 'on'=>'search'),
+			array('id, name , raw_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,9 +69,15 @@ class Period extends ActiveRecord
 	{
 		return array(
 			'id' => Yii::t('app','ID'),
-			'month' => Yii::t('app','Month'),
-			'year' => Yii::t('app','Year'),
-			'raw_date' => Yii::t('app','Raw Date'),
+			'name' => Yii::t('app','Name'),
+		);
+	}
+	
+	public function scopes()
+	{
+		return array(
+			'desc' => array('order' => 'id DESC'),
+			'last' => array('order' => 'id DESC', 'limit' => 1),
 		);
 	}
 
@@ -89,23 +93,22 @@ class Period extends ActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('month',$this->month,true);
-		$criteria->compare('year',$this->year,true);
-		$criteria->compare('raw_date',$this->raw_date,true);
+		$criteria->compare('name',$this->month,true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
 	}
-	
+
 	public function addPeriod()
 	{
-		$period = new Period();
-		$period->year = date('Y');
-		$period->month = date('m');
-		$period->raw_date = date('Y-m');
-		$period->save();
-		return $period;
+		if (!$this->findByAttributes(array('name' => date('F Y')))) {
+			$period = new Period();
+			$period->name = date('F Y');
+			$period->save();
+			return $period;
+		}
+		return false;
 	}
 	
 	public function generateInvoices()
@@ -126,6 +129,7 @@ class Period extends ActiveRecord
 				$invoiceItem->customer_id = $customer->id;
 				$invoiceItem->period_id = $this->id;
 				$invoiceItem->invoice_id = $invoice->id;
+				$invoiceItem->service_id = $service->id;
 				$invoiceItem->save();
 				$invoice->total_amount += $invoiceItem->amount;
 				$invoice->total_compensation += $invoiceItem->subtotal_compensation;

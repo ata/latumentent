@@ -17,41 +17,29 @@
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
-<body>
+<body id="<?php echo $this->htmlId?>-page">
 
 <div id="headersite">
 	<div class="container">
-		<h2><?php echo Yii::app()->name ?></h2>
+		<div id="app-name" class="span-8"><h2><?php echo CHtml::link(Yii::app()->name,array('/'))?></h2></div>
+		<div id="top-menu" class="span-16 last">
+			<?php 
+			$this->widget('zii.widgets.CMenu', array(
+			'items'=>array(
+				array('label'=>'Home', 'url'=>array('/')),
+				array('label'=>'Administration', 'url'=>array('admin/service')),
+				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Logout ('.Yii::app()->user->fullname.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+			)));
+			?>
+		</div>
 	</div>
 </div>
+
 <div id="bodysite">
 	<div class="container">
-		<div id="header" class="span-24">
-			<div id="logo" class="floatLeft">[LOGO]</div>
-			<div id="mainmenu" class="floatRight">
-				<?php $this->widget('zii.widgets.CMenu',array(
-					'items'=>array(
-						array('label'=>'Home', 'url'=>array('/site/index')),
-						array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-						array('label'=>'Product', 'url'=>array('/site/page', 'view'=>'product')),
-						array('label'=>'Contact', 'url'=>array('/site/contact',), 'linkOptions' => array('class' => 'last')),
-						//array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-						//array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-					),
-				)); ?>
-			</div><!-- mainmenu -->
-			<div class="clear"></div>
-		</div><!-- header -->
-		
-		<div class="span-24">
-			<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-				'links'=>$this->breadcrumbs,
-			)); ?><!-- breadcrumbs -->
-		</div>
-
 		<?php echo $content; ?>
-
-	</div><!-- page -->
+	</div>
 </div>
 
 <div id="footbar">

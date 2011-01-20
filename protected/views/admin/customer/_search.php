@@ -7,7 +7,7 @@
 
 	<div class="row">
 		<?php echo $form->label($customer,'id'); ?>
-		<?php echo $form->textField($customer,'id',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($customer,'id'); ?>
 	</div>
 
 	<div class="row">
@@ -17,7 +17,12 @@
 
 	<div class="row">
 		<?php echo $form->label($customer,'user_id'); ?>
-		<?php echo $form->textField($customer,'user_id',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($customer,'user_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($customer,'status'); ?>
+		<?php echo $form->textField($customer,'status'); ?>
 	</div>
 
 	<div class="row buttons">

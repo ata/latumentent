@@ -10,12 +10,6 @@
 	<?php echo $form->errorSummary($user); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($user,'fullname'); ?>
-		<?php echo $form->textField($user,'fullname',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($user,'fullname'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($user,'username'); ?>
 		<?php echo $form->textField($user,'username',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($user,'username'); ?>
@@ -35,8 +29,20 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($user,'role_id'); ?>
-		<?php echo $form->textField($user,'role_id',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($user,'role_id'); ?>
 		<?php echo $form->error($user,'role_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($user,'status'); ?>
+		<?php echo $form->textField($user,'status'); ?>
+		<?php echo $form->error($user,'status'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($user,'fullname'); ?>
+		<?php echo $form->textField($user,'fullname',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($user,'fullname'); ?>
 	</div>
 
 	<div class="row buttons">

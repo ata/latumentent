@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	Yii::t('app','Periods')=>array('index'),
-	$period->id=>array('view','id'=>$period->id),
+	$period->name=>array('view','id'=>$period->id),
 	Yii::t('app','Update'),
 );
 
@@ -12,6 +12,6 @@ $this->menu=array(
 );
 ?>
 
-<h2><?php echo Yii::t('app','Update {name}',array('{name}' => $period->id)); ?></h2>
+<h2><?php echo Yii::t('app','Update {name}',array('{name}' => $period->name)); ?></h2>
 
 <?php echo $this->renderPartial('_form', array('period'=>$period)); ?>

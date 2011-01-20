@@ -23,5 +23,6 @@ $this->menu=array(
 		'invoice_id',
 		'period_id',
 		'customer_id',
+		'service_id',
 	),
 )); ?>

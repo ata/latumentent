@@ -60,6 +60,11 @@
 		<?php echo $form->textField($ticket,'author_id'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($ticket,'service_id'); ?>
+		<?php echo $form->textField($ticket,'service_id'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>
