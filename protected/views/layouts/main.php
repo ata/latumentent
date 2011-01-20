@@ -27,8 +27,8 @@
 <div id="bodysite">
 	<div class="container">
 		<div id="header" class="span-24">
-			<div id="logo">[LOGO]</div>
-			<div id="mainmenu">
+			<div id="logo" class="floatLeft">[LOGO]</div>
+			<div id="mainmenu" class="floatRight">
 				<?php $this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
 						array('label'=>'Home', 'url'=>array('/site/index')),
@@ -40,6 +40,7 @@
 					),
 				)); ?>
 			</div><!-- mainmenu -->
+			<div class="clear"></div>
 		</div><!-- header -->
 		
 		<div class="span-24">
@@ -47,17 +48,10 @@
 				'links'=>$this->breadcrumbs,
 			)); ?><!-- breadcrumbs -->
 		</div>
-		
-		
-		
+
 		<?php echo $content; ?>
 
-		<div id="footer">
-			
-		</div><!-- footer -->
-
 	</div><!-- page -->
-
 </div>
 
 <div id="footbar">
@@ -110,10 +104,15 @@
 </div>
 
 <div id="footersite">
-	<div class="container ac clear">
-		Copyright &copy; <?php echo date('Y'); ?> by <a href="http://nevisa.web.id">Nevisa IT Solution</a><br/>
-		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
+	<div class="container">
+		<div class="floatLeft">
+			Copyright &copy; <?php echo date('Y'); ?> by <a href="http://nevisa.web.id">Nevisa IT Solution</a>.
+			All Rights Reserved.
+		</div>
+		<div class="floatRight">
+			<?php echo Yii::powered(); ?>
+		</div>
+		<div class="clear"></div>
 	</div>
 </div>
 </body>

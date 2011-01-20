@@ -1,3 +1,7 @@
+/*
+	GLOBAL
+ */
+
 body {
 	background: none repeat scroll 0 0 #000000;
 	color: #555555;
@@ -5,9 +9,37 @@ body {
 	margin: 0;
 	padding: 0;
 }
+
+p, h1, h2, h3, h4, h5 {
+	margin: 0;
+	padding: 0;
+}
+
+#bodysite {
+	background-color:#F5F5F5;
+}
+
+.floatLeft {
+	float: left;
+}
+
+.floatRight {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+
+/*
+	HEADER
+ */
+ 
 #headersite {
 	background: none repeat scroll 0 0 #1A1A1A;
 }
+
 #headersite h2 {
 	color: #FFFFFF;
 	line-height: 40px;
@@ -15,53 +47,36 @@ body {
 	padding: 0;
 }
 
-#bodysite{
-	background-color:#F5F5F5;
-}
-
-
-#footbar {
-	background-color: #4D4D4D;
-	color: #FFFFFF;
-}
-
-#footbar h3{
-	color: #FFFFFF;
-}
-
-#footersite {
-	background-color: #000000;
-	color: #FFFFFF;
-}
-#footersite h3 {
-	color: #FFFFFF;
-}
 #header {
 	border-bottom: 3px solid #CCCCCC;
-	margin: 0;
+	margin-bottom: 20px;
 	padding: 0;
-	position: relative;
 	height:75px;
 }
+
 #logo {
-	position:absolute;
+	
 	left:0;
 	bottom:0;
+	margin-top: 35px;
 	font-size: 200%;
 	line-height: 50px;
-	
 }
+
 #mainmenu {
-	position:absolute;
+	margin-top: 35px;
 	right:0;
 	bottom:0;
 }
+
 #mainmenu ul {
 	margin: 0;
 }
+
 #mainmenu ul li {
 	display: inline;
 }
+
 #mainmenu ul li a {
 	padding:0;
 	margin:0;
@@ -88,28 +103,106 @@ body {
 	color: #000000;
 	text-decoration: none;
 }
-#content {
-	
-}
+
+
+/*
+	SLIDESHOW
+ */
+
 
 #slideshow{
-	
-	
+
 }
 
 #slideshow img{
 	
 }
+
 #slideshow .info{
-	
+	position: absolute;
+	height: 290px;
+	width: 290px;
+	left: 629px;
+	top: 138px;
+	background-color: #000000;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	padding: 30px;
+	color: #FFFFFF;
 }
 	
 #slideshow .info .row{
-	
+	padding: 5px 0;
+	border-bottom: 1px dashed #FFFFFF;
 }
 #slideshow .info .row .title{
 }
 #slideshow .info .row .value{
+}
+
+
+
+/*
+	CONTENT
+ */
+ 
+.content {
+	padding: 20px 0;
+}
+
+.ptitle, .stitle {
+	padding: 10px 0;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.pcontent, .scontent {
+	padding: 20px 0;
+	border-top: 1px solid #FFFFFF;
+}
+
+.scontent li {
+	list-style-type: none;
+	border-bottom: 1px solid #CCCCCC;
+	padding-bottom: 5px;
+}
+
+#post-image {
+	padding-right: 20px;
+}
+ 
+
+
+/*
+	FOOTER
+ */
+ 
+#footbar {
+	background-color: #4D4D4D;
+	color: #FFFFFF;
+	padding: 20px;
+}
+ 
+#footbar h3{
+	color: #FFFFFF;
+	padding-bottom: 10px;
+}
+
+#footbar li {
+	list-style-type: square;
+	padding-bottom: 3px;
+}
+
+#footersite {
+	background-color: #000000;
+	color: #FFFFFF;
+	padding: 10px 0;
+}
+#footersite h3 {
+	color: #FFFFFF;
+}
+
+#content {
+	
 }
 
 #sidebar {
