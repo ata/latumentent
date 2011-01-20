@@ -2,8 +2,8 @@
 
 
 <div id="header" class="span-24">
-	<div id="logo">[LOGO]</div>
-	<div id="mainmenu">
+	<div id="logo" class="floatLeft">[LOGO]</div>
+	<div id="mainmenu" class="floatRight">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
@@ -15,6 +15,7 @@
 			),
 		)); ?>
 	</div><!-- mainmenu -->
+	<div class="clear"></div>
 </div><!-- header -->
 
 <div class="span-24">

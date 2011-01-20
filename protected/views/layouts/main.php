@@ -21,8 +21,8 @@
 
 <div id="headersite">
 	<div class="container">
-		<div id="app-name" class="span-8"><h2><?php echo CHtml::link(Yii::app()->name,array('/'))?></h2></div>
-		<div id="top-menu" class="span-16 last">
+		<div id="app-name" class="floatLeft"><h2><?php echo CHtml::link(Yii::app()->name,array('/'))?></h2></div>
+		<div id="top-menu" class="floatRight">
 			<?php 
 			$this->widget('zii.widgets.CMenu', array(
 			'items'=>array(
@@ -33,6 +33,7 @@
 			)));
 			?>
 		</div>
+		<div class="clear"></div>
 	</div>
 </div>
 
