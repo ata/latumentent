@@ -25,6 +25,11 @@ class InvoiceController extends Controller
 				'actions'=>array('index','view'),
 				'roles'=>array('admin','customer_services'),
 			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('view'),
+				'roles'=>array('customer'),
+			),
+			
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -63,9 +68,11 @@ class InvoiceController extends Controller
 	
 	public function loadInvoice()
 	{
-		$id = $_GET['id'];
+		
 		if(!isset($_GET['id'])) {
 			$id = Yii::app()->user->id;
+		} else {
+			$id = $_GET['id'];
 		}
 		
 		$invoice=Invoice::model()->findByPk((int) $id);

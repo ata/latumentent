@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 20, 2011 at 02:59 PM
+-- Generation Time: Jan 20, 2011 at 07:41 PM
 -- Server version: 5.1.54
 -- PHP Version: 5.3.5-0.dotdeb.1
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `user_id` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `customer`
@@ -41,7 +41,8 @@ CREATE TABLE IF NOT EXISTS `customer` (
 INSERT INTO `customer` (`id`, `number`, `user_id`, `status`) VALUES
 (1, '001', 2, 1),
 (2, '002', 3, 1),
-(3, '003', 4, 1);
+(3, '003', 4, 1),
+(7, '004', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -64,7 +65,8 @@ INSERT INTO `customer_has_service` (`customer_id`, `service_id`) VALUES
 (1, 2),
 (2, 1),
 (3, 1),
-(3, 2);
+(3, 2),
+(7, 1);
 
 -- --------------------------------------------------------
 
@@ -80,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `invoice` (
   `period_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `invoice`
@@ -89,7 +91,8 @@ CREATE TABLE IF NOT EXISTS `invoice` (
 INSERT INTO `invoice` (`id`, `total_amount`, `total_compensation`, `period_id`, `customer_id`) VALUES
 (1, 180000, 0, 1, 1),
 (2, 100000, 0, 1, 2),
-(3, 180000, 0, 1, 3);
+(3, 180000, 0, 1, 3),
+(5, 100000, 0, 1, 7);
 
 -- --------------------------------------------------------
 
@@ -107,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `invoice_item` (
   `customer_id` int(11) NOT NULL,
   `service_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `invoice_item`
@@ -118,7 +121,8 @@ INSERT INTO `invoice_item` (`id`, `amount`, `subtotal_compensation`, `invoice_id
 (2, 80000, 0, 1, 1, 1, 2),
 (3, 100000, 0, 2, 1, 2, 1),
 (4, 100000, 0, 3, 1, 3, 1),
-(5, 80000, 0, 3, 1, 3, 2);
+(5, 80000, 0, 3, 1, 3, 2),
+(6, 100000, 0, 5, 1, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -249,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `status` int(11) NOT NULL,
   `fullname` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `user`
@@ -262,4 +266,5 @@ INSERT INTO `user` (`id`, `username`, `password`, `email`, `role_id`, `status`, 
 (4, 'customer3', 'ac43724f16e9241d990427ab7c8f4228', 'customer3@gmail.com', 2, 1, 'Customer 3'),
 (5, 'management1', 'ac43724f16e9241d990427ab7c8f4228', 'management1@gmail.com', 3, 1, 'Management 1'),
 (6, 'techincal_support1', 'ac43724f16e9241d990427ab7c8f4228', 'techincal_support1@gmail.com', 4, 1, 'Technical Support 1'),
-(7, 'customer_services', 'ac43724f16e9241d990427ab7c8f4228', 'customer_services1@gmail.com', 5, 1, 'Customer Service 1');
+(7, 'customer_services1', 'ac43724f16e9241d990427ab7c8f4228', 'customer_services1@gmail.com', 5, 1, 'Customer Service 1'),
+(11, 'ata', '24accbed29ea007663fb3d7e5765f1c7', 'ata@nevisa.web.id', 2, 1, 'Ahmad Tanwir');
