@@ -378,15 +378,10 @@ td {
 	width: 300px;
 }
 
-.form td {
-	background: #CCCCCC;
-	border: 1px solid #FFFFFF;
-	width: 200px;
-}
 
-.form td.form-title {
-	text-align: right;
-}
+/*
+	STYLE.CSS
+ */
 
 .grid-view-loading
 {
