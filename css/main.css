@@ -53,6 +53,10 @@ p, h1, h2, h3, h4, h5 {
 	padding-left: 10px;
 }
 
+#top-menu li a{
+	text-decoration: none;
+}
+
 #header {
 	border-bottom: 3px solid #CCCCCC;
 	margin-bottom: 20px;
@@ -247,6 +251,32 @@ div.flash-success a {
 div.form .rememberMe label {
 	display: inline;
 }
+
+div.form div.row{
+	display:block;
+}
+div.form div.row label{
+	float: left;
+	width: 150px;
+}
+
+.form .checkbox label{
+	display:inline;
+	float:none;
+}
+
+.form .checkbox .title{
+	display:block;
+	float:left;
+}
+
+
+div.form div.row input{
+	
+}
+
+
+
 div.view {
 	border: 1px solid #C9E0ED;
 	margin: 10px 0;
@@ -265,14 +295,6 @@ div.search-form {
 	padding: 10px;
 }
 
-.form .checkbox label{
-	display:inline;
-}
-
-.form .checkbox .title{
-	display:block;
-	float:left;
-}
 
 
 
@@ -377,15 +399,10 @@ td {
 	width: 300px;
 }
 
-.form td {
-	background: #CCCCCC;
-	border: 1px solid #FFFFFF;
-	width: 200px;
-}
 
-.form td.form-title {
-	text-align: right;
-}
+/*
+	STYLE.CSS
+ */
 
 .grid-view-loading
 {
