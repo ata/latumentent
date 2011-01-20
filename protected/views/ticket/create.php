@@ -1,27 +1,49 @@
-<h2>Ticket</h2>
 
-<div class="form">
-    <h3>Pengajuan Masalah Teknis</h3>
-    <div class="row">
-	<label>Layanan</label>
-	<select>
-	    <option>--Pilih Layanan--</option>
-	</select>
-    </div>
-    <div class="row">
-	<label>Judul Gangguan</label>
-	<input type="text" class="title">
-    </div>
-    <div class="row">
-	<label>Deskripsi</label>
-	<textarea></textarea>
-    </div>
-    <input type="submit" value="submit">
-</div>
+<h2><?php echo Yii::t('app','New Ticket')?></h2>
+<div class="form span-16">
+<?php $form=$this->beginWidget('CActiveForm', array(
+	'id'=>'ticket-form',
+	'enableAjaxValidation'=>true,
+)); ?>
+	<fieldset>
+		<legend>New Ticket</legend>
+		<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-<div class="info">
-    <ul>
-	<li>Tiket yang digunakan 3</li>
-	<li>Tiket maksimal 5</li>
-    </ul>
+		<?php echo $form->errorSummary($ticket); ?>
+		
+		<div class="row">
+			<?php echo $form->labelEx($ticket,'service_id'); ?>
+			<?php echo $form->dropDownList($ticket,'invoice_item_id', $invoiceItemList); ?>
+			<?php echo $form->error($ticket,'invoice_item_id'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($ticket,'title'); ?>
+			<?php echo $form->textField($ticket,'title'); ?>
+			<?php echo $form->error($ticket,'title'); ?>
+		</div>
+
+		<div class="row">
+			<?php echo $form->labelEx($ticket,'body'); ?>
+			<?php echo $form->textArea($ticket,'body'); ?>
+			<?php echo $form->error($ticket,'body'); ?>
+		</div>
+
+		
+		<div class="row buttons">
+			<?php echo CHtml::submitButton('Submit'); ?>
+		</div>
+	</fieldset>
+
+<?php $this->endWidget(); ?>
+
+</div><!-- form -->
+
+<div class="form span-8 last">
+	<fieldset>
+		<legend><?php echo Yii::t('app','info')?></legend>
+		<p>
+			Disini Info
+		</p>
+	</fieldset>
 </div>

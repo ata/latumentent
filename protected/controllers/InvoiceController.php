@@ -72,13 +72,12 @@ class InvoiceController extends Controller
 	public function loadInvoice()
 	{
 		
-		if(!isset($_GET['id'])) {
-			$id = Customer::model()->findByAttributes(array('user_id' => Yii::app()->user->id))->id;
+		if ('customer' === Yii::app()->user->role) {
+			$invoice = Invoice::model()->findByUserId(Yii::app()->user->id);
 		} else {
-			$id = $_GET['id'];
+			$invoice = Invoice::model()->findByPk((int) $_GET['id']);
 		}
 		
-		$invoice=Invoice::model()->findByPk((int) $id);
 		if($invoice===null)
 			throw new CHttpException(404,Yii::t('app','The requested page does not exist.'));
 		return $invoice;

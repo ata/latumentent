@@ -27,6 +27,9 @@
  */
 class Ticket extends ActiveRecord
 {
+	
+	const STATUS_OPEN = 1;
+	const STATUS_CLOSED = 2;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Ticket the static model class
@@ -55,7 +58,7 @@ class Ticket extends ActiveRecord
 			array('title, body, status, compensation, service_id, invoice_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'required'),
 			array('status, invoice_id, service_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'numerical', 'integerOnly'=>true),
 			array('compensation', 'numerical'),
-			array('title, body', 'length', 'max'=>255),
+			array('title', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, title, body, status, compensation, service_id, invoice_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'safe', 'on'=>'search'),

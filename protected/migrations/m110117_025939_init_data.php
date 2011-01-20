@@ -42,6 +42,7 @@ class m110117_025939_init_data extends CDbMigration
 			'role_id' => 1,
 		));
 		
+		
 		// Initial datafor Service
 		$this->insert('service',array(
 			'name' => 'Internet',

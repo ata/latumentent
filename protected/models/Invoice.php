@@ -111,6 +111,16 @@ class Invoice extends ActiveRecord
 		return $this->findAllByAttributes(array('period_id' => $period_id));
 	}
 	
+	public function findByUserId($user_id)
+	{
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'customer.user_id = :user_id';
+		$criteria->with = array('customer');
+		$criteria->params = array('user_id' => $user_id);
+		
+		return $this->find($criteria);
+	}
+	
 	public function getTotalAmountLocale() 
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->total_amount,'IDR');

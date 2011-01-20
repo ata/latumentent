@@ -97,6 +97,9 @@ class SiteController extends Controller
 	{
 		if (Yii::app()->user->role === 'customer') {
 			$this->redirect(array('invoice/view'));
+		
+		} else if (Yii::app()->user->role === 'admin'){
+			$this->redirect(array('admin/service'));
 		} else {
 			$this->redirect(array('invoice/index'));
 		}

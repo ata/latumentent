@@ -67,6 +67,10 @@ class InvoiceItem extends ActiveRecord
 			'service' => array(self::BELONGS_TO, 'Service', 'service_id'),
 			'period' => array(self::BELONGS_TO, 'Period', 'period_id'),
 			'tickets' => array(self::HAS_MANY, 'Ticket', 'invoice_item_id'),
+			'closedTickets' => array(self::HAS_MANY, 'Ticket', 'invoice_item_id',
+				'condition' => 'status = :status',
+				'params' => array('status' => Ticket::STATUS_CLOSED),
+			),
 		);
 	}
 
@@ -110,6 +114,20 @@ class InvoiceItem extends ActiveRecord
 		));
 	}
 	
+	public function findAllCurrentPeriod($user_id)
+	{
+		
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'customer.user_id = :user_id AND period_id = :period_id';
+		$criteria->params = array(
+			'user_id' => $user_id,
+			'period_id' => Period::model()->last()->find()->id,
+		);
+		
+		$criteria->with = array('customer');
+		return $this->findAll($criteria);
+	}
+	
 	public function getSubTotalCompensationLocale() 
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->subtotal_compensation,'IDR');
@@ -129,4 +147,5 @@ class InvoiceItem extends ActiveRecord
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->amountPay,'IDR');
 	}
+	
 }

@@ -9,15 +9,11 @@ return array(
 	'Administration' => 'Administrasi',
 	'Login' => 'Masuk',
 	'Logout ({name})' => 'Keluar ({name})',
-	
-	// 
 	'User' => 'Pengguna',
 	'Invoice' => 'Tagihan',
 	'Invoices' => 'Daftar Tagihan',
 	'Customer' => 'Pelanggan',
 	'Period' => 'Periode',
-	
-	//
 	'Name' => 'Nama',
 	'Full Name' => 'Nama Lengkap',
 	'Administation' => 'Administrasi',
@@ -25,8 +21,17 @@ return array(
 	'Apartment Number' => 'No. Apartemen',
 	'Password' => 'Kata Kunci',
 	'Confirm Password' => 'Konfirmasi Password',
-	'Compensation' => 'Konpensasi',
-	''
-	
-	
+	'Compensation' => 'Kompensasi',
+	'Total Bill' => 'Total Tagihan',
+	'Total Compensation' => 'Total Kompensasi',
+	'Add New Customer' => 'Tambah Pelanggan Baru',
+	'Action' => 'Aksi',
+	'No one tickets for compensation bills'  => 'Tidak Ada ticket untuk kompensasi tagihan',
+	'Initial Bill' => 'Tagihan Awal',
+	'Bills to pay' => 'Tagihan yang harus dibayar',
+	'Total Bills to pay' => 'Total tagihan yang dibayar',
+	'Detail Invoice' => 'Detail Tagihan',
+	'Price' => 'Harga',
+	'Title' => 'Judul',
+	'Body' => 'Isi',
 );

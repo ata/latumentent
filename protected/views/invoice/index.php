@@ -52,10 +52,10 @@ $this->breadcrumbs=array(
 			),
 			array(
 				'name' => 'rawServices',
-				'header' => 'Services',
+				'header' => Yii::t('app','Services'),
 			),
 			array(
-				'header' => 'action',
+				'header' => Yii::t('app','Action'),
 				'type' => 'raw',
 				'value' => 'CHtml::link(Yii::t("app","Detail"),array("view","id" => $data->id))',
 			),
