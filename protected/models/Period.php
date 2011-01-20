@@ -113,31 +113,12 @@ class Period extends ActiveRecord
 	
 	public function generateInvoices()
 	{
-		
 		foreach(Customer::model()->findAllActive() as $customer) {
-			$invoice = new Invoice();
-			$invoice->total_amount = 0;
-			$invoice->total_compensation = 0;
-			$invoice->customer_id = $customer->id;
-			$invoice->period_id = $this->id;
-			$invoice->save();
-			
-			foreach($customer->services as $service) {
-				$invoiceItem = new InvoiceItem;
-				$invoiceItem->amount = $service->price;
-				$invoiceItem->subtotal_compensation = 0;
-				$invoiceItem->customer_id = $customer->id;
-				$invoiceItem->period_id = $this->id;
-				$invoiceItem->invoice_id = $invoice->id;
-				$invoiceItem->service_id = $service->id;
-				$invoiceItem->save();
-				$invoice->total_amount += $invoiceItem->amount;
-				$invoice->total_compensation += $invoiceItem->subtotal_compensation;
-			}
-			
-			$invoice->save();
+			$customer->generateInvoices($this->id);
 		}
+		
 	}
+	
 	
 	
 }

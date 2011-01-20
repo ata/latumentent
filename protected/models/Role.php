@@ -89,4 +89,9 @@ class Role extends ActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function findByName($name)
+	{
+		return $this->findByAttributes(array('name' => $name));
+	}
 }
