@@ -106,6 +106,11 @@ class Invoice extends ActiveRecord
 		));
 	}
 	
+	public function findAllByPeriodId($period_id) 
+	{
+		return $this->findAllByAttributes(array('period_id' => $period_id));
+	}
+	
 	public function getTotalAmountLocale() 
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->total_amount,'IDR');
@@ -119,5 +124,18 @@ class Invoice extends ActiveRecord
 	public function getTotalCompensationLocale() 
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->total_compensation,'IDR');
+	}
+	
+	public function getTotalBills($period_id = null)
+	{
+		if ($period_id == null) {
+			$period_id = $this->period_id;
+		}
+		return array_sum(CHtml::listData($this->findAllByPeriodId($period_id),'id','total_amount'));
+	}
+	
+	public function getTotalBillsLocale()
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalBills,'IDR');
 	}
 }

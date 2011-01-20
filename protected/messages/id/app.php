@@ -25,7 +25,8 @@ return array(
 	'Apartment Number' => 'No. Apartemen',
 	'Password' => 'Kata Kunci',
 	'Confirm Password' => 'Konfirmasi Password',
-	'Compensation' => 'Konpensasi'
+	'Compensation' => 'Konpensasi',
+	''
 	
 	
 );

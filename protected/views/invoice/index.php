@@ -63,24 +63,18 @@ $this->breadcrumbs=array(
 	)); ?>
 </div>
 
-<div class="span-24">
+<div class="span-24 bills">
 	<table>
-		<tr class="odd">
-			<td>Total yang sudah membayar</td>
-			<td>Rp. 0</td>
-		</tr>
-		<tr>
-			<td>Total yang belum membayar</td>
-			<td>Rp. 0</td>
-		</tr>
-		<tr>
-			<td>Total</td>
-			<td>Rp. 0</td>
-		</tr>
+		<thead>
+			<tr>
+				<th class="title"><?php echo Yii::t('app','Total Tagihan')?></th>
+				<th class="ar value"><?php echo $invoice->totalBillsLocale ?></th>
+			</tr>
+		</thead>
 	</table>
 </div>
 
-<div class="span-24" id="info">
+<div class="span-24 form" id="info">
 	<form>
 		<fieldset>
 			<legend>Info</legend>

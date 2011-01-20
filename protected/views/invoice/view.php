@@ -27,6 +27,23 @@ $this->breadcrumbs=array(
 				<th class="value ar"><?php echo Yii::t('app','Compensation') ?></th>
 			</tr>
 		</thead>
+		<tbody>
+			<?php if(count($item->tickets) > 0):?>
+				<?php foreach($items->tickets as $ticket):?>
+				<tr>
+					<td>
+						<th><?php echo $ticket->title ?></th>
+					</td>
+				</tr>
+				<?php endforeach?>
+			<?php else:?>
+				<tr>
+					<td colspan="2">
+						<?php Yii::t('app','No one tickets')?>
+					</td>
+				</tr>
+			<?php endif?>
+		</tbody>
 		<tfoot>
 			<tr>
 				<th class="title"><?php echo Yii::t('app','Total Compensation') ?></th>

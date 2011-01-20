@@ -45,11 +45,14 @@ class InvoiceController extends Controller
 		$invoice = new Invoice('search');
 		$invoice->unsetAttributes();
 		
+		
 		if (isset($_GET['Invoice'])) {
 			$invoice->attributes = $_GET['Invoice'];
 		} else {
 			$invoice->serviceIds = array_keys($serviceList);
+			$invoice->period_id = Period::model()->last()->find()->id;
 		}
+		
 		
 		$this->render('index',array(
 			'invoice' => $invoice,
