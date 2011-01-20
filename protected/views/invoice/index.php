@@ -3,9 +3,11 @@ $this->breadcrumbs=array(
 	Yii::t('app','Invoices')=>array('index'),
 );?>
 
-<h2><?php echo Yii::t('app','Invoices'); ?></h2>
+<div>
+	<h2><?php echo Yii::t('app','Invoices'); ?></h2>
+</div>
 
-<div class="span-8">
+<div class="span-8 new-button">
 	<?php echo CHtml::link(Yii::t('app','Add New Customer'), array('customer/create'));?>
 </div>
 
@@ -14,11 +16,12 @@ $this->breadcrumbs=array(
 		<fieldset>
 			<legend><?php echo Yii::t('app','filter'); ?></legend>
 			<div class="row">
-				<label><?php echo Yii::t('app','Period'); ?></label>
-				<?php echo CHtml::activeDropDownList($invoice, 'period_id', $periodList); ?>
+				<div class="label floatLeft"><label><?php echo Yii::t('app','Period'); ?></label></div>
+				<div class="floatLeft"><?php echo CHtml::activeDropDownList($invoice, 'period_id', $periodList); ?></div>
+				<div class="clear"></div>
 			</div>
-			<div class="row">
-				<label><?php echo Yii::t('app','Service'); ?></label>
+			<div class="row checkbox">
+				<label class="title"><?php echo Yii::t('app','Service'); ?></label>
 				<?php echo CHtml::activeCheckBoxList($invoice, 'serviceIds', $serviceList, array('separator' => '')); ?>
 			</div>
 		</fieldset>
@@ -58,4 +61,32 @@ $this->breadcrumbs=array(
 			),
 		),
 	)); ?>
+</div>
+
+<div class="span-24">
+	<table>
+		<tr class="odd">
+			<td>Total yang sudah membayar</td>
+			<td>Rp. 0</td>
+		</tr>
+		<tr>
+			<td>Total yang belum membayar</td>
+			<td>Rp. 0</td>
+		</tr>
+		<tr>
+			<td>Total</td>
+			<td>Rp. 0</td>
+		</tr>
+	</table>
+</div>
+
+<div class="span-24" id="info">
+	<form>
+		<fieldset>
+			<legend>Info</legend>
+			<div>
+				<p>Untuk melihat detail pembayaran tiap customer, dapat meng-klik tabel row di atas.</p>
+			</div>
+		</fieldset>
+	</form>
 </div>

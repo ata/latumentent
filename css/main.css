@@ -264,6 +264,19 @@ div.search-form {
 	margin: 10px 0;
 	padding: 10px;
 }
+
+.form .checkbox label{
+	display:inline;
+}
+
+.form .checkbox .title{
+	display:block;
+	float:left;
+}
+
+
+
+
 .portlet {
 
 }
@@ -319,7 +332,7 @@ div.search-form {
 	
 }
 #customer-filter .row label{
-	
+	padding-right: 100px;
 }
 
 #customer-filter .row select{
@@ -327,3 +340,39 @@ div.search-form {
 }
 
 
+/*
+	INVOICES
+ */
+
+.new-button {
+	padding-top: 50px;
+	padding-left: 0px;
+}
+
+.new-button a {
+	text-decoration: none;
+	padding: 10px 20px;
+	margin-top: 50px;
+	background: #CCCCCC;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.invoice {
+	padding: 10px 0;
+}
+
+
+/*
+	TABLE
+*/
+
+tr {
+	background: #F8F8F8;
+}
+
+td {
+	border: 1px solid #CCCCCC;
+	width: 300px;
+}
