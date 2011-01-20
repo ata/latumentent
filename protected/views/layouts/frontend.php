@@ -17,6 +17,7 @@
 	</div><!-- mainmenu -->
 	<div class="clear"></div>
 </div><!-- header -->
+<div class="clean"></div>
 
 <div class="span-24">
 	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
