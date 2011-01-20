@@ -10,41 +10,45 @@
 			<?php echo $form->errorSummary($customerForm); ?>
 			
 			<div class="row">
-				<?php echo $form->labelEx($customerForm,'apartmentNumber'); ?>
-				<?php echo $form->textField($customerForm,'apartmentNumber'); ?>
-				<?php echo $form->error($customerForm,'apartmentNumber'); ?>
+				<table class="form">
+					<tr>
+						<td class="form-title"><?php echo $form->labelEx($customerForm,'apartmentNumber'); ?></td>
+						<td><?php echo $form->textField($customerForm,'apartmentNumber'); ?></td>
+						<td><?php echo $form->error($customerForm,'apartmentNumber'); ?></td>
+					</tr>
+					
+					<tr>
+						<td class="form-title"><?php echo $form->labelEx($customerForm,'fullname'); ?></td>
+						<td><?php echo $form->textField($customerForm,'fullname'); ?></td>
+						<td><?php echo $form->error($customerForm,'fullname'); ?></td>
+					</tr>
+					
+					<tr>
+						<td class="form-title"><?php echo $form->labelEx($customerForm,'username'); ?></td>
+						<td><?php echo $form->textField($customerForm,'username'); ?></td>
+						<td><?php echo $form->error($customerForm,'username'); ?></td>
+					</tr>
+					
+					<tr>
+						<td class="form-title"><?php echo $form->labelEx($customerForm,'password'); ?></td>
+						<td><?php echo $form->passwordField($customerForm,'password'); ?></td>
+						<td><?php echo $form->error($customerForm,'password'); ?></td>
+					</tr>
+					
+					<tr>
+						<td class="form-title"><?php echo $form->labelEx($customerForm,'confirmPassword'); ?></td>
+						<td><?php echo $form->passwordField($customerForm,'confirmPassword'); ?></td>
+						<td><?php echo $form->error($customerForm,'confirmPassword'); ?></td>
+					</tr>
+					
+					<tr>
+						<td class="form-title"><?php echo $form->labelEx($customerForm,'email'); ?></td>
+						<td><?php echo $form->textField($customerForm,'email'); ?></td>
+						<td><?php echo $form->error($customerForm,'email'); ?></td>
+					</tr>
+				</table>
 			</div>
 
-			<div class="row">
-				<?php echo $form->labelEx($customerForm,'fullname'); ?>
-				<?php echo $form->textField($customerForm,'fullname'); ?>
-				<?php echo $form->error($customerForm,'fullname'); ?>
-			</div>
-			
-			<div class="row">
-				<?php echo $form->labelEx($customerForm,'username'); ?>
-				<?php echo $form->textField($customerForm,'username'); ?>
-				<?php echo $form->error($customerForm,'username'); ?>
-			</div>
-
-			<div class="row">
-				<?php echo $form->labelEx($customerForm,'password'); ?>
-				<?php echo $form->passwordField($customerForm,'password'); ?>
-				<?php echo $form->error($customerForm,'password'); ?>
-			</div>
-			
-			<div class="row">
-				<?php echo $form->labelEx($customerForm,'confirmPassword'); ?>
-				<?php echo $form->passwordField($customerForm,'confirmPassword'); ?>
-				<?php echo $form->error($customerForm,'confirmPassword'); ?>
-			</div>
-			
-			<div class="row">
-				<?php echo $form->labelEx($customerForm,'email'); ?>
-				<?php echo $form->textField($customerForm,'email'); ?>
-				<?php echo $form->error($customerForm,'email'); ?>
-			</div>
-			
 			<div class="row checkbox">
 				<?php echo $form->labelEx($customerForm,'serviceIds'); ?>
 				<?php echo CHtml::activeCheckBoxList($customerForm, 'serviceIds', $serviceList, array('separator' => '')); ?>
