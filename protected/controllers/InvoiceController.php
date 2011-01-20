@@ -23,7 +23,7 @@ class InvoiceController extends Controller
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('index','view'),
-				'roles'=>array('admin','customer_service'),
+				'roles'=>array('admin','customer_services'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -56,14 +56,19 @@ class InvoiceController extends Controller
 	public function actionView()
 	{
 		$this->render('view',array(
-			'invoice' => $this->loadInvoice($_GET['id']),
+			'invoice' => $this->loadInvoice(),
 		));
 	}
 	
 	
-	public function loadInvoice($id)
+	public function loadInvoice()
 	{
-		$invoice=Invoice::model()->findByPk((int)$id);
+		$id = $_GET['id'];
+		if(!isset($_GET['id'])) {
+			$id = Yii::app()->user->id;
+		}
+		
+		$invoice=Invoice::model()->findByPk((int) $id);
 		if($invoice===null)
 			throw new CHttpException(404,Yii::t('app','The requested page does not exist.'));
 		return $invoice;

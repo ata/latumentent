@@ -17,12 +17,13 @@
 </div><!-- header -->
 
 <div class="clean"></div>
-
+<?php /*
 <div class="span-24">
 	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 		'links'=>$this->breadcrumbs,
 	)); ?><!-- breadcrumbs -->
 </div>
+*/?>
 
 <div id="content">
 	<?php echo $content; ?>

@@ -260,19 +260,24 @@ div.form div.row label{
 	width: 150px;
 }
 
-.form .checkbox label{
+div.form div.checkbox label{
 	display:inline;
 	float:none;
+	padding-right:30px;
 }
 
-.form .checkbox .title{
+div.form div.checkbox .title{
 	display:block;
 	float:left;
+	padding-right:0;
 }
-
 
 div.form div.row input{
 	
+}
+
+div.form div.buttons input{
+	margin-left:150px;
 }
 
 

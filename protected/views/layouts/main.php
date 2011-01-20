@@ -26,7 +26,7 @@
 			<?php 
 			$this->widget('zii.widgets.CMenu', array(
 			'items'=>array(
-				array('label'=>Yii::t('app','Home'), 'url'=>array('/')),
+				array('label'=>Yii::t('app','Dashboard'), 'url'=>array('site/dashboard'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'admin'),
 				array('label'=>Yii::t('app','Administration'), 'url'=>array('admin/service')),
 				array('label'=>Yii::t('app','Login'), 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>Yii::t('app','Logout ({name})',array('{name}'=>Yii::app()->user->fullname)), 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)

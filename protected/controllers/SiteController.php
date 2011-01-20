@@ -92,6 +92,15 @@ class SiteController extends Controller
 		// display the login form
 		$this->render('login',array('model'=>$model));
 	}
+	
+	public function actionDashboard()
+	{
+		if (Yii::app()->user->role === 'customer') {
+			$this->redirect(array('invoice/view'));
+		} else {
+			$this->redirect(array('invoice/index'));
+		}
+	}
 
 	/**
 	 * Logs out the current user and redirect to homepage.

@@ -45,13 +45,13 @@
 				<?php echo $form->error($customerForm,'email'); ?>
 			</div>
 			
-			<div class="row checkbox">
-				<?php echo $form->labelEx($customerForm,'serviceIds'); ?>
+			<div class="checkbox row">
+				<?php echo $form->labelEx($customerForm,'serviceIds',array('class' => 'title')); ?>
 				<?php echo CHtml::activeCheckBoxList($customerForm, 'serviceIds', $serviceList, array('separator' => '')); ?>
 				<?php echo $form->error($customerForm,'serviceIds'); ?>
 			</div>
 
-			<div class="row buttons">
+			<div class="buttons row">
 				<?php echo CHtml::submitButton('Submit'); ?>
 			</div>
 
