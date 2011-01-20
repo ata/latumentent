@@ -6,12 +6,10 @@
 	<div id="mainmenu" class="floatRight">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Product', 'url'=>array('/site/page', 'view'=>'product')),
-				array('label'=>'Contact', 'url'=>array('/site/contact',), 'linkOptions' => array('class' => 'last')),
-				//array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				//array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				array('label'=> Yii::t('app','Home'), 'url'=>array('/site/index')),
+				array('label'=> Yii::t('app','Tentang'), 'url'=>array('/site/page', 'view'=>'about')),
+				array('label'=> Yii::t('app','Product'), 'url'=>array('/site/page', 'view'=>'product')),
+				array('label'=> Yii::t('app','Contact'), 'url'=>array('/site/contact',), 'linkOptions' => array('class' => 'last')),
 			),
 		)); ?>
 	</div><!-- mainmenu -->
