@@ -1,4 +1,4 @@
-<div id="slideshow">
+<div id="slideshow" class="span-24">
 	<div class="image-container">
 		<img src="<?php echo Yii::app()->request->baseUrl?>/images/front-image.jpg" alt="image" title="image"/>
 	</div>
