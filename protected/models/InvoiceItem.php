@@ -11,6 +11,8 @@
  * @property integer $period_id
  * @property integer $customer_id
  * @property integer $service_id
+ * @property date $billing_date
+ * @property date $paying_date
  * 
  * The followings are the available model relations:
  * @property Customer $customer
@@ -50,7 +52,7 @@ class InvoiceItem extends ActiveRecord
 			array('amount, subtotal_compensation', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, amount, subtotal_compensation, invoice_id, period_id, service_id, customer_id', 'safe', 'on'=>'search'),
+			array('id, amount, billing_date, paying_date, subtotal_compensation, invoice_id, period_id, service_id, customer_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -86,7 +88,9 @@ class InvoiceItem extends ActiveRecord
 			'invoice_id' => Yii::t('app','Invoice'),
 			'period_id' => Yii::t('app','Period'),
 			'customer_id' => Yii::t('app','Customer'),
-			'service_id' => Yii::t('app','Service')
+			'service_id' => Yii::t('app','Service'),
+			'billing_date' => Yii::t('app','Billing Date'),
+			'paying_date' => Yii::t('app','Paying Date'),
 		);
 	}
 
@@ -107,6 +111,9 @@ class InvoiceItem extends ActiveRecord
 		$criteria->compare('invoice_id',$this->invoice_id);
 		$criteria->compare('period_id',$this->period_id);
 		$criteria->compare('customer_id',$this->customer_id);
+		$criteria->compare('service_id',$this->service_id);
+		$criteria->compare('billing_date',$this->billing_date);
+		$criteria->compare('paying_date',$this->paying_date);
 		$criteria->compare('service_id',$this->service_id);
 
 		return new CActiveDataProvider(get_class($this), array(
@@ -140,7 +147,7 @@ class InvoiceItem extends ActiveRecord
 	
 	public function getAmountPay()
 	{
-		return $this->amount = $this->subtotal_compensation;
+		return $this->amount = $this->amount - $this->subtotal_compensation;
 	}
 	
 	public function getAmountPayLocale() 

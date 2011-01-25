@@ -64,7 +64,7 @@ class User extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'customers' => array(self::HAS_ONE, 'Customer', 'user_id'),
+			'customer' => array(self::HAS_ONE, 'Customer', 'user_id'),
 			'tickets' => array(self::HAS_MANY, 'Ticket', 'technician_id'),
 			'role' => array(self::BELONGS_TO, 'Role', 'role_id'),
 		);

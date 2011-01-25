@@ -18,11 +18,11 @@ $this->breadcrumbs=array(
 	</div>
 </div>
 
-<?php /*if(Yii::app()->user->role === 'customer'):?>
+<?php if(Yii::app()->user->role === 'customer'):?>
 <div class="span-24 new-button last" style="margin-bottom:20px; padding-top:20px; ">
 	<?php echo CHtml::link(Yii::t('app','New Ticket'), array('ticket/create'));?>
 </div>
-<?php endif*/?>
+<?php endif ?>
 
 <div class="span-24 bills">
 	<?php foreach($invoice->invoiceItems as $item):?>
@@ -37,12 +37,10 @@ $this->breadcrumbs=array(
 		</thead>
 		<tbody>
 			<?php if(count($item->tickets) > 0):?>
-				<?php foreach($items->tickets as $ticket):?>
+				<?php foreach($item->tickets as $ticket):?>
 				<tr>
-					<td>
-						<td class="title"><?php echo $ticket->title?></th>
-						<td class="value ar"><?php echo $ticket->compensation ?></td>
-					</td>
+					<td class="title"><?php echo $ticket->title?></td>
+					<td class="value ar"><?php echo $ticket->compensationLocale ?></td>
 				</tr>
 				<?php endforeach?>
 			<?php else:?>

@@ -151,6 +151,11 @@ class Customer extends ActiveRecord
 		$this->save();
 	}
 	
+	public function findByUserId($user_id)
+	{
+		return $this->findByAttributes(array('user' => $user_id));
+	}
+	
 	public function generateInvoices($period_id)
 	{
 		$invoice = new Invoice();

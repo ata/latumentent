@@ -16,7 +16,11 @@
  * @property integer $technician_id
  * @property integer $author_id
  * @property integer $service_id
- *
+ * @property integer $problem_type_id
+ * @property datetime $time_open 
+ * @property datetime $time_closed
+ * @property boolean $solved
+ * 
  * The followings are the available model relations:
  * @property User $author
  * @property Customer $customer
@@ -55,13 +59,16 @@ class Ticket extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, body, status, compensation, service_id, invoice_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'required'),
+			array('title, body, service_id, invoice_id, invoice_item_id, period_id, customer_id, author_id', 'required'),
 			array('status, invoice_id, service_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'numerical', 'integerOnly'=>true),
 			array('compensation', 'numerical'),
 			array('title', 'length', 'max'=>255),
+			array('status','default','value'=>self::STATUS_OPEN),
+			array('solved','default','value'=>false),
+			array('time_open','default','value'=> date('Y-m-d')),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, title, body, status, compensation, service_id, invoice_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'safe', 'on'=>'search'),
+			array('id, title, time_open, time_closed, problem_type_id, solved, body, status, compensation, service_id, invoice_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -100,7 +107,10 @@ class Ticket extends ActiveRecord
 			'customer_id' => Yii::t('app','Customer'),
 			'technician_id' => Yii::t('app','Technician'),
 			'author_id' => Yii::t('app','Author'),
-			'service_id' => Yii::t('app','Service'),
+			'time_open' => Yii::t('app','Time Open'),
+			'time_closed' => Yii::t('app','Time Closed'),
+			'type_problem_id' => Yii::t('app','Type of Problem'),
+			'solved' => Yii::t('app','Solved'),
 		);
 	}
 
@@ -132,4 +142,32 @@ class Ticket extends ActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	protected function beforeValidate()
+	{
+		if ($this->service_id == null) {
+			$this->service_id = $this->invoiceItem->service_id;
+		}
+		
+		if ($this->invoice_id == null) {
+			$this->invoice_id = $this->invoiceItem->invoice_id;
+		}
+		
+		if ($this->period_id == null) {
+			$this->period_id = Period::model()->last()->find()->id;
+		}
+		
+		if ($this->customer_id == null) {
+			$this->customer_id = $this->author->customer->id;
+		}
+		
+		
+		return parent::beforeValidate();
+	}
+	
+	public function getCompensationLocale() 
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->compensation,'IDR');
+	}
+	
 }

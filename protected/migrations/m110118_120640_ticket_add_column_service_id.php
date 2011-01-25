@@ -10,7 +10,7 @@ class m110118_120640_ticket_add_column_service_id extends CDbMigration
 	
 	public function down()
 	{
-		$this->dropColumn('ticket','service');
+		$this->dropColumn('ticket','service_id');
 	}
 	
 }

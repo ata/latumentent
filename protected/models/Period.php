@@ -6,7 +6,8 @@
  * The followings are the available columns in table 'period':
  * @property integer $id
  * @property string $name
- *
+ * @property double total_revenue
+ * @property double total_outlay
  * The followings are the available model relations:
  * @property Invoice[] $invoices
  * @property InvoiceItem[] $invoiceItems
@@ -41,10 +42,10 @@ class Period extends ActiveRecord
 		return array(
 			array('name', 'required'),
 			array('name', 'length', 'max'=>255),
-			array('raw_date', 'safe'),
+			array('total_revenue, total_outlay', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name , raw_date', 'safe', 'on'=>'search'),
+			array('id, name, total_revenue, total_outlay', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,6 +71,8 @@ class Period extends ActiveRecord
 		return array(
 			'id' => Yii::t('app','ID'),
 			'name' => Yii::t('app','Name'),
+			'total_revenue' => Yii::t('app','Total Revenue'),
+			'total_outlay' => Yii::t('app','Total Outlay'),
 		);
 	}
 	
@@ -94,6 +97,8 @@ class Period extends ActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
+		$criteria->compare('total_revenue',$this->total_revenue);
+		$criteria->compare('total_outlay',$this->total_outlay);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
@@ -118,7 +123,5 @@ class Period extends ActiveRecord
 		}
 		
 	}
-	
-	
 	
 }

@@ -111,6 +111,8 @@ class Invoice extends ActiveRecord
 		return $this->findAllByAttributes(array('period_id' => $period_id));
 	}
 	
+	
+	
 	public function findByUserId($user_id)
 	{
 		$criteria = new CDbCriteria;
