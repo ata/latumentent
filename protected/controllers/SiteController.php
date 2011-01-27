@@ -95,13 +95,19 @@ class SiteController extends Controller
 	
 	public function actionDashboard()
 	{
-		if (Yii::app()->user->role === 'customer') {
-			$this->redirect(array('invoice/view'));
-		
-		} else if (Yii::app()->user->role === 'admin'){
-			$this->redirect(array('admin/service'));
-		} else {
-			$this->redirect(array('invoice/index'));
+		switch (Yii::app()->user->role) {
+			case 'customer':
+				$this->redirect(array('invoice/view'));
+				break;
+			case 'admin':
+				$this->redirect(array('admin/service'));
+				break;
+			case 'technical_support':
+				$this->redirect(array('ticket/index'));
+				break;
+			case 'customer_service':
+				$this->redirect(array('invoice/index'));
+				break;
 		}
 	}
 

@@ -78,12 +78,26 @@ class TicketController extends Controller
 	
 	public function actionView()
 	{
-		$this->render('view');
+		$this->render('view',array(
+			'ticket' => $this->loadTicket(),
+		));
 	}
 
 	public function actionReply()
 	{
 		$this->render('reply');
+	}
+	
+	public function loadTicket()
+	{
+		if (!isset($_GET['id'])) {
+			throw new CHttpException(404,Yii::t('app','The requested page does not exist.'));
+		}
+		$ticket = Ticket::model()->find((int) $_GET['id']);
+		if ($ticket === null) {
+			throw new CHttpException(404,Yii::t('app','The requested page does not exist.'));
+		}
+		return $ticket;
 	}
 }
 

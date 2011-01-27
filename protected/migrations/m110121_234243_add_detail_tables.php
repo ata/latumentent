@@ -38,8 +38,8 @@ class m110121_234243_add_detail_tables extends CDbMigration
 		$this->addColumn('period','total_revenue','double NOT NULL');
 		$this->addColumn('period','total_outlay','double NOT NULL');
 		
-		$this->addColumn('ticket','time_open','datetime NOT NULL');
-		$this->addColumn('ticket','time_closed','datetime NOT NULL');
+		$this->addColumn('ticket','time_open','datetime');
+		$this->addColumn('ticket','time_closed','datetime');
 		$this->addColumn('ticket','problem_type_id','integer NOT NULL');
 		$this->addColumn('ticket','solved','boolean');
 		

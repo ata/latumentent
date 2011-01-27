@@ -550,3 +550,13 @@ td {
 	width: 100%;
 	border: 1px solid #ccc;
 }
+.ticket .head{
+	background-color:#000;
+	color:#fff;
+	font-size:17px;
+	padding:5px 0;
+}
+.ticket h3{
+	color:#fff;
+	padding-left:1em;
+}

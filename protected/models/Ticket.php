@@ -170,4 +170,13 @@ class Ticket extends ActiveRecord
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->compensation,'IDR');
 	}
 	
+	public function getStatusLabel()
+	{
+		$label = array(
+			self::STATUS_OPEN => Yii::t('app','Open'),
+			self::STATUS_CLOSED => Yii::t('app','Closed'),
+		);
+		return $label[$this->status];
+	}
+	
 }
