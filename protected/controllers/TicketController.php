@@ -84,7 +84,8 @@ class TicketController extends Controller
 	
 	public function actionView()
 	{
-		$this->render('view');
+		
+		$this->render('reply');
 	}
 
 	public function actionReply()
