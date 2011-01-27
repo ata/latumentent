@@ -66,6 +66,7 @@ class Ticket extends ActiveRecord
 			array('status','default','value'=>self::STATUS_OPEN),
 			array('solved','default','value'=>false),
 			array('time_open','default','value'=> date('Y-m-d')),
+			array('time_closed, problem_type_id, solved','safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, title, time_open, time_closed, problem_type_id, solved, body, status, compensation, service_id, invoice_id, invoice_item_id, period_id, customer_id, technician_id, author_id', 'safe', 'on'=>'search'),
@@ -87,6 +88,7 @@ class Ticket extends ActiveRecord
 			'period' => array(self::BELONGS_TO, 'Period', 'period_id'),
 			'technician' => array(self::BELONGS_TO, 'User', 'technician_id'),
 			'service' => array(self::BELONGS_TO, 'Service', 'service_id'),
+			'replies' => array(self::HAS_MANY, 'TicketReply', 'ticket_id'),
 		);
 	}
 
@@ -177,6 +179,23 @@ class Ticket extends ActiveRecord
 			self::STATUS_CLOSED => Yii::t('app','Closed'),
 		);
 		return $label[$this->status];
+	}
+	
+	public function getIsOpen() 
+	{
+		return $this->status == self::STATUS_OPEN;
+	}
+	
+	public function close()
+	{
+		$this->status = self::STATUS_CLOSED;
+		$this->save();
+	}
+	
+	public function reply(TicketReply $reply)
+	{
+		$reply->ticket_id = $this->id;
+		return $reply->save();
 	}
 	
 }

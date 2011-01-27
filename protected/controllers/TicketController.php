@@ -84,15 +84,24 @@ class TicketController extends Controller
 	
 	public function actionView()
 	{
+		$ticket = $this->loadTicket();
+		$reply = new TicketReply;
+		if (isset($_POST['submit'])) {
+			if (isset($_POST['submit']['close'])) {
+				$ticket->close();
+			} else {
+				$reply->attributes = $_POST['TicketReply'];
+				if ($ticket->reply($reply)) {
+					$this->refresh();
+				}
+			}
+		}
 		$this->render('view',array(
-			'ticket' => $this->loadTicket(),
+			'ticket' => $ticket,
+			'reply' => $reply,
 		));
 	}
 
-	public function actionReply()
-	{
-		$this->render('reply');
-	}
 	
 	public function loadTicket()
 	{
