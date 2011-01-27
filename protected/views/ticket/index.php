@@ -24,7 +24,8 @@
 			),
 			array(
 				'header'=>Yii::t('app','body'),
-				'value'=>'$data->body',
+				'type'=>'raw',
+				'value'=>'CHtml::link($data->body,array("view"))',
 			),
 			array(
 				'header'=>Yii::t('app','service'),

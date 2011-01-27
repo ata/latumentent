@@ -6,7 +6,7 @@
 		<span class="status span-2 last"><?php echo $ticket->statusLabel; ?></span>
 	</div>
 	<div class="body">
-		<span class="author span-20"><h4><?php echo $ticket->; ?></h4></span>
-		
+		<span class="author span-20"><h4><?php echo $ticket->author->fullname; ?></h4></span>
+		<span class="date span-4 last"><?php echo $ticket->time_open; ?></span>
 	</div>
 </div>
