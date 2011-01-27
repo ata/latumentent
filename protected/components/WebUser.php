@@ -53,7 +53,7 @@ class WebUser extends CWebUser
 	}
 	*/
 	
-	public function getReturnUrl()
+	public function getBackUrl()
 	{
 		return $this->getState('__returnUrl',Yii::app()->createUrl('site/dashboard'));
 	}

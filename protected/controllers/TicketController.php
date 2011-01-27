@@ -8,7 +8,18 @@ class TicketController extends Controller
 
 	public function actionIndex()
 	{
-		$this->render('index');
+		//$filter = isset($_GET['period']) ? "author_id = :author_id AND period_id = '$_GET[period]'" : "author_id = :author_id" ;
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'author_id = :author_id';
+		$criteria->params = array('author_id'=>Yii::app()->user->id);
+		
+		$dataProvider = new CActiveDataProvider('Ticket',array('criteria'=>$criteria,));
+		$periodList = CHtml::listdata(Period::model()->findAll(),'id','name');
+				
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+			'periodList'=>$periodList,
+			));
 	}
 
 	public function actionCreate()

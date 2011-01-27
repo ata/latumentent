@@ -13,9 +13,18 @@ class CustomerController extends Controller
 	}
 	
 	
+	public function actionTest()
+	{
+		if($test === new Customer){
+			echo $test;
+		}
+		$this->render('index');
+	}
+	
+	
 	public function actionCreate()
 	{
-		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
+	    $serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
 		$customerForm=new CustomerForm;
 		
 
