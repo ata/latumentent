@@ -57,7 +57,7 @@ class TicketController extends Controller
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 			'periodList'=>$periodList,
-			));
+		));
 	}
 
 	public function actionCreate()
