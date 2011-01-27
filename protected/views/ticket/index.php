@@ -1,20 +1,26 @@
-<?php Yii::app()->clientScript->registerScript('filter-js','$(\'#period\').change(function(){
-	$(\'#ticket-list\').yiiGridView.update(\'ticket-list\',{
-		url:\'?period=\'+$(this).val()
-	});
-});');?>
-<div class="filter">
-    <?php echo CHtml::link(Yii::t('app','Complaint'),array('create'))?>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <div class="form">
-	<label>Periode</label>
-	<?php echo CHtml::dropDownList('period','all',$periodList);?>
-    </div>
+<div class="title">
+	<h2><?php echo Yii::t('app','Ticket'); ?></h2>
 </div>
-<div class="list-ticket">
+
+<div class="span-8 new-button">
+	<?php echo CHtml::link(Yii::t('app','Ajukan Permasalahan'), array('ticket/create'));?>
+</div>
+
+<div class="filter span-16 last form" id="customer-filter">
+	<fieldset>
+		<legend><?php echo Yii::t('app','filter'); ?></legend>
+			<div class="row">
+				<div class="label floatLeft"><label><?php echo Yii::t('app','Period'); ?></label></div>
+				<div class="floatLeft"><?php echo CHtml::dropDownList('period', 'all', $periodList); ?></div>
+				<div class="clear"></div>
+			</div>
+	</fieldset>
+</div>
+
+<div class="span-24">
     <?php $this->widget('zii.widgets.grid.CGridView',array(
 		'id'=>'ticket-list',
-		'dataProvider'=>$dataProvider,
+		'dataProvider'=>$ticketList->search(),
 		'columns'=>array(
 			array(
 				'class' => 'NumberColumn'
