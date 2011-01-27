@@ -2,9 +2,6 @@
 	<h2><?php echo Yii::t('app','Ticket'); ?></h2>
 </div>
 
-<div class="span-8 new-button">
-	<?php echo CHtml::link(Yii::t('app','Ajukan Permasalahan'), array('ticket/create'));?>
-</div>
 
 <div class="filter span-16 last form" id="customer-filter">
 	<fieldset>
