@@ -1,0 +1,38 @@
+Customer:
+- liat tagihan 
+- tambah ticket
+- lihat ticket
+
+Customer Service:
+- liat semua tagihan
+- lihat detail tagihan:
+	- filter tagihan yang belum di bayarkan
+	- filter tagihan yang sudah di bayarkan
+- tambah customer
+- daftar customer:
+	- column rating/loyality
+	- urutkan berdasarkan loyality
+	
+Manager:
+- liat semua tagihan
+- lihat detail tagihan:
+	- filter tagihan yang belum di bayarkan
+	- filter tagihan yang sudah di bayarkan
+- tambah customer
+- daftar customer:
+	- column rating/loyality
+	- urutkan berdasarkan loyality
+- Grafik status ticket:
+	- solved dan tidak dalam bulan dan tahun
+	- grafik waktu solved (dalam jam) dalam bulan dan tahun
+- Pengeluaran:
+	- Pengeluaran Manual
+	- Pengeluaran Otomatis
+- Neraca
+
+Teknisi:
+- liat semua ticket (default open)
+- liat detail ticket
+- ganti status ticket
+
+
