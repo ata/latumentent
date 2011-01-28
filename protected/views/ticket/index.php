@@ -30,13 +30,13 @@
 				'class' => 'NumberColumn'
 			),
 			array(
-				'header'=>Yii::t('app','body'),
+				'header'=>Yii::t('app','title'),
 				'type'=>'raw',
 				'value'=>'CHtml::link($data->title,array("view","id"=>$data->id))',
 			),
 			array(
 				'header'=>Yii::t('app','service'),
-				'value'=>'$data->service->name',
+				'name'=>'service.name',
 			),
 			array(
 				'header'=>Yii::t('app','status'),

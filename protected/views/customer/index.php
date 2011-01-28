@@ -24,9 +24,10 @@
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
 		array(
-			'header' => 'No',
+			/*'header' => 'No',
 			'value'=>'$this->grid->dataProvider->pagination->currentPage*$this->grid->dataProvider->pagination->pageSize + $row+1',
-			'htmlOptions' => array('width' => '30px'),
+			'htmlOptions' => array('width' => '30px'),*/
+			'class' => 'NumberColumn'
 		),
 		'number',
 		array(
