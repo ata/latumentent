@@ -1,5 +1,5 @@
 <div class="title">
-	<h2><?php echo Yii::t('app','Ticket'); ?></h2>
+	<h2><?php echo Yii::t('app','List Ticket'); ?></h2>
 </div>
 
 
@@ -10,6 +10,13 @@
 				<div class="label floatLeft"><label><?php echo Yii::t('app','Period'); ?></label></div>
 				<div class="floatLeft"><?php echo CHtml::dropDownList('period', 'all', $periodList); ?></div>
 				<div class="clear"></div>
+			</div>
+			<div class="row">
+				<div class="label floatleft"><label><?php echo Yii::t('app','Status');?></label></div>
+				<div class="floatleft"><?php echo CHtml::dropDownList('status','all',array(
+					Ticket::STATUS_OPEN=>'Open',
+					Ticket::STATUS_CLOSED=>'Close',
+					))?></div>
 			</div>
 	</fieldset>
 </div>
@@ -25,7 +32,7 @@
 			array(
 				'header'=>Yii::t('app','body'),
 				'type'=>'raw',
-				'value'=>'CHtml::link($data->body,array("view"))',
+				'value'=>'CHtml::link($data->title,array("view","id"=>$data->id))',
 			),
 			array(
 				'header'=>Yii::t('app','service'),

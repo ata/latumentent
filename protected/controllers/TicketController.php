@@ -91,7 +91,10 @@ class TicketController extends Controller
 
 	public function actionReply()
 	{
-		$this->render('reply');
+		$ticket = $this->loadTicket();
+		$this->render('reply',array(
+			'ticket'=>$ticket,
+			));
 	}
 	
 	public function loadTicket()
