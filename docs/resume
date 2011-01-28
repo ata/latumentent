@@ -1,0 +1,50 @@
+Pertemuan I:
+	
+	Finishing Feature:
+		- Pilihan Design
+		- Implementasi Design Tahap Awal
+		- Daftar Tagihan
+		- Detail Tagihan
+		- Tambah Customer
+		- Login/Auth
+		- Admin Page (Tahap Awal)
+	
+	FeedBack:
+		- data untuk formulir registrasi client, ada pilihan apakah dia pemilik atau 
+		  penyewa …data otentik .. sewa sampai kapan ? .. 
+		- customer rating .../customer loyalty dari pembayaran … 
+		  ada award/ perhitungan otomatis .. 
+		- type pembayaran/metoda pembayaran pakai apa, CS akan follow up ..
+		- manual pengeluaran …
+		- neraca pengeluaran/pemasukan …
+		- management dashboard, penambahan number customer (real time)
+		- graphically progress client
+		- technical support action ..(statistic/analysis / grafikal) … dare complaining, 
+		  sampai berate person closed  
+		- Untuk CS,  notification buat member yang udah jadi member 2 minggu-1 bulan, di follow up ..
+		- complain gara2 billing apa layanan ..
+		- ARPU - average revenue per subscriber/user …
+		- jumlah revenue/jumlah subscriber per bulan …
+		- cost of service per subscriber ...
+		
+
+Pertemuan II:
+
+	Finishing Feature:
+		- Add Ticket
+		- Daftar Ticket tagihan customer
+		- Tambah Ticket untuk customer
+		- Melengkapi field data Customer
+		- Reply dan Ubah status ticket untuk teknisi
+		- Daftar ticket terbaru untuk teknisi
+		
+	FeedBack:
+		- Installasi, One time fee
+		- Database Apartemen (Aktif, Idle, Kosong)
+		- Revenue graphically : x: bulan, y: revenue
+		- List semua ticket customer
+		
+	Target Minggu selanjutnya:
+		- Statistik/Dashboard
+		
+
