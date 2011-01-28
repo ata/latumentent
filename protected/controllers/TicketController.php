@@ -26,11 +26,11 @@ class TicketController extends Controller
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('index'),
-				'roles'=>array('admin','technical_support'),
+				'roles'=>array('admin','technical_support','customer_services'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('view'),
-				'roles'=>array('admin','technical_support'),
+				'roles'=>array('admin','technical_support','customer'),
 			),
 			
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -84,25 +84,55 @@ class TicketController extends Controller
 	
 	public function actionView()
 	{
+		$ticket = $this->loadTicket();
+		$reply = new TicketReply;
+		
+		if (isset($_POST['Ticket'])) {
+			$ticket->attributes = $_POST['Ticket'];
+			if($ticket->save()) {
+				
+			}
+		}
+		
+		if (isset($_POST['submit'])) {
+			if (isset($_POST['submit']['close'])) {
+				if ($ticket->close()) {
+					$reply->attributes = array();
+					$this->refresh();
+				}
+			} else if (isset($_POST['submit']['reply']) || isset($_POST['submit']['reply_close'])){
+				$reply->attributes = $_POST['TicketReply'];
+				if ($ticket->reply(Yii::app()->user->id, $reply)) {
+					$reply->attributes = array();
+				}
+				if (isset($_POST['submit']['reply_close'])) {
+					if($ticket->close()) {
+						$reply->attributes = array();
+					}
+				}
+				$this->refresh();
+			} else if (isset($_POST['submit']['open'])) {
+				if ($ticket->open()) {
+					$this->refresh();
+				}
+			}
+		}
+		
 		$this->render('view',array(
-			'ticket' => $this->loadTicket(),
+			'ticket' => $ticket,
+			'reply' => $reply,
 		));
 	}
 
-	public function actionReply()
-	{
-		$ticket = $this->loadTicket();
-		$this->render('reply',array(
-			'ticket'=>$ticket,
-			));
-	}
+
 	
 	public function loadTicket()
 	{
 		if (!isset($_GET['id'])) {
 			throw new CHttpException(404,Yii::t('app','The requested page does not exist.'));
 		}
-		$ticket = Ticket::model()->find((int) $_GET['id']);
+		$ticket = Ticket::model()->findByPk((int) $_GET['id']);
+		
 		if ($ticket === null) {
 			throw new CHttpException(404,Yii::t('app','The requested page does not exist.'));
 		}

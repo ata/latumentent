@@ -39,10 +39,10 @@
 				'name'=>'service.name',
 			),
 			array(
-				'header'=>Yii::t('app','status'),
-				'value'=>'$data->status === "1"?CHtml::encode(Yii::t("app","Open")):CHtml::encode(Yii::t("app","Closed"))'
+				'header'=>Yii::t('app','Status'),
+				'value'=>'$data->statusLabel',
 			),
 		),
 	));
-    ?>
+	?>
 </div>

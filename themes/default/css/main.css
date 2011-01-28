@@ -562,4 +562,23 @@ td {
 }
 .ticket .body{
 	margin:5px 0;
+	background-color:#666666;
+	color:#ffffff;
+}
+.ticket .body h4{
+	color:#ffffff;
+	padding-left:1em;
+}
+
+.ticket .body p{
+	padding:0 1em;
+}
+
+.ticket .content{
+	background-color:#ffffff;
+	color:#000000;
+}
+
+.number-column{
+	width:3em;
 }

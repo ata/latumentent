@@ -8,6 +8,10 @@
  * @property string $number
  * @property interger $status
  * @property integer $user_id
+ * @property string $contact_number
+ * @property integer $ownership
+ * @property date $hire_up_to
+ 
  * The followings are the available model relations:
  * @property User $user
  * @property Invoice[] $invoices
@@ -47,10 +51,11 @@ class Customer extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('number, user_id, serviceIds', 'required'),
+			array('number, user_id, serviceIds, contact_number, ownership', 'required'),
 			array('user_id, status', 'numerical', 'integerOnly'=>true),
 			array('number', 'length', 'max'=>255),
 			array('status','default','value'=>self::STATUS_ACTIVE),
+			array('hire_up_to', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, number, user_id', 'safe', 'on'=>'search'),
@@ -83,6 +88,8 @@ class Customer extends ActiveRecord
 			'number' => Yii::t('app','No. Apartment'),
 			'user_id' => Yii::t('app','User'),
 			'status' => Yii::t('app','Status'),
+			'ownership' => Yii::t('app','Apartement Ownership'),
+			'hire_up_to' => Yii::t('app','Hire Up To'),
 			'serviceIds'=>Yii::t('app','Service'),
 		);
 	}

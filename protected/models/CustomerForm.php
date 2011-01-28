@@ -14,6 +14,9 @@ class CustomerForm extends CFormModel
 	public $confirmPassword;
 	public $apartmentNumber;
 	public $serviceIds;
+	public $contactNumber;
+	public $ownership;
+	public $hire_up_to;
 
 	/**
 	 * Declares the validation rules.
@@ -79,7 +82,6 @@ class CustomerForm extends CFormModel
 			die();
 			return false;
 		}
-		
 
 		if(!$customer->generateInvoices(Period::model()->last()->find()->id)) {
 			return false;
