@@ -23,19 +23,19 @@
 				'class' => 'NumberColumn'
 			),
 			array(
-				'header'=>Yii::t('app','body'),
+				'header'=>Yii::t('app','Title'),
 				'type'=>'raw',
-				'value'=>'CHtml::link($data->body,array("view"))',
+				'value'=>'CHtml::link($data->title, array("view","id" => $data->id))',
 			),
 			array(
-				'header'=>Yii::t('app','service'),
+				'header'=>Yii::t('app','Service'),
 				'value'=>'$data->service->name',
 			),
 			array(
-				'header'=>Yii::t('app','status'),
-				'value'=>'$data->status === "1"?CHtml::encode(Yii::t("app","Open")):CHtml::encode(Yii::t("app","Closed"))'
+				'header'=>Yii::t('app','Status'),
+				'value'=>'$data->statusLabel',
 			),
 		),
 	));
-    ?>
+	?>
 </div>

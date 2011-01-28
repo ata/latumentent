@@ -39,7 +39,7 @@ $this->breadcrumbs=array(
 			<?php if(count($item->tickets) > 0):?>
 				<?php foreach($item->tickets as $ticket):?>
 				<tr>
-					<td class="title"><?php echo $ticket->title?></td>
+					<td class="title"><?php echo CHtml::link($ticket->title,array('ticket/view','id' => $ticket->id));?></td>
 					<td class="value ar"><?php echo $ticket->compensationLocale ?></td>
 				</tr>
 				<?php endforeach?>

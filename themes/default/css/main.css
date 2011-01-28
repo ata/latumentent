@@ -578,3 +578,7 @@ td {
 	background-color:#ffffff;
 	color:#000000;
 }
+
+.number-column{
+	width:3em;
+}

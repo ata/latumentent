@@ -14,6 +14,9 @@ class CustomerForm extends CFormModel
 	public $confirmPassword;
 	public $apartmentNumber;
 	public $serviceIds;
+	public $contactNumber;
+	public $ownership;
+	public $hire_up_to;
 
 	/**
 	 * Declares the validation rules.

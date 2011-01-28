@@ -105,7 +105,7 @@ class SiteController extends Controller
 			case 'technical_support':
 				$this->redirect(array('ticket/index'));
 				break;
-			case 'customer_service':
+			case 'customer_services':
 				$this->redirect(array('invoice/index'));
 				break;
 		}

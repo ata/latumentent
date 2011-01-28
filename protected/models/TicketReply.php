@@ -7,6 +7,8 @@
  * @property integer $id
  * @property integer $ticket_id
  * @property string $message
+ * @property integer $author_id
+ * @property string $time
  */
 class TicketReply extends ActiveRecord
 {
@@ -35,12 +37,12 @@ class TicketReply extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ticket_id, message', 'required'),
-			array('ticket_id', 'numerical', 'integerOnly'=>true),
-			array('message', 'safe'),
+			array('ticket_id, author_id, message', 'required'),
+			array('ticket_id, author_id', 'numerical', 'integerOnly'=>true),
+			array('time','default','value'=> date('Y-m-d h:i:s')),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, ticket_id, message', 'safe', 'on'=>'search'),
+			array('id, ticket_id, message, author_id, time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,6 +54,7 @@ class TicketReply extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'author' => array(self::BELONGS_TO, 'User', 'author_id'),
 		);
 	}
 
@@ -64,6 +67,8 @@ class TicketReply extends ActiveRecord
 			'id' => Yii::t('app','ID'),
 			'ticket_id' => Yii::t('app','Ticket'),
 			'message' => Yii::t('app','Message'),
+			'author_id' => Yii::t('app','Author'),
+			'time' => Yii::t('app','Time'),
 		);
 	}
 
@@ -81,6 +86,8 @@ class TicketReply extends ActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('ticket_id',$this->ticket_id);
 		$criteria->compare('message',$this->message,true);
+		$criteria->compare('author_id',$this->author_id);
+		$criteria->compare('time',$this->time,true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

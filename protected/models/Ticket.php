@@ -64,8 +64,8 @@ class Ticket extends ActiveRecord
 			array('compensation', 'numerical'),
 			array('title', 'length', 'max'=>255),
 			array('status','default','value'=>self::STATUS_OPEN),
-			array('solved','default','value'=>false),
-			array('time_open','default','value'=> date('Y-m-d')),
+			array('solved','default','value'=>true),
+			array('time_open','default','value'=> date('Y-m-d h:i:s')),
 			array('time_closed, problem_type_id, solved','safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -174,11 +174,15 @@ class Ticket extends ActiveRecord
 	
 	public function getStatusLabel()
 	{
-		$label = array(
-			self::STATUS_OPEN => Yii::t('app','Open'),
-			self::STATUS_CLOSED => Yii::t('app','Closed'),
-		);
-		return $label[$this->status];
+		if ($this->status == self::STATUS_OPEN) {
+			return Yii::t('app','Open');
+		}
+		
+		if ($this->solved == 1) {
+			return Yii::t('app','Close (Solved)');
+		}
+		return Yii::t('app','Close (Not Solved)');
+		
 	}
 	
 	public function getIsOpen() 
@@ -189,12 +193,27 @@ class Ticket extends ActiveRecord
 	public function close()
 	{
 		$this->status = self::STATUS_CLOSED;
-		$this->save();
+		return $this->save();
 	}
 	
-	public function reply(TicketReply $reply)
+	public function open()
+	{
+		$this->status = self::STATUS_OPEN;
+		return $this->save();
+	}
+	
+	public function solve()
+	{
+		$this->solved = true;
+		return $this->save();
+	}
+	
+	public function reply($author_id, TicketReply $reply, $solved = false)
 	{
 		$reply->ticket_id = $this->id;
+		$reply->author_id = $author_id;
+		$this->solved = $solved;
+		$this->save();
 		return $reply->save();
 	}
 	
