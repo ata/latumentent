@@ -14,7 +14,7 @@ class CustomerForm extends CFormModel
 	public $confirmPassword;
 	public $apartmentNumber;
 	public $serviceIds;
-	public $contactNumber;
+	public $contact_number;
 	public $ownership;
 	public $hire_up_to;
 
@@ -25,13 +25,13 @@ class CustomerForm extends CFormModel
 	{
 		return array(
 			// name, email, subject and body are required
-			array('fullname, username, password, apartmentNumber, confirmPassword, serviceIds', 'required'),
+			array('fullname, contact_number, ownership, username, password, apartmentNumber, confirmPassword, serviceIds', 'required'),
 			array('confirmPassword', 'compare', 'compareAttribute'=>'password'),
 			array('username', 'unique', 'className' => 'User'),
 			array('apartmentNumber', 'unique', 'className' => 'Customer','attributeName' => 'number'),
 			// email has to be a valid email address
 			array('email', 'email'),
-			array('servicesIds','safe'),
+			array('servicesIds, hire_up_to','safe'),
 		);
 	}
 
@@ -51,6 +51,9 @@ class CustomerForm extends CFormModel
 			'email' => Yii::t('app','Email'),
 			'apartmentNumber' => Yii::t('app','Apartment Number'),
 			'serviceIds' => Yii::t('app','Services'),
+			'contact_number' => Yii::t('app','Contact Number'),
+			'hire_up_to' => Yii::t('app','Hire Up To'),
+			'ownership' => Yii::t('app','Apartment Ownership'),
 		);
 	}
 	
@@ -77,6 +80,10 @@ class CustomerForm extends CFormModel
 		$customer->user_id = $user->id;
 		$customer->number = $this->apartmentNumber;
 		$customer->serviceIds = $this->serviceIds;
+		$customer->contact_number = $this->contact_number;
+		$customer->ownership = $this->ownership;
+		$customer->hire_up_to = $this->hire_up_to;
+		
 		if (!$customer->save()) {
 			var_dump($customer->errors);
 			die();
@@ -86,7 +93,6 @@ class CustomerForm extends CFormModel
 		if(!$customer->generateInvoices(Period::model()->last()->find()->id)) {
 			return false;
 		}
-		
 		return true;
 	}
 }

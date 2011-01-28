@@ -46,7 +46,7 @@ class User extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, fullname, email, role_id', 'required'),
+			array('username, password, fullname, role_id', 'required'),
 			array('role_id, status', 'numerical', 'integerOnly'=>true),
 			array('username, password, fullname, email', 'length', 'max'=>255),
 			array('status','default','value'=>self::STATUS_ACTIVE),

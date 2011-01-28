@@ -34,4 +34,7 @@ return array(
 	'Price' => 'Harga',
 	'Title' => 'Judul',
 	'Body' => 'Isi',
+	'Apartment Ownership' => 'Kepemilikan Apartemen',
+	'Hire Up To' => 'Disewa Sampai',
+	'Contact Number' => 'Nomer Kontak',
 );

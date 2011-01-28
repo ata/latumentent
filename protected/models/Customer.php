@@ -23,6 +23,10 @@ class Customer extends ActiveRecord
 	
 	const STATUS_ACTIVE = 1;
 	const STATUS_DELETED = 2;
+	
+	const OWNERSHIP_OWNER = 1;
+	const OWNERSHIP_RENTER = 2;
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Customer the static model class
@@ -189,6 +193,6 @@ class Customer extends ActiveRecord
 			$invoice->total_compensation += $invoiceItem->subtotal_compensation;
 		}
 		
-		$invoice->save();
+		return $invoice->save();
 	}
 }
