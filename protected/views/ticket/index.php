@@ -1,3 +1,14 @@
+<?php Yii::app()->clientScript->registerScript('filter-js','
+function showValues(){
+	var str = $(\'#ticket-filter\').serialize();
+	$(\'#ticket-list\').yiiGridView.update(\'ticket-list\',{
+		url:$(this).attr(\'action\'),
+		data:str
+	});
+};
+$(\'#status_check\').click(showValues);
+$(\'#select-period\').change(showValues);
+');?>
 <div class="title">
 	<h2><?php echo Yii::t('app','List Ticket'); ?></h2>
 </div>
@@ -6,25 +17,31 @@
 <div class="filter span-16 last form" id="customer-filter">
 	<fieldset>
 		<legend><?php echo Yii::t('app','filter'); ?></legend>
-			<div class="row">
-				<div class="label floatLeft"><label><?php echo Yii::t('app','Period'); ?></label></div>
-				<div class="floatLeft"><?php echo CHtml::dropDownList('period', 'all', $periodList); ?></div>
-				<div class="clear"></div>
+			<?php $form=$this->beginWidget('CActiveForm', array(
+				'id'=>'ticket-filter'
+			)); ?>
+			<div class="row" id="select-period">
+				<?php echo $form->labelEx($ticketList,'period');?>
+				<?php echo $form->dropDownList($ticketList, 'period', $periodList); ?>
 			</div>
-			<div class="row">
-				<div class="label floatleft"><label><?php echo Yii::t('app','Status');?></label></div>
-				<div class="floatleft"><?php echo CHtml::dropDownList('status','all',array(
+			<div class="row" id="status_check">
+				<?php echo $form->labelEx($ticketList,'status');?>
+				<?php echo $form->checkBoxList($ticketList,'status',array(
 					Ticket::STATUS_OPEN=>'Open',
 					Ticket::STATUS_CLOSED=>'Close',
-					))?></div>
+					))?>
 			</div>
+			<div class="row buttons">
+				<?php echo CHtml::submitButton(Yii::t('app','Tampilkan')); ?>
+			</div>
+			<?php $this->endWidget(); ?>
 	</fieldset>
 </div>
 
 <div class="span-24">
     <?php $this->widget('zii.widgets.grid.CGridView',array(
 		'id'=>'ticket-list',
-		'dataProvider'=>$ticketList->search(),
+		'dataProvider'=>$dataProvider,
 		'columns'=>array(
 			array(
 				'class' => 'NumberColumn'

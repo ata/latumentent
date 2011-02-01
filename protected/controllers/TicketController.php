@@ -48,10 +48,31 @@ class TicketController extends Controller
 	{
 		//$filter = isset($_GET['period']) ? "author_id = :author_id AND period_id = '$_GET[period]'" : "author_id = :author_id" ;
 		$ticketList = new Ticket;
+		$condition = array();
+		
+		if(isset($_GET['Ticket']['period'])){
+			$params_period = $_GET['Ticket']['period'];
+			$condition[] = "period_id=$params_period";
+		}
+	
+		if(isset($_GET['Ticket']['status'])){
+			if(!empty($_GET['Ticket']['status'])){
+				$params_status = implode(",",$_GET['Ticket']['status']);
+				$condition[] = "status in ($params_status)";
+			}	
+		}
+		
+		$criteria = new CDbCriteria;
+		$criteria->condition = implode(" AND ",$condition);
+		
+		$dataProvider = new CActiveDataProvider('Ticket',array(
+			'criteria'=>$criteria,
+		));
 		$periodList = CHtml::listData(Period::model()->findAll(),'id','name');
 		$this->render('index',array(
 			'ticketList'=>$ticketList,
 			'periodList'=>$periodList,
+			'dataProvider'=>$dataProvider,
 		));
 	}
 
