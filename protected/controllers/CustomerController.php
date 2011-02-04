@@ -68,18 +68,16 @@ class CustomerController extends Controller
 	
 	public function actionCreate()
 	{
-	    $serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
-		$customerForm=new CustomerForm;
+		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
+		$customerForm = new CustomerForm;
 		
 
-		if(isset($_POST['ajax']) && $_POST['ajax']==='customer-form')
-		{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='customer-form'){
 			echo CActiveForm::validate($customerForm);
 			Yii::app()->end();
 		}
 
-		if(isset($_POST['CustomerForm']))
-		{
+		if(isset($_POST['CustomerForm'])) {
 			$customerForm->attributes=$_POST['CustomerForm'];
 			if ($customerForm->submit()) {
 				$this->redirect(array('invoice/index'));
