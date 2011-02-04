@@ -60,7 +60,7 @@ class CustomerController extends Controller
 		{
 			$customerForm->attributes=$_POST['CustomerForm'];
 			if ($customerForm->submit()) {
-				
+				$this->redirect(array('invoice/index'));
 			}
 		} else {
 			$customerForm->serviceIds = array_keys($serviceList);

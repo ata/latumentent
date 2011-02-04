@@ -5,7 +5,7 @@
 			'id'=>'customer-form',
 			'enableAjaxValidation'=>true,
 		)); ?>
-			<p class="note">Fields with <span class="required">*</span> are required.</p>
+			
 			
 			<?php echo $form->errorSummary($customerForm); ?>
 			
@@ -45,12 +45,40 @@
 				<?php echo $form->error($customerForm,'email'); ?>
 			</div>
 			
+			<div class="row">
+				<?php echo $form->labelEx($customerForm,'contact_number'); ?>
+				<?php echo $form->textField($customerForm,'contact_number'); ?>
+				<?php echo $form->error($customerForm,'contact_number'); ?>
+			</div>
+			
 			<div class="checkbox row">
 				<?php echo $form->labelEx($customerForm,'serviceIds',array('class' => 'title')); ?>
-				<?php echo CHtml::activeCheckBoxList($customerForm, 'serviceIds', $serviceList, array('separator' => '')); ?>
+				<?php echo $form->checkBoxList($customerForm, 'serviceIds', $serviceList, array('separator' => '')); ?>
 				<?php echo $form->error($customerForm,'serviceIds'); ?>
 			</div>
-
+			<div class="row">
+				<?php echo $form->labelEx($customerForm,'ownership'); ?>
+				<?php echo $form->dropDownList($customerForm, 'ownership', array(
+					Customer::OWNERSHIP_OWNER => Yii::t('app','Owner'),
+					Customer::OWNERSHIP_RENTER => Yii::t('app','Render'),
+				)); ?>
+				<?php echo $form->error($customerForm,'ownership'); ?>
+			</div>
+			<div class="row">
+				<?php echo $form->labelEx($customerForm,'hire_up_to'); ?>
+				<?php
+				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+					'name'=>'CustomerForm[hire_up_to]',
+					// additional javascript options for the date picker plugin
+					'options'=>array(
+						'showAnim'=>'fold',
+					),
+					'htmlOptions'=>array(
+						'style'=>'height:20px;'
+					),
+				));?>
+				<?php echo $form->error($customerForm,'hire_up_to'); ?>
+			</div>
 			<div class="buttons row">
 				<?php echo CHtml::submitButton('Submit'); ?>
 			</div>
