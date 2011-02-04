@@ -130,4 +130,9 @@ class User extends ActiveRecord
 		$this->save(false);
 	}
 	
+	public function getName()
+	{
+		return $this->fullname;
+	}
+	
 }

@@ -369,7 +369,7 @@ div.search-form {
 	padding-right: 100px;
 }
 
-#customer-filter .row select{
+#customer-filter .row select input{
 	
 }
 
@@ -382,6 +382,15 @@ div.search-form {
 	display: inline;
 	padding: 30px;
 }
+
+#ticket-filter .row{
+	
+}
+
+#ticket-filter .row label{
+	padding-right:100px;
+}
+$ticket-filter .row sel
 
 .bills th.title, .summary-bills th.title{
 	background: #CCCCCC;

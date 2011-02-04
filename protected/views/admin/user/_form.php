@@ -29,7 +29,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($user,'role_id'); ?>
-		<?php echo $form->textField($user,'role_id'); ?>
+		<?php echo $form->dropDownList($user,'role_id',CHtml::listData(Role::model()->findAll(),'id','display')); ?>
 		<?php echo $form->error($user,'role_id'); ?>
 	</div>
 

@@ -48,6 +48,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'customer_id',
 		/*
 		'service_id',
+		'billing_date',
+		'paying_date',
 		*/
 		array(
 			'class'=>'CButtonColumn',

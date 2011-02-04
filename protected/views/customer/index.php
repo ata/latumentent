@@ -1,32 +1,26 @@
-<?php Yii::app()->clientScript->registerScript('filter-js','
+<?php Yii::app()->clientScript->registerScript('customer-filter-js','
 	function showValues(){
-		var str = $(\'#customer-filter\').serialize();
-		$(\'#customer-filter\').yiiGridView.update(\'customer-list\',{
+		var str = $(\'#customer-filter-form\').serialize();
+		$(\'#customer-list\').yiiGridView.update(\'customer-list\',{
 			url:$(this).attr(\'action\'),
 			data:str,
 		});
-	}
-	$(\'#service\').click(showValues);
-')?>
-<div class="new-customer">
-	<?php echo CHtml::link(Yii::t('app','Tambah Customer'), array('create'))?>
+	};
+	$(\'#customer-filter-form\').click(showValues);
+');?>
+<div class="span-8 new-button">
+	<?php echo CHtml::link(Yii::t('app','Add New Customer'), array('customer/create'));?>
 </div>
 
 <div class="filter span-16 last form" id="customer-filter">
 	<fieldset>
 		<legend><?php echo Yii::t('app','filter'); ?></legend>
 		<?php $form=$this->beginWidget('CActiveForm', array(
-			'id'=>'customer-filter'
+			'id'=>'customer-filter-form'
 		)); ?>
-		<div class="row">
-			<label>Tagihan Bulan</label>
-			<select>
-				<option>Desember 2010</option>
-			</select>
-		</div>
-		<div class="row" id="service">
-			<?php echo $form->labelEx($customerForm,'serviceIds');?>
-			<?php echo $form->checkBoxList($customerForm,'serviceIds',$serviceList)?>
+		<div class="row checkbox" id="service">
+			<?php echo $form->labelEx($customerFilter,'serviceIds');?>
+			<?php echo $form->checkBoxList($customerFilter,'serviceIds',$serviceList,array('separator'=>''))?>
 		</div>
 		<?php $this->endWidget(); ?>
 	</fieldset>
@@ -57,12 +51,18 @@
 				'value'=>'$data->selectedService'
 			),
 			array(
+				'header'=>Yii::t('app','Apartment Ownership'),
+				'value'=>'($data->ownership==="1")? CHtml::encode(Yii::t("app","Owner")) : 
+					CHtml::encode(Yii::t("app","Hire Up To"))." ".$data->hire_up_to',
+			),
+			array(
 				'class'=>'CButtonColumn',
-				'template'=>'{softDelete}{delete}',
+				'template'=>'{softDelete}{update}',
 				'buttons'=>array(
 					'softDelete'=>array(
 						'label'=>Yii::t("app","Soft Delete"),
 						'url'=>'"#"',
+						'imageUrl'=>Yii::app()->request->baseUrl.'/images/delete.png',
 						'click'=>'function(){ 
 							$.fn.yiiGridView.update(\'customer-list\',{
 								url:"'.Yii::app()->createUrl("customer/softDelete").'",

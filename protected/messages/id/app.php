@@ -37,4 +37,5 @@ return array(
 	'Apartment Ownership' => 'Kepemilikan Apartemen',
 	'Hire Up To' => 'Disewa Sampai',
 	'Contact Number' => 'Nomer Kontak',
+	'Owner'=>'Pemilik',
 );

@@ -15,6 +15,16 @@
 		<?php echo $form->textField($period,'name',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($period,'total_revenue'); ?>
+		<?php echo $form->textField($period,'total_revenue'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($period,'total_outlay'); ?>
+		<?php echo $form->textField($period,'total_outlay'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

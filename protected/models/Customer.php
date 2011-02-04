@@ -208,4 +208,9 @@ class Customer extends ActiveRecord
 		$user = User::model()->findbyPk($this->user_id);
 		$user->delete();
 	}
+	
+	public function getName()
+	{
+		return $this->user->fullname;
+	}
 }

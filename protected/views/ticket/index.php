@@ -14,22 +14,27 @@ $(\'#select-period\').change(showValues);
 </div>
 
 
-<div class="filter span-16 last form" id="customer-filter">
+<div class="filter span-16 last form" id="ticket">
 	<fieldset>
 		<legend><?php echo Yii::t('app','filter'); ?></legend>
 			<?php $form=$this->beginWidget('CActiveForm', array(
 				'id'=>'ticket-filter'
 			)); ?>
-			<div class="row" id="select-period">
-				<?php echo $form->labelEx($ticketList,'period');?>
-				<?php echo $form->dropDownList($ticketList, 'period', $periodList); ?>
+			<div class="row select" id="select-period">
+				<div class="label floatLeft">
+					<?php echo $form->labelEx($ticketList,'period');?>
+				</div>
+				<div class="floatLeft">
+					<?php echo $form->dropDownList($ticketList, 'period', $periodList); ?>
+				</div>
+				<div class="clear"></div>
 			</div>
-			<div class="row-checkbox" id="status_check">
+			<div class="row checkbox" id="status_check">
 				<?php echo $form->labelEx($ticketList,'status');?>
 				<?php echo $form->checkBoxList($ticketList,'status',array(
 					Ticket::STATUS_OPEN=>'Open',
 					Ticket::STATUS_CLOSED=>'Close',
-					),array('class'=>'check'))?>
+					),array('class'=>'check','separator'=>''))?>
 			</div>
 			<?php $this->endWidget(); ?>
 	</fieldset>

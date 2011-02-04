@@ -1,19 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "outlay".
+ * This is the model class for table "compensation_schema".
  *
- * The followings are the available columns in table 'outlay':
+ * The followings are the available columns in table 'compensation_schema':
  * @property integer $id
- * @property double $amount
- * @property integer $period_id
+ * @property integer $uptime
+ * @property integer $downtime
+ * @property integer $percentdown
+ * @property integer $percentup
+ * @property double $compensation
  * @property integer $service_id
  */
-class Outlay extends ActiveRecord
+class CompensationSchema extends ActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Outlay the static model class
+	 * @return CompensationSchema the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -25,7 +28,7 @@ class Outlay extends ActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'outlay';
+		return 'compensation_schema';
 	}
 
 	/**
@@ -36,12 +39,12 @@ class Outlay extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('amount, period_id', 'required'),
-			array('period_id, service_id', 'numerical', 'integerOnly'=>true),
-			array('amount', 'numerical'),
+			array('uptime, downtime, percentdown, percentup, compensation, service_id', 'required'),
+			array('uptime, downtime, percentdown, percentup, service_id', 'numerical', 'integerOnly'=>true),
+			array('compensation', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, amount, period_id, service_id', 'safe', 'on'=>'search'),
+			array('id, uptime, downtime, percentdown, percentup, compensation, service_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,6 +56,7 @@ class Outlay extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'service' => array(self::BELONGS_TO,'Service','service_id'),
 		);
 	}
 
@@ -63,8 +67,11 @@ class Outlay extends ActiveRecord
 	{
 		return array(
 			'id' => Yii::t('app','ID'),
-			'amount' => Yii::t('app','Amount'),
-			'period_id' => Yii::t('app','Period'),
+			'uptime' => Yii::t('app','Uptime'),
+			'downtime' => Yii::t('app','Downtime'),
+			'percentdown' => Yii::t('app','Percentdown'),
+			'percentup' => Yii::t('app','Percentup'),
+			'compensation' => Yii::t('app','Compensation'),
 			'service_id' => Yii::t('app','Service'),
 		);
 	}
@@ -81,12 +88,23 @@ class Outlay extends ActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('amount',$this->amount);
-		$criteria->compare('period_id',$this->period_id);
+		$criteria->compare('uptime',$this->uptime);
+		$criteria->compare('downtime',$this->downtime);
+		$criteria->compare('percentdown',$this->percentdown);
+		$criteria->compare('percentup',$this->percentup);
+		$criteria->compare('compensation',$this->compensation);
 		$criteria->compare('service_id',$this->service_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function getDisplay()
+	{
+		return Yii::t('app','{percentup} % Up Time of {service}',array(
+			'{percentup}' => $this->percentup,
+			'{service}' => $this->service,
+		)); 
 	}
 }

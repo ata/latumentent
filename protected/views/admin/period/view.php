@@ -19,5 +19,7 @@ $this->menu=array(
 	'attributes'=>array(
 		'id',
 		'name',
+		'total_revenue',
+		'total_outlay',
 	),
 )); ?>

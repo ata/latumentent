@@ -23,13 +23,13 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($invoice,'period_id'); ?>
-		<?php echo $form->textField($invoice,'period_id'); ?>
+		<?php echo $form->dropDownList($invoice,'period_id',CHtml::listData(Period::model()->findAll(),'id','display')); ?>
 		<?php echo $form->error($invoice,'period_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($invoice,'customer_id'); ?>
-		<?php echo $form->textField($invoice,'customer_id'); ?>
+		<?php echo $form->dropDownList($invoice,'customer_id',CHtml::listData(Customer::model()->findAll(),'id','display')); ?>
 		<?php echo $form->error($invoice,'customer_id'); ?>
 	</div>
 

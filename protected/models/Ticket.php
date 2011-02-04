@@ -89,6 +89,7 @@ class Ticket extends ActiveRecord
 			'technician' => array(self::BELONGS_TO, 'User', 'technician_id'),
 			'service' => array(self::BELONGS_TO, 'Service', 'service_id'),
 			'replies' => array(self::HAS_MANY, 'TicketReply', 'ticket_id'),
+			'problemType' => array(self::BELONGS_TO,'ProblemType','problem_type_id'),
 		);
 	}
 

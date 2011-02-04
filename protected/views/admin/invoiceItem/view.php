@@ -24,5 +24,7 @@ $this->menu=array(
 		'period_id',
 		'customer_id',
 		'service_id',
+		'billing_date',
+		'paying_date',
 	),
 )); ?>

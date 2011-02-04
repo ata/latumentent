@@ -44,6 +44,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'number',
 		'user_id',
 		'status',
+		'contact_number',
+		'ownership',
+		/*
+		'hire_up_to',
+		'apartment_id',
+		*/
 		array(
 			'class'=>'CButtonColumn',
 		),
