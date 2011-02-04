@@ -1,0 +1,2 @@
+#!/bin/bash
+rsync -avz . -e ssh mitel@203.190.47.38:/var/www/html/billing
