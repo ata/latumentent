@@ -1,17 +1,16 @@
-<script>
-	jQuery(document).ready(function(){
-		if($('#Customer_ownership').val()=="1"){
-			jQuery('#hire-up').hide();
-		} 
-		jQuery('#ownership').change(function(){
-			if($('#Customer_ownership').val()=="2"){
-				jQuery('#hire-up').fadeIn("fast");
-			} else {
-				jQuery('#hire-up').fadeOut("fast");
-			}
-		});
+
+<?php Yii::app()->clientScript->registerScript('filter-js','
+	if(jQuery(\'#Customer_ownership\').val()=="1"){
+		jQuery(\'#hire-up\').hide();
+	}
+	jQuery(\'#ownership\').change(function(){
+		if($(\'#Customer_ownership\').val()=="2"){
+			jQuery(\'#hire-up\').fadeIn("fast");
+		} else {
+			jQuery(\'#hire-up\').fadeOut("fast");
+		}
 	});
-</script>
+');?>
 <div class="form span-16">
 	<fieldset>
 		<legend><?php echo Yii::t('app','Update Customer') ?></legend>

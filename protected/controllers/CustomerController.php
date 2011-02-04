@@ -22,9 +22,6 @@ class CustomerController extends Controller
 		}
 		
 		$criteria = new CDbCriteria;
-		/*$criteria->alias = 'Customer';
-		$criteria->join = 'LEFT OUTER JOIN customer_has_service on customer_has_service.customer_id = Customer.id';
-		$criteria->condition = 'Customer.status=1';*/
 		
 		$dataProvider = new CActiveDataProvider('Customer',array(
 			'criteria'=>$criteria,
@@ -38,14 +35,6 @@ class CustomerController extends Controller
 		));
 	}
 	
-	
-	public function actionTest()
-	{
-		if($test === new Customer){
-			echo $test;
-		}
-		$this->render('index');
-	}
 	
 	public function actionSoftDelete()
 	{
@@ -127,15 +116,6 @@ class CustomerController extends Controller
 		}
 		
 	}
-	
-	/*public function actionDelete()
-	{
-		if(isset($_GET['id'])){
-			$customer = Customer::model()->findbyPk($_GET['id']);
-			$customer->delete();
-		}
-		
-	}*/
 	
 	public function loadCustomer()
 	{
