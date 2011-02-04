@@ -57,10 +57,10 @@
 			),
 			array(
 				'class'=>'CButtonColumn',
-				'template'=>'{softDelete}{update}',
+				'template'=>'{softDelete}{update}{resetPassword}',
 				'buttons'=>array(
 					'softDelete'=>array(
-						'label'=>Yii::t("app","Soft Delete"),
+						'label'=>Yii::t('app','Soft Delete'),
 						'url'=>'"#"',
 						'imageUrl'=>Yii::app()->request->baseUrl.'/images/delete.png',
 						'click'=>'function(){ 
@@ -76,6 +76,11 @@
 					/*'options'=>array(
 						'onclick'=>'softDel("'.$data->id.'")',
 					),*/
+					),
+					'resetPassword'=>array(
+						'label'=>Yii::t('app','Reset Password'),
+						'url'=>'Yii::app()->createUrl("/customer/resetPassword",array("id"=>$data->id))',
+						'imageUrl'=>Yii::app()->request->baseUrl.'/images/key.png',
 					),
 				),
 			),
