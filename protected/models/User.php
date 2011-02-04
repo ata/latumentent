@@ -127,7 +127,7 @@ class User extends ActiveRecord
 	public function softDelete()
 	{
 		$this->status = self::STATUS_DELETED;
-		$this->save();
+		$this->save(false);
 	}
 	
 }

@@ -24,15 +24,12 @@ $(\'#select-period\').change(showValues);
 				<?php echo $form->labelEx($ticketList,'period');?>
 				<?php echo $form->dropDownList($ticketList, 'period', $periodList); ?>
 			</div>
-			<div class="row" id="status_check">
+			<div class="row-checkbox" id="status_check">
 				<?php echo $form->labelEx($ticketList,'status');?>
 				<?php echo $form->checkBoxList($ticketList,'status',array(
 					Ticket::STATUS_OPEN=>'Open',
 					Ticket::STATUS_CLOSED=>'Close',
-					))?>
-			</div>
-			<div class="row buttons">
-				<?php echo CHtml::submitButton(Yii::t('app','Tampilkan')); ?>
+					),array('class'=>'check'))?>
 			</div>
 			<?php $this->endWidget(); ?>
 	</fieldset>

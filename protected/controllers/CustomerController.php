@@ -5,10 +5,25 @@
  */
 class CustomerController extends Controller
 {
+	
+	private $_model;
+	
 	public function actionIndex()
 	{
+		$customerForm = new Customer;
+		$condtion = array();
+		
+		if(isset($_GET['Customer']['serviceIds'])){
+			if(!empty($_GET['Customer']['serviceIds'])){
+				$paramsService = implode(",",$_GET['Customer']['serviceIds']);
+				$condtion[] = "services.service_id = ";
+			}
+		}
+		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
 		$this->render('index',array(
 			'dataProvider' => Customer::model()->search(),
+			'serviceList'=>$serviceList,
+			'customerForm'=>$customerForm,
 		));
 	}
 	
@@ -21,6 +36,13 @@ class CustomerController extends Controller
 		$this->render('index');
 	}
 	
+	public function actionSoftDelete()
+	{
+		if(isset($_GET['id'])){
+			$customer = Customer::model()->findByPk($_GET['id']);
+			$customer->userCustomerSoftDelete();
+		}
+	}
 	
 	public function actionCreate()
 	{
@@ -47,6 +69,28 @@ class CustomerController extends Controller
 			'customerForm' => $customerForm,
 			'serviceList' => $serviceList,
 		));
+	}
+	
+	public function actionDelete()
+	{
+		if(isset($_GET['id'])){
+			$customer = Customer::model()->findbyPk($_GET['id']);
+			$customer->delete();
+		}
+		
+	}
+	
+	public function loadCustomer()
+	{
+		if ($this->_model === null) {
+            if (isset($_GET['id'])) {
+                $this->_model = Customer::model()->findbyPk($_GET['id']);
+            }
+            if ($this->_model === null) {
+                throw new CHttpException(404,'The requested page does not exist.');
+            }
+        }
+        return $this->_model;
 	}
 
 

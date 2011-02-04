@@ -26,7 +26,7 @@ class TicketController extends Controller
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('index'),
-				'roles'=>array('admin','technical_support','customer_services'),
+				'roles'=>array('admin','technical_support','customer_services','customer'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('view'),
@@ -61,6 +61,11 @@ class TicketController extends Controller
 				$condition[] = "status in ($params_status)";
 			}	
 		}
+		
+		if(Yii::app()->user->getRole() === 'customer'){
+			$condition[] = "author_id = '".Yii::app()->user->id."'";
+		}
+		
 		
 		$criteria = new CDbCriteria;
 		$criteria->condition = implode(" AND ",$condition);

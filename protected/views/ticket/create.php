@@ -12,7 +12,7 @@
 		<?php echo $form->errorSummary($ticket); ?>
 		
 		<div class="row">
-			<?php echo $form->labelEx($ticket,'service_id'); ?>
+			<?php echo $form->labelEx($ticket,'invoice_item_id'); ?>
 			<?php echo $form->dropDownList($ticket,'invoice_item_id', $invoiceItemList); ?>
 			<?php echo $form->error($ticket,'invoice_item_id'); ?>
 		</div>

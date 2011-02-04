@@ -65,6 +65,32 @@ div.form .row
 	margin: 5px 0;
 }
 
+div.form .row-checkbox
+{
+	clear:both;
+	float:none;
+	
+	margin:0px;
+}
+
+div.form .row-checkbox input {
+	clear:left;
+	float:left;
+	margin-left: 250px;
+	margin-top: -10px;
+	display:inline;
+	list-style:none;
+	vertical-align:middle;
+	position:relative;
+}
+
+div.form .row-checkbox label {
+	clear:left;
+	display:block;
+	float:left;
+	
+}
+
 div.form .hint
 {
 	margin: 0;
