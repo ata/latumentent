@@ -159,7 +159,13 @@ class Customer extends ActiveRecord
 	public function softDelete()
 	{
 		$this->status = self::STATUS_DELETED;
-		$this->save();
+		$this->save(false);
+	}
+	
+	public function userCustomerSoftDelete()
+	{
+		$this->softDelete();
+		$this->user->softDelete();
 	}
 	
 	public function findByUserId($user_id)
@@ -194,5 +200,12 @@ class Customer extends ActiveRecord
 		}
 		
 		return $invoice->save();
+	}
+	
+	protected function afterDelete()
+	{
+		parent::afterDelete();
+		$user = User::model()->findbyPk($this->user_id);
+		$user->delete();
 	}
 }

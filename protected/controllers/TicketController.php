@@ -26,7 +26,7 @@ class TicketController extends Controller
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('index'),
-				'roles'=>array('admin','technical_support','customer_services'),
+				'roles'=>array('admin','technical_support','customer_services','customer'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('view'),
@@ -48,10 +48,36 @@ class TicketController extends Controller
 	{
 		//$filter = isset($_GET['period']) ? "author_id = :author_id AND period_id = '$_GET[period]'" : "author_id = :author_id" ;
 		$ticketList = new Ticket;
+		$condition = array();
+		
+		if(isset($_GET['Ticket']['period'])){
+			$params_period = $_GET['Ticket']['period'];
+			$condition[] = "period_id=$params_period";
+		}
+	
+		if(isset($_GET['Ticket']['status'])){
+			if(!empty($_GET['Ticket']['status'])){
+				$params_status = implode(",",$_GET['Ticket']['status']);
+				$condition[] = "status in ($params_status)";
+			}	
+		}
+		
+		if(Yii::app()->user->getRole() === 'customer'){
+			$condition[] = "author_id = '".Yii::app()->user->id."'";
+		}
+		
+		
+		$criteria = new CDbCriteria;
+		$criteria->condition = implode(" AND ",$condition);
+		
+		$dataProvider = new CActiveDataProvider('Ticket',array(
+			'criteria'=>$criteria,
+		));
 		$periodList = CHtml::listData(Period::model()->findAll(),'id','name');
 		$this->render('index',array(
 			'ticketList'=>$ticketList,
 			'periodList'=>$periodList,
+			'dataProvider'=>$dataProvider,
 		));
 	}
 
@@ -118,14 +144,12 @@ class TicketController extends Controller
 			}
 		}
 		
-		
-		
-		
 		$this->render('view',array(
 			'ticket' => $ticket,
 			'reply' => $reply,
 		));
 	}
+
 
 	
 	public function loadTicket()
