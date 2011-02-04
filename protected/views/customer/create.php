@@ -1,15 +1,15 @@
-<script>
-	jQuery(document).ready(function(){
-		jQuery('#hire-up').hide();
-		jQuery('#ownership').change(function(){
-			if($('#CustomerForm_ownership').val()=="2"){
-				jQuery('#hire-up').fadeIn("fast");
+
+<?php Yii::app()->clientScript->registerScript('filter-js','
+		jQuery(\'#hire-up\').hide();
+		jQuery(\'#ownership\').change(function(){
+			if(jQuery(\'#CustomerForm_ownership\').val()=="2"){
+				jQuery(\'#hire-up\').fadeIn("fast");
 			} else {
-				jQuery('#hire-up').fadeOut("fast");
+				jQuery(\'#hire-up\').fadeOut("fast");
 			}
-		});
-	});
-</script>
+		});		
+');
+?>
 <div class="form span-16">
 	<fieldset>
 		<legend><?php echo Yii::t('app','New Customer') ?></legend>

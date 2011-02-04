@@ -54,6 +54,12 @@ $(\'#select-period\').change(showValues);
 				'value'=>'CHtml::link($data->title,array("view","id"=>$data->id))',
 			),
 			array(
+				'header'=>Yii::t('app','Consumer'),
+				'type'=>'raw',
+				'value'=>'$data->customer->user->fullname',
+				'visible'=>(Yii::app()->user->getRole() !== 'customer') ? true : false,
+			),
+			array(
 				'header'=>Yii::t('app','service'),
 				'name'=>'service.name',
 			),
