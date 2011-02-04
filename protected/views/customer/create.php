@@ -1,3 +1,15 @@
+<script>
+	jQuery(document).ready(function(){
+		jQuery('#hire-up').hide();
+		jQuery('#ownership').change(function(){
+			if($('#CustomerForm_ownership').val()=="2"){
+				jQuery('#hire-up').fadeIn("fast");
+			} else {
+				jQuery('#hire-up').fadeOut("fast");
+			}
+		});
+	});
+</script>
 <div class="form span-16">
 	<fieldset>
 		<legend><?php echo Yii::t('app','New Customer') ?></legend>
@@ -56,7 +68,7 @@
 				<?php echo $form->checkBoxList($customerForm, 'serviceIds', $serviceList, array('separator' => '')); ?>
 				<?php echo $form->error($customerForm,'serviceIds'); ?>
 			</div>
-			<div class="row">
+			<div class="row" id="ownership">
 				<?php echo $form->labelEx($customerForm,'ownership'); ?>
 				<?php echo $form->dropDownList($customerForm, 'ownership', array(
 					Customer::OWNERSHIP_OWNER => Yii::t('app','Owner'),
@@ -64,7 +76,7 @@
 				)); ?>
 				<?php echo $form->error($customerForm,'ownership'); ?>
 			</div>
-			<div class="row">
+			<div class="row" id="hire-up">
 				<?php echo $form->labelEx($customerForm,'hire_up_to'); ?>
 				<?php
 				$this->widget('zii.widgets.jui.CJuiDatePicker', array(

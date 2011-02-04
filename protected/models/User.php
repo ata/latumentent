@@ -21,6 +21,8 @@ class User extends ActiveRecord
 {
 	const STATUS_ACTIVE = 1;
 	const STATUS_DELETED = 2;
+	public $passwordConfirm;
+	public $reqNewPassword = false;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return User the static model class
@@ -50,6 +52,8 @@ class User extends ActiveRecord
 			array('role_id, status', 'numerical', 'integerOnly'=>true),
 			array('username, password, fullname, email', 'length', 'max'=>255),
 			array('status','default','value'=>self::STATUS_ACTIVE),
+			array('password','compare','compareAttribute'=>'passwordConfirm'),
+			array('passwordConfirm','safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, username, status, fullname, password, email, role_id', 'safe', 'on'=>'search'),
@@ -88,11 +92,19 @@ class User extends ActiveRecord
 	
 	protected function beforeSave()
 	{
-		if($this->isNewRecord){
+		if($this->isNewRecord || $this->reqNewPassword){
 			$this->password = md5($this->password);
 		}
 		return parent::beforeSave();
 	}
+	
+	protected function afterValidate()
+    {
+        if(!$this->reqNewPassword) {
+            $this->clearErrors('password');
+        }
+
+    }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -127,7 +139,7 @@ class User extends ActiveRecord
 	public function softDelete()
 	{
 		$this->status = self::STATUS_DELETED;
-		$this->save();
+		$this->save(false);
 	}
 	
 	public function getName()
