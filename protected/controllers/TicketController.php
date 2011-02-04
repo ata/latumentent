@@ -57,7 +57,7 @@ class TicketController extends Controller
 
 	public function actionCreate()
 	{
-		$ticket = new Ticket('search');
+		$ticket = new Ticket();
 		$ticket->author_id = Yii::app()->user->id;
 
 		// uncomment the following code to enable ajax-based validation

@@ -53,6 +53,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'technician_id',
 		'author_id',
 		'service_id',
+		'time_open',
+		'time_closed',
+		'problem_type_id',
+		'solved',
+		'down',
 		*/
 		array(
 			'class'=>'CButtonColumn',

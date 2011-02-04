@@ -22,7 +22,7 @@
 
 	<div class="row">
 		<?php echo $form->label($user,'role_id'); ?>
-		<?php echo $form->textField($user,'role_id'); ?>
+		<?php echo $form->dropDownList($user,'role_id',CHtml::listData(Role::model()->findAll(),'id','display')); ?>
 	</div>
 
 	<div class="row">

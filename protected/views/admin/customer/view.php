@@ -21,5 +21,9 @@ $this->menu=array(
 		'number',
 		'user_id',
 		'status',
+		'contact_number',
+		'ownership',
+		'hire_up_to',
+		'apartment_id',
 	),
 )); ?>

@@ -29,5 +29,10 @@ $this->menu=array(
 		'technician_id',
 		'author_id',
 		'service_id',
+		'time_open',
+		'time_closed',
+		'problem_type_id',
+		'solved',
+		'down',
 	),
 )); ?>

@@ -22,22 +22,32 @@
 
 	<div class="row">
 		<?php echo $form->label($invoiceItem,'invoice_id'); ?>
-		<?php echo $form->textField($invoiceItem,'invoice_id'); ?>
+		<?php echo $form->dropDownList($invoiceItem,'invoice_id',CHtml::listData(Invoice::model()->findAll(),'id','display')); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($invoiceItem,'period_id'); ?>
-		<?php echo $form->textField($invoiceItem,'period_id'); ?>
+		<?php echo $form->dropDownList($invoiceItem,'period_id',CHtml::listData(Period::model()->findAll(),'id','display')); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($invoiceItem,'customer_id'); ?>
-		<?php echo $form->textField($invoiceItem,'customer_id'); ?>
+		<?php echo $form->dropDownList($invoiceItem,'customer_id',CHtml::listData(Customer::model()->findAll(),'id','display')); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($invoiceItem,'service_id'); ?>
-		<?php echo $form->textField($invoiceItem,'service_id'); ?>
+		<?php echo $form->dropDownList($invoiceItem,'service_id',CHtml::listData(Service::model()->findAll(),'id','display')); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($invoiceItem,'billing_date'); ?>
+		<?php echo $form->textField($invoiceItem,'billing_date'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($invoiceItem,'paying_date'); ?>
+		<?php echo $form->textField($invoiceItem,'paying_date'); ?>
 	</div>
 
 	<div class="row buttons">

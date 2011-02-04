@@ -209,6 +209,13 @@ class CrudCode extends CCodeModel
 
 	public function generateActiveField($modelClass,$column)
 	{
+		$model = new $modelClass;
+		foreach($model->relations() as $relationName => $relation) {
+			if($relation[0] == CActiveRecord::BELONGS_TO && $column->name === $relation[2]) {
+				return "\$form->dropDownList(\${$this->singularName},'{$column->name}',CHtml::listData({$relation[1]}::model()->findAll(),'id','display'))";
+			}
+		}
+		
 		if($column->type==='boolean')
 			return "\$form->checkBox(\${$this->singularName},'{$column->name}')";
 		else if(stripos($column->dbType,'text')!==false)
@@ -230,6 +237,7 @@ class CrudCode extends CCodeModel
 			}
 		}
 	}
+
 
 	public function guessNameColumn($columns)
 	{

@@ -195,4 +195,10 @@ class Customer extends ActiveRecord
 		
 		return $invoice->save();
 	}
+	
+	
+	public function getName()
+	{
+		return $this->user->fullname;
+	}
 }

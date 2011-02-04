@@ -86,4 +86,9 @@ class Apartment extends ActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function getDisplay()
+	{
+		return $this->number;
+	}
 }

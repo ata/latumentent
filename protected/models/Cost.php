@@ -53,6 +53,8 @@ class Cost extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'service' => array(self::BELONGS_TO,'Service','service_id'),
+			'period' => array(self::BELONGS_TO,'Period','period_id'),
 		);
 	}
 
@@ -88,5 +90,14 @@ class Cost extends ActiveRecord
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function getDisplay()
+	{
+		return Yii::t('app','{amount} at period {period} on {service}',array(
+			'{amount}' => $this->amount,
+			'{period}' => $this->period,
+			'{service}' => $this->service,
+		)); 
 	}
 }

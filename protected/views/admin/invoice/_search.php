@@ -22,12 +22,12 @@
 
 	<div class="row">
 		<?php echo $form->label($invoice,'period_id'); ?>
-		<?php echo $form->textField($invoice,'period_id'); ?>
+		<?php echo $form->dropDownList($invoice,'period_id',CHtml::listData(Period::model()->findAll(),'id','display')); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($invoice,'customer_id'); ?>
-		<?php echo $form->textField($invoice,'customer_id'); ?>
+		<?php echo $form->dropDownList($invoice,'customer_id',CHtml::listData(Customer::model()->findAll(),'id','display')); ?>
 	</div>
 
 	<div class="row buttons">

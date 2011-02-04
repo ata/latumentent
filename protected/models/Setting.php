@@ -100,4 +100,9 @@ class Setting extends ActiveRecord
 		
 		return $setting->value;
 	}
+	
+	public function getDisplay()
+	{
+		return $this->key;
+	}
 }
