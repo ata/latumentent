@@ -201,6 +201,7 @@ class Customer extends ActiveRecord
 	protected function afterDelete()
 	{
 		parent::afterDelete();
-		User::model()->delete('id='.$this->user_id);
+		$user = User::model()->findbyPk($this->user_id);
+		$user->delete();
 	}
 }
