@@ -1,13 +1,13 @@
 
 <?php Yii::app()->clientScript->registerScript('filter-js','
-	if(jQuery(\'#Customer_ownership\').val()=="1"){
-		jQuery(\'#hire-up\').hide();
+	if(jQuery("#Customer_ownership").val()=="1"){
+		jQuery("#hire-up").hide();
 	}
-	jQuery(\'#ownership\').change(function(){
-		if($(\'#Customer_ownership\').val()=="2"){
-			jQuery(\'#hire-up\').fadeIn("fast");
+	jQuery("#ownership").change(function(){
+		if($("#Customer_ownership").val()=="2"){
+			jQuery("#hire-up").fadeIn("fast");
 		} else {
-			jQuery(\'#hire-up\').fadeOut("fast");
+			jQuery("#hire-up").fadeOut("fast");
 		}
 	});
 ');?>

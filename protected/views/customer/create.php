@@ -1,11 +1,11 @@
 
 <?php Yii::app()->clientScript->registerScript('filter-js','
-		jQuery(\'#hire-up\').hide();
-		jQuery(\'#ownership\').change(function(){
-			if(jQuery(\'#CustomerForm_ownership\').val()=="2"){
-				jQuery(\'#hire-up\').fadeIn("fast");
+		jQuery("#hire-up").hide();
+		jQuery("#ownership").change(function(){
+			if(jQuery("#CustomerForm_ownership").val()=="2"){
+				jQuery("#hire-up").fadeIn("fast");
 			} else {
-				jQuery(\'#hire-up\').fadeOut("fast");
+				jQuery("#hire-up").fadeOut("fast");
 			}
 		});		
 ');

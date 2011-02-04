@@ -1,13 +1,13 @@
 <?php Yii::app()->clientScript->registerScript('filter-js','
 function showValues(){
-	var str = $(\'#ticket-filter\').serialize();
-	$(\'#ticket-list\').yiiGridView.update(\'ticket-list\',{
-		url:$(this).attr(\'action\'),
+	var str = $("#ticket-filter").serialize();
+	$("#ticket-list").yiiGridView.update("ticket-list",{
+		url:$(this).attr("action"),
 		data:str
 	});
 };
-$(\'#status_check\').click(showValues);
-$(\'#select-period\').change(showValues);
+$("#status_check").click(showValues);
+$("#select-period").change(showValues);
 ');?>
 <div class="title">
 	<h2><?php echo Yii::t('app','List Ticket'); ?></h2>
