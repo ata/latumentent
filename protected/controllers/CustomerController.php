@@ -12,16 +12,18 @@ class CustomerController extends Controller
 	{
 		$customerFilter = new Customer;
 		$condition = array();
-		$condition[] = 'status=1';
+		$condition[] = 'status = 1';
 		
 		if(isset($_GET['Customer']['serviceIds'])){
 			if(!empty($_GET['Customer']['serviceIds'])){
 				$params_service = implode(",",$_GET['Customer']['serviceIds']);
-				$condition[] = "services_services.service_id in ($params_service)"; 
+				$condition[] = "service_id in ($params_service)"; 
 			}
 		}
 		
 		$criteria = new CDbCriteria;
+		$criteria->with = array('services'=>array('together'=>true));
+		$criteria->condition = implode(" AND ",$condition);
 		
 		$dataProvider = new CActiveDataProvider('Customer',array(
 			'criteria'=>$criteria,
