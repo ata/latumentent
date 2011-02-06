@@ -45,10 +45,12 @@
 				'class' => 'NumberColumn'
 			),
 			array(
+				'name' => 'apartment_id',
 				'header' => 'Apartment Number',
 				'value' => '$data->apartment->number',
 			),
 			array(
+				'name' => 'user',
 				'header'=>Yii::t('app','Full Name'),
 				'type'=>'raw',
 				'value'=>'CHtml::link($data->user->fullname, array("detail"))',
@@ -58,13 +60,15 @@
 				'value'=>'$data->rawServices'
 			),
 			array(
+				'name' => 'ownership',
 				'header'=>Yii::t('app','Apartment Ownership'),
 				'value'=>'($data->ownership==="1")? CHtml::encode(Yii::t("app","Owner")) : 
 					CHtml::encode(Yii::t("app","Hire Up To"))." ".$data->hire_up_to',
 			),
+			'rating',
 			array(
 				'class'=>'CButtonColumn',
-				'template'=>'{softDelete}{update}{resetPassword}',
+				'template'=>'{softDelete} {update} {resetPassword}',
 				'buttons'=>array(
 					'softDelete'=>array(
 						'label'=>Yii::t('app','Soft Delete'),
