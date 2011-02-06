@@ -1,13 +1,13 @@
-
 <?php Yii::app()->clientScript->registerScript('filter-js','
-		jQuery("#hire-up").hide();
-		jQuery("#ownership").change(function(){
-			if(jQuery("#CustomerForm_ownership").val()=="2"){
-				jQuery("#hire-up").fadeIn("fast");
-			} else {
-				jQuery("#hire-up").fadeOut("fast");
-			}
-		});		
+(function($){
+	$("#ownership").change(function(){
+		if($("#CustomerForm_ownership").val()=="' . Customer::OWNERSHIP_RENTER . '"){
+			$("#hire-up").fadeIn("fast");
+		} else {
+			$("#hire-up").fadeOut("fast");
+		}
+	});
+})(jQuery);
 ');
 ?>
 <div class="form span-16">
@@ -17,8 +17,7 @@
 			'id'=>'customer-form',
 			'enableAjaxValidation'=>true,
 		)); ?>
-			
-			
+		
 			<?php echo $form->errorSummary($customerForm); ?>
 			
 			<div class="row">
@@ -72,21 +71,18 @@
 				<?php echo $form->labelEx($customerForm,'ownership'); ?>
 				<?php echo $form->dropDownList($customerForm, 'ownership', array(
 					Customer::OWNERSHIP_OWNER => Yii::t('app','Owner'),
-					Customer::OWNERSHIP_RENTER => Yii::t('app','Render'),
+					Customer::OWNERSHIP_RENTER => Yii::t('app','Renter'),
 				)); ?>
 				<?php echo $form->error($customerForm,'ownership'); ?>
 			</div>
-			<div class="row" id="hire-up">
+			<div class="row" id="hire-up" style="display:none">
 				<?php echo $form->labelEx($customerForm,'hire_up_to'); ?>
 				<?php
 				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
 					'name'=>'CustomerForm[hire_up_to]',
-					// additional javascript options for the date picker plugin
 					'options'=>array(
-						'showAnim'=>'fold',
-					),
-					'htmlOptions'=>array(
-						'style'=>'height:20px;'
+						'changeYear'=>true,
+						'dateFormat' => 'yy-mm-dd'
 					),
 				));?>
 				<?php echo $form->error($customerForm,'hire_up_to'); ?>

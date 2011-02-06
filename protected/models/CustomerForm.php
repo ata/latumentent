@@ -25,10 +25,10 @@ class CustomerForm extends CFormModel
 	{
 		return array(
 			// name, email, subject and body are required
-			array('fullname, contact_number, ownership, username, password, apartmentNumber, confirmPassword, serviceIds', 'required'),
+			array('fullname, contact_number, hire_up_to, ownership, username, password, apartmentNumber, confirmPassword, serviceIds', 'required'),
 			array('confirmPassword', 'compare', 'compareAttribute'=>'password'),
 			array('username', 'unique', 'className' => 'User'),
-			array('apartmentNumber', 'unique', 'className' => 'Customer','attributeName' => 'number'),
+			array('apartmentNumber', 'exist', 'className' => 'Apartment', 'attributeName' => 'number'),
 			// email has to be a valid email address
 			array('email', 'email'),
 			array('servicesIds, hire_up_to','safe'),
@@ -57,12 +57,20 @@ class CustomerForm extends CFormModel
 		);
 	}
 	
+	protected function beforeValidate()
+	{
+		if ($this->ownership === Customer::OWNERSHIP_OWNER) {
+			$this->clearErrors('hire_up_to');
+		}
+		return parent::beforeValidate();
+	}
+	
 	public function submit()
 	{
+		$transaction = Yii::app()->db->beginTransaction();
 		if (!$this->validate()) {
 			return false;
 		}
-		
 		$user = new User;
 		$user->fullname = $this->fullname;
 		$user->username = $this->username;
@@ -78,7 +86,7 @@ class CustomerForm extends CFormModel
 		
 		$customer = new Customer;
 		$customer->user_id = $user->id;
-		$customer->number = $this->apartmentNumber;
+		$customer->apartment_id = Apartment::model()->findByNumber($this->number);
 		$customer->serviceIds = $this->serviceIds;
 		$customer->contact_number = $this->contact_number;
 		$customer->ownership = $this->ownership;
@@ -93,6 +101,8 @@ class CustomerForm extends CFormModel
 		if(!$customer->generateInvoices(Period::model()->last()->find()->id)) {
 			return false;
 		}
+		
+		$transaction->commit();
 		return true;
 	}
 }

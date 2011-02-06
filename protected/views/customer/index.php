@@ -1,26 +1,36 @@
-<?php Yii::app()->clientScript->registerScript('customer-filter-js','
-	function showValues(){
-		var str = $("#customer-filter-form").serialize();
-		$("#customer-list").yiiGridView.update("customer-list",{
-			url:$(this).attr("action"),
-			data:str,
+<?php Yii::app()->clientScript->registerScript('customer-filter','
+(function($){
+	var update_customer_list = function(){
+		$("#ticket-list").yiiGridView.update("customer-list",{
+			url: $(this).attr("action"),
+			data: $("#customer-filter").serialize(),
 		});
-	};
-	$("#customer-filter-form").click(showValues);
-');?>
+	}
+	$("#customer-filter input[type=checkbox]").click(update_customer_list);
+	$("#customer-filter select").change(update_customer_list);
+})(jQuery)');?>
 <div class="span-8 new-button">
 	<?php echo CHtml::link(Yii::t('app','Add New Customer'), array('customer/create'));?>
 </div>
 
-<div class="filter span-16 last form" id="customer-filter">
+<div class="filter span-16 last form">
 	<fieldset>
 		<legend><?php echo Yii::t('app','filter'); ?></legend>
 		<?php $form=$this->beginWidget('CActiveForm', array(
-			'id'=>'customer-filter-form'
+			'id'=>'customer-filter'
 		)); ?>
+		
+		<div class="row select">
+			<?php echo $form->label($customer, 'ownership') ?>
+			<?php echo $form->dropDownList($customer, 'ownership',array(
+				Customer::OWNERSHIP_OWNER => Yii::t('app','Owner'),
+				Customer::OWNERSHIP_RENTER => Yii::t('app','Renter'),
+			),array('empty' => Yii::t('app','All')));?>
+		</div>
+		
 		<div class="row checkbox" id="service">
-			<?php echo $form->labelEx($customerFilter,'serviceIds');?>
-			<?php echo $form->checkBoxList($customerFilter,'serviceIds',$serviceList,array('separator'=>''))?>
+			<?php echo $form->label($customer,'serviceIds');?>
+			<?php echo $form->checkBoxList($customer,'serviceIds',$serviceList,array('separator'=>''))?>
 		</div>
 		<?php $this->endWidget(); ?>
 	</fieldset>
@@ -29,18 +39,15 @@
 <div class="span-24">
 	<?php $this->widget('zii.widgets.grid.CGridView',array(
 		'id'=>'customer-list',
-		'dataProvider'=>$dataProvider,
+		'dataProvider'=>$customer->search(),
 		'columns'=>array(
 			array(
-				'value'=>'$data->id',
-				'type'=>'raw',
-				'htmlOptions'=>array('style'=>'display:none;width:0%'),
-				'headerHtmlOptions'=>array('style'=>'display:none;width:0%'),
+				'class' => 'NumberColumn'
 			),
 			array(
-				'class' => 'NumberColumn'
-				),
-			'number',
+				'header' => 'Apartment Number',
+				'value' => '$data->apartment->number',
+			),
 			array(
 				'header'=>Yii::t('app','Full Name'),
 				'type'=>'raw',
@@ -48,7 +55,7 @@
 			),
 			array(
 				'header'=>Yii::t('app','Services'),
-				'value'=>'$data->selectedService'
+				'value'=>'$data->rawServices'
 			),
 			array(
 				'header'=>Yii::t('app','Apartment Ownership'),
@@ -73,9 +80,6 @@
 							})
 						}',
 						'type'=>'raw',
-					/*'options'=>array(
-						'onclick'=>'softDel("'.$data->id.'")',
-					),*/
 					),
 					'resetPassword'=>array(
 						'label'=>Yii::t('app','Reset Password'),
@@ -84,13 +88,6 @@
 					),
 				),
 			),
-		/*array(
-			'class'=>'CLinkColumn',
-			'header'=>Yii::t("app","Soft Delete"),
-			'labelExpression'=>'Yii::t("app","Soft Delete")',
-			'urlExpression'=>'Yii::app()->createUrl("#")',
-			'linkHtmlOptions'=>array('onclick'=>'softDelete(<?php echo $data->id ?>)'),
-		),*/
 		),
 	))?>
 </div>

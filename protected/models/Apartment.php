@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'apartment':
  * @property integer $id
  * @property string $number
- * @property integer $status
+ * @property string $note
  */
 class Apartment extends ActiveRecord
 {
@@ -35,12 +35,12 @@ class Apartment extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('status', 'required'),
-			array('status', 'numerical', 'integerOnly'=>true),
+			array('number', 'required'),
 			array('number', 'length', 'max'=>255),
+			array('note','safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, number, status', 'safe', 'on'=>'search'),
+			array('id, number, note', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,6 +52,7 @@ class Apartment extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'occupant' => array(self::HAS_ONE,'Customer','apartment_id'),
 		);
 	}
 
@@ -63,7 +64,7 @@ class Apartment extends ActiveRecord
 		return array(
 			'id' => Yii::t('app','ID'),
 			'number' => Yii::t('app','Number'),
-			'status' => Yii::t('app','Status'),
+			'note' => Yii::t('app','Note'),
 		);
 	}
 
@@ -80,10 +81,17 @@ class Apartment extends ActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('number',$this->number,true);
-		$criteria->compare('status',$this->status);
+		$criteria->compare('note',$this->note);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
+		));
+	}
+	
+	public function findByNumber($number) 
+	{
+		return $this->findByAttributes(array(
+			'number' => $number,
 		));
 	}
 	
