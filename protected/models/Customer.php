@@ -123,6 +123,9 @@ class Customer extends ActiveRecord
 	protected function beforeSave()
 	{
 		$this->user->status = $this->status;
+		if(!$this->isNewRecord){
+			$this->deleteCustomerHasService();
+		}
 		return parent::beforeSave();
 	}
 	
@@ -139,6 +142,14 @@ class Customer extends ActiveRecord
 				VALUES (:customer_id,:service_id)
 			")->query(array('customer_id'=>$this->id,'service_id'=>$serviceIds));
 		}
+	}
+	
+	private function deleteCustomerHasService()
+	{
+		$this->dbConnection->createCommand(
+			'DELETE FROM customer_has_service
+			 WHERE customer_id = :customer_id'
+			)->query(array('customer_id'=>$this->id));
 	}
 
 	public function getSelectedService()

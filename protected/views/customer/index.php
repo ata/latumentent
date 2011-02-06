@@ -1,12 +1,12 @@
 <?php Yii::app()->clientScript->registerScript('customer-filter-js','
 	function showValues(){
-		var str = $(\'#customer-filter-form\').serialize();
-		$(\'#customer-list\').yiiGridView.update(\'customer-list\',{
-			url:$(this).attr(\'action\'),
+		var str = $("#customer-filter-form").serialize();
+		$("#customer-list").yiiGridView.update("customer-list",{
+			url:$(this).attr("action"),
 			data:str,
 		});
 	};
-	$(\'#customer-filter-form\').click(showValues);
+	$("#customer-filter-form").click(showValues);
 ');?>
 <div class="span-8 new-button">
 	<?php echo CHtml::link(Yii::t('app','Add New Customer'), array('customer/create'));?>
