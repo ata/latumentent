@@ -99,4 +99,11 @@ class Apartment extends ActiveRecord
 	{
 		return $this->number;
 	}
+	
+	public function getStatus()
+	{
+		if ($this->occupant) {
+			
+		}
+	}
 }
