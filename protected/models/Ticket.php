@@ -166,6 +166,7 @@ class Ticket extends ActiveRecord
 			$this->customer_id = $this->author->customer->id;
 		}
 		
+		$this->down = $this->problemType->down;
 		
 		return parent::beforeValidate();
 	}
