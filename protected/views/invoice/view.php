@@ -33,7 +33,6 @@ $this->breadcrumbs=array(
 				<th class="title"><?php echo Yii::t('app','Ticket') ?></th>
 				<th class="value ar"><?php echo Yii::t('app','Compensation') ?></th>
 			</tr>
-			
 		</thead>
 		<tbody>
 			<?php if(count($item->tickets) > 0):?>

@@ -41,7 +41,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$customer,
 	'columns'=>array(
 		'id',
-		'number',
+		'apartment.number',
 		array(
 			'name'=>'user_id',
 			'header'=>Yii::t('app','fullname'),

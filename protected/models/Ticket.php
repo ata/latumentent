@@ -114,6 +114,8 @@ class Ticket extends ActiveRecord
 			'time_closed' => Yii::t('app','Time Closed'),
 			'type_problem_id' => Yii::t('app','Type of Problem'),
 			'solved' => Yii::t('app','Solved'),
+			'service_id' => Yii::t('app','Service'),
+			'problem_type_id' => Yii::t('app','Problem Type'),
 		);
 	}
 
