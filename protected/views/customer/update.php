@@ -1,10 +1,15 @@
 <?php Yii::app()->clientScript->registerScript('filter-js','
 (function($){
+	if($("#Customer_ownership").val()=="' . Customer::OWNERSHIP_OWNER . '"){
+		$("#hire-up").hide();
+	}
+	
 	$("#ownership").change(function(){
 		if($("#Customer_ownership").val()=="' . Customer::OWNERSHIP_RENTER . '"){
 			$("#hire-up").fadeIn("fast");
 		} else {
 			$("#hire-up").fadeOut("fast");
+			$("#Customer_hire_up_to").val("");
 		}
 	});
 })(jQuery);

@@ -244,4 +244,13 @@ class Customer extends ActiveRecord
 		return $this->status == self::STATUS_ACTIVE?Yii::t('app','Active'):Yii::t('app','Non-Active'); 
 	}
 	
+	public function getDisplayOwnership()
+	{
+		if($this->ownership == self::OWNERSHIP_RENTER){
+			return CHtml::encode(Yii::t('app','Hire Up To {hire_up}',array('{hire_up}'=>$this->hire_up_to)));
+		} else {
+			return CHtml::encode(Yii::t('app','Owner'));
+		}
+	}
+	
 }
