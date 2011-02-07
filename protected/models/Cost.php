@@ -106,10 +106,10 @@ class Cost extends ActiveRecord
 		)); 
 	}
 	
-	protected function beforeValidate()
+	protected function beforeSave()
 	{
 		$this->user_id = $this->customer->user->id;
-		return parent::beforeValidate();
+		return parent::beforeSave();
 	}
 }
 

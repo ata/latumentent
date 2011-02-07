@@ -254,4 +254,9 @@ class Customer extends ActiveRecord
 		}
 	}
 	
+	public function getName()
+	{
+		return $this->user->fullname;
+	}
+	
 }
