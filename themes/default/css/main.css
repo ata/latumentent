@@ -408,6 +408,7 @@ $ticket-filter .row sel
 .new-button {
 	padding-top: 50px;
 	padding-left: 0px;
+	padding-bottom: 30px;
 }
 
 .new-button a {

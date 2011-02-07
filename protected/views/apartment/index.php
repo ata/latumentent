@@ -8,7 +8,7 @@
 		'number',
 		//'note',
 		array(
-			'name' =>'status',
+			'name' =>'note',
 			'filter' => false,
 		),
 		array(

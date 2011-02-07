@@ -3,6 +3,7 @@ $this->breadcrumbs=array(
 	Yii::t('app','Invoices')=>array('index'),
 );?>
 
+
 <div>
 	<h2><?php echo Yii::t('app','Invoices'); ?></h2>
 </div>
@@ -53,6 +54,7 @@ $this->breadcrumbs=array(
 			array(
 				'name' => 'rawServices',
 				'header' => Yii::t('app','Services'),
+				//'value'=>'$data->customer->rawServices',
 			),
 			array(
 				'header' => Yii::t('app','Action'),

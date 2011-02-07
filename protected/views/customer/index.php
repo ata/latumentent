@@ -9,6 +9,11 @@
 	$("#customer-filter input[type=checkbox]").click(update_customer_list);
 	$("#customer-filter select").change(update_customer_list);
 })(jQuery)');?>
+
+<div class="title">
+	<h2><?php echo Yii::t('app','List Customer'); ?></h2>
+</div>
+
 <div class="span-8 new-button">
 	<?php echo CHtml::link(Yii::t('app','Add New Customer'), array('customer/create'));?>
 </div>
