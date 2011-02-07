@@ -41,14 +41,16 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$customer,
 	'columns'=>array(
 		'id',
-		'number',
 		'user_id',
 		'status',
 		'contact_number',
 		'ownership',
-		/*
 		'hire_up_to',
+		/*
 		'apartment_id',
+		'rating',
+		'delay_count',
+		'advance_count',
 		*/
 		array(
 			'class'=>'CButtonColumn',

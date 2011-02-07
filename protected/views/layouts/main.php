@@ -27,6 +27,7 @@
 			$this->widget('zii.widgets.CMenu', array(
 			'items'=>array(
 				array('label'=>Yii::t('app','Dashboard'), 'url'=>array('site/dashboard'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'admin'),
+				array('label'=>Yii::t('app','Apartment'), 'url'=>array('apartment/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
 				array('label'=>Yii::t('app','Ticket'), 'url'=>array('ticket/index'), 'visible'=> !Yii::app()->user->isGuest),
 				array('label'=>Yii::t('app','Customer'), 'url'=>array('customer/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
 				array('label'=>Yii::t('app','Invoice'), 'url'=>array('invoice/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),

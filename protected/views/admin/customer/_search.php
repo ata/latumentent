@@ -11,11 +11,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($customer,'number'); ?>
-		<?php echo $form->textField($customer,'number',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($customer,'user_id'); ?>
 		<?php echo $form->dropDownList($customer,'user_id',CHtml::listData(User::model()->findAll(),'id','display')); ?>
 	</div>
@@ -42,7 +37,22 @@
 
 	<div class="row">
 		<?php echo $form->label($customer,'apartment_id'); ?>
-		<?php echo $form->textField($customer,'apartment_id'); ?>
+		<?php echo $form->dropDownList($customer,'apartment_id',CHtml::listData(Apartment::model()->findAll(),'id','display')); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($customer,'rating'); ?>
+		<?php echo $form->textField($customer,'rating'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($customer,'delay_count'); ?>
+		<?php echo $form->textField($customer,'delay_count'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($customer,'advance_count'); ?>
+		<?php echo $form->textField($customer,'advance_count'); ?>
 	</div>
 
 	<div class="row buttons">

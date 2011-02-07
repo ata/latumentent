@@ -18,12 +18,14 @@ $this->menu=array(
 	'data'=>$customer,
 	'attributes'=>array(
 		'id',
-		'number',
 		'user_id',
 		'status',
 		'contact_number',
 		'ownership',
 		'hire_up_to',
 		'apartment_id',
+		'rating',
+		'delay_count',
+		'advance_count',
 	),
 )); ?>

@@ -10,12 +10,6 @@
 	<?php echo $form->errorSummary($customer); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($customer,'number'); ?>
-		<?php echo $form->textField($customer,'number',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($customer,'number'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($customer,'user_id'); ?>
 		<?php echo $form->dropDownList($customer,'user_id',CHtml::listData(User::model()->findAll(),'id','display')); ?>
 		<?php echo $form->error($customer,'user_id'); ?>
@@ -47,8 +41,26 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($customer,'apartment_id'); ?>
-		<?php echo $form->textField($customer,'apartment_id'); ?>
+		<?php echo $form->dropDownList($customer,'apartment_id',CHtml::listData(Apartment::model()->findAll(),'id','display')); ?>
 		<?php echo $form->error($customer,'apartment_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($customer,'rating'); ?>
+		<?php echo $form->textField($customer,'rating'); ?>
+		<?php echo $form->error($customer,'rating'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($customer,'delay_count'); ?>
+		<?php echo $form->textField($customer,'delay_count'); ?>
+		<?php echo $form->error($customer,'delay_count'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($customer,'advance_count'); ?>
+		<?php echo $form->textField($customer,'advance_count'); ?>
+		<?php echo $form->error($customer,'advance_count'); ?>
 	</div>
 
 	<div class="row buttons">
