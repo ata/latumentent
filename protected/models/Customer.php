@@ -62,7 +62,7 @@ class Customer extends ActiveRecord
 			array('hire_up_to', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, number, user_id', 'safe', 'on'=>'search'),
+			array('id, number, user_id, status, ownership, hire_up_to', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -92,6 +92,7 @@ class Customer extends ActiveRecord
 			'number' => Yii::t('app','No. Apartment'),
 			'user_id' => Yii::t('app','User'),
 			'status' => Yii::t('app','Status'),
+			'statusCustomer' => Yii::t('app','Status'), 
 			'ownership' => Yii::t('app','Apartement Ownership'),
 			'hire_up_to' => Yii::t('app','Hire Up To'),
 			'serviceIds'=>Yii::t('app','Service'),
@@ -111,6 +112,9 @@ class Customer extends ActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('number',$this->number,true);
 		$criteria->compare('user_id',$this->user_id);
+		$criteria->compare('status',$this->status);
+		$criteria->compare('ownership',$this->ownership);
+		$criteria->compare('hire_up_to',$this->hire_up_to);
 		if (!$all) {
 			$criteria->compare('status', self::STATUS_ACTIVE);
 		}
@@ -220,8 +224,14 @@ class Customer extends ActiveRecord
 		$user->delete();
 	}
 	
-	public function getName()
+	public function getDisplayFullName()
 	{
 		return $this->user->fullname;
 	}
+	
+	public function getStatusCustomer()
+	{
+		return $this->status == self::STATUS_ACTIVE?Yii::t('app','Active'):Yii::t('app','Non-Active'); 
+	}
+	
 }

@@ -44,7 +44,10 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'username',
 		'password',
 		'email',
-		'role_id',
+		array(
+			'name'=>'role_id',
+			'value'=>'$data->displayRole',
+		),
 		'status',
 		/*
 		'fullname',

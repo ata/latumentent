@@ -43,8 +43,14 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'id',
 		'total_amount',
 		'total_compensation',
-		'period_id',
-		'customer_id',
+		array(
+			'name'=>'period_id',
+			'value'=>'$data->period->name',
+		),
+		array(
+			'name'=>'customer_id',
+			'value'=>'$data->customer->user->fullname',
+		),
 		array(
 			'class'=>'CButtonColumn',
 		),
