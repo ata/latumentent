@@ -81,6 +81,7 @@ class Invoice extends ActiveRecord
 			'total_compensation' => Yii::t('app','Total Compensation'),
 			'period_id' => Yii::t('app','Period'),
 			'customer_id' => Yii::t('app','Customer'),
+			'serviceIds' => Yii::t('app','Service'),
 		);
 	}
 
@@ -88,7 +89,7 @@ class Invoice extends ActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($all = false)
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
@@ -100,6 +101,13 @@ class Invoice extends ActiveRecord
 		$criteria->compare('total_compensation',$this->total_compensation);
 		$criteria->compare('period_id',$this->period_id);
 		$criteria->compare('customer_id',$this->customer_id);
+		/*if($this->serviceIds !== null){
+			$serviceIds = !empty($this->serviceIds)?implode(',',$this->serviceIds):'0';
+			$criteria->addCondition('id IN (SELECT invoice_id 
+				FROM invoice_item
+				WHERE invoice_id = id
+					AND service_id IN (' . $serviceIds . '))');
+		}*/
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
