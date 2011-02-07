@@ -41,6 +41,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$customer,
 	'columns'=>array(
 		'id',
+		'apartment.number',
 		array(
 			'name'=>'user_id',
 			'header'=>Yii::t('app','fullname'),
@@ -66,7 +67,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		),
 		/*
 		'hire_up_to',
+		/*
 		'apartment_id',
+		'rating',
+		'delay_count',
+		'advance_count',
 		*/
 		array(
 			'class'=>'CButtonColumn',

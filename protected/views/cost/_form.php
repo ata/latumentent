@@ -23,14 +23,18 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($cost,'service_id'); ?>
-		<?php echo $form->dropDownList($cost,'service_id',CHtml::listData(Service::model()->findAll(),'id','display')); ?>
+		<?php echo $form->dropDownList($cost,'service_id',
+			CHtml::listData(Service::model()->findAll(),'id','display'),
+			array('empty' => Yii::t('app','Choose Service'))); ?>
 		<?php echo $form->error($cost,'service_id'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($cost,'user_id'); ?>
-		<?php echo $form->textField($cost,'user_id'); ?>
-		<?php echo $form->error($cost,'user_id'); ?>
+		<?php echo $form->labelEx($cost,'customer_id'); ?>
+		<?php echo $form->dropDownList($cost,'customer_id',
+			CHtml::listData(Customer::model()->findAll(),'id','display'),
+			array('empty' => Yii::t('app','Choose Customer'))); ?>
+		<?php echo $form->error($cost,'customer_id'); ?>
 	</div>
 
 	<div class="row buttons">

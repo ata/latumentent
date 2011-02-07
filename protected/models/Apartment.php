@@ -53,6 +53,7 @@ class Apartment extends ActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'occupant' => array(self::HAS_ONE,'Customer','apartment_id'),
+			'customer' => array(self::HAS_ONE,'Customer','apartment_id'),//alias
 		);
 	}
 
@@ -102,8 +103,15 @@ class Apartment extends ActiveRecord
 	
 	public function getStatus()
 	{
-		if ($this->occupant) {
-			
+		if ($this->customer !== null) {
+			if (empty($this->customer->services)) {
+				return Yii::t('app','Idle');
+			}
+			return Yii::t('app','Hired by {name}',array(
+				'{name}' => $this->customer->user->fullname
+			));
+		} else {
+			return Yii::t('app','Empty');
 		}
 	}
 }

@@ -54,7 +54,22 @@
 
 	<div class="row">
 		<?php echo $form->label($customer,'apartment_id'); ?>
-		<?php echo $form->textField($customer,'apartment_id'); ?>
+		<?php echo $form->dropDownList($customer,'apartment_id',CHtml::listData(Apartment::model()->findAll(),'id','display')); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($customer,'rating'); ?>
+		<?php echo $form->textField($customer,'rating'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($customer,'delay_count'); ?>
+		<?php echo $form->textField($customer,'delay_count'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($customer,'advance_count'); ?>
+		<?php echo $form->textField($customer,'advance_count'); ?>
 	</div>
 
 	<div class="row buttons">
