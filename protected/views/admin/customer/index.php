@@ -50,7 +50,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		),
 		array(
 			'name'=>'status',
-			'value'=>'$data->status==="1"?CHtml::encode("active"):CHtml::encode("Non-Active")',
+			'value'=>'$data->StatusCustomer',
 			'filter'=>array(
 				Customer::STATUS_ACTIVE => Yii::t('app','Active'),
 				Customer::STATUS_DELETED => Yii::t('app','Non-Active'),
@@ -59,8 +59,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'contact_number',
 		array(
 			'name'=>'ownership',
-			'value'=>'($data->ownership==="1")? CHtml::encode(Yii::t("app","Owner")) : 
-				CHtml::encode(Yii::t("app","Hire Up To"))." ".$data->hire_up_to',
+			'value'=>'$data->displayOwnership',
 			'filter'=>array(
 				Customer::OWNERSHIP_OWNER => Yii::t('app','Owner'),
 				Customer::OWNERSHIP_RENTER => Yii::t('app','Renter'),

@@ -5,6 +5,7 @@
 			$("#hire-up").fadeIn("fast");
 		} else {
 			$("#hire-up").fadeOut("fast");
+			$("#CustomerForm_hire_up_to").val("");
 		}
 	});
 })(jQuery);

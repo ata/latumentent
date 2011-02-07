@@ -46,10 +46,12 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		array(
 			'name'=>'period_id',
 			'value'=>'$data->period->name',
+			'filter'=>CHtml::listData(Period::model()->findAll(),'id','name'),
 		),
 		array(
 			'name'=>'customer_id',
-			'value'=>'$data->customer',
+			'value'=>'$data->customer->user->fullname',
+			'filter'=>CHtml::listData(Customer::model()->findAll(),'id','user.fullname')
 		),
 		array(
 			'class'=>'CButtonColumn',
