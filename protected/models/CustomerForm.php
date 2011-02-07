@@ -57,12 +57,12 @@ class CustomerForm extends CFormModel
 		);
 	}
 	
-	protected function beforeValidate()
+	protected function afterValidate()
 	{
 		if ($this->ownership === Customer::OWNERSHIP_OWNER) {
 			$this->clearErrors('hire_up_to');
 		}
-		return parent::beforeValidate();
+		return parent::afterValidate();
 	}
 	
 	public function submit()
@@ -86,7 +86,7 @@ class CustomerForm extends CFormModel
 		
 		$customer = new Customer;
 		$customer->user_id = $user->id;
-		$customer->apartment_id = Apartment::model()->findByNumber($this->number);
+		$customer->apartment_id = Apartment::model()->findByNumber($this->apartmentNumber)->id;
 		$customer->serviceIds = $this->serviceIds;
 		$customer->contact_number = $this->contact_number;
 		$customer->ownership = $this->ownership;

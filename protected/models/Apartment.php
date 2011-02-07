@@ -63,7 +63,7 @@ class Apartment extends ActiveRecord
 	{
 		return array(
 			'id' => Yii::t('app','ID'),
-			'number' => Yii::t('app','Number'),
+			'number' => Yii::t('app','Apartment Number'),
 			'note' => Yii::t('app','Note'),
 		);
 	}
@@ -98,5 +98,12 @@ class Apartment extends ActiveRecord
 	public function getDisplay()
 	{
 		return $this->number;
+	}
+	
+	public function getStatus()
+	{
+		if ($this->occupant) {
+			
+		}
 	}
 }
