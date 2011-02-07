@@ -5,12 +5,15 @@
  *
  * The followings are the available columns in table 'customer':
  * @property integer $id
- * @property string $number
  * @property interger $status
  * @property integer $user_id
  * @property string $contact_number
  * @property integer $ownership
  * @property date $hire_up_to
+ * @property integer $rating
+ * @property integer $delay_count
+ * @property integer $advance_count
+ * 
  
  * The followings are the available model relations:
  * @property User $user
@@ -55,14 +58,15 @@ class Customer extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('number, user_id, serviceIds, contact_number, ownership', 'required'),
+			array('user_id, serviceIds, contact_number, apartment_id, ownership', 'required'),
 			array('user_id, status', 'numerical', 'integerOnly'=>true),
-			array('number', 'length', 'max'=>255),
+			array('rating, delay_count, advance_count', 'length', 'max'=>255),
 			array('status','default','value'=>self::STATUS_ACTIVE),
 			array('hire_up_to', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, number, user_id, status, ownership, hire_up_to', 'safe', 'on'=>'search'),
+
 		);
 	}
 
@@ -75,6 +79,7 @@ class Customer extends ActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+			'apartment' => array(self::BELONGS_TO, 'Apartment', 'apartment_id'),
 			'invoices' => array(self::HAS_MANY, 'Invoice', 'customer_id'),
 			'invoiceItems' => array(self::HAS_MANY, 'InvoiceItem', 'customer_id'),
 			'tickets' => array(self::HAS_MANY, 'Ticket', 'customer_id'),
@@ -89,7 +94,6 @@ class Customer extends ActiveRecord
 	{
 		return array(
 			'id' => Yii::t('app','ID'),
-			'number' => Yii::t('app','No. Apartment'),
 			'user_id' => Yii::t('app','User'),
 			'status' => Yii::t('app','Status'),
 			'statusCustomer' => Yii::t('app','Status'), 
@@ -110,7 +114,7 @@ class Customer extends ActiveRecord
 
 		$criteria=new CDbCriteria;
 		$criteria->compare('id',$this->id);
-		$criteria->compare('number',$this->number,true);
+		$criteria->compare('ownership',$this->ownership);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('ownership',$this->ownership);
@@ -118,7 +122,13 @@ class Customer extends ActiveRecord
 		if (!$all) {
 			$criteria->compare('status', self::STATUS_ACTIVE);
 		}
-		
+		if ($this->serviceIds !== null) {
+			$serviceIds = !empty($this->serviceIds)?implode(',',$this->serviceIds):'0';
+			$criteria->addCondition('id IN (SELECT customer_id  
+				FROM customer_has_service 
+				WHERE customer_id = id 
+					AND service_id IN (' . $serviceIds . '))');
+		} 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
@@ -155,10 +165,10 @@ class Customer extends ActiveRecord
 			 WHERE customer_id = :customer_id'
 			)->query(array('customer_id'=>$this->id));
 	}
-
-	public function getSelectedService()
+	
+	public function getRawServices()
 	{
-		return implode(',', CHtml::listData($this->services,'id','name'));
+		return implode(', ', CHtml::listData($this->services,'id','name'));
 	}
 
 	public function afterFind() {

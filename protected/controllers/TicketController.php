@@ -46,38 +46,18 @@ class TicketController extends Controller
 
 	public function actionIndex()
 	{
-		//$filter = isset($_GET['period']) ? "author_id = :author_id AND period_id = '$_GET[period]'" : "author_id = :author_id" ;
-		$ticketList = new Ticket;
-		$condition = array();
-		
-		if(isset($_GET['Ticket']['period'])){
-			$params_period = $_GET['Ticket']['period'];
-			$condition[] = "period_id=$params_period";
+		$ticket = new Ticket('search');
+		$ticket->unsetAttributes();
+		if (isset($_GET['Ticket'])) {
+			$ticket->attributes = $_GET['Ticket'];
 		}
-	
-		if(isset($_GET['Ticket']['status'])){
-			if(!empty($_GET['Ticket']['status'])){
-				$params_status = implode(",",$_GET['Ticket']['status']);
-				$condition[] = "status in ($params_status)";
-			}	
+		if (Yii::app()->user->role === 'customer') {
+			$ticket->author_id = Yii::app()->user->id;
 		}
-		
-		if(Yii::app()->user->getRole() === 'customer'){
-			$condition[] = "author_id = '".Yii::app()->user->id."'";
-		}
-		
-		
-		$criteria = new CDbCriteria;
-		$criteria->condition = implode(" AND ",$condition);
-		
-		$dataProvider = new CActiveDataProvider('Ticket',array(
-			'criteria'=>$criteria,
-		));
-		$periodList = CHtml::listData(Period::model()->findAll(),'id','name');
+		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 		$this->render('index',array(
-			'ticketList'=>$ticketList,
+			'ticket'=>$ticket,
 			'periodList'=>$periodList,
-			'dataProvider'=>$dataProvider,
 		));
 	}
 

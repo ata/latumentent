@@ -10,6 +10,7 @@
 			<?php
 			$this->beginWidget('zii.widgets.CPortlet', array(
 				'title'=>'Admin Menu',
+				
 			));
 			$this->widget('zii.widgets.CMenu', array(
 				'items'=>array(

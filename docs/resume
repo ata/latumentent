@@ -24,7 +24,7 @@ Pertemuan I:
 		- Untuk CS,  notification buat member yang udah jadi member 2 minggu-1 bulan, di follow up ..
 		- complain gara2 billing apa layanan ..
 		- ARPU - average revenue per subscriber/user …
-		- jumlah revenue/jumlah subscriber per bulan …
+			jumlah revenue/jumlah subscriber per bulan …
 		- cost of service per subscriber ...
 		
 
@@ -46,6 +46,21 @@ Pertemuan II:
 		
 	Target Minggu selanjutnya:
 		- Statistik/Dashboard
+			- customer loyalty (tables) | include on customer index
 		- Database Apartemen
-		- 
+
+
+Pertemuan ke-III:
+	Finishing Feature:
+		- daftar semua ticket di customer
+		- filter customer, ticket, dan tagihan
+		- Database apartment (disesuikan dengan create & update customer)
+		- Melengkapi halaman admin (apartment, skema kompensasi, dll)
+		- Tambah periode:
+			- generate semua tagihan dan detail tagihan customer
+		- Customer loyalty 
+		- grafikal revenue
+		- pembenahan bagian add ticket:
+			- penambahan jenis permasalahan
+		
 

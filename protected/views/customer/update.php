@@ -1,15 +1,13 @@
-
 <?php Yii::app()->clientScript->registerScript('filter-js','
-	if(jQuery("#Customer_ownership").val()=="1"){
-		jQuery("#hire-up").hide();
-	}
-	jQuery("#ownership").change(function(){
-		if($("#Customer_ownership").val()=="2"){
-			jQuery("#hire-up").fadeIn("fast");
+(function($){
+	$("#ownership").change(function(){
+		if($("#Customer_ownership").val()=="' . Customer::OWNERSHIP_RENTER . '"){
+			$("#hire-up").fadeIn("fast");
 		} else {
-			jQuery("#hire-up").fadeOut("fast");
+			$("#hire-up").fadeOut("fast");
 		}
 	});
+})(jQuery);
 ');?>
 <div class="form span-16">
 	<fieldset>
@@ -19,12 +17,6 @@
 			'enableAjaxValidation'=>true,
 		)); ?>
 			<?php echo $form->errorSummary($customer); ?>
-			
-			<div class="row">
-				<?php echo $form->labelEx($customer,'number'); ?>
-				<?php echo $form->textField($customer,'number'); ?>
-				<?php echo $form->error($customer,'number'); ?>
-			</div>
 			
 			<div class="row">
 				<?php echo $form->labelEx($customer->user,'fullname'); ?>
@@ -60,23 +52,20 @@
 				<?php echo $form->labelEx($customer,'ownership'); ?>
 				<?php echo $form->dropDownList($customer, 'ownership', array(
 					Customer::OWNERSHIP_OWNER => Yii::t('app','Owner'),
-					Customer::OWNERSHIP_RENTER => Yii::t('app','Render'),
+					Customer::OWNERSHIP_RENTER => Yii::t('app','Renter'),
 				)); ?>
 				<?php echo $form->error($customer,'ownership'); ?>
 			</div>
 			
-			<div class="row" id="hire-up">
+			<div class="row" id="hire-up" <?php $customer->ownership === Customer::OWNERSHIP_OWNER?'style="display:none"':''?> >
 				<?php echo $form->labelEx($customer,'hire_up_to'); ?>
 					<?php
 					$this->widget('zii.widgets.jui.CJuiDatePicker', array(
 						'name'=>'Customer[hire_up_to]',
 						'value'=>$customer->hire_up_to,
-						// additional javascript options for the date picker plugin
 						'options'=>array(
-							'showAnim'=>'fold',
-						),
-						'htmlOptions'=>array(
-							'style'=>'height:20px;'
+							'changeYear'=>true,
+							'dateFormat' => 'yy-mm-dd'
 						),
 					));?>
 					<?php echo $form->error($customer,'hire_up_to'); ?>

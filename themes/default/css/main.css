@@ -559,6 +559,11 @@ td {
 	width: 100%;
 	border: 1px solid #ccc;
 }
+
+.grid-view table.items td.button-column {
+	width:100px;
+}
+
 .ticket .head{
 	background-color:#000;
 	color:#fff;

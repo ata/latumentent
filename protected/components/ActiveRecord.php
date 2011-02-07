@@ -10,10 +10,7 @@ class ActiveRecord extends CActiveRecord
 	
 	public function getDisplay()
 	{
-		if (property_exists($this, 'display')) {
-			return $this->display;
-		}
-		if (property_exists($this, 'name')) {
+		if(isset($this->name)){
 			return $this->name;
 		}
 		return sprintf('%s ID: %s',get_class($this), $this->id);
