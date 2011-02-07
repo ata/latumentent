@@ -22,12 +22,16 @@
 
 	<div class="row">
 		<?php echo $form->label($invoice,'period_id'); ?>
-		<?php echo $form->dropDownList($invoice,'period_id',CHtml::listData(Period::model()->findAll(),'id','display')); ?>
+		<?php echo $form->dropDownList($invoice,'period_id',CHtml::listData(Period::model()->findAll(),'id','name'),array(
+			'empty'=>Yii::t('app','Select Period')
+			)); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($invoice,'customer_id'); ?>
-		<?php echo $form->dropDownList($invoice,'customer_id',CHtml::listData(Customer::model()->findAll(),'id','display')); ?>
+		<?php echo$form->dropDownList($invoice,'customer_id',CHtml::listData(Customer::model()->findAll(),'id','user.fullname'),
+			array('empty'=>Yii::t('app','Select Customer'),
+		)); ?>
 	</div>
 
 	<div class="row buttons">

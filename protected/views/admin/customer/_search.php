@@ -11,11 +11,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($customer,'number'); ?>
-		<?php echo $form->textField($customer,'number',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($customer,'user_id'); ?>
 		<?php echo $form->dropDownList($customer,'user_id',CHtml::listData(User::model()->findListCustomer(),'id','fullname'),
 			array('empty'=>Yii::t('app','Select Customer'))

@@ -10,12 +10,6 @@
 	<?php echo $form->errorSummary($customer); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($customer,'number'); ?>
-		<?php echo $form->textField($customer,'number',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($customer,'number'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($customer,'user_id'); ?>
 		<?php echo $form->dropDownList($customer,'user_id',CHtml::listData(User::model()->findAll(),'id','display')); ?>
 		<?php echo $form->error($customer,'user_id'); ?>
