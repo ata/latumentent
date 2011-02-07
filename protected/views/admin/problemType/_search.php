@@ -17,7 +17,7 @@
 
 	<div class="row">
 		<?php echo $form->label($problemType,'service_id'); ?>
-		<?php echo $form->textField($problemType,'service_id'); ?>
+		<?php echo $form->dropDownList($problemType,'service_id',CHtml::listData(Service::model()->findAll(),'id','display')); ?>
 	</div>
 
 	<div class="row">
