@@ -44,5 +44,10 @@ return array(
 	'Note' => 'Catatan',
 	'Amount' => 'Jumlah',
 	'Add New Cost' => 'Tambah Pembiayaan',
-	'Apartement Ownership' => 'Kepemilikan Apartement'
+	'Apartement Ownership' => 'Kepemilikan Apartement',
+	'List Cost' => 'Daftar Pembiayaan',
+	'List Ticket' => 'Daftar Ticket',
+	'List Apartment' => 'Daftar Apartement',
+	'Add New Apartment' => 'Tambah Data Apartement',
+	'List Customer' => 'Daftar Customer',
 );
