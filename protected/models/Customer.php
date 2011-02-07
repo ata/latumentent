@@ -100,6 +100,7 @@ class Customer extends ActiveRecord
 			'ownership' => Yii::t('app','Apartement Ownership'),
 			'hire_up_to' => Yii::t('app','Hire Up To'),
 			'serviceIds'=>Yii::t('app','Service'),
+			'contact_number' => Yii::t('app','Contact Number'),
 		);
 	}
 

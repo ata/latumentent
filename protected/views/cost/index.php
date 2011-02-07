@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <?php
 $this->breadcrumbs=array(
 	Yii::t('app','Costs')=>array('index'),
@@ -28,11 +28,17 @@ $this->menu=array(
 		'columns'=>array(
 			'id',
 			'amount',
-			'period_id',
-			'service_id',
-			'user_id',
+			array(
+				'name'=>'period_id',
+				'value'=>'$data->period->name',
+			),
+			array(
+				'name'=>'service_id',
+				'value'=>'$data->service->name'
+			),
 			array(
 				'class'=>'CButtonColumn',
 			),
-	)); ?>
+	))); 
+?>
 </div>

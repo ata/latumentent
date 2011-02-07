@@ -8,6 +8,7 @@
  * @property double $amount
  * @property integer $period_id
  * @property integer $service_id
+ * @property integer $customer_id
  * @property text $note
  */
 class Cost extends ActiveRecord
@@ -38,7 +39,7 @@ class Cost extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('amount, period_id', 'required'),
-			array('period_id, service_id, user_id', 'numerical', 'integerOnly'=>true),
+			array('period_id, service_id, customer_id, user_id', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -56,6 +57,7 @@ class Cost extends ActiveRecord
 		return array(
 			'service' => array(self::BELONGS_TO,'Service','service_id'),
 			'period' => array(self::BELONGS_TO,'Period','period_id'),
+			'customer' => array(self::BELONGS_TO,'Customer','customer_id'),
 			'user' => array(self::BELONGS_TO,'User','user_id'),
 		);
 	}
@@ -70,6 +72,7 @@ class Cost extends ActiveRecord
 			'amount' => Yii::t('app','Amount'),
 			'period_id' => Yii::t('app','Period'),
 			'service_id' => Yii::t('app','Service'),
+			'customer_id' => Yii::t('app','Customer')
 		);
 	}
 
@@ -103,10 +106,10 @@ class Cost extends ActiveRecord
 		)); 
 	}
 	
-	/*protected function beforeValidate()
+	protected function beforeValidate()
 	{
 		$this->user_id = $this->customer->user->id;
 		return parent::beforeValidate();
-	}*/
+	}
 }
 

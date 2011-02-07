@@ -36,10 +36,13 @@ return array(
 	'Body' => 'Isi',
 	'Apartment Ownership' => 'Kepemilikan Apartemen',
 	'Hire Up To' => 'Disewa Sampai',
-	'Contact Number' => 'Nomer Kontak',
+	'Contact Number' => 'Nomor Kontak',
 	'Owner'=>'Pemilik',
 	'Hire Up To {hire_up}' => 'Disewa Sampai {hire_up}',
 	'Select Period' => 'Pilih Periode',
 	'Select Customer' => 'Pilih Customer',
 	'Note' => 'Catatan',
+	'Amount' => 'Jumlah',
+	'Add New Cost' => 'Tambah Pembiayaan',
+	'Apartement Ownership' => 'Kepemilikan Apartement'
 );
