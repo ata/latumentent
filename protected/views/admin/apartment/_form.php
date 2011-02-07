@@ -16,9 +16,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($apartment,'status'); ?>
-		<?php echo $form->textField($apartment,'status'); ?>
-		<?php echo $form->error($apartment,'status'); ?>
+		<?php echo $form->labelEx($apartment,'note'); ?>
+		<?php echo $form->textArea($apartment,'note',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->error($apartment,'note'); ?>
 	</div>
 
 	<div class="row buttons">

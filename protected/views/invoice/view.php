@@ -13,8 +13,8 @@ $this->breadcrumbs=array(
 	</div>
 	
 	<div class="row">
-		<span class="title"><?php echo CHtml::activeLabel($invoice->customer, 'number') ?>:</span>
-		<span class="value"><?php echo $invoice->customer->number ?></span>
+		<span class="title"><?php echo CHtml::activeLabel($invoice->customer->apartment, 'number') ?>:</span>
+		<span class="value"><?php echo $invoice->customer->apartment->number ?></span>
 	</div>
 </div>
 

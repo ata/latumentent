@@ -16,8 +16,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($apartment,'status'); ?>
-		<?php echo $form->textField($apartment,'status'); ?>
+		<?php echo $form->label($apartment,'note'); ?>
+		<?php echo $form->textArea($apartment,'note',array('rows'=>6, 'cols'=>50)); ?>
 	</div>
 
 	<div class="row buttons">
