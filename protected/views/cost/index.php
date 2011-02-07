@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 $this->breadcrumbs=array(
 	Yii::t('app','Costs')=>array('index'),
@@ -32,7 +33,6 @@ $this->menu=array(
 			'user_id',
 			array(
 				'class'=>'CButtonColumn',
-				),
-		),
+			),
 	)); ?>
 </div>

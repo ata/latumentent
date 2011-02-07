@@ -37,6 +37,7 @@ class ProblemType extends ActiveRecord
 		return array(
 			array('name, service_id', 'required'),
 			array('service_id', 'numerical', 'integerOnly'=>true),
+			array('down','safe'),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -52,6 +53,7 @@ class ProblemType extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'service' => array(self::BELONGS_TO,'Service','service_id'),
 		);
 	}
 
