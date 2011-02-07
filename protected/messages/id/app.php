@@ -38,4 +38,5 @@ return array(
 	'Hire Up To' => 'Disewa Sampai',
 	'Contact Number' => 'Nomer Kontak',
 	'Owner'=>'Pemilik',
+	'Hire Up To {hire_up}' => 'Disewa Sampai {hire_up}',
 );

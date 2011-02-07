@@ -41,10 +41,32 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$customer,
 	'columns'=>array(
 		'id',
-		'user_id',
-		'status',
+		'number',
+		array(
+			'name'=>'user_id',
+			'header'=>Yii::t('app','fullname'),
+			'value'=>'$data->user->fullname',
+			'filter'=>CHtml::listData(User::model()->findListCustomer(),'id','fullname')
+		),
+		array(
+			'name'=>'status',
+			'value'=>'$data->status==="1"?CHtml::encode("active"):CHtml::encode("Non-Active")',
+			'filter'=>array(
+				Customer::STATUS_ACTIVE => Yii::t('app','Active'),
+				Customer::STATUS_DELETED => Yii::t('app','Non-Active'),
+			),
+		),
 		'contact_number',
-		'ownership',
+		array(
+			'name'=>'ownership',
+			'value'=>'($data->ownership==="1")? CHtml::encode(Yii::t("app","Owner")) : 
+				CHtml::encode(Yii::t("app","Hire Up To"))." ".$data->hire_up_to',
+			'filter'=>array(
+				Customer::OWNERSHIP_OWNER => Yii::t('app','Owner'),
+				Customer::OWNERSHIP_RENTER => Yii::t('app','Renter'),
+			),
+		),
+		/*
 		'hire_up_to',
 		/*
 		'apartment_id',

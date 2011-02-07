@@ -27,6 +27,8 @@ class User extends ActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * @return User the static model class
 	 */
+	
+	
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -145,6 +147,30 @@ class User extends ActiveRecord
 	public function getName()
 	{
 		return $this->fullname;
+	}
+	
+	public function findListCustomer()
+	{
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'role_id = :role';
+		$criteria->params = array('role'=>2);
+		return $this->findAll($criteria);
+	}
+	
+	public function getDisplayRole()
+	{
+			if($this->role === 1){
+				return CHtml::encode(Yii::t('app','Administrator'));
+			} else if ($this->role === '2') {
+				return CHtml::encode(Yii::t('app','Customer'));
+			} else if($this->role === '3') {
+				return CHtml::encode(Yii::t('app','Management'));
+			} else if($this->role === '4') {
+				return CHtml::encode(Yii::t('app','Tecnical Support'));
+			} else if($this->role === '5'){
+				return CHtml::encode(Yii::t('app','Customer Service'));
+			};
+		
 	}
 	
 }

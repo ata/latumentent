@@ -47,7 +47,7 @@
 			array(
 				'name' => 'apartment_id',
 				'header' => 'Apartment Number',
-				'value' => '$data->apartment->number',
+				//'value' => '$data->apartment->number',
 			),
 			array(
 				'name' => 'user',
@@ -62,8 +62,7 @@
 			array(
 				'name' => 'ownership',
 				'header'=>Yii::t('app','Apartment Ownership'),
-				'value'=>'($data->ownership==="1")? CHtml::encode(Yii::t("app","Owner")) : 
-					CHtml::encode(Yii::t("app","Hire Up To"))." ".$data->hire_up_to',
+				'value'=>'$data->displayOwnership',
 			),
 			'rating',
 			array(
