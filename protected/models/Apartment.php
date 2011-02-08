@@ -89,6 +89,7 @@ class Apartment extends ActiveRecord
 		));
 	}
 	
+	
 	public function findByNumber($number) 
 	{
 		return $this->findByAttributes(array(
