@@ -19,7 +19,7 @@
 class Invoice extends ActiveRecord
 {
 	
-	public $serviceIds = array();
+	public $serviceIds;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Invoice the static model class
@@ -50,7 +50,7 @@ class Invoice extends ActiveRecord
 			array('total_amount, total_compensation', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, total_amount, serviceIds, total_compensation, period_id, customer_id', 'safe', 'on'=>'search'),
+			array('id, total_amount, total_compensation, period_id, customer_id, serviceIds', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -95,20 +95,18 @@ class Invoice extends ActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
+		$criteria->with = array('invoiceItems',array('together'=>true));
+		$criteria->together = true;
 		$criteria->compare('id',$this->id);
 		$criteria->compare('total_amount',$this->total_amount);
 		$criteria->compare('total_compensation',$this->total_compensation);
-		$criteria->compare('period_id',$this->period_id);
+		$criteria->compare('t.period_id',$this->period_id);
 		$criteria->compare('customer_id',$this->customer_id);
-		/*if($this->serviceIds !== null){
+		if($this->serviceIds !== null){
 			$serviceIds = !empty($this->serviceIds)?implode(',',$this->serviceIds):'0';
-			$criteria->addCondition('id IN (SELECT invoice_id 
-				FROM invoice_item
-				WHERE invoice_id = id
-					AND service_id IN (' . $serviceIds . '))');
-		}*/
-
+			$criteria->addCondition('invoiceItems.service_id in ('. $serviceIds .')');
+		}
+		
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
