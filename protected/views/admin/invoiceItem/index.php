@@ -43,9 +43,17 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'id',
 		'amount',
 		'subtotal_compensation',
-		'invoice_id',
-		'period_id',
-		'customer_id',
+		//'invoice_id',
+		array(
+			'name'=>'period_id',
+			'value'=>'$data->period->name',
+			'filter'=>CHtml::listData(Period::model()->findAll(),'id','name'),
+		),
+		array(
+			'name'=>'customer_id',
+			'value'=>'$data->customer->user->fullname',
+			'filter'=>CHtml::listData(Customer::model()->findAll(),'id','user.fullname'),
+		),
 		/*
 		'service_id',
 		'billing_date',

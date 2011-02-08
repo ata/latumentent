@@ -42,9 +42,21 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		'id',
 		'amount',
-		'period_id',
-		'service_id',
-		'user_id',
+		array(
+			'name'=>'period_id',
+			'value'=>'$data->period->name',
+			'filter'=>CHtml::listData(Period::model()->findAll(),'id','name'),
+		),
+		array(
+			'name'=>'service_id',
+			'value'=>'$data->service->name',
+			'filter'=>CHtml::listData(Service::model()->findAll(),'id','name'),
+		),
+		array(
+			'name'=>'user_id',
+			'value'=>'$data->user->fullname',
+			'filter'=>CHtml::listData(Customer::model()->findAll(),'id','user.fullname'),
+		),
 		array(
 			'class'=>'CButtonColumn',
 		),

@@ -42,13 +42,16 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		'id',
 		'username',
-		'password',
+		//'password',
 		'email',
 		array(
 			'name'=>'role_id',
 			'value'=>'$data->displayRole',
 		),
-		'status',
+		array(
+			'name'=>'status',
+			'value'=>'$data->displayStatus',
+		),
 		/*
 		'fullname',
 		*/

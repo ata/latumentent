@@ -22,12 +22,17 @@
 
 	<div class="row">
 		<?php echo $form->label($user,'role_id'); ?>
-		<?php echo $form->dropDownList($user,'role_id',CHtml::listData(Role::model()->findAll(),'id','display')); ?>
+		<?php echo $form->dropDownList($user,'role_id',CHtml::listData(Role::model()->findAll(),'id','display'),array(
+			'empty'=>Yii::t('app','Select Role')
+		)); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($user,'status'); ?>
-		<?php echo $form->textField($user,'status'); ?>
+		<?php echo $form->dropDownList($user,'status',array(
+			User::STATUS_ACTIVE => Yii::t('app','Active'),
+			User::STATUS_DELETED => Yii::t('app','Non-Active')
+		),array('empty'=>Yii::t('app','Select Status'))); ?>
 	</div>
 
 	<div class="row">
