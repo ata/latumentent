@@ -159,18 +159,27 @@ class User extends ActiveRecord
 	
 	public function getDisplayRole()
 	{
-			if($this->role === 1){
+			if($this->role_id == ROLE::ROLE_ADMIN){
 				return CHtml::encode(Yii::t('app','Administrator'));
-			} else if ($this->role === '2') {
+			} else if ($this->role_id == ROLE::ROLE_CUSTOMER) {
 				return CHtml::encode(Yii::t('app','Customer'));
-			} else if($this->role === '3') {
+			} else if($this->role_id == ROLE::ROLE_MANAGEMENT) {
 				return CHtml::encode(Yii::t('app','Management'));
-			} else if($this->role === '4') {
+			} else if($this->role_id == ROLE::ROLE_TECHNICAL_SUPPORT) {
 				return CHtml::encode(Yii::t('app','Tecnical Support'));
-			} else if($this->role === '5'){
+			} else if($this->role_id == ROLE::ROLE_CUSTOMER_SERVICE){
 				return CHtml::encode(Yii::t('app','Customer Service'));
 			};
 		
+	}
+	
+	public function getDisplayStatus()
+	{
+		if($this->status == self::STATUS_ACTIVE){
+			return CHtml::encode(Yii::t('app','Active'));
+		} else {
+			return CHtml::encode(Yii::t('app','Non_active'));
+		}
 	}
 	
 }

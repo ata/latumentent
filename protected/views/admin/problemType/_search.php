@@ -17,7 +17,9 @@
 
 	<div class="row">
 		<?php echo $form->label($problemType,'service_id'); ?>
-		<?php echo $form->dropDownList($problemType,'service_id',CHtml::listData(Service::model()->findAll(),'id','display')); ?>
+		<?php echo $form->dropDownList($problemType,'service_id',CHtml::listData(Service::model()->findAll(),'id','display'),array(
+			'empty'=>Yii::t('app','Select Service'))
+		); ?>
 	</div>
 
 	<div class="row">

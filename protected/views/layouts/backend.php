@@ -1,5 +1,11 @@
 <?php $this->beginContent('//layouts/main'); ?>
-<div id="content" class="span-24">
-	<?php echo $content; ?>
-</div><!-- content -->
+<div id="bodysite">
+	<div id="content">
+		<div class="container">
+			<?php echo $content; ?>
+		</div>
+	</div><!-- content -->
+</div>
+
 <?php $this->endContent(); ?>
+

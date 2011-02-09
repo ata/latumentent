@@ -50,4 +50,8 @@ return array(
 	'List Apartment' => 'Daftar Apartement',
 	'Add New Apartment' => 'Tambah Data Apartement',
 	'List Customer' => 'Daftar Customer',
+	'Select Service' => 'Pilih Layanan',
+	'Select Customer' => 'Pilih Pelanggan',
+	'Select Role' => 'Pilih Role',
+	'Select Status' => 'Pilih Status',
 );
