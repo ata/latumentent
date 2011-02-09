@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h2><?php echo Yii::t('app','Login')?></h2>
+<h2 id="login-title"><?php echo Yii::t('app','Login')?></h2>
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
