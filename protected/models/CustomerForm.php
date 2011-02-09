@@ -59,7 +59,7 @@ class CustomerForm extends CFormModel
 	
 	protected function afterValidate()
 	{
-		if ($this->ownership === Customer::OWNERSHIP_OWNER) {
+		if ($this->ownership == Customer::OWNERSHIP_OWNER) {
 			$this->clearErrors('hire_up_to');
 		}
 		return parent::afterValidate();

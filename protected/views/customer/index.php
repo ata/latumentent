@@ -48,7 +48,7 @@
 		'columns'=>array(
 			array(
 				'name'=>'id',
-				'htmlOptions'=>array('style'=>'width:0px,display:none'),
+				'htmlOptions'=>array('style'=>'width:0px;display:none'),
 				'headerHtmlOptions'=>array('style'=>'width:0px;display:none'),
 			),
 			array(
