@@ -116,6 +116,34 @@ class Cost extends ActiveRecord
 		return parent::beforeSave();
 	}
 	
+
+	public function findByPeriod($period_id=false)
+	{
+		$criteria = new CDbCriteria;
+		
+		if($period_id !== 0){
+			$period = $period_id;
+		} else {
+			$period = Period::model()->last()->last()->find()->id;
+		}
+		
+		$criteria->group = 'service_id';
+		$criteria->condition = 'period_id = :period';
+		$criteria->params = array('period'=>$period);
+		
+		return $this->findAll($criteria);
+		
+	}
 	
+	public function getTotalCost()
+	{
+		return array_sum(CHtml::listData($this->findByPeriod(),'id','amount'));
+	}
+	
+	public function getTotalCostLocale()
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalCost,'IDR');
+	}
+
 }
 

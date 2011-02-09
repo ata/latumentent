@@ -6,7 +6,7 @@
 	'enableAjaxValidation'=>true,
 )); ?>
 	<fieldset>
-		<legend>New Ticket</legend>
+		<legend><?php Yii::t('app','New Ticket')?></legend>
 		<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 		<?php echo $form->errorSummary($ticket); ?>
@@ -25,13 +25,13 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($ticket,'title'); ?>
-			<?php echo $form->textField($ticket,'title'); ?>
+			<?php echo $form->textField($ticket,'title',array('style' => 'width:400px')); ?>
 			<?php echo $form->error($ticket,'title'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $form->labelEx($ticket,'body'); ?>
-			<?php echo $form->textArea($ticket,'body'); ?>
+			<?php echo $form->textArea($ticket,'body',array('cols' =>60,'rows' => '10')); ?>
 			<?php echo $form->error($ticket,'body'); ?>
 		</div>
 

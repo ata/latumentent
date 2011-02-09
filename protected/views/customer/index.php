@@ -47,6 +47,11 @@
 		'dataProvider'=>$customer->search(),
 		'columns'=>array(
 			array(
+				'name'=>'id',
+				'htmlOptions'=>array('style'=>'width:0px,display:none'),
+				'headerHtmlOptions'=>array('style'=>'width:0px;display:none'),
+			),
+			array(
 				'class' => 'NumberColumn'
 			),
 			array(
@@ -57,8 +62,7 @@
 			array(
 				'name' => 'user',
 				'header'=>Yii::t('app','Full Name'),
-				'type'=>'raw',
-				'value'=>'CHtml::link($data->user->fullname, array("detail"))',
+				'value'=>'$data->user->fullname',
 			),
 			array(
 				'header'=>Yii::t('app','Services'),
@@ -79,11 +83,11 @@
 						'url'=>'"#"',
 						'imageUrl'=>Yii::app()->request->baseUrl.'/images/delete.png',
 						'click'=>'function(){ 
-							$.fn.yiiGridView.update(\'customer-list\',{
+							$.fn.yiiGridView.update("customer-list",{
 								url:"'.Yii::app()->createUrl("customer/softDelete").'",
 								data:{id:$(this).parent().parent().children(":first-child").text()},
 								success: function(){
-									$.fn.yiiGridView.update(\'customer-list\');
+									$.fn.yiiGridView.update("customer-list");
 								}
 							})
 						}',
