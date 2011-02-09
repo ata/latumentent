@@ -4,8 +4,8 @@ class BalanceController extends Controller
 	public function actionIndex()
 	{
 	
-		if(isset($_GET['filter'])){
-			$period = $_GET['filter'];
+		if(isset($_GET['period'])){
+			$period = $_GET['period'];
 		} else {
 			$period = 0;
 		}
@@ -25,11 +25,11 @@ class BalanceController extends Controller
 		));
 	}
 	
-	public function actionUpdate()
+	public function actionFilter()
 	{
 		
-		if(isset($_GET['filter'])){
-			$period = $_GET['filter'];
+		if(isset($_GET['period'])){
+			$period = $_GET['period'];
 		} else {
 			$period = 0;
 		}

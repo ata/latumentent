@@ -18,7 +18,7 @@
 		<tfoot>
 			<tr>
 				<td><?php echo Yii::t('app','Total Cost')?></td>
-				<td><?php echo $items->totalCostLocale?></td>
+				<td><?php //echo $items->totalCostLocale?></td>
 			</tr>
 		</tfoot>
 	</table>
@@ -43,7 +43,7 @@
 		<tfoot>
 			<tr>
 				<td><?php echo Yii::t('app','Total Revenue')?></td>
-				<td><?php echo $data->totalRevenueLocale?></td>
+				<td><?php //echo $data->totalRevenueLocale?></td>
 			</tr>
 		</tfoot>
 	</table>
