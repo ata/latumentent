@@ -54,6 +54,7 @@ class Invoice extends ActiveRecord
 			array('total_amount, total_compensation, period_id, customer_id', 'required'),
 			array('period_id, status, customer_id, payment_method_id', 'numerical', 'integerOnly'=>true),
 			array('total_amount, total_compensation', 'numerical'),
+			array('status','default','value'=>self::STATUS_NOT_PAID),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, total_amount, total_compensation, period_id, customer_id, serviceIds', 'safe', 'on'=>'search'),
@@ -175,6 +176,8 @@ class Invoice extends ActiveRecord
 		}
 		return Yii::t('app','Paid');
 	}
+	
+	
 	
 	public function pay()
 	{

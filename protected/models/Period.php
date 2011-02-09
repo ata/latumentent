@@ -60,6 +60,9 @@ class Period extends ActiveRecord
 			'invoices' => array(self::HAS_MANY, 'Invoice', 'period_id'),
 			'invoiceItems' => array(self::HAS_MANY, 'InvoiceItem', 'period_id'),
 			'tickets' => array(self::HAS_MANY, 'Ticket', 'period_id'),
+			'staticCostClient' => array(self::HAS_ONE,'StaticCostClient','period_id'),
+			'staticArpu' => array(self::HAS_ONE,'StaticArpu','period_id'),
+			'staticCostClient' => array(self::HAS_ONE,'StaticCostClient','period_id'),
 		);
 	}
 
@@ -105,11 +108,11 @@ class Period extends ActiveRecord
 		));
 	}
 
-	public function addPeriod()
+	public function addPeriod($name=null)
 	{
 		if (!$this->findByAttributes(array('name' => date('F Y')))) {
 			$period = new Period();
-			$period->name = date('F Y');
+			$period->name = $name==null?date('F Y'):$name;
 			$period->save();
 			return $period;
 		}
@@ -122,6 +125,27 @@ class Period extends ActiveRecord
 			$customer->generateInvoices($this->id);
 		}
 		
+	}
+	
+	public function generateStatic()
+	{
+		if ($this->staticArpu == null) {
+			$this->staticArpu = new StaticArpu;
+			$this->staticArpu->period_id = $this->id;
+		}
+	}
+	
+	public function generateCustomerRevenue()
+	{
+		foreach($this->invoices as $invoice) {
+			
+		}
+	}
+	
+	public function generateCustomerCost()
+	{
+		foreach(Customer::model()->findAllActive() as $customer) {
+		}
 	}
 	
 }
