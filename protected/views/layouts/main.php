@@ -47,6 +47,11 @@
 			<?php 
 			$this->widget('zii.widgets.CMenu', array(
 			'items'=>array(
+				array('label'=> Yii::t('app','Home'), 'url'=>array('/site/index'), 'visible'=> Yii::app()->user->isGuest),
+				array('label'=> Yii::t('app','Tentang'), 'url'=>array('/site/page', 'view'=>'about'), 'visible'=> Yii::app()->user->isGuest),
+				array('label'=> Yii::t('app','Product'), 'url'=>array('/site/page', 'view'=>'product'), 'visible'=> Yii::app()->user->isGuest),
+				array('label'=> Yii::t('app','Contact'), 'url'=>array('/site/contact',), 'linkOptions' => array('class' => 'last'), 'visible'=> Yii::app()->user->isGuest),
+				
 				array('label'=>Yii::t('app','Dashboard'), 'url'=>array('dashboard/index'), 'visible'=> !Yii::app()->user->isGuest),
 				array('label'=>Yii::t('app','Apartment'), 'url'=>array('apartment/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
 				array('label'=>Yii::t('app','Cost'), 'url'=>array('cost/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
@@ -58,14 +63,15 @@
 				//array('label'=>Yii::t('app','Logout ({name})',array('{name}'=>Yii::app()->user->fullname)), 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			)));
 			?>
-			<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=> Yii::t('app','Home'), 'url'=>array('/site/index')),
-				array('label'=> Yii::t('app','Tentang'), 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=> Yii::t('app','Product'), 'url'=>array('/site/page', 'view'=>'product')),
-				array('label'=> Yii::t('app','Contact'), 'url'=>array('/site/contact',), 'linkOptions' => array('class' => 'last')),
-			),
-		)); ?>
+			
+			<?php /* $this->widget('zii.widgets.CMenu',array(
+				'items'=>array(
+					array('label'=> Yii::t('app','Home'), 'url'=>array('/site/index')),
+					array('label'=> Yii::t('app','Tentang'), 'url'=>array('/site/page', 'view'=>'about')),
+					array('label'=> Yii::t('app','Product'), 'url'=>array('/site/page', 'view'=>'product')),
+					array('label'=> Yii::t('app','Contact'), 'url'=>array('/site/contact',), 'linkOptions' => array('class' => 'last')),
+				),
+			)); */?>
 		</div>
 	</div>
 </div>	
@@ -74,6 +80,7 @@
 		<?php echo $content; ?>
 	</div>
 </div>
+<div class="clear"></div>
 <div id="footbar">
 	<div class="container">
 		<div class="span-6">
