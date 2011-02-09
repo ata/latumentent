@@ -77,7 +77,8 @@ class InvoiceController extends Controller
 				$this->redirect(array('index'));
 			}
 		}
-		$paymentMethodList = PaymentMethod::model()->listData();
+		$paymentMethodList = CHtml::listData(PaymentMethod::model()->findAll(),'id','display');
+		
 		$this->render('pay',array(
 			'paymentMethodList' => $paymentMethodList,
 			'invoice' => $this->loadInvoice(),

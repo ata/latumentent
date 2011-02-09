@@ -14,7 +14,7 @@ class m110209_022113_create_statistic_tables extends CDbMigration
 			'periode_id' => 'integer NOT NULL',
 			'value' => 'double NOT NULL',
 		));
-		$this->createTable('stasistic_cost_client',array(
+		$this->createTable('statistic_cost_client',array(
 			'id' => 'pk',
 			'periode_id' => 'integer NOT NULL',
 			'value' => 'double NOT NULL',

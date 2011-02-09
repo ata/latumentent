@@ -1,31 +1,58 @@
 <?php $this->beginContent('//layouts/main'); ?>
-
-
-<div id="header" class="span-24">
-	<div id="logo" class="floatLeft">[LOGO]</div>
-	<div id="mainmenu" class="floatRight">
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=> Yii::t('app','Home'), 'url'=>array('/site/index')),
-				array('label'=> Yii::t('app','Tentang'), 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=> Yii::t('app','Product'), 'url'=>array('/site/page', 'view'=>'product')),
-				array('label'=> Yii::t('app','Contact'), 'url'=>array('/site/contact',), 'linkOptions' => array('class' => 'last')),
-			),
-		)); ?>
-	</div><!-- mainmenu -->
-	<div class="clear"></div>
-</div><!-- header -->
-
-<div class="clean"></div>
-<?php /*
-<div class="span-24">
-	<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-		'links'=>$this->breadcrumbs,
-	)); ?><!-- breadcrumbs -->
+<div id="bodysite">
+	<div id="content">
+		<div class="container">
+			<?php echo $content; ?>
+		</div>
+	</div><!-- content -->
 </div>
-*/?>
-
-<div id="content">
-	<?php echo $content; ?>
-</div><!-- content -->
+<div class="clear"></div>
+<div id="footbar">
+	<div class="container">
+		<div class="span-6">
+			<h3>Interior</h3>
+			<ul>
+				<li>Interior Design</li>
+				<li>Free Interior Design</li>
+				<li>Interior Design</li>
+				<li>Free Interior Design</li>
+				<li>Interior Design</li>
+				<li>Free Interior Design</li>
+			</ul>
+		</div>
+		<div class="span-6">
+			<h3>Furniture</h3>
+			<ul>
+				<li>Wooden Furniture</li>
+				<li>Plastic Furniture</li>
+				<li>Wooden Furniture</li>
+				<li>Plastic Furniture</li>
+				<li>Wooden Furniture</li>
+				<li>Plastic Furniture</li>
+			</ul>
+		</div>
+		<div class="span-6">
+			<h3>Wallpaper</h3>
+			<ul>
+				<li>Kids Wallpaper</li>
+				<li>Nature Wallpaper</li>
+				<li>Kids Wallpaper</li>
+				<li>Nature Wallpaper</li>
+				<li>Kids Wallpaper</li>
+				<li>Nature Wallpaper</li>
+			</ul>
+		</div>
+		<div class="span-6 last">
+			<h3>Property</h3>
+			<ul>
+				<li>New Property</li>
+				<li>Used Property</li>
+				<li>New Property</li>
+				<li>Used Property</li>
+				<li>New Property</li>
+				<li>Used Property</li>
+			</ul>
+		</div>
+	</div>
+</div>
 <?php $this->endContent(); ?>

@@ -55,7 +55,7 @@ class WebUser extends CWebUser
 	
 	public function getReturnUrl($defaultUrl=null)
 	{
-		return $this->getState('__returnUrl',Yii::app()->createUrl('site/dashboard'));
+		return $this->getState('__returnUrl',Yii::app()->createUrl('dashboard/index'));
 	}
 
 

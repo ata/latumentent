@@ -26,6 +26,6 @@ class m110202_043806_create_table_apartment_and_compensation_schmema extends CDb
 	{
 		$this->dropTable('compensation_schema');
 		$this->dropTable('apartment');
-		$this->droColumn('customer','apartment_id');
+		$this->dropColumn('customer','apartment_id');
 	}
 }

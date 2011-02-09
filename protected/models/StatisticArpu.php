@@ -86,4 +86,9 @@ class StatisticArpu extends ActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function createByPeriod($period_id) {
+		$staticArpu = new StatisticArpu;
+		$staticArpu->period_id = $period_id;
+	}
 }
