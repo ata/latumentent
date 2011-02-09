@@ -171,6 +171,14 @@ class Ticket extends ActiveRecord
 		return parent::beforeValidate();
 	}
 	
+	protected function beforeDelete()
+	{
+		foreach($this->replies as $replies){
+			$replies->delete();
+		}
+		return parent::beforeDelete();
+	}
+	
 	public function getCompensationLocale() 
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->compensation,'IDR');

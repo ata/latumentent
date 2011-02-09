@@ -3,8 +3,6 @@
 
 <div class="ticket-title">
     <label>Internet Ngaco</label>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label>Open</label>
 </div>
 &nbsp;&nbsp;

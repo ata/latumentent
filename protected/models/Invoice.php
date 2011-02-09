@@ -124,6 +124,14 @@ class Invoice extends ActiveRecord
 		$this->user_id = $this->customer->user_id;
 		return parent::beforeSave();
 	}
+	protected function beforeDelete()
+	{
+		foreach($this->invoiceItem as $invoiceItems){
+			$invoiceItem->delete();
+		}
+		
+		return parent::beforeDelete();
+	}
 	
 	public function findAllByPeriodId($period_id) 
 	{

@@ -75,6 +75,9 @@ class TicketController extends Controller
 		if (isset($_POST['Ticket'])) {
 			$ticket->attributes=$_POST['Ticket'];
 			if($ticket->save()) {
+				if (Yii::app()->user->role == 'customer') {
+					$this->redirect(array('dashboard/customer'));
+				}
 				$this->redirect(array('invoice/view'));
 			}
 		}
