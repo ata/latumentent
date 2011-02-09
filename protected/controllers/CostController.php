@@ -23,7 +23,7 @@ class CostController extends Controller
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('index','view','delete','create','update'),
-				'roles'=>array('admin'),
+				'roles'=>array('admin','management','customer_service'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -51,13 +51,14 @@ class CostController extends Controller
 		$cost=new Cost;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($cost);
+		$this->performAjaxValidation($cost);
 
-		if(isset($_POST['Cost']))
-		{
+		if (isset($_POST['Cost'])) {
 			$cost->attributes=$_POST['Cost'];
 			if($cost->save())
-				$this->redirect(array('view','id'=>$cost->id));
+				$this->redirect(array('index'));
+		} else {
+			$cost->period_id = Period::model()->last()->find()->id;
 		}
 
 		$this->render('create',array(

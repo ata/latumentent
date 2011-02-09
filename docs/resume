@@ -62,4 +62,11 @@ Pertemuan ke-III:
 		- grafikal revenue
 		- pembenahan bagian add ticket:
 			- penambahan jenis permasalahan
+		- dashboard:
+			- grafik arpu (rata-rata pendapatan dari percustomer / periode)
+				- di ambil dari revenue
+			- grafik progress client (jumlah)
+				- di ambil dari invoice
+			- grafik rata-rata cost percustomer / perbulan
+				- di ambil dari cost
 

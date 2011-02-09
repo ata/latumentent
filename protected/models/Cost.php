@@ -10,9 +10,13 @@
  * @property integer $service_id
  * @property integer $customer_id
  * @property text $note
+ * @property integer $status
  */
 class Cost extends ActiveRecord
 {
+	
+	const STATUS_NOT_PAID = 0;
+	const STATUS_PAID = 1;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Outlay the static model class
@@ -39,7 +43,7 @@ class Cost extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('amount, period_id', 'required'),
-			array('period_id, service_id, customer_id, user_id', 'numerical', 'integerOnly'=>true),
+			array('period_id, service_id, status, customer_id, user_id', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -106,12 +110,13 @@ class Cost extends ActiveRecord
 		)); 
 	}
 	
-	protected function beforeValidate()
+	protected function beforeSave()
 	{
 		$this->user_id = $this->customer->user->id;
-		return parent::beforeValidate();
+		return parent::beforeSave();
 	}
 	
+
 	public function findByPeriod()
 	{
 		$criteria = new CDbCriteria;
@@ -132,5 +137,6 @@ class Cost extends ActiveRecord
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalCost,'IDR');
 	}
+
 }
 

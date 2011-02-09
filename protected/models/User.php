@@ -101,12 +101,12 @@ class User extends ActiveRecord
 	}
 	
 	protected function afterValidate()
-    {
-        if(!$this->reqNewPassword) {
-            $this->clearErrors('password');
-        }
+	{
+		if(!$this->reqNewPassword) {
+			$this->clearErrors('password');
+		}
 
-    }
+	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

@@ -1,18 +1,17 @@
 <?php
 
 /**
- * This is the model class for table "apartment".
+ * This is the model class for table "payment_method".
  *
- * The followings are the available columns in table 'apartment':
+ * The followings are the available columns in table 'payment_method':
  * @property integer $id
- * @property string $number
- * @property string $note
+ * @property string $name
  */
-class Apartment extends ActiveRecord
+class PaymentMethod extends ActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Apartment the static model class
+	 * @return PaymentMethod the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -24,7 +23,7 @@ class Apartment extends ActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'apartment';
+		return 'payment_method';
 	}
 
 	/**
@@ -35,12 +34,10 @@ class Apartment extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('number', 'required'),
-			array('number', 'length', 'max'=>255),
-			array('note','safe'),
+			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, number, note', 'safe', 'on'=>'search'),
+			array('id, name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,8 +49,6 @@ class Apartment extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'occupant' => array(self::HAS_ONE,'Customer','apartment_id'),
-			'customer' => array(self::HAS_ONE,'Customer','apartment_id'),//alias
 		);
 	}
 
@@ -64,8 +59,7 @@ class Apartment extends ActiveRecord
 	{
 		return array(
 			'id' => Yii::t('app','ID'),
-			'number' => Yii::t('app','Apartment Number'),
-			'note' => Yii::t('app','Note'),
+			'name' => Yii::t('app','Name'),
 		);
 	}
 
@@ -81,38 +75,10 @@ class Apartment extends ActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('number',$this->number,true);
-		$criteria->compare('note',$this->note);
+		$criteria->compare('name',$this->name,true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
-	}
-	
-	
-	public function findByNumber($number) 
-	{
-		return $this->findByAttributes(array(
-			'number' => $number,
-		));
-	}
-	
-	public function getDisplay()
-	{
-		return $this->number;
-	}
-	
-	public function getStatus()
-	{
-		if ($this->customer !== null) {
-			if (empty($this->customer->services)) {
-				return Yii::t('app','Idle');
-			}
-			return Yii::t('app','Hired by {name}',array(
-				'{name}' => $this->customer->user->fullname
-			));
-		} else {
-			return Yii::t('app','Empty');
-		}
 	}
 }

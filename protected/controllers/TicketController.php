@@ -26,11 +26,11 @@ class TicketController extends Controller
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('index'),
-				'roles'=>array('admin','technical_support','customer_services','customer'),
+				'roles'=>array('admin','management','technical_support','customer_services','customer'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('view'),
-				'roles'=>array('admin','technical_support','customer'),
+				'roles'=>array('admin','management','technical_support','customer'),
 			),
 			
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions

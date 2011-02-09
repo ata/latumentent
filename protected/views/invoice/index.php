@@ -71,12 +71,16 @@ $this->breadcrumbs=array(
 			array(
 				'name' => 'rawServices',
 				'header' => Yii::t('app','Services'),
-				//'value'=>'$data->customer->rawServices',
 			),
 			array(
-				'header' => Yii::t('app','Action'),
+				'name' => 'statusDisplay',
+				'header' => Yii::t('app','Status'),
 				'type' => 'raw',
-				'value' => 'CHtml::link(Yii::t("app","Detail Invoice"),array("view","id" => $data->id))',
+			),
+			array(
+				'header' => Yii::t('app','Detail'),
+				'type' => 'raw',
+				'value' => 'CHtml::link(Yii::t("app","Detail"),array("view","id" => $data->id))',
 			),
 		),
 	)); ?>
