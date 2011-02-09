@@ -115,7 +115,7 @@ class InvoiceItem extends ActiveRecord
 		$criteria->compare('billing_date',$this->billing_date);
 		$criteria->compare('paying_date',$this->paying_date);
 		$criteria->compare('service_id',$this->service_id);
-
+		
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));

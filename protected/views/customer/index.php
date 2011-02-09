@@ -58,7 +58,7 @@
 				'name' => 'user',
 				'header'=>Yii::t('app','Full Name'),
 				'type'=>'raw',
-				'value'=>'CHtml::link($data->user->fullname, array("detail"))',
+				'value'=>'data->user->fullname',
 			),
 			array(
 				'header'=>Yii::t('app','Services'),
