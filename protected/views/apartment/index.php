@@ -11,7 +11,9 @@
 		'id'=>'apartment-grid',
 		'dataProvider'=>$apartment->search(),
 		'columns'=>array(
-			'id',
+			array(
+				'class' => 'NumberColumn'
+			),
 			'number',
 			'note',
 			'status',
