@@ -54,4 +54,10 @@ return array(
 	'Select Customer' => 'Pilih Pelanggan',
 	'Select Role' => 'Pilih Role',
 	'Select Status' => 'Pilih Status',
+	'Cost' => 'Pengeluaran',
+	'Total Cost' => 'Total Pengeluaran',
+	'Revenue' => 'Pendapatan',
+	'Total Revenue' => 'Total Pendapatan',
+	'Net Profit' => 'Laba Bersih',
+	'Loss' => 'Kerugian',
 );

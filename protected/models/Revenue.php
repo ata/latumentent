@@ -56,6 +56,8 @@ class Revenue extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'service'=>array(self::BELONGS_TO,'Service','service_id'),
+			'period'=>array(self::BELONGS_TO,'Period','period_id'),
 		);
 	}
 
@@ -91,5 +93,48 @@ class Revenue extends ActiveRecord
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	/*public function searchBalance()
+	{
+		$criteria = new CDbCriteria;
+		$criteria->group = 'service_id';
+		
+		$criteria->compare('id',$this->id);
+		$criteria->compare('amount',$this->amount);
+		$criteria->compare('perio_id',$this->period_id);
+		$criteria->compare('servie_id',$this->service_id);
+		
+		return new CActiveDataProvider(get_class($this), array(
+			'criteria'=>$criteria,
+		));
+	}*/
+	
+	public function findByPeriod($period_id=false)
+	{
+		
+		$criteria = new CDbCriteria;
+		
+		if($period_id !== 0){
+			$period = $period_id;
+		} else {
+			$period = Period::model()->last()->last()->find()->id;
+		}
+		
+		$criteria->group = 'service_id';
+		$criteria->condition = 'period_id = :period';
+		$criteria->params = array('period'=>$period);
+		
+		return $this->findAll($criteria);
+	}
+	
+	public function getTotalRevenue()
+	{
+		return array_sum(CHtml::listData($this->findByPeriod(),'id','amount'));
+	}
+	
+	public function getTotalRevenueLocale()
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenue,'IDR');
 	}
 }
