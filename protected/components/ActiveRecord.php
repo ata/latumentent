@@ -19,7 +19,7 @@ class ActiveRecord extends CActiveRecord
 	public function listData()
 	{
 		$class = get_class($this);
-		return CHtml::listData($class::model()->findAll(),'id','display');
+		//return CHtml::listData($class::model()->findAll(),'id','display');
 	}
 	
 	public function __toString()
