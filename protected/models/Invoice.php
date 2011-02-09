@@ -118,6 +118,15 @@ class Invoice extends ActiveRecord
 		));
 	}
 	
+	protected function beforeDelete()
+	{
+		foreach($this->invoiceItem as $invoiceItems){
+			$invoiceItem->delete();
+		}
+		
+		return parent::beforeDelete();
+	}
+	
 	public function findAllByPeriodId($period_id) 
 	{
 		return $this->findAllByAttributes(array('period_id' => $period_id));
