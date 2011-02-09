@@ -124,4 +124,10 @@ class Period extends ActiveRecord
 		
 	}
 	
+	public function findLastPeriod()
+	{
+		$criteria = new CDbCriteria;
+		$criteria->order = 'id DESC';
+		$this->findAll($criteria);
+	}
 }

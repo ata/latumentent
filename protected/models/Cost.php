@@ -117,12 +117,19 @@ class Cost extends ActiveRecord
 	}
 	
 
-	public function findByPeriod()
+	public function findByPeriod($period_id=false)
 	{
 		$criteria = new CDbCriteria;
+		
+		if($period_id !== 0){
+			$period = $period_id;
+		} else {
+			$period = Period::model()->last()->last()->find()->id;
+		}
+		
 		$criteria->group = 'service_id';
 		$criteria->condition = 'period_id = :period';
-		$criteria->params = array('period'=>Period::model()->last()->find()->id);
+		$criteria->params = array('period'=>$period);
 		
 		return $this->findAll($criteria);
 		
