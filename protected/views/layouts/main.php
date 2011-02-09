@@ -22,7 +22,28 @@
 <div id="headersite">
 	<div class="container">
 		<div id="app-name" class="floatLeft"><h2><?php echo CHtml::link(Yii::app()->name,array('/'))?></h2></div>
-		<div id="top-menu" class="floatRight">
+		<div id="login-status" class="floatRight">
+			<?php 
+			$this->widget('zii.widgets.CMenu', array(
+			'items'=>array(
+				//array('label'=>Yii::t('app','Dashboard'), 'url'=>array('site/dashboard'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'admin'),
+				//array('label'=>Yii::t('app','Apartment'), 'url'=>array('apartment/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
+				//array('label'=>Yii::t('app','Cost'), 'url'=>array('cost/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
+				//array('label'=>Yii::t('app','Ticket'), 'url'=>array('ticket/index'), 'visible'=> !Yii::app()->user->isGuest),
+				//array('label'=>Yii::t('app','Customer'), 'url'=>array('customer/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
+				//array('label'=>Yii::t('app','Invoice'), 'url'=>array('invoice/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
+				//array('label'=>Yii::t('app','Administration'), 'url'=>array('admin/service'), 'visible'=> Yii::app()->user->role === 'admin'),
+				array('label'=>Yii::t('app','Login'), 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>Yii::t('app','Logout ({name})',array('{name}'=>Yii::app()->user->fullname)), 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+			)));
+			?>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div id="top-menu">
+	<div class="container">
+		<div id="top-navigation">
 			<?php 
 			$this->widget('zii.widgets.CMenu', array(
 			'items'=>array(
@@ -33,21 +54,26 @@
 				array('label'=>Yii::t('app','Customer'), 'url'=>array('customer/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
 				array('label'=>Yii::t('app','Invoice'), 'url'=>array('invoice/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
 				array('label'=>Yii::t('app','Administration'), 'url'=>array('admin/service'), 'visible'=> Yii::app()->user->role === 'admin'),
-				array('label'=>Yii::t('app','Login'), 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>Yii::t('app','Logout ({name})',array('{name}'=>Yii::app()->user->fullname)), 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				//array('label'=>Yii::t('app','Login'), 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+				//array('label'=>Yii::t('app','Logout ({name})',array('{name}'=>Yii::app()->user->fullname)), 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			)));
 			?>
+			<?php $this->widget('zii.widgets.CMenu',array(
+			'items'=>array(
+				array('label'=> Yii::t('app','Home'), 'url'=>array('/site/index')),
+				array('label'=> Yii::t('app','Tentang'), 'url'=>array('/site/page', 'view'=>'about')),
+				array('label'=> Yii::t('app','Product'), 'url'=>array('/site/page', 'view'=>'product')),
+				array('label'=> Yii::t('app','Contact'), 'url'=>array('/site/contact',), 'linkOptions' => array('class' => 'last')),
+			),
+		)); ?>
 		</div>
-		<div class="clear"></div>
 	</div>
-</div>
-
+</div>	
 <div id="bodysite">
 	<div class="container">
 		<?php echo $content; ?>
 	</div>
 </div>
-
 <div id="footbar">
 	<div class="container">
 		<div class="span-6">
