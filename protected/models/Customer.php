@@ -86,6 +86,11 @@ class Customer extends ActiveRecord
 			'services'=>array(self::MANY_MANY,'Service','customer_has_service(customer_id,service_id)','index'=>'id')
 		);
 	}
+	
+	public function scopes()
+	{
+		return array();
+	}
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -169,7 +174,9 @@ class Customer extends ActiveRecord
 	
 	public function getRawServices()
 	{
-		return implode(', ', CHtml::listData($this->services,'id','name'));
+		$services = CHtml::listData($this->services,'id','name');
+		sort($services);
+		return implode(', ', $services);
 	}
 
 	public function afterFind() {

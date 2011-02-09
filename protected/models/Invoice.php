@@ -9,6 +9,9 @@
  * @property double $total_compensation
  * @property integer $period_id
  * @property integer $customer_id
+ * @property integer $payment_method_id
+ * @property integer $status
+ * 
  *
  * The followings are the available model relations:
  * @property Customer $customer
@@ -19,7 +22,10 @@
 class Invoice extends ActiveRecord
 {
 	
-	public $serviceIds = array();
+	const STATUS_NOT_PAID = 0;
+	const STATUS_PAID = 1;
+	
+	public $serviceIds;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Invoice the static model class
@@ -46,11 +52,11 @@ class Invoice extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('total_amount, total_compensation, period_id, customer_id', 'required'),
-			array('period_id, customer_id', 'numerical', 'integerOnly'=>true),
+			array('period_id, status, customer_id, payment_method_id', 'numerical', 'integerOnly'=>true),
 			array('total_amount, total_compensation', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, total_amount, serviceIds, total_compensation, period_id, customer_id', 'safe', 'on'=>'search'),
+			array('id, total_amount, total_compensation, period_id, customer_id, serviceIds', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,6 +87,7 @@ class Invoice extends ActiveRecord
 			'total_compensation' => Yii::t('app','Total Compensation'),
 			'period_id' => Yii::t('app','Period'),
 			'customer_id' => Yii::t('app','Customer'),
+			'serviceIds' => Yii::t('app','Service'),
 		);
 	}
 
@@ -88,19 +95,24 @@ class Invoice extends ActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($all = false)
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
+		$criteria->with = array('invoiceItems',array('together'=>true));
+		$criteria->together = true;
 		$criteria->compare('id',$this->id);
 		$criteria->compare('total_amount',$this->total_amount);
 		$criteria->compare('total_compensation',$this->total_compensation);
-		$criteria->compare('period_id',$this->period_id);
+		$criteria->compare('t.period_id',$this->period_id);
 		$criteria->compare('customer_id',$this->customer_id);
-
+		if($this->serviceIds !== null){
+			$serviceIds = !empty($this->serviceIds)?implode(',',$this->serviceIds):'0';
+			$criteria->addCondition('invoiceItems.service_id in ('. $serviceIds .')');
+		}
+		
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
@@ -130,7 +142,9 @@ class Invoice extends ActiveRecord
 	
 	public function getRawServices()
 	{
-		return implode(', ', CHtml::listData($this->services,'id','name'));
+		$services = CHtml::listData($this->services,'id','name');
+		sort($services);
+		return implode(', ', $services);
 	}
 	
 	public function getTotalCompensationLocale() 
@@ -149,5 +163,22 @@ class Invoice extends ActiveRecord
 	public function getTotalBillsLocale()
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalBills,'IDR');
+	}
+	
+	
+	public function getStatusDisplay()
+	{
+		if ($this->status == self::STATUS_NOT_PAID) {
+			return Yii::t('app','Not Paid ({link})',array(
+				'{link}' => CHtml::link(Yii::t('app','Pay'),array('invoice/pay','id' => $this->id))
+			));
+		}
+		return Yii::t('app','Paid');
+	}
+	
+	public function pay()
+	{
+		$this->status = self::STATUS_PAID;
+		return $this->save(false);
 	}
 }

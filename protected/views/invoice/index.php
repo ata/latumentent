@@ -1,3 +1,17 @@
+<?php Yii::app()->clientScript->registerScript('invoice-filter','
+	(function($){
+		var update_invoice_list = function(){
+			$("#invoice-grid").yiiGridView.update("invoice-grid",{
+				url:$(this).attr("action"),
+				data:$("#invoice-filter").serialize(),
+			});
+		}
+		$("#invoice-filter select").change(update_invoice_list);
+		$("#invoice-filter input[type=checkbox]").click(update_invoice_list);
+	})(jQuery)
+')
+?>
+
 <?php
 $this->breadcrumbs=array(
 	Yii::t('app','Invoices')=>array('index'),
@@ -13,20 +27,23 @@ $this->breadcrumbs=array(
 </div>
 
 <div class="filter span-16 last form" id="customer-filter">
-	<form>
-		<fieldset>
-			<legend><?php echo Yii::t('app','filter'); ?></legend>
-			<div class="row">
-				<div class="label floatLeft"><label><?php echo Yii::t('app','Period'); ?></label></div>
-				<div class="floatLeft"><?php echo CHtml::activeDropDownList($invoice, 'period_id', $periodList); ?></div>
-				<div class="clear"></div>
-			</div>
-			<div class="row checkbox">
-				<label class="title"><?php echo Yii::t('app','Service'); ?></label>
-				<?php echo CHtml::activeCheckBoxList($invoice, 'serviceIds', $serviceList, array('separator' => '')); ?>
-			</div>
-		</fieldset>
-	</form>
+	<fieldset>
+		<legend><?php echo Yii::t('app','filter'); ?></legend>
+		<?php $form=$this->beginWidget('CActiveForm', array(
+			'id'=>'invoice-filter'
+		)); ?>
+		<div class="row">
+			<?php echo $form->labelEx($invoice,'period_id');?>
+			<?php echo $form->dropDownList($invoice,'period_id',$periodList,array(
+				'empty'=>Yii::t('app','All'),
+			));?>
+		</div>
+		<div class="row checkbox">
+			<?php echo $form->label($invoice,'serviceIds');?>
+			<?php echo $form->checkBoxList($invoice,'serviceIds',$serviceList,array('separator'=>''))?>
+		</div>
+		<?php $this->endWidget(); ?>
+	</fieldset>
 </div>
 
 <div class="span-24">
@@ -54,12 +71,16 @@ $this->breadcrumbs=array(
 			array(
 				'name' => 'rawServices',
 				'header' => Yii::t('app','Services'),
-				//'value'=>'$data->customer->rawServices',
 			),
 			array(
-				'header' => Yii::t('app','Action'),
+				'name' => 'statusDisplay',
+				'header' => Yii::t('app','Status'),
 				'type' => 'raw',
-				'value' => 'CHtml::link(Yii::t("app","Detail Invoice"),array("view","id" => $data->id))',
+			),
+			array(
+				'header' => Yii::t('app','Detail'),
+				'type' => 'raw',
+				'value' => 'CHtml::link(Yii::t("app","Detail"),array("view","id" => $data->id))',
 			),
 		),
 	)); ?>
