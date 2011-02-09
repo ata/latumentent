@@ -8,9 +8,12 @@
  * @property double $amount
  * @property integer $period_id
  * @property integer $service_id
+ * @property integer $status
  */
 class Revenue extends ActiveRecord
 {
+	const STATUS_RECEIVED = 1;
+	const STATUS_NOT_RECEIVED = 0;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Revenue the static model class
@@ -37,7 +40,7 @@ class Revenue extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('amount, period_id, service_id', 'required'),
-			array('period_id, service_id', 'numerical', 'integerOnly'=>true),
+			array('period_id, service_id, status', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

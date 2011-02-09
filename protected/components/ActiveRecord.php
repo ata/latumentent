@@ -16,11 +16,6 @@ class ActiveRecord extends CActiveRecord
 		return sprintf('%s ID: %s',get_class($this), $this->id);
 	}
 	
-	public function listData()
-	{
-		$class = get_class($this);
-		//return CHtml::listData($class::model()->findAll(),'id','display');
-	}
 	
 	public function __toString()
 	{

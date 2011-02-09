@@ -2,9 +2,20 @@
 $this->breadcrumbs=array(
 	'Dashboard',
 );?>
-<h1><?php echo $this->id . '/' . $this->action->id; ?></h1>
+<h2><?php echo Yii::t('app','Statistic')?></h2>
 
-<p>
-	You may change the content of this page by modifying
-	the file <tt><?php echo __FILE__; ?></tt>.
-</p>
+<div class="span-12" id="statistic-arpu">
+	
+</div>
+
+<div class="span-12 last" id="statistic-client">
+	
+</div>
+
+<div class="span-12" id="statistic-cost-client">
+	
+</div>
+
+<div class="span-12 last" id="statistic-lain">
+	
+</div>
