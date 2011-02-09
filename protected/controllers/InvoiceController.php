@@ -22,7 +22,7 @@ class InvoiceController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','pay'),
 				'roles'=>array('admin','customer_services'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -68,15 +68,30 @@ class InvoiceController extends Controller
 	}
 	
 	
+	public function actionPay()
+	{
+		$invoice = $this->loadInvoice();
+		if (isset($_POST['Invoice'])) {
+			$invoice->attributes = $_POST['Invoice'];
+			if ($invoice->pay()) {
+				$this->redirect(array('index'));
+			}
+		}
+		$paymentMethodList = PaymentMethod::model()->listData();
+		$this->render('pay',array(
+			'paymentMethodList' => $paymentMethodList,
+			'invoice' => $this->loadInvoice(),
+		));
+	}
+	
+	
 	public function loadInvoice()
 	{
-		
 		if ('customer' === Yii::app()->user->role) {
 			$invoice = Invoice::model()->findByUserId(Yii::app()->user->id);
 		} else {
 			$invoice = Invoice::model()->findByPk((int) $_GET['id']);
 		}
-		
 		if($invoice===null)
 			throw new CHttpException(404,Yii::t('app','The requested page does not exist.'));
 		return $invoice;

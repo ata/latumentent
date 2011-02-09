@@ -9,6 +9,9 @@
  * @property double $total_compensation
  * @property integer $period_id
  * @property integer $customer_id
+ * @property integer $payment_method_id
+ * @property integer $status
+ * 
  *
  * The followings are the available model relations:
  * @property Customer $customer
@@ -18,6 +21,9 @@
  */
 class Invoice extends ActiveRecord
 {
+	
+	const STATUS_NOT_PAID = 0;
+	const STATUS_PAID = 1;
 	
 	public $serviceIds;
 	/**
@@ -46,7 +52,7 @@ class Invoice extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('total_amount, total_compensation, period_id, customer_id', 'required'),
-			array('period_id, customer_id', 'numerical', 'integerOnly'=>true),
+			array('period_id, status, customer_id, payment_method_id', 'numerical', 'integerOnly'=>true),
 			array('total_amount, total_compensation', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -136,7 +142,9 @@ class Invoice extends ActiveRecord
 	
 	public function getRawServices()
 	{
-		return implode(', ', CHtml::listData($this->services,'id','name'));
+		$services = CHtml::listData($this->services,'id','name');
+		sort($services);
+		return implode(', ', $services);
 	}
 	
 	public function getTotalCompensationLocale() 
@@ -155,5 +163,22 @@ class Invoice extends ActiveRecord
 	public function getTotalBillsLocale()
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalBills,'IDR');
+	}
+	
+	
+	public function getStatusDisplay()
+	{
+		if ($this->status == self::STATUS_NOT_PAID) {
+			return Yii::t('app','Not Paid ({link})',array(
+				'{link}' => CHtml::link(Yii::t('app','Pay'),array('invoice/pay','id' => $this->id))
+			));
+		}
+		return Yii::t('app','Paid');
+	}
+	
+	public function pay()
+	{
+		$this->status = self::STATUS_PAID;
+		return $this->save(false);
 	}
 }
