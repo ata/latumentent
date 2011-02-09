@@ -104,11 +104,11 @@ class Invoice extends ActiveRecord
 		$criteria=new CDbCriteria;
 		$criteria->with = array('invoiceItems',array('together'=>true));
 		$criteria->together = true;
-		$criteria->compare('id',$this->id);
-		$criteria->compare('total_amount',$this->total_amount);
-		$criteria->compare('total_compensation',$this->total_compensation);
+		$criteria->compare('t.sid',$this->id);
+		$criteria->compare('t.total_amount',$this->total_amount);
+		$criteria->compare('t.total_compensation',$this->total_compensation);
 		$criteria->compare('t.period_id',$this->period_id);
-		$criteria->compare('customer_id',$this->customer_id);
+		$criteria->compare('t.customer_id',$this->customer_id);
 		if($this->serviceIds !== null){
 			$serviceIds = !empty($this->serviceIds)?implode(',',$this->serviceIds):'0';
 			$criteria->addCondition('invoiceItems.service_id in ('. $serviceIds .')');

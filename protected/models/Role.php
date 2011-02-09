@@ -17,6 +17,13 @@ class Role extends ActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * @return Role the static model class
 	 */
+	
+	const ROLE_ADMIN = 1;
+	const ROLE_CUSTOMER = 2;
+	const ROLE_MANAGEMENT = 3;
+	const ROLE_TECHNICAL_SUPPORT = 4;
+	const ROLE_CUSTOMER_SERVICE = 5;
+	
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);

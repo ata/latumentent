@@ -42,7 +42,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		'id',
 		'name',
-		'service_id',
+		array(
+			'name'=>'service_id',
+			'value'=>'$data->service->name',
+			'filter'=>CHtml::listData(Service::model()->findAll(),'id','name'),
+		),
 		'down',
 		array(
 			'class'=>'CButtonColumn',

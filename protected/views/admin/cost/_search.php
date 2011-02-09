@@ -17,12 +17,16 @@
 
 	<div class="row">
 		<?php echo $form->label($cost,'period_id'); ?>
-		<?php echo $form->dropDownList($cost,'period_id',CHtml::listData(Period::model()->findAll(),'id','display')); ?>
+		<?php echo $form->dropDownList($cost,'period_id',
+			CHtml::listData(Period::model()->findAll(),'id','name'),array(
+				'empty'=>Yii::t('app','Select Period')
+			)); ?>
 	</div>
-
 	<div class="row">
 		<?php echo $form->label($cost,'service_id'); ?>
-		<?php echo $form->dropDownList($cost,'service_id',CHtml::listData(Service::model()->findAll(),'id','display')); ?>
+		<?php echo $form->dropDownList($cost,'service_id',CHtml::listData(Service::model()->findAll(),'id','name'),array(
+			'empty'=>Yii::t('app','Select Service')
+			)); ?>
 	</div>
 
 	<div class="row">
