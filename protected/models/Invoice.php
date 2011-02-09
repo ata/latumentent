@@ -133,6 +133,13 @@ class Invoice extends ActiveRecord
 		return parent::beforeDelete();
 	}
 	
+	protected function beforeSave()
+	{
+		$this->user_id = $this->customer->user_id;
+		return parent::beforeSave();
+>>>>>>> origin/didin
+	}
+	
 	public function findAllByPeriodId($period_id) 
 	{
 		return $this->findAllByAttributes(array('period_id' => $period_id));
