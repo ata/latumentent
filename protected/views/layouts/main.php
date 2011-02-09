@@ -44,91 +44,35 @@
 <div id="top-menu">
 	<div class="container">
 		<div id="top-navigation">
-			<?php 
-			$this->widget('zii.widgets.CMenu', array(
-			'items'=>array(
-				array('label'=> Yii::t('app','Home'), 'url'=>array('/site/index'), 'visible'=> Yii::app()->user->isGuest),
-				array('label'=> Yii::t('app','Tentang'), 'url'=>array('/site/page', 'view'=>'about'), 'visible'=> Yii::app()->user->isGuest),
-				array('label'=> Yii::t('app','Product'), 'url'=>array('/site/page', 'view'=>'product'), 'visible'=> Yii::app()->user->isGuest),
-				array('label'=> Yii::t('app','Contact'), 'url'=>array('/site/contact',), 'linkOptions' => array('class' => 'last'), 'visible'=> Yii::app()->user->isGuest),
-				
-				array('label'=>Yii::t('app','Dashboard'), 'url'=>array('dashboard/index'), 'visible'=> !Yii::app()->user->isGuest),
-				array('label'=>Yii::t('app','Apartment'), 'url'=>array('apartment/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
-				array('label'=>Yii::t('app','Cost'), 'url'=>array('cost/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
-				array('label'=>Yii::t('app','Ticket'), 'url'=>array('ticket/index'), 'visible'=> !Yii::app()->user->isGuest),
-				array('label'=>Yii::t('app','Customer'), 'url'=>array('customer/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
-				array('label'=>Yii::t('app','Invoice'), 'url'=>array('invoice/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
-				array('label'=>Yii::t('app','Administration'), 'url'=>array('admin/service'), 'visible'=> Yii::app()->user->role === 'admin'),
-				//array('label'=>Yii::t('app','Login'), 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				//array('label'=>Yii::t('app','Logout ({name})',array('{name}'=>Yii::app()->user->fullname)), 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			)));
-			?>
-			
-			<?php /* $this->widget('zii.widgets.CMenu',array(
+			<?php if (!Yii::app()->user->isGuest):?>
+			<?php $this->widget('Menu', array(
+				'items'=>array(
+					array('label'=>Yii::t('app','Dashboard'), 'url'=>array('dashboard/index'), 'visible'=> !Yii::app()->user->isGuest),
+					array('label'=>Yii::t('app','Customer'), 'url'=>array('customer/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
+					array('label'=>Yii::t('app','Apartment'), 'url'=>array('apartment/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
+					array('label'=>Yii::app()->user->role !== 'customer'?Yii::t('app','Ticket'):Yii::t('app','My Ticket'), 'url'=>array('ticket/index'), 'visible'=> !Yii::app()->user->isGuest),
+					array('label'=>Yii::t('app','Invoice'), 'url'=>array('invoice/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
+					array('label'=>Yii::t('app','Cost'), 'url'=>array('cost/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
+					array('label'=>Yii::t('app','Administration'), 'url'=>array('admin/service'), 'visible'=> Yii::app()->user->role === 'admin'),
+					//array('label'=>Yii::t('app','Login'), 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+					//array('label'=>Yii::t('app','Logout ({name})',array('{name}'=>Yii::app()->user->fullname)), 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				)
+			));?>
+			<?php else:?>
+			<?php $this->widget('zii.widgets.CMenu',array(
 				'items'=>array(
 					array('label'=> Yii::t('app','Home'), 'url'=>array('/site/index')),
 					array('label'=> Yii::t('app','Tentang'), 'url'=>array('/site/page', 'view'=>'about')),
 					array('label'=> Yii::t('app','Product'), 'url'=>array('/site/page', 'view'=>'product')),
 					array('label'=> Yii::t('app','Contact'), 'url'=>array('/site/contact',), 'linkOptions' => array('class' => 'last')),
 				),
-			)); */?>
-		</div>
-	</div>
-</div>	
-<div id="bodysite">
-	<div class="container">
-		<?php echo $content; ?>
-	</div>
-</div>
-<div class="clear"></div>
-<div id="footbar">
-	<div class="container">
-		<div class="span-6">
-			<h3>Interior</h3>
-			<ul>
-				<li>Interior Design</li>
-				<li>Free Interior Design</li>
-				<li>Interior Design</li>
-				<li>Free Interior Design</li>
-				<li>Interior Design</li>
-				<li>Free Interior Design</li>
-			</ul>
-		</div>
-		<div class="span-6">
-			<h3>Furniture</h3>
-			<ul>
-				<li>Wooden Furniture</li>
-				<li>Plastic Furniture</li>
-				<li>Wooden Furniture</li>
-				<li>Plastic Furniture</li>
-				<li>Wooden Furniture</li>
-				<li>Plastic Furniture</li>
-			</ul>
-		</div>
-		<div class="span-6">
-			<h3>Wallpaper</h3>
-			<ul>
-				<li>Kids Wallpaper</li>
-				<li>Nature Wallpaper</li>
-				<li>Kids Wallpaper</li>
-				<li>Nature Wallpaper</li>
-				<li>Kids Wallpaper</li>
-				<li>Nature Wallpaper</li>
-			</ul>
-		</div>
-		<div class="span-6 last">
-			<h3>Property</h3>
-			<ul>
-				<li>New Property</li>
-				<li>Used Property</li>
-				<li>New Property</li>
-				<li>Used Property</li>
-				<li>New Property</li>
-				<li>Used Property</li>
-			</ul>
+			));?>
+			<?php endif?>
 		</div>
 	</div>
 </div>
+
+<?php echo $content; ?>
 
 <div id="footersite">
 	<div class="container">

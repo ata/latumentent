@@ -11,7 +11,7 @@
  * @property integer $customer_id
  * @property integer $payment_method_id
  * @property integer $status
- * 
+ * @property integer $user_id
  *
  * The followings are the available model relations:
  * @property Customer $customer
@@ -52,7 +52,7 @@ class Invoice extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('total_amount, total_compensation, period_id, customer_id', 'required'),
-			array('period_id, status, customer_id, payment_method_id', 'numerical', 'integerOnly'=>true),
+			array('period_id, status, customer_id, user_id, payment_method_id', 'numerical', 'integerOnly'=>true),
 			array('total_amount, total_compensation', 'numerical'),
 			array('status','default','value'=>self::STATUS_NOT_PAID),
 			// The following rule is used by search().
@@ -117,6 +117,12 @@ class Invoice extends ActiveRecord
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	protected function beforeSave()
+	{
+		$this->user_id = $this->customer->user_id;
+		return parent::beforeSave();
 	}
 	
 	public function findAllByPeriodId($period_id) 
