@@ -166,10 +166,12 @@ class Cost extends ActiveRecord
 	
 	public function getServiceName()
 	{
-		if ($this->service != null) {
+		if ($this->service_id != null) {
 			return $this->service->name;
+		} else {
+			return CHtml::encode(Yii::t('app','Other Cost'));
 		}
-		return '-';
+		
 	}
 	
 	public function getCostLocale()

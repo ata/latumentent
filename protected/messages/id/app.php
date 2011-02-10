@@ -87,4 +87,11 @@ return array(
 	'Balance' => 'Neraca',
 	'Renter' => 'Penyewa',
 	'Amount' => 'Jumlah',
+	'Other Cost' => 'Pengeluaran lain-lain',
+	'Add Compensation Schema' => 'Tambah Schema Kompensasi',
+	'Add Problem Type' => 'Tambah Tipe Permasalahan',
+	'Add Periodic Cost' => 'Tambah Pengeluaran Rutin',
+	'Add Service' => 'Tambah Layanan',
+	'Add User' => 'Tambah Pengguna',
+	'Add New Role' => 'Tambah Role Baru'
 );

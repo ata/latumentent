@@ -57,14 +57,11 @@ $this->menu=array(
 				'class' => 'NumberColumn',
 		),
 		array(
-			'name'=>'period_id',
-			'value'=>'$data->period->name',
-			'filter'=>CHtml::listData(Period::model()->findAll(),'id','name'),
+			'name'=>'name',
 		),
 		array(
 			'name'=>'service_id',
 			'value'=>'$data->service->name',
-			'filter'=>CHtml::listData(Service::model()->findAll(),'id','name'),
 		),
 		array(
 			'name'=>'amountRevenue',
