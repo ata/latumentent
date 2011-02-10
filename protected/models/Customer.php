@@ -58,7 +58,7 @@ class Customer extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, serviceIds, contact_number, apartment_id, ownership', 'required'),
+			array('user_id, serviceIds, contact_number, apartment_id, ownership,hire_up_to', 'required'),
 			array('user_id, status', 'numerical', 'integerOnly'=>true),
 			array('rating, delay_count, advance_count', 'length', 'max'=>255),
 			array('status','default','value'=>self::STATUS_ACTIVE),
@@ -233,6 +233,15 @@ class Customer extends ActiveRecord
 		}
 		
 		return $invoice->save();
+	}
+	
+	protected function afterValidate()
+	{
+		if($this->ownership == self::OWNERSHIP_OWNER){
+			$this->clearErrors('hire_up_to');
+		}
+		
+		return parent::afterValidate();
 	}
 	
 	protected function afterDelete()

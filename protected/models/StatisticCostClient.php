@@ -8,7 +8,7 @@
  * @property integer $periode_id
  * @property double $value
  */
-class StasisticCostClient extends ActiveRecord
+class StatisticCostClient extends ActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -24,7 +24,7 @@ class StasisticCostClient extends ActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'stasistic_cost_client';
+		return 'statistic_cost_client';
 	}
 
 	/**

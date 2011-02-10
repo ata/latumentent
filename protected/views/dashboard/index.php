@@ -1,29 +1,32 @@
 <?php Yii::app()->clientScript->registerCoreScript('jquery');?>
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . '/js/highcharts.js');?>
-<h2><?php echo Yii::t('app','Statistic')?></h2>
 
-<div class="span-12" id="statistic-arpu">
+
+<h3><?php echo Yii::t('app','Statistic Average Revenue per Customer')?></h3>
+<div class="chart span-24 last" id="statistic-arpu">
 	
 </div>
 
-<div class="span-12 last" id="statistic-client">
+<h3><?php echo Yii::t('app','Statistic  Revenue per Customer')?></h3>
+<div class="chart span-24 last" id="statistic-client">
 	
 </div>
 
-<div class="span-12" id="statistic-cost-client">
-	
-</div>
-
-<div class="span-12 last" id="statistic-lain">
+<h3><?php echo Yii::t('app','Graphically Progress Customer')?></h3>
+<div class="chart span-24 last" id="statistic-cost-client">
 	
 </div>
 
 
 <script type="text/javascript">
-		
-	var chart;
+	var period_list = <?php echo $periodListJSON ?>;
+	var arpu_list = <?php echo $arpuListJSON ?>;
+	var client_list = <?php echo $clientListJSON ?>;
+	var cost_client_list = <?php echo $costClientListJSON ?>;
+	
 	jQuery(document).ready(function() {
-		chart = new Highcharts.Chart({
+		// ARPU
+		new Highcharts.Chart({
 			chart: {
 				renderTo: 'statistic-arpu',
 				defaultSeriesType: 'line',
@@ -36,10 +39,7 @@
 			},
 			
 			xAxis: {
-				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
-					'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-				categories1: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
-					'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+				categories: period_list,
 			},
 			yAxis: {
 				title: {
@@ -54,7 +54,7 @@
 			tooltip: {
 				formatter: function() {
 						return '<b>'+ this.series.name +'</b><br/>'+
-						this.x +': '+ this.y +'°C';
+						this.x +': '+ this.y ;
 				}
 			},
 			legend: {
@@ -67,8 +67,102 @@
 			},
 			series: [
 				{
-					name: 'Tokyo',
-					data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+					name: 'ARPU',
+					data: arpu_list
+				}
+			]
+		});
+		// Customer Subcribe
+		new Highcharts.Chart({
+			chart: {
+				renderTo: 'statistic-client',
+				defaultSeriesType: 'line',
+				marginRight: 130,
+				marginBottom: 25
+			},
+			title: {
+				text: 'Customer Subcribe',
+				x: -20 //center
+			},
+			
+			xAxis: {
+				categories: period_list,
+			},
+			yAxis: {
+				title: {
+					text: 'Rp.'
+				},
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}]
+			},
+			tooltip: {
+				formatter: function() {
+						return '<b>'+ this.series.name +'</b><br/>'+
+						this.x +': '+ this.y ;
+				}
+			},
+			legend: {
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'top',
+				x: -10,
+				y: 100,
+				borderWidth: 0
+			},
+			series: [
+				{
+					name: 'Customer Subcribe',
+					data: client_list
+				}
+			]
+		});
+		// Cost per Costomer
+		new Highcharts.Chart({
+			chart: {
+				renderTo: 'statistic-cost-client',
+				defaultSeriesType: 'line',
+				marginRight: 130,
+				marginBottom: 25
+			},
+			title: {
+				text: 'Average Cost per Customer',
+				x: -20 //center
+			},
+			
+			xAxis: {
+				categories: period_list,
+			},
+			yAxis: {
+				title: {
+					text: 'Rp.'
+				},
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}]
+			},
+			tooltip: {
+				formatter: function() {
+						return '<b>'+ this.series.name +'</b><br/>'+
+						this.x +': '+ this.y ;
+				}
+			},
+			legend: {
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'top',
+				x: -10,
+				y: 100,
+				borderWidth: 0
+			},
+			series: [
+				{
+					name: 'Average Customer Cost',
+					data: cost_client_list
 				}
 			]
 		});
