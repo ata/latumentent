@@ -9,6 +9,6 @@ $this->menu=array(
 );
 ?>
 
-<h2><?php echo Yii::t('app','Create PeriodicCost'); ?></h2>
+<h2><?php echo Yii::t('app','Create Periodic Cost'); ?></h2>
 
 <?php echo $this->renderPartial('_form', array('periodicCost'=>$periodicCost)); ?>

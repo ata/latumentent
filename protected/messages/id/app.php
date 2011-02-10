@@ -80,7 +80,7 @@ return array(
 	'Manage Settings' => 'Kelola Pengaturan',
 	'Manage Tickets' => 'Kelola Ticket',
 	'Manage Ticket Replys' => 'Kelola Balasan Ticket',
-	'Manage Users' => 'Kelolal Pengguna',
+	'Manage Users' => 'KelolalPengguna',
 	'Remember me next time' => 'Ingatkan kemudian',
 	'No one revenue on period' => 'Tidak ada data pendapatan di periode ini',
 	'No one cost on period' => 'Tidak ada data pengeluaran di period ini',
@@ -92,5 +92,11 @@ return array(
 	'Add Periodic Cost' => 'Tambah Pengeluaran Rutin',
 	'Add Service' => 'Tambah Layanan',
 	'Add User' => 'Tambah Pengguna',
-	'Add New Role' => 'Tambah Role Baru'
+	'Add New Role' => 'Tambah Role Baru',
+	'Create Compensation Schema' => 'Tambah Schem Kompensasi',
+	'Create Problem Type' => 'Tambah Type Permasalahan',
+	'Create Periodic Cost' => 'Tambah Pengeluaran Rutin',
+	'Create Service' => 'Tambah Layanan',
+	'Create User' => 'Tambah Pengguna',
+	'Create Role' => 'Tambah Role',
 );

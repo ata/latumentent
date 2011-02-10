@@ -5,10 +5,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=> Yii::t('app','Manage CompensationSchema'), 'url'=>array('index')),
+	array('label'=> Yii::t('app','Manage Compensation Schema'), 'url'=>array('index')),
 );
 ?>
 
-<h2><?php echo Yii::t('app','Create CompensationSchema'); ?></h2>
+<h2><?php echo Yii::t('app','Create Compensation Schema'); ?></h2>
 
 <?php echo $this->renderPartial('_form', array('compensationSchema'=>$compensationSchema)); ?>
