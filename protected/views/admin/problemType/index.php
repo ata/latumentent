@@ -13,7 +13,7 @@ $this->menu=array(
 <div class="new-button last span-8">
 	<?php echo CHtml::link(Yii::t('app','Add Problem Type'), array('create'));?>
 </div>
-
+<div class="clear"></div>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'problem-type-grid',
 	'dataProvider'=>$problemType->search(),

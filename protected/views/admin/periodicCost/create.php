@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=> Yii::t('app','Manage PeriodicCost'), 'url'=>array('index')),
+	array('label'=> Yii::t('app','Manage Periodic Cost'), 'url'=>array('index')),
 );
 ?>
 
