@@ -68,7 +68,10 @@ $this->menu=array(
 				'name'=>'serviceName',
 				'header'=> Yii::t('app','Service'),
 			),
-			'amount',
+			array(
+				'name'=>'costLocale',
+				'header'=>Yii::t('app','Amount'),
+			),
 			array(
 				'class'=>'CButtonColumn',
 			),

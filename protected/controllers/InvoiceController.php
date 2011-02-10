@@ -40,7 +40,7 @@ class InvoiceController extends Controller
 	{
 		
 		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
-		$periodList = CHtml::listData(Period::model()->findAll(),'id','name');
+		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 		
 		$invoice = new Invoice('search');
 		$invoice->unsetAttributes();

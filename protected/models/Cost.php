@@ -171,6 +171,11 @@ class Cost extends ActiveRecord
 		}
 		return '-';
 	}
+	
+	public function getCostLocale()
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->amount,'IDR');
+	}
 
 }
 
