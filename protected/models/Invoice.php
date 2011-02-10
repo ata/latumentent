@@ -195,6 +195,8 @@ class Invoice extends ActiveRecord
 	
 	public function pay()
 	{
+		$revenue = new Revenue;
+		
 		$this->status = self::STATUS_PAID;
 		return $this->save(false);
 	}

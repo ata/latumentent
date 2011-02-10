@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=> Yii::t('app','Manage ProblemType'), 'url'=>array('index')),
+	array('label'=> Yii::t('app','Manage Problem Type'), 'url'=>array('index')),
 );
 ?>
 

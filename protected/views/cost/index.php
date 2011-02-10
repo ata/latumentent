@@ -40,7 +40,7 @@ $this->menu=array(
 			)); ?>
 			<div class="row select span-12" id="select-period">
 				<div class="label floatLeft">
-					<?php echo $form->label($cost,'period_id',$periodList);?>
+					<?php echo $form->label($cost,'period_id');?>
 				</div>
 				<div class="floatLeft">
 					<?php echo $form->dropDownList($cost, 'period_id', 
@@ -61,8 +61,7 @@ $this->menu=array(
 				'class' => 'NumberColumn',
 			),
 			array(
-				'name'=>'period_id',
-				'value'=>'$data->period->name',
+				'name'=>'name',
 			),
 			array(
 				'name'=>'serviceName',

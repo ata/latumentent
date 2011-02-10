@@ -171,7 +171,9 @@ class Period extends ActiveRecord
 			}
 		}
 	}
-	
+	/**
+	 * Kompensasi, seharusnya tergantung uptime nya
+	 */
 	public function generateCustomerCosts()
 	{
 		foreach($this->invoices as $invoice) {
@@ -210,7 +212,8 @@ class Period extends ActiveRecord
 	
 	public function close()
 	{
-		$this->generateCustomerRevenues();
+		//$this->generateCustomerRevenues();
+		
 		$this->generateCustomerCosts();
 		$this->generateStatistics();
 	}

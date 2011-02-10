@@ -17,20 +17,14 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($revenue,'period_id'); ?>
-		<?php echo $form->textField($revenue,'period_id'); ?>
+		<?php echo $form->dropDownList($revenue,'period_id',$periodList); ?>
 		<?php echo $form->error($revenue,'period_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($revenue,'service_id'); ?>
-		<?php echo $form->textField($revenue,'service_id'); ?>
+		<?php echo $form->dropDownList($revenue,'service_id',$serviceList); ?>
 		<?php echo $form->error($revenue,'service_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($revenue,'user_id'); ?>
-		<?php echo $form->textField($revenue,'user_id'); ?>
-		<?php echo $form->error($revenue,'user_id'); ?>
 	</div>
 
 	<div class="row buttons">

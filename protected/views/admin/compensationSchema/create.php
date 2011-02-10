@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=> Yii::t('app','Manage CompensationSchema'), 'url'=>array('index')),
+	array('label'=> Yii::t('app','Manage Compensation Schema'), 'url'=>array('index')),
 );
 ?>
 
