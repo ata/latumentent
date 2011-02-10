@@ -150,7 +150,7 @@ class Cost extends ActiveRecord
 	
 	public function findAllCustomerCostByPeriodId($period_id) 
 	{
-		return $this->findAll('customer_id != NULL AND period_id = :period_id',array(
+		return $this->findAll('customer_id IS NOT NULL AND period_id = :period_id',array(
 			'period_id' => $period_id,
 		));
 	}

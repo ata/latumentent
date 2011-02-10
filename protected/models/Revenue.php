@@ -58,7 +58,9 @@ class Revenue extends ActiveRecord
 		return array(
 			'service'=>array(self::BELONGS_TO,'Service','service_id'),
 			'period'=>array(self::BELONGS_TO,'Period','period_id'),
+			'customer' => array(self::BELONGS_TO,'Customer','customer_id'),
 			'user'=>array(self::BELONGS_TO,'User','user_id'),
+			
 		);
 	}
 
@@ -98,6 +100,14 @@ class Revenue extends ActiveRecord
 		));
 	}
 	
+	protected function beforeSave()
+	{
+		if($this->customer !== null) {
+			$this->user_id = $this->customer->user->id;
+		}
+		return parent::beforeSave();
+	}
+	
 	
 	public function findByPeriod($period_id=false)
 	{
@@ -129,13 +139,21 @@ class Revenue extends ActiveRecord
 	
 	public function findAllCustomerRevenueByPeriodId($period_id) 
 	{
-		return $this->findAll('customer_id != NULL AND period_id = :period_id',array(
+		return $this->findAll('customer_id IS NOT NULL AND period_id = :period_id',array(
 			'period_id' => $period_id,
 		));
 	}
 	
+	public $total_amount;
 	public function totalCustomerRevenueByPeriodId($period_id) 
 	{
 		return array_sum(CHtml::listData($this->findAllCustomerRevenueByPeriodId($period_id),'id','amount'));
+		/*
+		$criteria = new CDbCriteria;
+		$criteria->select = 'SUM(amount) AS total_amount';
+		$criteria->condition = 'period_id = :period_id AND customer_id != NULL';
+		$criteria->params = array('period_id' => $period_id);
+		return $this->find($criteria)->total_amount;
+		*/
 	}
 }

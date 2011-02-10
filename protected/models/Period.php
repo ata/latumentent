@@ -62,7 +62,7 @@ class Period extends ActiveRecord
 			'tickets' => array(self::HAS_MANY, 'Ticket', 'period_id'),
 			'statisticCostClient' => array(self::HAS_ONE,'StatisticCostClient','period_id'),
 			'statisticArpu' => array(self::HAS_ONE,'StatisticArpu','period_id'),
-			'statisticCostClient' => array(self::HAS_ONE,'StatisticCostClient','period_id'),
+			'statisticClient' => array(self::HAS_ONE,'StatisticClient','period_id'),
 		);
 	}
 
@@ -130,27 +130,27 @@ class Period extends ActiveRecord
 	public function generateStatistics()
 	{
 		$totalPeriodCustomerRevenue = Revenue::model()->totalCustomerRevenueByPeriodId($this->id);
-		$totalPeriodCustomerCost = Cost::model()->totalCustomerCostByPeriodId($period_id);
+		$totalPeriodCustomerCost = Cost::model()->totalCustomerCostByPeriodId($this->id);
 		
 		if ($this->statisticArpu == null) {
 			$this->statisticArpu = new StatisticArpu;
 			$this->statisticArpu->period_id = $this->id;
-			$this->statisticArpu->value = $totalPeriodCustomerRevenue / $this->countCustomer;
+			$this->statisticArpu->value = $totalPeriodCustomerRevenue / $this->countCustomer();
 			$this->statisticArpu->save();
 		}
 		
 		
-		if ($this->statisticArpu == null) {
-			$this->statisticArpu = new StatisticArpu;
-			$this->statisticArpu->period_id = $this->id;
-			$this->statisticArpu->value = $totalPeriodCustomerCost / $this->countCustomer;
-			$this->statisticArpu->save();
+		if ($this->statisticCostClient == null) {
+			$this->statisticCostClient = new StatisticCostClient;
+			$this->statisticCostClient->period_id = $this->id;
+			$this->statisticCostClient->value = $totalPeriodCustomerCost / $this->countCustomer();
+			$this->statisticCostClient->save();
 		}
 		
 		if ($this->statisticClient == null) {
 			$this->statisticClient = new StatisticClient;
 			$this->statisticClient->period_id = $this->id;
-			$this->statisticClient->value = $this->countCustomer;
+			$this->statisticClient->value = $this->countCustomer();
 			$this->statisticClient->save();
 		}
 	}
@@ -164,7 +164,7 @@ class Period extends ActiveRecord
 				$revenue->user_id = $item->customer_id;
 				$revenue->customer_id = $item->customer_id;
 				$revenue->period_id  = $item->period_id;
-				$revenue->service_id = $service->id;
+				$revenue->service_id = $item->service_id;
 				$revenue->status = $invoice->status;
 				$revenue->save();
 			}
@@ -180,7 +180,7 @@ class Period extends ActiveRecord
 				$cost->user_id = $item->customer_id;
 				$cost->customer_id = $item->customer_id;
 				$cost->period_id  = $item->period_id;
-				$cost->service_id = $service->id;
+				$cost->service_id = $item->service_id;
 				$cost->status = $invoice->status;
 				$cost->save();
 			}
@@ -191,6 +191,20 @@ class Period extends ActiveRecord
 	public function countCustomer()
 	{
 		return count($this->invoices);
+	}
+	
+	public function open($name=null)
+	{
+		$this->last()->find()->close();
+		$newPeriod = $this->addPeriod($name);
+		$newPeriod->generateInvoices();
+	}
+	
+	public function close()
+	{
+		$this->generateCustomerRevenues();
+		$this->generateCustomerCosts();
+		$this->generateStatistics();
 	}
 	
 	
