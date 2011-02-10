@@ -26,7 +26,7 @@ class DashboardController extends Controller
 				'roles'=>array('admin','management','customer_services'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('customer'),
+				'actions'=>array('index','customer'),
 				'roles'=>array('customer'),
 			),
 			array('deny',  // deny all users
