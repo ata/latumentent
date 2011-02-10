@@ -175,14 +175,16 @@ class Period extends ActiveRecord
 	{
 		foreach($this->invoices as $invoice) {
 			foreach($invoice->invoiceItems as $item) {
-				$cost = new Cost;
-				$cost->amount = $item->subtotal_compensation;
-				$cost->user_id = $item->customer_id;
-				$cost->customer_id = $item->customer_id;
-				$cost->period_id  = $item->period_id;
-				$cost->service_id = $item->service_id;
-				$cost->status = $invoice->status;
-				$cost->save();
+				if ($item->amount > 0) {
+					$cost = new Cost;
+					$cost->amount = $item->subtotal_compensation;
+					$cost->user_id = $item->customer_id;
+					$cost->customer_id = $item->customer_id;
+					$cost->period_id  = $item->period_id;
+					$cost->service_id = $item->service_id;
+					$cost->status = $invoice->status;
+					$cost->save();
+				}
 			}
 		}
 	}

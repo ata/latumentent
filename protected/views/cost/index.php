@@ -28,15 +28,15 @@ $this->menu=array(
 			array(
 				'class' => 'NumberColumn',
 			),
-			'amount',
 			array(
 				'name'=>'period_id',
 				'value'=>'$data->period->name',
 			),
 			array(
-				'name'=>'service_id',
-				'value'=>'$data->service->name'
+				'name'=>'serviceName',
+				'header'=> Yii::t('app','Service'),
 			),
+			'amount',
 			array(
 				'class'=>'CButtonColumn',
 			),
