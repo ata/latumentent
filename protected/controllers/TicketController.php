@@ -50,6 +50,8 @@ class TicketController extends Controller
 		$ticket->unsetAttributes();
 		if (isset($_GET['Ticket'])) {
 			$ticket->attributes = $_GET['Ticket'];
+		} else {
+			$ticket->period_id = Period::model()->last()->find()->id;
 		}
 		if (Yii::app()->user->role === 'customer') {
 			$ticket->author_id = Yii::app()->user->id;

@@ -22,7 +22,7 @@
 					<?php echo $form->label($ticket,'period');?>
 				</div>
 				<div class="floatLeft">
-					<?php echo $form->dropDownList($ticket, 'period', $periodList); ?>
+					<?php echo $form->dropDownList($ticket, 'period', $periodList,array('empty'=>Yii::t('app','All'))); ?>
 				</div>
 				<div class="clear"></div>
 			</div>
