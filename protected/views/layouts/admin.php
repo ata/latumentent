@@ -24,7 +24,7 @@
 							//array('label'=>Yii::t('app','Invoice Item'), 'url'=>array('admin/invoiceItem')),
 							array('label'=>Yii::t('app','Problem Type'), 'url'=>array('admin/problemType')),
 							//array('label'=>Yii::t('app','Period'), 'url'=>array('admin/period')),
-							array('label'=>Yii::t('app','Revenue'), 'url'=>array('admin/revenue')),
+							//array('label'=>Yii::t('app','Revenue'), 'url'=>array('admin/revenue')),
 							array('label'=>Yii::t('app','Periodic Cost'), 'url'=>array('admin/periodicCost')),
 							array('label'=>Yii::t('app','Service'), 'url'=>array('admin/service')),
 							//array('label'=>Yii::t('app','Setting'), 'url'=>array('admin/setting')),
