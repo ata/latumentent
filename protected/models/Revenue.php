@@ -162,5 +162,10 @@ class Revenue extends ActiveRecord
 		return $this->find($criteria)->total_amount;
 		*/
 	}
+	
+	public function getAmountRevenue()
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->amount,'IDR');
+	}
 
 }
