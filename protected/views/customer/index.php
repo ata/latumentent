@@ -57,7 +57,7 @@
 			array(
 				'name' => 'apartment_id',
 				'header' => 'Apartment Number',
-				//'value' => '$data->apartment->number',
+				'value' => '$data->apartment->number',
 			),
 			array(
 				'name' => 'user',

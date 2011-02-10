@@ -24,9 +24,10 @@ $this->menu=array(
 	<?php $this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'cost-grid',
 		'dataProvider'=>$cost->search(),
-		'filter'=>$cost,
 		'columns'=>array(
-			'id',
+			array(
+				'class' => 'NumberColumn',
+			),
 			'amount',
 			array(
 				'name'=>'period_id',

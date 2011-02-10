@@ -159,6 +159,14 @@ class Cost extends ActiveRecord
 	{
 		return array_sum(CHtml::listData($this->findAllCustomerCostByPeriodId($period_id),'id','amount'));
 	}
+	
+	public function getServiceName()
+	{
+		if ($this->service != null) {
+			return $this->service->name;
+		}
+		return '-';
+	}
 
 }
 
