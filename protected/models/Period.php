@@ -60,9 +60,9 @@ class Period extends ActiveRecord
 			'invoices' => array(self::HAS_MANY, 'Invoice', 'period_id'),
 			'invoiceItems' => array(self::HAS_MANY, 'InvoiceItem', 'period_id'),
 			'tickets' => array(self::HAS_MANY, 'Ticket', 'period_id'),
-			'staticCostClient' => array(self::HAS_ONE,'StaticCostClient','period_id'),
-			'staticArpu' => array(self::HAS_ONE,'StaticArpu','period_id'),
-			'staticCostClient' => array(self::HAS_ONE,'StaticCostClient','period_id'),
+			'statisticCostClient' => array(self::HAS_ONE,'StatisticCostClient','period_id'),
+			'statisticArpu' => array(self::HAS_ONE,'StatisticArpu','period_id'),
+			'statisticCostClient' => array(self::HAS_ONE,'StatisticCostClient','period_id'),
 		);
 	}
 
@@ -127,25 +127,75 @@ class Period extends ActiveRecord
 		
 	}
 	
-	public function generateStatic()
+	public function generateStatistics()
 	{
-		if ($this->staticArpu == null) {
-			$this->staticArpu = new StaticArpu;
-			$this->staticArpu->period_id = $this->id;
+		$totalPeriodCustomerRevenue = Revenue::model()->totalCustomerRevenueByPeriodId($this->id);
+		$totalPeriodCustomerCost = Cost::model()->totalCustomerCostByPeriodId($period_id);
+		
+		if ($this->statisticArpu == null) {
+			$this->statisticArpu = new StatisticArpu;
+			$this->statisticArpu->period_id = $this->id;
+			$this->statisticArpu->value = $totalPeriodCustomerRevenue / $this->countCustomer;
+			$this->statisticArpu->save();
+		}
+		
+		
+		if ($this->statisticArpu == null) {
+			$this->statisticArpu = new StatisticArpu;
+			$this->statisticArpu->period_id = $this->id;
+			$this->statisticArpu->value = $totalPeriodCustomerCost / $this->countCustomer;
+			$this->statisticArpu->save();
+		}
+		
+		if ($this->statisticClient == null) {
+			$this->statisticClient = new StatisticClient;
+			$this->statisticClient->period_id = $this->id;
+			$this->statisticClient->value = $this->countCustomer;
+			$this->statisticClient->save();
 		}
 	}
 	
-	public function generateCustomerRevenue()
+	public function generateCustomerRevenues()
 	{
 		foreach($this->invoices as $invoice) {
-			
+			foreach($invoice->invoiceItems as $item) {
+				$revenue = new Revenue;
+				$revenue->amount = $item->amount;
+				$revenue->user_id = $item->customer_id;
+				$revenue->customer_id = $item->customer_id;
+				$revenue->period_id  = $item->period_id;
+				$revenue->service_id = $service->id;
+				$revenue->status = $invoice->status;
+				$revenue->save();
+			}
 		}
 	}
 	
-	public function generateCustomerCost()
+	public function generateCustomerCosts()
 	{
-		foreach(Customer::model()->findAllActive() as $customer) {
+		foreach($this->invoices as $invoice) {
+			foreach($invoices->invoiceItems as $item) {
+				$cost = new Cost;
+				$cost->amount = $item->subtotal_compensation;
+				$cost->user_id = $item->customer_id;
+				$cost->customer_id = $item->customer_id;
+				$cost->period_id  = $item->period_id;
+				$cost->service_id = $service->id;
+				$cost->status = $invoice->status;
+				$cost->save();
+			}
 		}
 	}
 	
+	
+	public function countCustomer()
+	{
+		return count($this->invoices);
+	}
+	
+	
+	public function getPaidInvoices()
+	{
+		return Invoice::model()->findAllPaidByPeriodId($this->id);
+	}
 }

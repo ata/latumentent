@@ -144,6 +144,19 @@ class Cost extends ActiveRecord
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalCost,'IDR');
 	}
+	
+	
+	public function findAllCustomerCostByPeriodId($period_id) 
+	{
+		return $this->findAll('customer_id != NULL AND period_id = :period_id',array(
+			'period_id' => $period_id,
+		));
+	}
+	
+	public function totalCustomerCostByPeriodId($period_id) 
+	{
+		return array_sum(CHtml::listData($this->findAllCustomerCostByPeriodId($period_id),'id','amount'));
+	}
 
 }
 

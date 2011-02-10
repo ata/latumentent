@@ -40,7 +40,7 @@ class Revenue extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('amount, period_id, service_id', 'required'),
-			array('period_id, service_id, status', 'numerical', 'integerOnly'=>true),
+			array('period_id, service_id, status, user_id, customer_id', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -136,5 +136,17 @@ class Revenue extends ActiveRecord
 	public function getTotalRevenueLocale()
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenue,'IDR');
+	}
+	
+	public function findAllCustomerRevenueByPeriodId($period_id) 
+	{
+		return $this->findAll('customer_id != NULL AND period_id = :period_id',array(
+			'period_id' => $period_id,
+		));
+	}
+	
+	public function totalCustomerRevenueByPeriodId($period_id) 
+	{
+		return array_sum(CHtml::listData($this->findAllCustomerRevenueByPeriodId($period_id),'id','amount'));
 	}
 }
