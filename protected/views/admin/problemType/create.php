@@ -9,6 +9,6 @@ $this->menu=array(
 );
 ?>
 
-<h2><?php echo Yii::t('app','Create ProblemType'); ?></h2>
+<h2><?php echo Yii::t('app','Create Problem Type'); ?></h2>
 
 <?php echo $this->renderPartial('_form', array('problemType'=>$problemType)); ?>
