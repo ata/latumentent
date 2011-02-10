@@ -164,7 +164,7 @@ div.form #login-form .row .errorMessage{
 	margin:3px 0 3px 150px;
 }
 
-div.form form#customer-form .row input,
+/*div.form form#customer-form .row input,
 .search-form .form .row input{
 	height:20px;
 	-moz-border-radius:10px;
@@ -172,7 +172,7 @@ div.form form#customer-form .row input,
 	border-radius:10px;
 	border:1px solid #CDCDCD;
 	padding:0 7px;
-}
+}*/
 
 div.form form#customer-form .checkbox label{
 	margin-top:-35px;
@@ -450,6 +450,8 @@ div.form div.row{
 div.form div.row label{
 	float: left;
 	width: 150px;
+	text-align:right;
+	margin:5px 10px 0 0;
 }
 
 div.form div.checkbox label{
