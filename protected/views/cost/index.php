@@ -11,8 +11,28 @@ $this->menu=array(
 
 ?>
 
+
 <div class="title">
 	<h2><?php echo Yii::t('app','List Cost'); ?></h2>
+</div>
+
+<div class="filter span-24 last form" id="ticket">
+	<fieldset>
+		<legend><?php echo Yii::t('app','filter'); ?></legend>
+			<?php $form=$this->beginWidget('CActiveForm', array(
+				'id'=>'cost-filter'
+			)); ?>
+			<div class="row select span-12" id="select-period">
+				<div class="label floatLeft">
+					<?php echo $form->label($cost,'period_id');?>
+				</div>
+				<div class="floatLeft">
+					<?php echo $form->dropDownList($cost, 'period_id', $periodList); ?>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<?php $this->endWidget(); ?>
+	</fieldset>
 </div>
 
 <div class="span-8 new-button">

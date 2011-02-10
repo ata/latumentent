@@ -116,12 +116,19 @@ class CostController extends Controller
 	public function actionIndex()
 	{
 		$cost=new Cost('search');
-		$cost->unsetAttributes();  // clear any default values
-		if(isset($_GET['Cost']))
+		$cost->unsetAttributes();
+		  // clear any default values
+		if(isset($_GET['Cost'])){
 			$cost->attributes=$_GET['Cost'];
-
+		} else {
+			$cost->period_id = Period::model()->last()->find()->id;
+		}
+		
+		$periodList = CHtml::listData(Period::model()->findAll(),'id','name');
+		
 		$this->render('index',array(
 			'cost'=>$cost,
+			'periodList'=>$periodList,
 		));
 	}
 
