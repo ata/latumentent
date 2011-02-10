@@ -112,7 +112,9 @@ class Cost extends ActiveRecord
 	
 	protected function beforeSave()
 	{
-		$this->user_id = $this->customer->user->id;
+		if($this->customer !== null) {
+			$this->user_id = $this->customer->user->id;
+		}
 		return parent::beforeSave();
 	}
 	

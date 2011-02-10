@@ -174,7 +174,7 @@ class Period extends ActiveRecord
 	public function generateCustomerCosts()
 	{
 		foreach($this->invoices as $invoice) {
-			foreach($invoices->invoiceItems as $item) {
+			foreach($invoice->invoiceItems as $item) {
 				$cost = new Cost;
 				$cost->amount = $item->subtotal_compensation;
 				$cost->user_id = $item->customer_id;

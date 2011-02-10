@@ -50,6 +50,7 @@
 			<?php $this->widget('Menu', array(
 				'items'=>array(
 					array('label'=>Yii::t('app','Dashboard'), 'url'=>array('dashboard/index'), 'visible'=> !Yii::app()->user->isGuest),
+					array('label'=>Yii::t('app','Balance'), 'url'=>array('balance/index'), 'visible'=> !Yii::app()->user->isGuest),
 					array('label'=>Yii::t('app','Customer'), 'url'=>array('customer/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
 					array('label'=>Yii::t('app','Apartment'), 'url'=>array('apartment/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
 					array('label'=>Yii::app()->user->role !== 'customer'?Yii::t('app','Ticket'):Yii::t('app','My Ticket'), 'url'=>array('ticket/index'), 'visible'=> !Yii::app()->user->isGuest),

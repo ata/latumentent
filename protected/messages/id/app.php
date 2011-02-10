@@ -78,4 +78,5 @@ return array(
 	'Manage Tickets' => 'Manage Ticket',
 	'Manage Ticket Replys' => 'Manage Respon Ticket',
 	'Manage Users' => 'Manage Pengguna',
+	'Balance' => 'Neraca',
 );
