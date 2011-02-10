@@ -147,8 +147,13 @@ div.form #login-form .row input#LoginForm_password{
 	background-color:#F1FED7;
 }
 
-div.form #login-form .rememberMe{
+div.form #login-form .rememberMe label{
+	margin-left:170px;
+}
+
+div.form #login-form .rememberMe input{
 	margin-left:150px;
+	margin-top:-14px;
 }
 
 div.form #login-form .row label.error{
