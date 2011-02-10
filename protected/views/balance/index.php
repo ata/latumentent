@@ -4,15 +4,20 @@
 	});
 ')?>
 
-<div class="filter span-16 last form">
+<div class="filter span-24 last form" id="ticket">
 	<fieldset>
 		<legend><?php echo Yii::t('app','filter'); ?></legend>
 		<?php $form=$this->beginWidget('CActiveForm', array(
 			'id'=>'period-filter'
 		)); ?>
-			<div class="row">
-				<?php echo Yii::t('app','Period');?>
-				<?php echo $form->dropDownList($period,'name',$periodList)?>
+			<div class="row select span-12" id="select-period">
+				<div class="label floatLeft">
+					<?php echo $form->label($period,'period');?>
+				</div>
+				<div class="floatLeft">
+					<?php echo $form->dropDownList($period, 'name', $periodList); ?>
+				</div>
+				<div class="clear"></div>
 			</div>
 		<?php $this->endWidget()?>
 	</fieldset>

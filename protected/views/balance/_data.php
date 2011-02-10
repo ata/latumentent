@@ -4,21 +4,30 @@
 	<table class="balance-data">
 		<thead>
 			<tr>
-				<th><?php echo Yii::t('app','Cost')?></th>
+				<th class="title"><?php echo Yii::t('app','Cost')?></th>
+				<th class="value ar"><?php echo Yii::t('app','Apartment')?></th>
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach($cost as $items):?>
+			<?php if(count($cost) > 0):?>
+				<?php foreach($cost as $items):?>
+					<tr>
+						<td class="title"><?php echo $items->service->name?></td>
+						<td class="value ar"><?php echo Yii::app()->locale->numberFormatter->formatCurrency($items->amount,'IDR')?></td>
+					</tr>
+				<?php endforeach?>
+			<?php else:?>
 				<tr>
-					<td><?php echo $items->service->name?></td>
-					<td><?php echo Yii::app()->locale->numberFormatter->formatCurrency($items->amount,'IDR')?></td>
+					<td colspan="2">
+						<?php echo Yii::t('app','No one cost on period')?>
+					</td>
 				</tr>
-			<?php endforeach?>
+			<?php endif?>
 		</tbody>
 		<tfoot>
 			<tr>
-				<td><?php echo Yii::t('app','Total Cost')?></td>
-				<td><?php //echo $items->totalCostLocale?></td>
+				<th class = "title"><?php echo Yii::t('app','Total Cost')?></th>
+				<th class = "value ar"><?php //echo $items->totalCostLocale?></td>
 			</tr>
 		</tfoot>
 	</table>
@@ -29,21 +38,31 @@
 	<table class="balance-data">
 		<thead>
 			<tr>
-				<th><?php echo Yii::t('app','Revenue');?></th>
+				<th class="title"><?php echo Yii::t('app','Revenue');?></th>
+				<th class="value ar"><?php echo Yii::t('app','Apartment')?></th>
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach($revenue as $data):?>
-			<tr>
-				<td><?php echo $data->service->name;?></td>
-				<td><?php echo Yii::app()->locale->numberFormatter->formatCurrency($data->amount,'IDR');?></td>
-			</tr>
-			<?php endforeach?>
+			<?php if(count($revenue) > 0):?>
+				<?php foreach($revenue as $data):?>
+				<tr>
+					<td class="title"><?php echo $data->service->name;?></td>
+					<td class="value ar"><?php echo Yii::app()->locale->numberFormatter->formatCurrency($data->amount,'IDR');?></td>
+				</tr>
+				<?php //$sum += $data->amount+$data->amount?>
+				<?php endforeach?>
+			<?php else:?>
+				<tr>
+					<td colspan="2">
+						<?php echo Yii::t('app','No one revenue on period')?>
+					</td>
+				</tr>
+			<?php endif?>
 		</tbody>
 		<tfoot>
 			<tr>
-				<td><?php echo Yii::t('app','Total Revenue')?></td>
-				<td><?php //echo $data->totalRevenueLocale?></td>
+				<th class="title"><?php echo Yii::t('app','Total Revenue')?></th>
+				<th class="value ar"><?php //echo $sum?></th>
 			</tr>
 		</tfoot>
 	</table>

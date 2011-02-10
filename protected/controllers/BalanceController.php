@@ -14,7 +14,7 @@ class BalanceController extends Controller
 		
 		$period = new Period;
 		$period->unsetAttributes();
-		$period->id = Period::model()->last()->find()->id;
+		$period->last()->find()->id;
 		$periodList = CHtml::listData(Period::model()->findAll(),'id','name');
 		
 		$this->render('index',array(
