@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'statistic_client':
  * @property integer $id
- * @property integer $periode_id
+ * @property integer $period_id
  * @property double $value
  */
 class StatisticClient extends ActiveRecord
@@ -35,12 +35,12 @@ class StatisticClient extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('periode_id, value', 'required'),
-			array('periode_id', 'numerical', 'integerOnly'=>true),
+			array('period_id, value', 'required'),
+			array('period_id', 'numerical', 'integerOnly'=>true),
 			array('value', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, periode_id, value', 'safe', 'on'=>'search'),
+			array('id, period_id, value', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,7 +62,7 @@ class StatisticClient extends ActiveRecord
 	{
 		return array(
 			'id' => Yii::t('app','ID'),
-			'periode_id' => Yii::t('app','Periode'),
+			'period_id' => Yii::t('app','Period'),
 			'value' => Yii::t('app','Value'),
 		);
 	}
@@ -79,7 +79,7 @@ class StatisticClient extends ActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('periode_id',$this->periode_id);
+		$criteria->compare('period_id',$this->period_id);
 		$criteria->compare('value',$this->value);
 
 		return new CActiveDataProvider(get_class($this), array(

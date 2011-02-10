@@ -112,7 +112,9 @@ class Cost extends ActiveRecord
 	
 	protected function beforeSave()
 	{
-		$this->user_id = $this->customer->user->id;
+		if($this->customer !== null) {
+			$this->user_id = $this->customer->user->id;
+		}
 		return parent::beforeSave();
 	}
 	
@@ -143,6 +145,19 @@ class Cost extends ActiveRecord
 	public function getTotalCostLocale()
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalCost,'IDR');
+	}
+	
+	
+	public function findAllCustomerCostByPeriodId($period_id) 
+	{
+		return $this->findAll('customer_id IS NOT NULL AND period_id = :period_id',array(
+			'period_id' => $period_id,
+		));
+	}
+	
+	public function totalCustomerCostByPeriodId($period_id) 
+	{
+		return array_sum(CHtml::listData($this->findAllCustomerCostByPeriodId($period_id),'id','amount'));
 	}
 
 }

@@ -198,4 +198,12 @@ class Invoice extends ActiveRecord
 		$this->status = self::STATUS_PAID;
 		return $this->save(false);
 	}
+	
+	public function findAllPaidByPeriodId($period_id)
+	{
+		return $this->findAllByAttributes(array(
+			'status' => self::STATUS_PAID,
+			'period_id' => $period_id,
+		));
+	}
 }

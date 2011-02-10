@@ -1,18 +1,19 @@
 <?php
 
 /**
- * This is the model class for table "statistic_arpu".
+ * This is the model class for table "periodic_cost".
  *
- * The followings are the available columns in table 'statistic_arpu':
+ * The followings are the available columns in table 'periodic_cost':
  * @property integer $id
- * @property integer $period_id
- * @property double $value
+ * @property string $name
+ * @property double $amount
+ * @property string $note
  */
-class StatisticArpu extends ActiveRecord
+class PeriodicCost extends ActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return StatisticArpu the static model class
+	 * @return PeriodicCost the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -24,7 +25,7 @@ class StatisticArpu extends ActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'statistic_arpu';
+		return 'periodic_cost';
 	}
 
 	/**
@@ -35,12 +36,13 @@ class StatisticArpu extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('period_id, value', 'required'),
-			array('period_id', 'numerical', 'integerOnly'=>true),
-			array('value', 'numerical'),
+			array('name, amount', 'required'),
+			array('amount', 'numerical'),
+			array('name', 'length', 'max'=>255),
+			array('note', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, period_id, value', 'safe', 'on'=>'search'),
+			array('id, name, amount, note', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,8 +64,9 @@ class StatisticArpu extends ActiveRecord
 	{
 		return array(
 			'id' => Yii::t('app','ID'),
-			'period_id' => Yii::t('app','Period'),
-			'value' => Yii::t('app','Value'),
+			'name' => Yii::t('app','Name'),
+			'amount' => Yii::t('app','Amount'),
+			'note' => Yii::t('app','Note'),
 		);
 	}
 
@@ -79,8 +82,9 @@ class StatisticArpu extends ActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('period_id',$this->period_id);
-		$criteria->compare('value',$this->value);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('amount',$this->amount);
+		$criteria->compare('note',$this->note,true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

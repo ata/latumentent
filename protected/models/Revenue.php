@@ -40,7 +40,7 @@ class Revenue extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('amount, period_id, service_id', 'required'),
-			array('period_id, service_id, status', 'numerical', 'integerOnly'=>true),
+			array('period_id, service_id, status, user_id, customer_id', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -58,7 +58,9 @@ class Revenue extends ActiveRecord
 		return array(
 			'service'=>array(self::BELONGS_TO,'Service','service_id'),
 			'period'=>array(self::BELONGS_TO,'Period','period_id'),
+			'customer' => array(self::BELONGS_TO,'Customer','customer_id'),
 			'user'=>array(self::BELONGS_TO,'User','user_id'),
+			
 		);
 	}
 
@@ -98,6 +100,14 @@ class Revenue extends ActiveRecord
 		));
 	}
 	
+	protected function beforeSave()
+	{
+		if($this->customer !== null) {
+			$this->user_id = $this->customer->user->id;
+		}
+		return parent::beforeSave();
+	}
+	
 	
 	public function findByPeriod($period_id=false)
 	{
@@ -127,6 +137,7 @@ class Revenue extends ActiveRecord
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenue,'IDR');
 	}
 	
+<<<<<<< HEAD
 	public function getTotalBalance($cost,$revenue)
 	{
 		$total = $revenue -  $cost;
@@ -134,4 +145,25 @@ class Revenue extends ActiveRecord
 		return Yii::app()->locale->numberFormatter->formatCurrency($total,'IDR');
 	}
 	
+=======
+	public function findAllCustomerRevenueByPeriodId($period_id) 
+	{
+		return $this->findAll('customer_id IS NOT NULL AND period_id = :period_id',array(
+			'period_id' => $period_id,
+		));
+	}
+	
+	public $total_amount;
+	public function totalCustomerRevenueByPeriodId($period_id) 
+	{
+		return array_sum(CHtml::listData($this->findAllCustomerRevenueByPeriodId($period_id),'id','amount'));
+		/*
+		$criteria = new CDbCriteria;
+		$criteria->select = 'SUM(amount) AS total_amount';
+		$criteria->condition = 'period_id = :period_id AND customer_id != NULL';
+		$criteria->params = array('period_id' => $period_id);
+		return $this->find($criteria)->total_amount;
+		*/
+	}
+
 }

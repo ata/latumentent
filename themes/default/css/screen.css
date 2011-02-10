@@ -60,7 +60,7 @@ dl dt {font-weight:bold;}
 dd {margin-left:1.5em;}
 table {margin-bottom:1.4em;width:100%;}
 th {font-weight:bold;}
-thead th {
+thead th, th.title {
 	background: #93978C;
 	background:-moz-linear-gradient(top, #B8BEB2, #93978C);
 	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#B8BEB2), to(#93978C));
@@ -249,7 +249,7 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 	text-align:right;
 	height:35px;
 }
-th.value{
+tbody tr th.value{
 	background-color: #93978C;
 	background:-moz-linear-gradient(top, #B8BEB2, #93978C);
 	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#B8BEB2), to(#93978C));

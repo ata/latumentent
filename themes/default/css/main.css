@@ -1,18 +1,39 @@
 /*
 	GLOBAL
  */
+ 
+ html{
+	height:100%;
+ }
 
-body {
-	background: none repeat scroll 0 0 #000000;
+ body {
+	background: none repeat scroll 0 0 #FFFFFF;
 	color: #555555;
 	font: 10pt Arial,Helvetica,sans-serif;
 	margin: 0;
 	padding: 0;
+	height:100%
+}
+
+.wrapper{
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -30px;
 }
 
 p, h1, h2, h3, h4, h5 {
 	margin: 0;
 	padding: 0;
+}
+
+h1{
+	margin-bottom:30px;
+}
+
+p{
+	line-height:20px;
+	margin:10px 0;
 }
 
 #bodysite {
@@ -58,15 +79,25 @@ p, h1, h2, h3, h4, h5 {
 }
 
 #login-status ul{
-	margin-top:69px;
+	margin-top:0px;
 	padding:5px 10px;
-	background:#000000;
+	background:#FFFFFF;
 	opacity:0.3;
-	-moz-border-radius:5px 5px 0 0;
-	-webkit-border-radius:5px 5px 0 0;
-	border-radius:5px 5px 0 0;
+	-moz-border-radius:0 0 5px 5px;
+	-webkit-border-radius:0 0 5px 5px;
+	border-radius:0 0 5px 5px;
 	list-style:none;
-	z-index:-1;
+	-moz-box-shadow:1px 1px 1px #000000;
+	-webkit-box-shadow:1px 1px 1px #000000;
+	box-shadow:1px 1px 1px #000000;
+}
+
+#login-status ul li a{
+	color:#808080;
+}
+
+#login-status ul li a:hover{
+	color:#000000;
 }
 
 div#content h2#login-title{
@@ -105,7 +136,8 @@ div.form #login-form .row label{
 	text-shadow:1px 1px 2px #000000;
 }
 
-div.form #login-form .row input#LoginForm_username, div.form #login-form .row input#LoginForm_password{
+div.form #login-form .row input#LoginForm_username,
+div.form #login-form .row input#LoginForm_password{
 	height:20px;
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
@@ -115,12 +147,54 @@ div.form #login-form .row input#LoginForm_username, div.form #login-form .row in
 	background-color:#F1FED7;
 }
 
+div.form #login-form .rememberMe label{
+	margin-left:170px;
+}
+
+div.form #login-form .rememberMe input{
+	margin-left:150px;
+	margin-top:-14px;
+}
+
 div.form #login-form .row label.error{
 	margin-top:3px;
 }
 
 div.form #login-form .row .errorMessage{
 	margin:3px 0 3px 150px;
+}
+
+div.form form#customer-form .row input,
+.search-form .form .row input{
+	height:20px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	border:1px solid #CDCDCD;
+	padding:0 7px;
+}
+
+div.form form#customer-form .checkbox label{
+	margin-top:-35px;
+	padding:0;
+}
+
+div.form form#customer-form .row label,
+div.form form#customer-form .row label.title,
+.search-form .form .row label{
+	margin-top:5px;
+	text-align:right;
+	margin-right:10px;
+}
+
+div.form form#customer-form .row div.errorMessage{
+	margin-left:160px;
+}
+
+div.filter form#ticket-filter .row label{
+	margin-top:5px;
+	text-align:right;
+	padding-right:20px;
 }
 
 #top-menu{
@@ -304,14 +378,19 @@ div.form #login-form .row .errorMessage{
 #footersite {
 	background-color: #000000;
 	color: #FFFFFF;
-	padding: 10px 0;
+	padding-top:15px;
 }
+
+#footersite, #footer, .push{
+	height:30px;
+}
+
 #footersite h3 {
 	color: #FFFFFF;
 }
 
 #content h2, #content h3{
-	margin:5px 0 10px 0;
+	margin:50px 0 10px 0;
 	color:#7C9511;
 	font-weight:bold;
 	text-shadow:1px 1px 1px #7B7B7B;
@@ -367,7 +446,7 @@ div.form div.row label{
 div.form div.checkbox label{
 	display:inline;
 	float:none;
-	padding-right:30px;
+	padding-right:150px;
 }
 
 div.form div.checkbox .title{
@@ -467,8 +546,10 @@ div.search-form {
 #customer-filter .row{
 	
 }
-#customer-filter .row label{
-	padding-right: 100px;
+#customer-filter .row label,
+#ticket-filter .row label{
+	width: 200px;
+	margin-top:5px;
 }
 
 #customer-filter .row select input{
@@ -490,7 +571,7 @@ div.search-form {
 	
 }
 
-#ticket-filter .row label{
+{
 	padding-right:100px;
 }
 $ticket-filter .row sel
@@ -499,12 +580,27 @@ $ticket-filter .row sel
 	background: #CCCCCC;
 }
 
-.bills th.value, .summary-bills th.value{
-	background: #CCCCCC;
-	background:#CCCCCC;
+.bills th.value,{
 	background: #93978C;
 	background:-moz-linear-gradient(top, #B8BEB2, #93978C);
 	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#B8BEB2), to(#93978C));
+}
+
+.bills tfoot th.value,
+.summary-bills th.value,
+.summary-bills th.title,
+.summary-bills tfoot th.value{
+	background:#B3B38A;
+}
+
+.summary-bills th.value{
+	color:#FCB400;
+	font-size:24px;
+}
+
+.bills tfoot th.value{
+	color:#B70F02;
+
 }
 
 
@@ -744,4 +840,8 @@ td {
 
 .chart{
 	margin-bottom:50px;
+}
+
+tfoot tr th.title, tfoot tr th.value{
+	background:#82845D;
 }
