@@ -44,7 +44,7 @@ class Revenue extends ActiveRecord
 			array('amount', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, amount, period_id, service_id', 'safe', 'on'=>'search'),
+			array('id, amount, period_id, service_id,user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,6 +58,7 @@ class Revenue extends ActiveRecord
 		return array(
 			'service'=>array(self::BELONGS_TO,'Service','service_id'),
 			'period'=>array(self::BELONGS_TO,'Period','period_id'),
+			'user'=>array(self::BELONGS_TO,'User','user_id'),
 		);
 	}
 
@@ -71,6 +72,7 @@ class Revenue extends ActiveRecord
 			'amount' => Yii::t('app','Amount'),
 			'period_id' => Yii::t('app','Period'),
 			'service_id' => Yii::t('app','Service'),
+			'user_id' => Yii::t('app','User'),
 		);
 	}
 
@@ -89,26 +91,13 @@ class Revenue extends ActiveRecord
 		$criteria->compare('amount',$this->amount);
 		$criteria->compare('period_id',$this->period_id);
 		$criteria->compare('service_id',$this->service_id);
+		$criteria->compare('user_id',$this->user_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
 	}
 	
-	/*public function searchBalance()
-	{
-		$criteria = new CDbCriteria;
-		$criteria->group = 'service_id';
-		
-		$criteria->compare('id',$this->id);
-		$criteria->compare('amount',$this->amount);
-		$criteria->compare('perio_id',$this->period_id);
-		$criteria->compare('servie_id',$this->service_id);
-		
-		return new CActiveDataProvider(get_class($this), array(
-			'criteria'=>$criteria,
-		));
-	}*/
 	
 	public function findByPeriod($period_id=false)
 	{

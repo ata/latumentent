@@ -153,6 +153,15 @@ class Customer extends ActiveRecord
 	{
 		$this->saveCustomerService();
 	}
+	
+	protected function beforeDelete()
+	{
+		foreach($this->services as $services){
+			$services->delete();
+		}
+		
+		return parent::beforeDelete();
+	}
 
 	private function saveCustomerService()
 	{

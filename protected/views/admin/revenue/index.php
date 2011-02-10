@@ -55,7 +55,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		array(
 			'name'=>'user_id',
 			'value'=>'$data->user->fullname',
-			'filter'=>CHtml::listData(Customer::model()->findAll(),'id','user.fullname'),
+			'filter'=>CHtml::listData(User::model()->findAll(),'id','fullname'),
 		),
 		array(
 			'class'=>'CButtonColumn',

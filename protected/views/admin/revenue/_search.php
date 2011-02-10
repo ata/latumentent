@@ -31,7 +31,7 @@
 
 	<div class="row">
 		<?php echo $form->label($revenue,'user_id'); ?>
-		<?php echo $form->dropDownList($revenue,'user_id',CHtml::listData(Customer::model()->findAll(),'id','user.fullname'),array(
+		<?php echo $form->dropDownList($revenue,'user_id',CHtml::listData(User::model()->findAll(),'id','fullname'),array(
 			'empty'=>Yii::t('app','Select Customer')
 		)); ?>
 	</div>
