@@ -122,11 +122,12 @@ class Cost extends ActiveRecord
 	public function findByPeriod($period_id=false)
 	{
 		$criteria = new CDbCriteria;
+		$criteria->select = 'SUM(amount) as amount,service_id,period_id';
 		
 		if($period_id !== 0){
 			$period = $period_id;
 		} else {
-			$period = Period::model()->last()->last()->find()->id;
+			$period = Period::model()->last()->find()->id;
 		}
 		
 		$criteria->group = 'service_id';

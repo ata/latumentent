@@ -113,11 +113,12 @@ class Revenue extends ActiveRecord
 	{
 		
 		$criteria = new CDbCriteria;
+		$criteria->select = 'SUM(amount) as amount,service_id,period_id';
 		
 		if($period_id !== 0){
 			$period = $period_id;
 		} else {
-			$period = Period::model()->last()->last()->find()->id;
+			$period = Period::model()->last()->find()->id;
 		}
 		
 		$criteria->group = 'service_id';
@@ -127,15 +128,16 @@ class Revenue extends ActiveRecord
 		return $this->findAll($criteria);
 	}
 	
-	public function getTotalRevenue()
+	/*public function getTotalRevenue()
 	{
 		return array_sum(CHtml::listData($this->findByPeriod(),'id','amount'));
-	}
+	}*/
 	
 	public function getTotalRevenueLocale()
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenue,'IDR');
 	}
+	
 	
 	public function findAllCustomerRevenueByPeriodId($period_id) 
 	{
@@ -145,6 +147,7 @@ class Revenue extends ActiveRecord
 	}
 	
 	public $total_amount;
+	
 	public function totalCustomerRevenueByPeriodId($period_id) 
 	{
 		return array_sum(CHtml::listData($this->findAllCustomerRevenueByPeriodId($period_id),'id','amount'));
@@ -156,4 +159,5 @@ class Revenue extends ActiveRecord
 		return $this->find($criteria)->total_amount;
 		*/
 	}
+
 }

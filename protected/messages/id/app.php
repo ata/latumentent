@@ -19,7 +19,6 @@ return array(
 	'Administation' => 'Administrasi',
 	'Services' => 'Layanan',
 	'Apartment Number' => 'No. Apartemen',
-	'Password' => 'Kata Kunci',
 	'Confirm Password' => 'Konfirmasi Password',
 	'Compensation' => 'Kompensasi',
 	'Total Bill' => 'Total Tagihan',
@@ -78,5 +77,8 @@ return array(
 	'Manage Tickets' => 'Manage Ticket',
 	'Manage Ticket Replys' => 'Manage Respon Ticket',
 	'Manage Users' => 'Manage Pengguna',
+	'Remember me next time' => 'Buat sistem untuk mengingat',
+	'No one revenue on period' => 'tidak ada data pendapatan di periode ini',
+	'No one cost on period' => 'tidak ada data pengeluaran di period ini',
 	'Balance' => 'Neraca',
 );
