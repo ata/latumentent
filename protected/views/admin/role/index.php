@@ -15,6 +15,7 @@ $this->menu=array(
 	<?php echo CHtml::link(Yii::t('app','Add New Role'), array('create'));?>
 </div>
 
+<div class="clear"></div>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'role-grid',
 	'dataProvider'=>$role->search(),

@@ -47,7 +47,7 @@ $this->menu=array(
 			<?php $this->endWidget(); ?>
 	</fieldset>
 </div>
-
+<div class="clear"></div>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'revenue-grid',
 	'dataProvider'=>$revenue->search(),
