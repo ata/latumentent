@@ -11,4 +11,8 @@ $this->menu=array(
 
 <h2><?php echo Yii::t('app','Create Revenue'); ?></h2>
 
-<?php echo $this->renderPartial('_form', array('revenue'=>$revenue)); ?>
+<?php echo $this->renderPartial('_form', array(
+			'revenue'=>$revenue,
+			'serviceList'=>$serviceList,
+			'periodList'=>$periodList,
+			)); ?>

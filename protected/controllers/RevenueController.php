@@ -58,10 +58,17 @@ class RevenueController extends Controller
 			$revenue->attributes=$_POST['Revenue'];
 			if($revenue->save())
 				$this->redirect(array('view','id'=>$revenue->id));
+		} else {
+			$revenue->period_id = Period::model()->last()->find()->id;
 		}
+		
+		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
+		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 
 		$this->render('create',array(
 			'revenue'=>$revenue,
+			'serviceList'=>$serviceList,
+			'periodList'=>$periodList,
 		));
 	}
 
@@ -83,9 +90,14 @@ class RevenueController extends Controller
 			if($revenue->save())
 				$this->redirect(array('view','id'=>$revenue->id));
 		}
+		
+		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
+		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 
 		$this->render('update',array(
 			'revenue'=>$revenue,
+			'serviceList'=>$serviceList,
+			'periodList'=>$periodList,
 		));
 	}
 
@@ -115,12 +127,19 @@ class RevenueController extends Controller
 	public function actionIndex()
 	{
 		$revenue=new Revenue('search');
-		$revenue->unsetAttributes();  // clear any default values
-		if(isset($_GET['Revenue']))
+		$revenue->unsetAttributes(); 
+		 // clear any default values
+		if(isset($_GET['Revenue'])){
 			$revenue->attributes=$_GET['Revenue'];
+		} else {
+			$revenue->period_id = Period::model()->last()->find()->id;
+		}
+		
+		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 
 		$this->render('index',array(
 			'revenue'=>$revenue,
+			'periodList'=>$periodList
 		));
 	}
 
