@@ -124,7 +124,7 @@ class CostController extends Controller
 			$cost->period_id = Period::model()->last()->find()->id;
 		}
 		
-		$periodList = CHtml::listData(Period::model()->findAll(),'id','name');
+		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 		
 		$this->render('index',array(
 			'cost'=>$cost,
