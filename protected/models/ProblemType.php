@@ -88,4 +88,12 @@ class ProblemType extends ActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function getServiceName()
+	{
+		if ($this->service != null) {
+			return $this->service->name;
+		}
+		return '-';
+	}
 }

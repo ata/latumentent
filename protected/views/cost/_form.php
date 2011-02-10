@@ -39,6 +39,7 @@
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($cost->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::link(Yii::t('app','cancel'),array('index'),array('class' => 'cancel'));?>
 	</div>
 
 <?php $this->endWidget(); ?>
