@@ -56,9 +56,7 @@ $this->menu=array(
 		array(
 				'class' => 'NumberColumn',
 		),
-		array(
-			'name'=>'name',
-		),
+		'name',
 		array(
 			'name'=>'service_id',
 			'value'=>'$data->service->name',
@@ -66,9 +64,6 @@ $this->menu=array(
 		array(
 			'name'=>'amountRevenue',
 			'header'=>Yii::t('app','Amount'),
-		),
-		array(
-			'class'=>'CButtonColumn',
 		),
 	),
 )); ?>

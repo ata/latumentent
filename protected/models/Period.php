@@ -127,6 +127,9 @@ class Period extends ActiveRecord
 		
 	}
 	
+	/**
+	 * @deprecated
+	 */
 	public function generateStatistics()
 	{
 		$totalPeriodCustomerRevenue = Revenue::model()->totalCustomerRevenueByPeriodId($this->id);
@@ -154,7 +157,9 @@ class Period extends ActiveRecord
 			$this->statisticClient->save();
 		}
 	}
-	
+	/**
+	 * @deprecated
+	 */
 	public function generateCustomerRevenues()
 	{
 		foreach($this->invoices as $invoice) {
@@ -172,6 +177,7 @@ class Period extends ActiveRecord
 		}
 	}
 	/**
+	 * @deprecated
 	 * Kompensasi, seharusnya tergantung uptime nya
 	 */
 	public function generateCustomerCosts()
@@ -191,12 +197,52 @@ class Period extends ActiveRecord
 				}
 			}
 		}
-		
+	}
+	
+	
+	public function generatePeriodicCost()
+	{
 		foreach(PeriodicCost::model()->findAll() as $periodicCost) {
-			
+			$cost = new Cost;
+			$cost->name = $periodicCost->name;
+			$cost->amount = $periodicCost->amount;
+			$cost->period_id  = $this->id;
+			$cost->service_id = $periodicCost->service_id;
+			$cost->save();
 		}
 	}
 	
+	public function updateStatistics()
+	{
+		$totalPeriodCustomerRevenue = Revenue::model()->totalCustomerRevenueByPeriodId($this->id);
+		$totalPeriodCustomerCost = Cost::model()->totalCustomerCostByPeriodId($this->id);
+		
+		if ($this->statisticArpu == null) {
+			$this->statisticArpu = new StatisticArpu;
+			$this->statisticArpu->period_id = $this->id;
+		}
+		
+		$this->statisticArpu->value = $totalPeriodCustomerRevenue / $this->countCustomer();
+		$this->statisticArpu->save();
+		
+		
+		if ($this->statisticCostClient == null) {
+			$this->statisticCostClient = new StatisticCostClient;
+			$this->statisticCostClient->period_id = $this->id;
+		}
+		
+		$this->statisticCostClient->value = $totalPeriodCustomerCost / $this->countCustomer();
+		$this->statisticCostClient->save();
+		
+		if ($this->statisticClient == null) {
+			$this->statisticClient = new StatisticClient;
+			$this->statisticClient->period_id = $this->id;
+		}
+		
+		$this->statisticClient->value = $this->countCustomer();
+		$this->statisticClient->save();
+		
+	}
 	
 	public function countCustomer()
 	{
@@ -208,14 +254,15 @@ class Period extends ActiveRecord
 		$this->last()->find()->close();
 		$newPeriod = $this->addPeriod($name);
 		$newPeriod->generateInvoices();
+		$newPeriod->generatePeriodicCost();
+		$newPeriod->updateStatistics();
 	}
 	
 	public function close()
 	{
 		//$this->generateCustomerRevenues();
-		
-		$this->generateCustomerCosts();
-		$this->generateStatistics();
+		//$this->generateCustomerCosts();
+		//$this->generateStatistics();
 	}
 	
 	

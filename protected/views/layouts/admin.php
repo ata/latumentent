@@ -16,6 +16,7 @@
 					));
 					$this->widget('zii.widgets.CMenu', array(
 						'items'=>array(
+							array('label'=>Yii::t('app','Period'), 'url'=>array('admin/period')),
 							//array('label'=>Yii::t('app','Apartment'), 'url'=>array('admin/apartment')),
 							array('label'=>Yii::t('app','Compensation Schema'), 'url'=>array('admin/compensationSchema')),
 							//array('label'=>Yii::t('app','Cost'), 'url'=>array('admin/cost')),
@@ -23,7 +24,6 @@
 							//array('label'=>Yii::t('app','Invoice'), 'url'=>array('admin/invoice')),
 							//array('label'=>Yii::t('app','Invoice Item'), 'url'=>array('admin/invoiceItem')),
 							array('label'=>Yii::t('app','Problem Type'), 'url'=>array('admin/problemType')),
-							//array('label'=>Yii::t('app','Period'), 'url'=>array('admin/period')),
 							//array('label'=>Yii::t('app','Revenue'), 'url'=>array('admin/revenue')),
 							array('label'=>Yii::t('app','Periodic Cost'), 'url'=>array('admin/periodicCost')),
 							array('label'=>Yii::t('app','Service'), 'url'=>array('admin/service')),

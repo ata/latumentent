@@ -56,8 +56,11 @@ class CostController extends Controller
 		if (isset($_POST['Cost'])) {
 			$cost->attributes=$_POST['Cost'];
 			if($cost->save())
+				Period::model()->last()->find()->updateStatistics();
 				$this->redirect(array('index'));
-		} 
+		} else {
+			$cost->period_id = Period::model()->last()->find()->id;
+		}
 
 		$this->render('create',array(
 			'cost'=>$cost,

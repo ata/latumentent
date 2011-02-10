@@ -195,9 +195,31 @@ class Invoice extends ActiveRecord
 	
 	public function pay()
 	{
-		$revenue = new Revenue;
-		
 		$this->status = self::STATUS_PAID;
+		foreach($this->invoiceItems as $item) {
+			$revenue = new Revenue;
+			$revenue->name = Yii::t('app','From payment of {service}',array('{service}' => $item->service->name));
+			$revenue->amount = $item->amount;
+			$revenue->user_id = $item->customer_id;
+			$revenue->customer_id = $item->customer_id;
+			$revenue->period_id  = $item->period_id;
+			$revenue->service_id = $item->service_id;
+			$revenue->status = $this->status;
+			$revenue->save();
+			if ($item->subtotal_compensation > 0) {
+				$cost = new Cost;
+				$cost->name = Yii::t('app','Compensation {service}',array('{service}' => $item->service->name));
+				$cost->amount = $item->subtotal_compensation;
+				$cost->user_id = $item->customer_id;
+				$cost->customer_id = $item->customer_id;
+				$cost->period_id  = $item->period_id;
+				$cost->service_id = $item->service_id;
+				$cost->status = $this->status;
+				$cost->save();
+			}
+		}
+		
+		$this->period->updateStatistics();
 		return $this->save(false);
 	}
 	

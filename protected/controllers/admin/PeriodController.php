@@ -22,7 +22,7 @@ class PeriodController extends AdminController
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view','delete','create','update'),
+				'actions'=>array('index','view','delete','Open','create','update'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -61,6 +61,20 @@ class PeriodController extends AdminController
 		}
 
 		$this->render('create',array(
+			'period'=>$period,
+		));
+	}
+	
+	public function actionOpen()
+	{
+		$period = new Period;
+		if (isset($_POST['Period'])) {
+			Period::model()->open($_POST['Period']['name']);
+			$this->redirect(array('index'));
+		} else {
+			$period->name = date('F Y');
+		}
+		$this->render('open',array(
 			'period'=>$period,
 		));
 	}

@@ -8,6 +8,7 @@
  * @property string $name
  * @property double $amount
  * @property string $note
+ * @property integer $service_id
  */
 class PeriodicCost extends ActiveRecord
 {
@@ -38,6 +39,7 @@ class PeriodicCost extends ActiveRecord
 		return array(
 			array('name, amount', 'required'),
 			array('amount', 'numerical'),
+			array('service_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			array('note', 'safe'),
 			// The following rule is used by search().
@@ -54,6 +56,7 @@ class PeriodicCost extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'service' => array(self::BELONGS_TO, 'Service', 'service_id'),
 		);
 	}
 
@@ -66,6 +69,7 @@ class PeriodicCost extends ActiveRecord
 			'id' => Yii::t('app','ID'),
 			'name' => Yii::t('app','Name'),
 			'amount' => Yii::t('app','Amount'),
+			'service_id' => Yii::t('app','Service'),
 			'note' => Yii::t('app','Note'),
 		);
 	}
