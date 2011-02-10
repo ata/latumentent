@@ -79,6 +79,6 @@ return array(
 	'Manage Users' => 'Manage Pengguna',
 	'Remember me next time' => 'Buat sistem untuk mengingat',
 	'No one revenue on period' => 'tidak ada data pendapatan di periode ini',
-	'No one cost on period' => 'tidak ada data pengeluaran di period ini'
+	'No one cost on period' => 'tidak ada data pengeluaran di period ini',
 	'Balance' => 'Neraca',
 );

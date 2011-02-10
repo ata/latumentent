@@ -113,11 +113,12 @@ class Revenue extends ActiveRecord
 	{
 		
 		$criteria = new CDbCriteria;
+		$criteria->select = 'SUM(amount) as amount,service_id,period_id';
 		
 		if($period_id !== 0){
 			$period = $period_id;
 		} else {
-			$period = Period::model()->last()->last()->find()->id;
+			$period = Period::model()->last()->find()->id;
 		}
 		
 		$criteria->group = 'service_id';
@@ -137,15 +138,7 @@ class Revenue extends ActiveRecord
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenue,'IDR');
 	}
 	
-<<<<<<< HEAD
-	public function getTotalBalance($cost,$revenue)
-	{
-		$total = $revenue -  $cost;
-		abs($total);
-		return Yii::app()->locale->numberFormatter->formatCurrency($total,'IDR');
-	}
 	
-=======
 	public function findAllCustomerRevenueByPeriodId($period_id) 
 	{
 		return $this->findAll('customer_id IS NOT NULL AND period_id = :period_id',array(
@@ -154,6 +147,7 @@ class Revenue extends ActiveRecord
 	}
 	
 	public $total_amount;
+	
 	public function totalCustomerRevenueByPeriodId($period_id) 
 	{
 		return array_sum(CHtml::listData($this->findAllCustomerRevenueByPeriodId($period_id),'id','amount'));

@@ -12,12 +12,10 @@ class BalanceController extends Controller
 		$revenue = Revenue::model()->findByPeriod($period);
 		$cost = Cost::model()->findByPeriod($period);
 		
-		var_dump($revenue);
 		
-		$period = new Period;
-		$period->unsetAttributes();
-		$period->last()->find()->id;
-		$periodList = CHtml::listData(Period::model()->findAll(),'id','name');
+		$period = new Period('search');
+
+		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 		
 		$this->render('index',array(
 			'revenue'=>$revenue,
