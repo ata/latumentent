@@ -12,6 +12,8 @@ class BalanceController extends Controller
 		$revenue = Revenue::model()->findByPeriod($period);
 		$cost = Cost::model()->findByPeriod($period);
 		
+		var_dump($revenue);
+		
 		$period = new Period;
 		$period->unsetAttributes();
 		$period->last()->find()->id;

@@ -1,5 +1,5 @@
-
-
+<?php $total = 0;?>
+<?php $sum = 0;?>
 <div class="span-24 cost">
 	<table class="balance-data">
 		<thead>
@@ -15,6 +15,7 @@
 						<td class="title"><?php echo $items->service->name?></td>
 						<td class="value ar"><?php echo Yii::app()->locale->numberFormatter->formatCurrency($items->amount,'IDR')?></td>
 					</tr>
+					<?php $total += $items->amount?>
 				<?php endforeach?>
 			<?php else:?>
 				<tr>
@@ -27,7 +28,7 @@
 		<tfoot>
 			<tr>
 				<th class = "title"><?php echo Yii::t('app','Total Cost')?></th>
-				<th class = "value ar"><?php //echo $items->totalCostLocale?></td>
+				<th class = "value ar"><?php echo Yii::app()->locale->numberFormatter->formatCurrency($total,'IDR')?></td>
 			</tr>
 		</tfoot>
 	</table>
@@ -49,7 +50,7 @@
 					<td class="title"><?php echo $data->service->name;?></td>
 					<td class="value ar"><?php echo Yii::app()->locale->numberFormatter->formatCurrency($data->amount,'IDR');?></td>
 				</tr>
-				<?php //$sum += $data->amount+$data->amount?>
+				<?php $sum += $data->amount;?>
 				<?php endforeach?>
 			<?php else:?>
 				<tr>
@@ -62,7 +63,7 @@
 		<tfoot>
 			<tr>
 				<th class="title"><?php echo Yii::t('app','Total Revenue')?></th>
-				<th class="value ar"><?php //echo $sum?></th>
+				<th class="value ar"><?php echo Yii::app()->locale->numberFormatter->formatCurrency($sum,'IDR')?></th>
 			</tr>
 		</tfoot>
 	</table>
@@ -72,13 +73,12 @@
 	<table>
 		<thead>
 			<tr>
-				<?php /*if($items->totalCost >= $data->totalRevenue):?>
-					<th><?php echo Yii::t('app','Loss')?></th>
+				<?php if($sum < $total):?>
+					<th class="title"><?php echo Yii::t('app','Loss')?></th>
 				<?php else:?>
-					<th><?php echo Yii::t('app','Net Profit')?></th>
-				<?php endif;*/?>
-				<th></th>
-				<th><?php //echo Yii::app()->locale->numberFormatter->formatCurrency(($data->totalRevenue-$items->totalCost),'IDR')?></th>
+					<th class="titile"><?php echo Yii::t('app','Net Profit')?></th>
+				<?php endif?>
+				<th class="value ar"><?php echo (Yii::app()->locale->numberFormatter->formatCurrency(abs($sum-$total),'IDR'))?></th>
 			</tr>
 		</thead>
 	</table>

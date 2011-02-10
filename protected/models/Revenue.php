@@ -117,13 +117,21 @@ class Revenue extends ActiveRecord
 		return $this->findAll($criteria);
 	}
 	
-	public function getTotalRevenue()
+	/*public function getTotalRevenue()
 	{
 		return array_sum(CHtml::listData($this->findByPeriod(),'id','amount'));
-	}
+	}*/
 	
 	public function getTotalRevenueLocale()
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenue,'IDR');
 	}
+	
+	public function getTotalBalance($cost,$revenue)
+	{
+		$total = $revenue -  $cost;
+		abs($total);
+		return Yii::app()->locale->numberFormatter->formatCurrency($total,'IDR');
+	}
+	
 }
