@@ -741,3 +741,7 @@ td {
 .number-column{
 	width:3em;
 }
+
+.chart{
+	margin-bottom:50px;
+}

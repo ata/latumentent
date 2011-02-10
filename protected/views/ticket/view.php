@@ -27,7 +27,7 @@
 		)); ?>
 			<?php if($ticket->isOpen):?>
 			<div class="row">
-				<?php echo $form->textArea($reply,'message'); ?>
+				<?php echo $form->textArea($reply,'message',array('cols' => '72')); ?>
 				<?php echo $form->error($reply,'message'); ?>
 			</div>
 			

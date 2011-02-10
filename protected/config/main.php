@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'[Name] Apartment',
+	'name'=> Yii::t('app','{name} Apartment',array('{name}' => 'Latumenten')),
 	'language' => 'id',
 	'theme' => 'default',
 	// preloading 'log' component

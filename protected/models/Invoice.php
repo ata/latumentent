@@ -119,6 +119,11 @@ class Invoice extends ActiveRecord
 		));
 	}
 	
+	protected function beforeSave()
+	{
+		$this->user_id = $this->customer->user_id;
+		return parent::beforeSave();
+	}
 	protected function beforeDelete()
 	{
 		foreach($this->invoiceItem as $invoiceItems){
@@ -126,12 +131,6 @@ class Invoice extends ActiveRecord
 		}
 		
 		return parent::beforeDelete();
-	}
-	
-	protected function beforeSave()
-	{
-		$this->user_id = $this->customer->user_id;
-		return parent::beforeSave();
 	}
 	
 	public function findAllByPeriodId($period_id) 
