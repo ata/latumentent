@@ -469,7 +469,34 @@ div.form div.row input{
 }
 
 div.form div.buttons input{
-	margin-left:150px;
+	margin-left:160px;
+}
+
+div.form div.buttons a.cancel{
+	color:#8E1C17;
+	margin-left:20px;
+}
+/*	height:20px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	background:#8E1C17;
+	background:-moz-linear-gradient(top, #DB8981, #8E1C17);
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#DB8981), to(#8E1C17));
+	padding:10px 20px;
+	text-decoration:none;
+	color:#CCCCCC;
+	font-weight:bold;
+	text-shadow:1px 1px 1px #000000;
+	-moz-box-shadow:0 0 3px #000000;
+	-webkit-box-shadow:0 0 3px #000000;
+	box-shadow:0 0 3px #000000;
+	border:1px solid #CCCCCC;
+	margin-left:20px;
+}*/
+
+div.form div.buttons a.cancel:hover{
+	color:#DB8981;
 }
 
 
@@ -598,7 +625,8 @@ div.ticket .head{
 .bills tfoot th.value,
 .summary-bills th.value,
 .summary-bills th.title,
-.summary-bills tfoot th.value{
+.summary-bills tfoot th.value,
+table.balance-data tfoot th.ar{
 	background:#B3B38A;
 }
 
@@ -607,9 +635,9 @@ div.ticket .head{
 	font-size:24px;
 }
 
-.bills tfoot th.value{
+.bills tfoot th.value,
+table.balance-data tfoot th.value{
 	color:#B70F02;
-
 }
 
 div.ticket .head span.title h3{
