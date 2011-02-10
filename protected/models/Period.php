@@ -160,6 +160,7 @@ class Period extends ActiveRecord
 		foreach($this->invoices as $invoice) {
 			foreach($invoice->invoiceItems as $item) {
 				$revenue = new Revenue;
+				$cost->name = Yii::t('app','From payment of {service}',array('{service}' => $item->service->name));
 				$revenue->amount = $item->amount;
 				$revenue->user_id = $item->customer_id;
 				$revenue->customer_id = $item->customer_id;
@@ -175,8 +176,9 @@ class Period extends ActiveRecord
 	{
 		foreach($this->invoices as $invoice) {
 			foreach($invoice->invoiceItems as $item) {
-				if ($item->amount > 0) {
+				if ($item->subtotal_compensation > 0) {
 					$cost = new Cost;
+					$cost->name = Yii::t('app','Compensation {service}',array('{service}' => $item->service->name));
 					$cost->amount = $item->subtotal_compensation;
 					$cost->user_id = $item->customer_id;
 					$cost->customer_id = $item->customer_id;
@@ -186,6 +188,10 @@ class Period extends ActiveRecord
 					$cost->save();
 				}
 			}
+		}
+		
+		foreach(PeriodicCost::model()->findAll() as $periodicCost) {
+			
 		}
 	}
 	

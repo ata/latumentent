@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'cost':
  * @property integer $id
+ * @popertty string $name
  * @property double $amount
  * @property integer $period_id
  * @property integer $service_id
@@ -45,6 +46,7 @@ class Cost extends ActiveRecord
 			array('amount, period_id', 'required'),
 			array('period_id, service_id, status, customer_id, user_id', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
+			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, amount, period_id, service_id', 'safe', 'on'=>'search'),
@@ -73,6 +75,7 @@ class Cost extends ActiveRecord
 	{
 		return array(
 			'id' => Yii::t('app','ID'),
+			'name' => Yii::t('app','Name'),
 			'amount' => Yii::t('app','Amount'),
 			'period_id' => Yii::t('app','Period'),
 			'service_id' => Yii::t('app','Service'),

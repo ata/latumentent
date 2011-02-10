@@ -50,13 +50,14 @@
 			<?php $this->widget('Menu', array(
 				'items'=>array(
 					array('label'=>Yii::t('app','Dashboard'), 'url'=>array('dashboard/index'), 'visible'=> !Yii::app()->user->isGuest),
-					array('label'=>Yii::t('app','Balance'), 'url'=>array('balance/index'), 'visible'=> !Yii::app()->user->isGuest),
+					array('label'=>Yii::t('app','Balance'), 'url'=>array('balance/index'), 'visible'=> Yii::app()->user->role == 'admin' || Yii::app()->user->role == 'management'),
 					array('label'=>Yii::t('app','Customer'), 'url'=>array('customer/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
 					array('label'=>Yii::t('app','Apartment'), 'url'=>array('apartment/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
 					array('label'=>Yii::app()->user->role !== 'customer'?Yii::t('app','Ticket'):Yii::t('app','My Ticket'), 'url'=>array('ticket/index'), 'visible'=> !Yii::app()->user->isGuest),
 					array('label'=>Yii::t('app','Invoice'), 'url'=>array('invoice/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
+					array('label'=>Yii::t('app','Revenue'), 'url'=>array('revenue/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
 					array('label'=>Yii::t('app','Cost'), 'url'=>array('cost/index'), 'visible'=> !Yii::app()->user->isGuest && Yii::app()->user->role !== 'customer'),
-					array('label'=>Yii::t('app','Administration'), 'url'=>array('admin/service'), 'visible'=> Yii::app()->user->role === 'admin'),
+					array('label'=>Yii::t('app','Administration'), 'url'=>array('admin/default'), 'visible'=> Yii::app()->user->role === 'admin'),
 					//array('label'=>Yii::t('app','Login'), 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 					//array('label'=>Yii::t('app','Logout ({name})',array('{name}'=>Yii::app()->user->fullname)), 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 				)
@@ -84,8 +85,10 @@
 <div id="footersite">
 	<div class="container">
 		<div class="floatLeft">
+			<!--
 			Copyright &copy; <?php echo date('Y'); ?> by <a href="http://nevisa.web.id">Nevisa IT Solution</a>.
 			All Rights Reserved.
+			-->
 		</div>
 		<div class="floatRight">
 			<?php echo Yii::powered(); ?>

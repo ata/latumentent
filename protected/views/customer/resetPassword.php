@@ -9,7 +9,7 @@
 			
 			<div class="row">
 				<?php echo $form->labelEx($user,'password'); ?>
-                <?php echo $form->passwordField($user,'password',array('value'=>'')); ?>
+				<?php echo $form->passwordField($user,'password',array('value'=>'')); ?>
 			</div>
 			
 			<div class="row">
@@ -20,6 +20,7 @@
 			
 			<div class="buttons row">
 				<?php echo CHtml::submitButton('Submit'); ?>
+				<?php echo CHtml::link(Yii::t('app','cancel'),array('index'),array('class' => 'cancel'));?>
 			</div>
 			
 		<?php $this->endWidget(); ?>

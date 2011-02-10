@@ -90,6 +90,7 @@
 			</div>
 			<div class="buttons row">
 				<?php echo CHtml::submitButton('Submit'); ?>
+				<?php echo CHtml::link(Yii::t('app','cancel'),array('index'),array('class' => 'cancel'));?>
 			</div>
 
 		<?php $this->endWidget(); ?>
