@@ -86,4 +86,5 @@ return array(
 	'No one cost on period' => 'Tidak ada data pengeluaran di period ini',
 	'Balance' => 'Neraca',
 	'Renter' => 'Penyewa',
+	'Amount' => 'Jumlah',
 );

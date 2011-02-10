@@ -23,12 +23,13 @@ $this->menu=array(
 ?>
 
 <h2><?php echo Yii::t('app','Manage Revenues'); ?></h2>
-
+<?php /*
 <div class="new-button last span-8">
 	<?php echo CHtml::link(Yii::t('app','Add Revenue'), array('create'));?>
 </div>
+*/?>
 
-<div class="filter span-16 last form" id="ticket">
+<div class="filter span-24 last form" id="ticket">
 	<fieldset>
 		<legend><?php echo Yii::t('app','filter'); ?></legend>
 			<?php $form=$this->beginWidget('CActiveForm', array(
@@ -67,7 +68,7 @@ $this->menu=array(
 		),
 		array(
 			'name'=>'amountRevenue',
-			'header'=>Yii::t('Yii','Amount'),
+			'header'=>Yii::t('app','Amount'),
 		),
 		array(
 			'class'=>'CButtonColumn',
