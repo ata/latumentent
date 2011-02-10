@@ -12,7 +12,11 @@
 			<?php if(count($cost) > 0):?>
 				<?php foreach($cost as $items):?>
 					<tr>
-						<td class="title"><?php echo $items->service->name?></td>
+						<?php if($items->service_id !== null):?>
+							<td class="title"><?php echo $items->service->name?></td>
+						<?php else:?>
+							<td class="title"><?php echo Yii::t('app','Other Cost')?></td>
+						<?php endif?>
 						<td class="value ar"><?php echo Yii::app()->locale->numberFormatter->formatCurrency($items->amount,'IDR')?></td>
 					</tr>
 					<?php $total += $items->amount?>

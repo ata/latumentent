@@ -61,8 +61,7 @@ $this->menu=array(
 				'class' => 'NumberColumn',
 			),
 			array(
-				'name'=>'period_id',
-				'value'=>'$data->period->name',
+				'name'=>'name',
 			),
 			array(
 				'name'=>'serviceName',

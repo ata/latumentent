@@ -86,4 +86,11 @@ return array(
 	'No one cost on period' => 'Tidak ada data pengeluaran di period ini',
 	'Balance' => 'Neraca',
 	'Renter' => 'Penyewa',
+	'Other Cost' => 'Pengeluaran lain-lain',
+	'Add Compensation Schema' => 'Tambah Schema Kompensasi',
+	'Add Problem Type' => 'Tambah Tipe Permasalahan',
+	'Add Periodic Cost' => 'Tambah Pengeluaran Rutin',
+	'Add Service' => 'Tambah Layanan',
+	'Add User' => 'Tambah Pengguna',
+	'Add New Role' => 'Tambah Role Baru'
 );
