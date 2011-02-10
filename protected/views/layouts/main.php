@@ -19,6 +19,8 @@
 
 <body id="<?php echo $this->htmlId?>-page">
 
+<div class="wrapper">
+
 <div id="headersite">
 	<div class="container">
 		<div id="app-name" class="floatLeft"><h2><?php echo CHtml::link(Yii::app()->name,array('/'))?></h2></div>
@@ -73,6 +75,10 @@
 </div>
 
 <?php echo $content; ?>
+
+	<div class="push"></div>
+
+</div>
 
 <div id="footersite">
 	<div class="container">

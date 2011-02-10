@@ -7,7 +7,7 @@
 	</div><!-- content -->
 </div>
 <div class="clear"></div>
-<div id="footbar">
+<!--<div id="footbar">
 	<div class="container">
 		<div class="span-6">
 			<h3>Interior</h3>
@@ -54,5 +54,5 @@
 			</ul>
 		</div>
 	</div>
-</div>
+</div>-->
 <?php $this->endContent(); ?>
