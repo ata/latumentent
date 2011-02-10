@@ -23,7 +23,7 @@ class InvoiceController extends Controller
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('index','view','pay'),
-				'roles'=>array('admin','customer_services'),
+				'roles'=>array('admin','management','customer_services'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('view'),
