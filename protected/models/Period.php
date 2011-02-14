@@ -110,9 +110,10 @@ class Period extends ActiveRecord
 
 	public function addPeriod($name=null)
 	{
-		if (!$this->findByAttributes(array('name' => date('F Y')))) {
+		$_name = $name==null?date('F Y'):$name;
+		if (!$this->findByAttributes(array('name' => $_name))) {
 			$period = new Period();
-			$period->name = $name==null?date('F Y'):$name;
+			$period->name = $_name;
 			$period->save();
 			return $period;
 		}
@@ -252,10 +253,11 @@ class Period extends ActiveRecord
 	public function open($name=null)
 	{
 		$this->last()->find()->close();
-		$newPeriod = $this->addPeriod($name);
-		$newPeriod->generateInvoices();
-		$newPeriod->generatePeriodicCost();
-		$newPeriod->updateStatistics();
+		if($newPeriod = $this->addPeriod($name)) {
+			$newPeriod->generateInvoices();
+			$newPeriod->generatePeriodicCost();
+			$newPeriod->updateStatistics();
+		}
 	}
 	
 	public function close()
