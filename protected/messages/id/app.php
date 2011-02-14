@@ -100,4 +100,8 @@ return array(
 	'Create Service' => 'Tambah Layanan',
 	'Create User' => 'Tambah Pengguna',
 	'Create Role' => 'Tambah Role',
+	'Total Bills have Paid' => 'Total Tagihan yang sudah dibayarkan',
+	'Total Paid Bills have\'t Paid' => 'Total Tagihan yang belum dibayarkan',
+	'Total Bills' => 'Total Tagihan',
+	
 );
