@@ -167,43 +167,41 @@ class Invoice extends ActiveRecord
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->total_compensation,'IDR');
 	}
 	
-	public function getTotalBills($period_id = null)
+	public function getTotalBills($period_id)
 	{
-		if ($period_id == null) {
-			$period_id = $this->period_id;
-		}
-		return Yii::app()->db->createCommand('SELECT SUM(total_amount) FROM invoice 
+		$totalBill = Yii::app()->db->createCommand('SELECT SUM(total_amount) FROM invoice 
 										WHERE period_id = :period_id')
 										->query(array('period_id' => $period_id))
 										->readColumn(0);
+										
+		return Yii::app()->locale->numberFormatter->formatCurrency($totalBill,'IDR');
 	}
 	
-	public function getTotalPaidBills($period_id = null)
+	public function getTotalPaidBills($period_id)
 	{
-		if ($period_id == null) {
-			$period_id = $this->period_id;
-		}
-		return Yii::app()->db->createCommand('SELECT SUM(total_amount) FROM invoice 
+		$totalPaid = Yii::app()->db->createCommand('SELECT SUM(total_amount) FROM invoice 
 										WHERE period_id = :period_id AND status = :status')
 										->query(array(
 											'period_id' => $period_id,
 											'status' => self::STATUS_PAID
 										))
 										->readColumn(0);
+										
+		return Yii::app()->locale->numberFormatter->formatCurrency($totalPaid,'IDR');
 	}
 	
-	public function getTotalNotPaidBills($period_id = null)
+	public function getTotalNotPaidBills($period_id)
 	{
-		if ($period_id == null) {
-			$period_id = $this->period_id;
-		}
-		return Yii::app()->db->createCommand('SELECT SUM(total_amount) FROM invoice 
+		
+		$totalNotPaid = Yii::app()->db->createCommand('SELECT SUM(total_amount) FROM invoice 
 										WHERE period_id = :period_id AND status = :status')
 										->query(array(
 											'period_id' => $period_id,
 											'status' => self::STATUS_NOT_PAID
 										))
 										->readColumn(0);
+										
+		return Yii::app()->locale->numberFormatter->formatCurrency($totalNotPaid,'IDR');
 	}
 	
 	public function getTotalBillsLocale()

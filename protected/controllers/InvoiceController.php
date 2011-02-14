@@ -22,7 +22,7 @@ class InvoiceController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view','pay'),
+				'actions'=>array('index','view','pay','filter'),
 				'roles'=>array('admin','management','customer_services'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -53,11 +53,40 @@ class InvoiceController extends Controller
 		}
 		
 		
+		$period = Period::model()->last()->find()->id;
+		
+		$totalBill = Invoice::model()->getTotalBills($period);
+		$totalPaidBill = Invoice::model()->getTotalPaidBills($period);
+		$totalNotPaidBill = Invoice::model()->getTotalNotPaidBills($period);
+		
+		
 		$this->render('index',array(
 			'invoice' => $invoice,
 			'serviceList' => $serviceList,
 			'periodList' => $periodList,
+			'totalBill'=>$totalBill,
+			'totalPaidBill'=>$totalPaidBill,
+			'totalNotPaidBill'=>$totalNotPaidBill,
 		));
+	}
+	
+	public function actionFilter()
+	{
+		if(isset($_GET['period'])){
+			$period = $_GET['period'];
+		} else {
+			$period = Period::model()->last()->find()->id;
+		}
+		
+		$totalBill = Invoice::model()->getTotalBills($period);
+		$totalPaidBill = Invoice::model()->getTotalPaidBills($period);
+		$totalNotPaidBill = Invoice::model()->getTotalNotPaidBills($period);
+		
+		$this->renderPartial('_total',array(
+			'totalBill'=>$totalBill,
+			'totalPaidBill'=>$totalPaidBill,
+			'totalNotPaidBill'=>$totalNotPaidBill,
+		),false,true);
 	}
 
 	public function actionView()

@@ -9,6 +9,10 @@
 		$("#invoice-filter select").change(update_invoice_list);
 		$("#invoice-filter input[type=checkbox]").click(update_invoice_list);
 	})(jQuery)
+	
+	$("#Invoice_period_id").change(function(){
+		$("#total").load("index.php?r=invoice/filter&period="+$(this).val());
+	});
 ')
 ?>
 
@@ -34,9 +38,7 @@ $this->breadcrumbs=array(
 		)); ?>
 		<div class="row">
 			<?php echo $form->labelEx($invoice,'period_id');?>
-			<?php echo $form->dropDownList($invoice,'period_id',$periodList,array(
-				'empty'=>Yii::t('app','All'),
-			));?>
+			<?php echo $form->dropDownList($invoice,'period_id',$periodList);?>
 		</div>
 		<div class="row checkbox">
 			<?php echo $form->label($invoice,'serviceIds');?>
@@ -86,26 +88,12 @@ $this->breadcrumbs=array(
 	)); ?>
 </div>
 
-<div class="span-24 bills">
-	<table>
-		<thead>
-			
-			<tr>
-				<th class="title"><?php echo Yii::t('app','Total Bills have Paid')?></th>
-				<th class="ar value"><?php echo $invoice->totalPaidBillsLocale ?></th>
-			</tr>
-			
-			<tr>
-				<th class="title"><?php echo Yii::t('app','Total Paid Bills have\'t Paid')?></th>
-				<th class="ar value"><?php echo $invoice->totalNotPaidBillsLocale ?></th>
-			</tr>
-			
-			<tr>
-				<th class="title"><?php echo Yii::t('app','Total Bills')?></th>
-				<th class="ar value"><?php echo $invoice->totalBillsLocale ?></th>
-			</tr>
-		</thead>
-	</table>
+<div class="span-24 bills" id="total">
+<?php $this->renderPartial('_total',array(
+			'totalBill'=>$totalBill,
+			'totalPaidBill'=>$totalPaidBill,
+			'totalNotPaidBill'=>$totalNotPaidBill,
+		));?>
 </div>
 
 <div class="span-24 form" id="info">
