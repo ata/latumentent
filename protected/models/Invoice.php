@@ -102,7 +102,7 @@ class Invoice extends ActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-		$criteria->with = array('invoiceItems',array('together'=>true));
+		$criteria->with = array('invoiceItems',array('together'=>true),'customer');
 		$criteria->together = true;
 		$criteria->compare('t.sid',$this->id);
 		$criteria->compare('t.total_amount',$this->total_amount);

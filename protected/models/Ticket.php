@@ -142,6 +142,8 @@ class Ticket extends ActiveRecord
 		$criteria->compare('technician_id',$this->technician_id);
 		$criteria->compare('author_id', $this->author_id);
 		$criteria->compare('service_id',$this->service_id);
+		
+		$criteria->with = array('customer','period');
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

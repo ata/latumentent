@@ -120,21 +120,23 @@ class Customer extends ActiveRecord
 
 		$criteria=new CDbCriteria;
 		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('ownership',$this->ownership);
 		$criteria->compare('user_id',$this->user_id);
-		$criteria->compare('status',$this->status);
+		$criteria->compare('t.status',$this->status);
 		$criteria->compare('ownership',$this->ownership);
 		$criteria->compare('hire_up_to',$this->hire_up_to);
 		if (!$all) {
-			$criteria->compare('status', self::STATUS_ACTIVE);
+			$criteria->compare('t.status', self::STATUS_ACTIVE);
 		}
 		if ($this->serviceIds !== null) {
 			$serviceIds = !empty($this->serviceIds)?implode(',',$this->serviceIds):'0';
-			$criteria->addCondition('id IN (SELECT customer_id  
+			$criteria->addCondition('t.id IN (SELECT customer_id  
 				FROM customer_has_service 
-				WHERE customer_id = id 
+				WHERE customer_id = t.id 
 					AND service_id IN (' . $serviceIds . '))');
 		} 
+		$criteria->with = array('user');
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
