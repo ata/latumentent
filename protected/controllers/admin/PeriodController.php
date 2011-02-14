@@ -69,6 +69,7 @@ class PeriodController extends AdminController
 	{
 		$period = new Period;
 		if (isset($_POST['Period'])) {
+			//die($_POST['Period']['name']);
 			Period::model()->open($_POST['Period']['name']);
 			$this->redirect(array('index'));
 		} else {

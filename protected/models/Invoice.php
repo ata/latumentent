@@ -172,12 +172,53 @@ class Invoice extends ActiveRecord
 		if ($period_id == null) {
 			$period_id = $this->period_id;
 		}
-		return array_sum(CHtml::listData($this->findAllByPeriodId($period_id),'id','total_amount'));
+		return Yii::app()->db->createCommand('SELECT SUM(total_amount) FROM invoice 
+										WHERE period_id = :period_id')
+										->query(array('period_id' => $period_id))
+										->readColumn(0);
+	}
+	
+	public function getTotalPaidBills($period_id = null)
+	{
+		if ($period_id == null) {
+			$period_id = $this->period_id;
+		}
+		return Yii::app()->db->createCommand('SELECT SUM(total_amount) FROM invoice 
+										WHERE period_id = :period_id AND status = :status')
+										->query(array(
+											'period_id' => $period_id,
+											'status' => self::STATUS_PAID
+										))
+										->readColumn(0);
+	}
+	
+	public function getTotalNotPaidBills($period_id = null)
+	{
+		if ($period_id == null) {
+			$period_id = $this->period_id;
+		}
+		return Yii::app()->db->createCommand('SELECT SUM(total_amount) FROM invoice 
+										WHERE period_id = :period_id AND status = :status')
+										->query(array(
+											'period_id' => $period_id,
+											'status' => self::STATUS_NOT_PAID
+										))
+										->readColumn(0);
 	}
 	
 	public function getTotalBillsLocale()
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalBills,'IDR');
+	}
+	
+	public function getTotalPaidBillsLocale()
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalPaidBills,'IDR');
+	}
+	
+	public function getTotalNotPaidBillsLocale()
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalNotPaidBills,'IDR');
 	}
 	
 	
@@ -190,8 +231,6 @@ class Invoice extends ActiveRecord
 		}
 		return Yii::t('app','Paid');
 	}
-	
-	
 	
 	public function pay()
 	{

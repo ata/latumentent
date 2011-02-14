@@ -89,8 +89,19 @@ $this->breadcrumbs=array(
 <div class="span-24 bills">
 	<table>
 		<thead>
+			
 			<tr>
-				<th class="title"><?php echo Yii::t('app','Total Tagihan')?></th>
+				<th class="title"><?php echo Yii::t('app','Total Bills have Paid')?></th>
+				<th class="ar value"><?php echo $invoice->totalPaidBillsLocale ?></th>
+			</tr>
+			
+			<tr>
+				<th class="title"><?php echo Yii::t('app','Total Paid Bills have\'t Paid')?></th>
+				<th class="ar value"><?php echo $invoice->totalNotPaidBillsLocale ?></th>
+			</tr>
+			
+			<tr>
+				<th class="title"><?php echo Yii::t('app','Total Bills')?></th>
 				<th class="ar value"><?php echo $invoice->totalBillsLocale ?></th>
 			</tr>
 		</thead>
