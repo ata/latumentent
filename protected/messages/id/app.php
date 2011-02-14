@@ -80,7 +80,7 @@ return array(
 	'Manage Settings' => 'Kelola Pengaturan',
 	'Manage Tickets' => 'Kelola Ticket',
 	'Manage Ticket Replys' => 'Kelola Balasan Ticket',
-	'Manage Users' => 'KelolalPengguna',
+	'Manage Users' => 'Kelola Pengguna',
 	'Remember me next time' => 'Ingatkan kemudian',
 	'No one revenue on period' => 'Tidak ada data pendapatan di periode ini',
 	'No one cost on period' => 'Tidak ada data pengeluaran di period ini',
