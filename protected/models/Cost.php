@@ -178,6 +178,17 @@ class Cost extends ActiveRecord
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->amount,'IDR');
 	}
+	
+	public function getTotalCostPeriod($period)
+	{
+		$total = Yii::app()->db->createCommand('
+									SELECT sum(amount) FROM cost 
+									WHERE period_id = :period')->query(array(
+										'period'=>$period
+									))->readColumn(0);
+									
+		return Yii::app()->locale->numberFormatter->formatCurrency($total,'IDR');
+	}
 
 }
 

@@ -163,7 +163,7 @@ class RevenueController extends Controller
 		
 		$this->renderPartial('_total',array(
 			'totalRevenue'=>$totalRevenue,
-		));
+		),false,true);
 	}
 
 	/**

@@ -8,6 +8,9 @@
 	}
 	$("#cost-filter select").change(update_cost_list);
 })(jQuery)
+$("#Cost_period_id").change(function(){
+		$("#total").load("index.php?r=cost/filter&period="+$(this).val());
+	});
 ')
 ?>
 <?php
@@ -76,4 +79,8 @@ $this->menu=array(
 			),
 	))); 
 ?>
+</div>
+
+<div class="span-24 bills" id="total">
+	<?php $this->renderPartial('_total',array('totalCost'=>$totalCost))?>
 </div>
