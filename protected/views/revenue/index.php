@@ -4,12 +4,17 @@
 		$("#revenue-grid").yiiGridView.update("revenue-grid",{
 			url: $(this).attr("action"),
 			data: $("#revenue-filter").serialize(),
-		});
+		});;
 	}
 	$("#revenue-filter select").change(update_revenue_list);
 })(jQuery)
+
+$("#Revenue_period_id").change(function(){
+		$("#total").load("index.php?r=revenue/filter&period="+$(this).val());
+	});
 ')
 ?>
+
 
 <?php
 $this->breadcrumbs=array(
@@ -41,7 +46,7 @@ $this->menu=array(
 				</div>
 				<div class="floatLeft">
 					<?php echo $form->dropDownList($revenue, 'period_id', 
-						$periodList,array('empty'=>Yii::t('app','All'))); ?>
+						$periodList); ?>
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -49,7 +54,8 @@ $this->menu=array(
 	</fieldset>
 </div>
 <div class="clear"></div>
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<div class="span-24">
+	<?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'revenue-grid',
 	'dataProvider'=>$revenue->search(),
 	'columns'=>array(
@@ -67,3 +73,9 @@ $this->menu=array(
 		),
 	),
 )); ?>
+</div>
+<div class="span-24 bills" id="total">
+	<?php $this->renderPartial('_total',array(
+		'totalRevenue'=>$totalRevenue
+	))?>
+</div>
