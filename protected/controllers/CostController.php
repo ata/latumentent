@@ -139,13 +139,8 @@ class CostController extends Controller
 			$cost->period_id = Period::model()->last()->find()->id;
 		}
 		
-		if(isset($_GET['period'])){
-			$period = $_GET['period'];
-		} else {
-			$period = Period::model()->last()->find()->id;
-		}
 		
-		$totalCost = Cost::model()->getTotalCostPeriod($period);
+		$totalCost = Cost::model()->getTotalCostPeriod(Period::model()->last()->find()->id);
 		
 		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 		

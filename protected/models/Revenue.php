@@ -176,10 +176,12 @@ class Revenue extends ActiveRecord
 			$period_id = Period::model()->last()->find()->id;
 		}
 		
-		return Yii::app()->db->createCommand('SELECT sum(amount) 
+		$totalRevenue = Yii::app()->db->createCommand('SELECT sum(amount) 
 											FROM revenue
 											WHERE period_id = :period_id')->query(array(
 												'period_id'=>$period_id))->readColumn(0);
+												
+		return Yii::app()->locale->numberFormatter->formatCurrency($totalRevenue,'IDR');
 	}
 	
 	public function getTotalRevenuePeriodLocale()

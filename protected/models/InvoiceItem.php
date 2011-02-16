@@ -155,4 +155,15 @@ class InvoiceItem extends ActiveRecord
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->amountPay,'IDR');
 	}
 	
+	public function findByUserId($user_id,$period)
+	{
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'customer.user_id = :user_id,period_id = :period';
+		$criteria->with = array('customer');
+		//$criteria->together = true;
+		$criteria->params = array('user_id' => $user_id,'period'=>$period);
+		
+		return $this->find($criteria);
+	}
+	
 }

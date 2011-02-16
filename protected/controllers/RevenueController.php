@@ -135,14 +135,9 @@ class RevenueController extends Controller
 			$revenue->period_id = Period::model()->last()->find()->id;
 		}
 		
-		if(isset($_GET['period'])){
-			$period = $_GET['period'];
-		} else {
-			$period = 0;
-		}
 		
 		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
-		$totalRevenue = Revenue::model()->getTotalRevenuePeriod($period);
+		$totalRevenue = Revenue::model()->getTotalRevenuePeriod(Period::model()->last()->find()->id);
 
 		$this->render('index',array(
 			'revenue'=>$revenue,
@@ -155,9 +150,7 @@ class RevenueController extends Controller
 	{
 		if(isset($_GET['period'])){
 			$period = $_GET['period'];
-		} else {
-			$period = 0;
-		}
+		} 
 		
 		$totalRevenue = Revenue::model()->getTotalRevenuePeriod($period);
 		

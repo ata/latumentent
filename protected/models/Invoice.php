@@ -140,12 +140,13 @@ class Invoice extends ActiveRecord
 	
 	
 	
-	public function findByUserId($user_id)
+	public function findByUserId($user_id,$period)
 	{
 		$criteria = new CDbCriteria;
-		$criteria->condition = 'customer.user_id = :user_id';
+		$criteria->condition = 'customer.user_id = :user_id and period_id = :period';
 		$criteria->with = array('customer');
-		$criteria->params = array('user_id' => $user_id);
+		//$criteria->together = true;
+		$criteria->params = array('user_id' => $user_id,'period'=>$period);
 		
 		return $this->find($criteria);
 	}
