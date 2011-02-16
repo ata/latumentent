@@ -12,7 +12,7 @@ $this->breadcrumbs=array(
 
 <h2><?php echo Yii::t('app','Detail Invoice') ?></h2>
 
-<div class="customer-info span-24">
+<div class="customer-info span-24" id="ticket">
 	<div class="row">
 		<span class="title"><?php echo CHtml::activeLabel($invoice->customer->user, 'fullname') ?>:</span>
 		<span class="value"><?php echo $invoice->customer->user->fullname?>:</span>

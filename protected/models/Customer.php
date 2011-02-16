@@ -154,6 +154,7 @@ class Customer extends ActiveRecord
 	protected function afterSave()
 	{
 		$this->saveCustomerService();
+		Setting::model()->get('REGISTRASI_FEE',200000);
 	}
 	
 	protected function beforeDelete()
