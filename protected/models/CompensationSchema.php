@@ -87,13 +87,14 @@ class CompensationSchema extends ActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('uptime',$this->uptime);
 		$criteria->compare('downtime',$this->downtime);
 		$criteria->compare('percentdown',$this->percentdown);
 		$criteria->compare('percentup',$this->percentup);
 		$criteria->compare('compensation',$this->compensation);
 		$criteria->compare('service_id',$this->service_id);
+		$criteria->with = array('service');
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

@@ -26,7 +26,7 @@ class DashboardController extends Controller
 				'roles'=>array('admin','management','customer_services'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','customer'),
+				'actions'=>array('index','customer','filter'),
 				'roles'=>array('customer'),
 			),
 			array('deny',  // deny all users
@@ -70,9 +70,26 @@ class DashboardController extends Controller
 	
 	public function actionCustomer()
 	{
-		$invoice = Invoice::model()->findByUserId(Yii::app()->user->id);
+		$invoice = Invoice::model()->findByUserId(Yii::app()->user->id,Period::model()->last()->find()->id);
+		
+		$period = new Period;
+		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
+		
 		$this->render('customer',array(
 			'invoice' => $invoice,
+			'period'=>$period,
+			'periodList'=>$periodList,
 		));
+	}
+	
+	public function actionFilter()
+	{
+		if(isset($_GET['period'])){
+			$period = $_GET['period'];
+		}
+		
+		$invoice = Invoice::model()->findByUserId(Yii::app()->user->id,$period);
+		
+		$this->renderPartial('_customerInvoice',array('invoice'=>$invoice),false,true);
 	}
 }

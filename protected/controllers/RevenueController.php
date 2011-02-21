@@ -22,7 +22,7 @@ class RevenueController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view','delete','create','update'),
+				'actions'=>array('index','view','delete','create','update','filter'),
 				'roles'=>array('admin','management','customer_services'),
 			),
 			array('deny',  // deny all users
@@ -135,12 +135,28 @@ class RevenueController extends Controller
 			$revenue->period_id = Period::model()->last()->find()->id;
 		}
 		
+		
 		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
+		$totalRevenue = Revenue::model()->getTotalRevenuePeriod(Period::model()->last()->find()->id);
 
 		$this->render('index',array(
 			'revenue'=>$revenue,
-			'periodList'=>$periodList
+			'periodList'=>$periodList,
+			'totalRevenue'=>$totalRevenue,
 		));
+	}
+	
+	public function actionFilter()
+	{
+		if(isset($_GET['period'])){
+			$period = $_GET['period'];
+		} 
+		
+		$totalRevenue = Revenue::model()->getTotalRevenuePeriod($period);
+		
+		$this->renderPartial('_total',array(
+			'totalRevenue'=>$totalRevenue,
+		),false,true);
 	}
 
 	/**

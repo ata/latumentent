@@ -119,13 +119,14 @@ class User extends ActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('t.id',$this->id);
 		$criteria->compare('username',$this->username);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('fullname',$this->password,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('role_id',$this->role_id);
 		$criteria->compare('status', $this->status);
+		$criteria->with = array('role');
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

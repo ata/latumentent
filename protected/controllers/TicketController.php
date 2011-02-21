@@ -86,10 +86,15 @@ class TicketController extends Controller
 		$invoiceItemList = CHtml::listData(InvoiceItem::model()
 				->findAllCurrentPeriod(Yii::app()->user->id),'id','service.name');
 		$problemTypeList = CHtml::listData(ProblemType::model()->findAll(),'id','display');
+		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
+		
+		
+		
 		$this->render('create',array(
 			'ticket'=>$ticket,
 			'invoiceItemList' => $invoiceItemList,
 			'problemTypeList' => $problemTypeList,
+			'serviceList' => $serviceList,
 		));
 
 	}
