@@ -10,7 +10,7 @@
 })(jQuery)
 
 $("#Revenue_period_id").change(function(){
-		$("#total").load("index.php?r=revenue/filter&period="+$(this).val());
+		$("#total").load("index.php?r=revenue/filter&period_id="+$(this).val());
 	});
 ')
 ?>
