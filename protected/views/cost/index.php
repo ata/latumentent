@@ -93,7 +93,7 @@ $this->menu=array(
 					'detailCost'=>array(
 						'label'=>Yii::t('app','Detail Cost'),
 						'url'=>'Yii::app()->createUrl("/cost/view",array("id"=>$data->id))',
-						'imageUrl'=>Yii::app()->request->baseUrl.'images/view.png',
+						'imageUrl'=>Yii::app()->request->baseUrl.'/images/view.png',
 					),
 				),
 			),
