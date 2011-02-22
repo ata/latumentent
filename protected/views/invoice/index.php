@@ -9,11 +9,10 @@
 		$("#invoice-filter select").change(update_invoice_list);
 		$("#invoice-filter input[type=checkbox]").click(update_invoice_list);
 		$("#Invoice_status").change(update_invoice_list);
-	})(jQuery)
-	
-	$("#Invoice_period_id").change(function(){
-		$("#total").load("index.php?r=invoice/filter&period="+$(this).val());
+		$("#Invoice_period_id").change(function(){
+		$("#total_invoice").load("index.php?r=invoice/filter&period_id="+$(this).val());
 	});
+	})(jQuery)
 ')
 ?>
 
@@ -96,7 +95,7 @@ $this->breadcrumbs=array(
 	)); ?>
 </div>
 
-<div class="span-24 bills" id="total">
+<div class="span-24 bills" id="total_invoice">
 <?php $this->renderPartial('_total',array(
 			'totalBill'=>$totalBill,
 			'totalPaidBill'=>$totalPaidBill,
