@@ -10,7 +10,7 @@ class ActiveRecord extends CActiveRecord
 	
 	public function getDisplay()
 	{
-		if(isset($this->name)){
+		if (isset($this->name)){
 			return $this->name;
 		}
 		return sprintf('%s ID: %s',get_class($this), $this->id);
@@ -20,5 +20,13 @@ class ActiveRecord extends CActiveRecord
 	public function __toString()
 	{
 		return $this->getDisplay();
+	}
+	
+	protected function beforeSave()
+	{
+		if (isset($this->user_log_id) && !Yii::app()->user->isGuest) {
+			$this->user_log_id = Yii::app()->user->id;
+		}
+		return parent::beforeSave();
 	}
 }

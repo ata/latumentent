@@ -59,7 +59,7 @@ class CostController extends Controller
 				Period::model()->last()->find()->updateStatistics();
 				$this->redirect(array('index'));
 		} else {
-			$cost->period_id = Period::model()->last()->find()->id;
+			$cost->period_id = Period::model()->getLastId();
 		}
 
 		$this->render('create',array(
@@ -69,16 +69,15 @@ class CostController extends Controller
 	
 	public function actionFilter()
 	{
-		if(isset($_GET['period'])){
-			$period = $_GET['period'];
+		if(isset($_GET['period_id'])){
+			$period_id = $_GET['period_id'];
 		} else {
-			$period = Period::model()->last()->find()->id;
+			$period_id = Period::model()->getLastId();
 		}
+
+		$totalCost = Cost::model()->totalCostByPeriodId($period_id);
 		
-		$totalCost = Cost::model()->getTotalCostPeriod($period);
-		
-		
-		$this->renderPartial('_total',array('totalCost'=>$totalCost),false,true);
+		$this->renderPartial('_total',array('totalCost'=>$totalCost));
 	}
 
 	/**
@@ -136,11 +135,11 @@ class CostController extends Controller
 		if(isset($_GET['Cost'])){
 			$cost->attributes=$_GET['Cost'];
 		} else {
-			$cost->period_id = Period::model()->last()->find()->id;
+			$cost->period_id = Period::model()->getLastPeriodId();
 		}
 		
 		
-		$totalCost = Cost::model()->getTotalCostPeriod(Period::model()->last()->find()->id);
+		$totalCost = Cost::model()->totalCostByPeriodId(Period::model()->getLastId());
 		
 		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 		

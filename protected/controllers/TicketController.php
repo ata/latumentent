@@ -51,7 +51,7 @@ class TicketController extends Controller
 		if (isset($_GET['Ticket'])) {
 			$ticket->attributes = $_GET['Ticket'];
 		} else {
-			$ticket->period_id = Period::model()->last()->find()->id;
+			$ticket->period_id = Period::model()->getLastId();
 		}
 		if (Yii::app()->user->role === 'customer') {
 			$ticket->author_id = Yii::app()->user->id;
@@ -110,10 +110,9 @@ class TicketController extends Controller
 				
 			}
 		}
-		
 		if (isset($_POST['submit'])) {
 			if (isset($_POST['submit']['close'])) {
-				if ($ticket->close()) {
+				if ($ticket->close(Yii::app()->user->id)) {
 					$reply->attributes = array();
 					$this->refresh();
 				}
@@ -123,13 +122,13 @@ class TicketController extends Controller
 					$reply->attributes = array();
 				}
 				if (isset($_POST['submit']['reply_close'])) {
-					if($ticket->close()) {
+					if($ticket->close(Yii::app()->user-id)) {
 						$reply->attributes = array();
 					}
 				}
 				$this->refresh();
 			} else if (isset($_POST['submit']['open'])) {
-				if ($ticket->open()) {
+				if ($ticket->open(Yii::app()->user->id)) {
 					$this->refresh();
 				}
 			}

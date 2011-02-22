@@ -204,15 +204,17 @@ class Ticket extends ActiveRecord
 		return $this->status == self::STATUS_OPEN;
 	}
 	
-	public function close()
+	public function close($user_id)
 	{
 		$this->status = self::STATUS_CLOSED;
+		$this->technician_id = $user_id;
 		return $this->save();
 	}
 	
-	public function open()
+	public function open($user_id)
 	{
 		$this->status = self::STATUS_OPEN;
+		$this->technician_id = $user_id;
 		return $this->save();
 	}
 	

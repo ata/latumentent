@@ -7,10 +7,10 @@
 		});
 	}
 	$("#cost-filter select").change(update_cost_list);
-})(jQuery)
-$("#Cost_period_id").change(function(){
-		$("#total").load("index.php?r=cost/filter&period="+$(this).val());
+	$("#Cost_period_id").change(function(){
+		$("#total").load("index.php?r=cost/filter&period_id="+$(this).val());
 	});
+})(jQuery)
 ')
 ?>
 <?php

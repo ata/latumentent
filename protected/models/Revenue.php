@@ -41,7 +41,7 @@ class Revenue extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('amount, period_id, service_id', 'required'),
-			array('period_id, service_id, status, user_id, customer_id', 'numerical', 'integerOnly'=>true),
+			array('period_id, service_id, user_log_id, status, user_id, customer_id', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
@@ -102,6 +102,7 @@ class Revenue extends ActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
 	
 	protected function beforeSave()
 	{
@@ -112,6 +113,21 @@ class Revenue extends ActiveRecord
 	}
 	
 	
+	public function createRegisterRevenue($customer)
+	{
+		$revenue = new Revenue;
+		$revenue->period_id = Period::model()->last()->find();
+		$revenue->user_id = $customer->user->id;
+		$revenue->customer_id = $customer->id;
+		$revenue->status = self::STATUS_RECEIVED;
+		$revenue->amount = Setting::model()->get('REGISTER_FEE',200000);
+		$revenue->name = Yii::t('app','Registration fee from {name}',array(
+			'{name}' => $customer->user->display,
+		));
+		return $revenue->save();
+		
+	}
+	
 	public function findByPeriod($period_id=false)
 	{
 		
@@ -121,7 +137,7 @@ class Revenue extends ActiveRecord
 		if($period_id !== 0){
 			$period = $period_id;
 		} else {
-			$period = Period::model()->last()->find()->id;
+			$period = Period::model()->getLastId();
 		}
 		
 		$criteria->group = 'service_id';

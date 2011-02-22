@@ -69,4 +69,93 @@ Pertemuan ke-III:
 				- di ambil dari invoice
 			- grafik rata-rata cost percustomer / perbulan
 				- di ambil dari cost
+				
+
+
+sorting paid dan non paid di bagian  tagihan admin 
+
+product
+1(myTV) TV aja - 170 rb
+2 Mighty Net (paket Internet)
+ -starter 50 channel +  up to 256K - > 150rb +120 =  270
+ -personal 50 channel + up to 512K -> 150 rb +230 = 380
+ -pro 50 channel + 1024K  -> 150rb + 625 = 775
+-prepaid -> hotspot internet up to 256 degenerate number .. 120 rbi ..
+installation fee :  
+kontrak 1 tahun - discount 11 bulan .. ( 1 tahun dibayar muka) ...
+
+income statement 
+
+streamnya : 
+- TV berbayar :
+- Internet : dibagi starter - personal - pro
+- installation fee (TV 200/internet 275)
+
+A/R statement
+aging + 60 .. -> cutoff
+ama keseluruhan cash flow ..
+
+aging +8 harus kirim sms broadcast atau telfon atau notifications via internet
+aging +0 itu masuknya dari keluar invoice (tgl 21) 
+
+ticket dibagi 
+-TV berbayar
+- Internet 
+
+billing statement diperjelas TV berbayar dan internet ..
+
+billing tiap tgl 20 …
+
+20			20			20
+M-1			M0			M+1
+tagihan dari tgl 20-30
+periode pembayaran 30-10
+lewat 10 masuk piutang
+
+misal masuk tgl 1 M-1 .. yah tgl 1 sampai tgl 20 free …. 
+
+lewat tgl 10 - piutang - kena denda ..1/1000 perhari ..
+
+kalo ada piutang dikasih notifikasi di login client ..
+
+Dashboard jgn lebih 2 % Turn …
+
+graphic : (terutama yg internet) 
+- dari langganan
+- dari prepaid ..
+
+start billing 
+-edc mandiri ke BMI (pake standing instruction)
+-edc bca ke BMI (pake standing instruction)
+
+COST of Service
+
+content 
+- Internet - mediaNET  tgl 10-15
+- MNC -  TV 		  tgl 10-15	
+- Royalti fee ke building management tgl 15-20 
+
+disupport  oleh software untuk bisa masuk A/R statement
+
+Posissi Account Payable :
+Cost of Service				Aging
+Internet mediaNET			not more than M+1 (tgl 20) , normalnya 50 hari ..
+MNC
+Royalti fee building management
+
+penambahan pengeluaran untuk promosi/discount - manual … ada di admin …
+
+pembayaran 
+- cash
+- debit card bca
+- debit card mandiri
+- credit card visa
+- credit card mastercard
+
+sms broadcast .. untuk mask period pembayaran …
+countdown untuk cs, client udah bisa ditagih ...
+
+warna - biru donker - merah ..
+testimonial …
+online cs - YM ..
 

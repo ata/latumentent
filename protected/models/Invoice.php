@@ -52,7 +52,7 @@ class Invoice extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('total_amount, total_compensation, period_id, customer_id', 'required'),
-			array('period_id, status, customer_id, user_id, payment_method_id', 'numerical', 'integerOnly'=>true),
+			array('period_id, status, user_log_id, customer_id, user_id, payment_method_id', 'numerical', 'integerOnly'=>true),
 			array('total_amount, total_compensation', 'numerical'),
 			array('status','default','value'=>self::STATUS_NOT_PAID),
 			// The following rule is used by search().
@@ -236,9 +236,12 @@ class Invoice extends ActiveRecord
 		$this->status = self::STATUS_PAID;
 		foreach($this->invoiceItems as $item) {
 			$revenue = new Revenue;
-			$revenue->name = Yii::t('app','From payment of {service}',array('{service}' => $item->service->name));
+			$revenue->name = Yii::t('app','{service} payment from {name}',array(
+				'{service}' => $item->service->name,
+				'{name}' => $item->customer->user->display,
+			));
 			$revenue->amount = $item->amount;
-			$revenue->user_id = $item->customer_id;
+			$revenue->user_id = $item->customer->user_id;
 			$revenue->customer_id = $item->customer_id;
 			$revenue->period_id  = $item->period_id;
 			$revenue->service_id = $item->service_id;
@@ -246,9 +249,12 @@ class Invoice extends ActiveRecord
 			$revenue->save();
 			if ($item->subtotal_compensation > 0) {
 				$cost = new Cost;
-				$cost->name = Yii::t('app','Compensation {service}',array('{service}' => $item->service->name));
+				$cost->name = Yii::t('app','{service} compensation from {name}',array(
+					'{service}' => $item->service->name,
+					'{name}' => $item->customer->user->display,
+				));
 				$cost->amount = $item->subtotal_compensation;
-				$cost->user_id = $item->customer_id;
+				$cost->user_id = $item->customer->user_id;
 				$cost->customer_id = $item->customer_id;
 				$cost->period_id  = $item->period_id;
 				$cost->service_id = $item->service_id;
