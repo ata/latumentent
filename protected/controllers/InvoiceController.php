@@ -70,15 +70,15 @@ class InvoiceController extends Controller
 	
 	public function actionFilter()
 	{
-		if(isset($_GET['period'])){
-			$period = $_GET['period'];
+		if(isset($_GET['period_id'])){
+			$period_id = $_GET['period_id'];
 		} else {
-			$period = Period::model()->last()->find()->id;
+			$period_id = Period::model()->last()->find()->id;
 		}
 		
-		$totalBill = Invoice::model()->getTotalBills($period);
-		$totalPaidBill = Invoice::model()->getTotalPaidBills($period);
-		$totalNotPaidBill = Invoice::model()->getTotalNotPaidBills($period);
+		$totalBill = Invoice::model()->getTotalBills($period_id);
+		$totalPaidBill = Invoice::model()->getTotalPaidBills($period_id);
+		$totalNotPaidBill = Invoice::model()->getTotalNotPaidBills($period_id);
 		
 		$this->renderPartial('_total',array(
 			'totalBill'=>$totalBill,

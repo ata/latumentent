@@ -49,7 +49,7 @@ class Cost extends ActiveRecord
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, amount, period_id, service_id', 'safe', 'on'=>'search'),
+			array('id, amount, period_id, service_id,status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -98,6 +98,7 @@ class Cost extends ActiveRecord
 		$criteria->compare('amount',$this->amount);
 		$criteria->compare('period_id',$this->period_id);
 		$criteria->compare('service_id',$this->service_id);
+		$criteria->compare('status',$this->status);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

@@ -10,7 +10,7 @@
 })(jQuery)
 
 $("#Revenue_period_id").change(function(){
-		$("#total").load("index.php?r=revenue/filter&period="+$(this).val());
+		$("#total").load("index.php?r=revenue/filter&period_id="+$(this).val());
 	});
 ')
 ?>
@@ -49,6 +49,17 @@ $this->menu=array(
 						$periodList); ?>
 				</div>
 				<div class="clear"></div>
+			</div>
+			<div class="row select span-12" id="select status">
+				<div class="label floatLeft">
+					<?php echo $form->label($revenue,'status');?>
+				</div>
+				<div class="floatLeft">
+					<?php echo $form->dropDownList($revenue,'status',array(
+						Revenue::STATUS_RECEIVED => Yii::t('app','Received'),
+						Revenue::STATUS_NOT_RECEIVED => Yii::t('app','Not Received'),
+					),array('empty'=>'All'))?>
+				</div>
 			</div>
 			<?php $this->endWidget(); ?>
 	</fieldset>

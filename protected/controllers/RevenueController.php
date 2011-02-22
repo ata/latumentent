@@ -148,15 +148,15 @@ class RevenueController extends Controller
 	
 	public function actionFilter()
 	{
-		if(isset($_GET['period'])){
-			$period = $_GET['period'];
+		if(isset($_GET['period_id'])){
+			$period_id = $_GET['period_id'];
 		} 
 		
-		$totalRevenue = Revenue::model()->getTotalRevenuePeriod($period);
+		$totalRevenue = Revenue::model()->getTotalRevenuePeriod($period_id);
 		
 		$this->renderPartial('_total',array(
 			'totalRevenue'=>$totalRevenue,
-		),false,true);
+		));
 	}
 
 	/**
