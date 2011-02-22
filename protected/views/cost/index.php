@@ -83,6 +83,10 @@ $this->menu=array(
 				'header'=> Yii::t('app','Service'),
 			),
 			array(
+				'name'=>'costStatus',
+				'header'=>Yii::t('app','Status'),
+			),
+			array(
 				'name'=>'costLocale',
 				'header'=>Yii::t('app','Amount'),
 			),

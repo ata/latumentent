@@ -159,6 +159,14 @@ class Revenue extends ActiveRecord
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenue,'IDR');
 	}
 	
+	public function getStatusRevenue()
+	{
+		if($this->status == self::STATUS_RECEIVED){
+			return CHtml::encode(Yii::t('app','Received'));
+		} else {
+			return CHtml::encode(Yii::t('app','Not Received'));
+		}
+	}
 	
 	public function findAllCustomerRevenueByPeriodId($period_id) 
 	{

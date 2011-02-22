@@ -79,6 +79,10 @@ $this->menu=array(
 			'value'=>'$data->service->name',
 		),
 		array(
+			'name'=>'statusRevenue',
+			'header'=>Yii::t('app','Status'),
+		),
+		array(
 			'name'=>'amountRevenue',
 			'header'=>Yii::t('app','Amount'),
 		),
