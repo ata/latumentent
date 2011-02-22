@@ -8,6 +8,7 @@
 		}
 		$("#invoice-filter select").change(update_invoice_list);
 		$("#invoice-filter input[type=checkbox]").click(update_invoice_list);
+		$("#Invoice_status").change(update_invoice_list);
 	})(jQuery)
 	
 	$("#Invoice_period_id").change(function(){
@@ -39,6 +40,13 @@ $this->breadcrumbs=array(
 		<div class="row">
 			<?php echo $form->labelEx($invoice,'period_id');?>
 			<?php echo $form->dropDownList($invoice,'period_id',$periodList);?>
+		</div>
+		<div class="row select">
+			<?php echo $form->labelEx($invoice,'status')?>
+			<?php echo $form->dropDownList($invoice,'status',array(
+				Invoice::STATUS_NOT_PAID => Yii::t('app','Not Paid'),
+				Invoice::STATUS_PAID => Yii::t('app','Paid'),
+				),array('empty'=>'All'))?>
 		</div>
 		<div class="row checkbox">
 			<?php echo $form->label($invoice,'serviceIds');?>
