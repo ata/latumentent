@@ -103,5 +103,7 @@ return array(
 	'Total Bills have Paid' => 'Total Tagihan yang sudah dibayarkan',
 	'Total Paid Bills have\'t Paid' => 'Total Tagihan yang belum dibayarkan',
 	'Total Bills' => 'Total Tagihan',
+	'Received'=>'Telah Diterima',
+	'Not Received'=>'Belum Diterima',
 	
 );

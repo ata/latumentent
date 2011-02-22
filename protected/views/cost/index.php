@@ -7,6 +7,7 @@
 		});
 	}
 	$("#cost-filter select").change(update_cost_list);
+	$("#Cost_status").change(update_cost_list);
 	$("#Cost_period_id").change(function(){
 	$("#total").load("index.php?r=cost/filter&period_id="+$(this).val());
 	});
@@ -50,6 +51,17 @@ $this->menu=array(
 						$periodList); ?>
 				</div>
 				<div class="clear"></div>
+			</div>
+			<div class="row select span-12" id="select-status">
+				<div class="label floatLeft">
+					<?php echo $form->label($cost,'status');?>
+				</div>
+				<div class="floatleft">
+					<?php echo $form->dropDownList($cost,'status',array(
+						Cost::STATUS_PAID => Yii::t('app','Paid'),
+						Cost::STATUS_NOT_PAID => Yii::t('app','Not Paid')
+					),array('empty'=>'All'))?>
+				</div>
 			</div>
 			<?php $this->endWidget(); ?>
 	</fieldset>

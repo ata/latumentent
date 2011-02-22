@@ -46,7 +46,7 @@ class Revenue extends ActiveRecord
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, amount, period_id, service_id,user_id', 'safe', 'on'=>'search'),
+			array('id, amount, period_id, service_id,user_id,status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -97,6 +97,7 @@ class Revenue extends ActiveRecord
 		$criteria->compare('period_id',$this->period_id);
 		$criteria->compare('service_id',$this->service_id);
 		$criteria->compare('user_id',$this->user_id);
+		$criteria->compare('status',$this->status);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
