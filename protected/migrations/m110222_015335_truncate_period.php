@@ -12,7 +12,7 @@ class m110222_015335_truncate_period extends CDbMigration
 
 	public function down()
 	{
-		
+		$this->up();
 		$this->insert('period',array('id' => 1, 'name' => 'Januari 2011'));
 		
 		$invoices = array(

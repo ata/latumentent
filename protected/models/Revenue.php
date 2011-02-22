@@ -40,7 +40,7 @@ class Revenue extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('amount, period_id, service_id', 'required'),
+			array('amount, period_id', 'required'),
 			array('period_id, service_id, user_log_id, status, user_id, customer_id', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
 			array('name', 'length', 'max'=>255),
@@ -116,7 +116,7 @@ class Revenue extends ActiveRecord
 	public function createRegisterRevenue($customer)
 	{
 		$revenue = new Revenue;
-		$revenue->period_id = Period::model()->last()->find();
+		$revenue->period_id = Period::model()->getLastId();
 		$revenue->user_id = $customer->user->id;
 		$revenue->customer_id = $customer->id;
 		$revenue->status = self::STATUS_RECEIVED;
@@ -124,7 +124,12 @@ class Revenue extends ActiveRecord
 		$revenue->name = Yii::t('app','Registration fee from {name}',array(
 			'{name}' => $customer->user->display,
 		));
-		return $revenue->save();
+		if($revenue->save()) {
+			return true;
+		} else {
+			var_dump($revenue->errors);
+			die();
+		}
 		
 	}
 	
@@ -146,11 +151,7 @@ class Revenue extends ActiveRecord
 		
 		return $this->findAll($criteria);
 	}
-	
-	/*public function getTotalRevenue()
-	{
-		return array_sum(CHtml::listData($this->findByPeriod(),'id','amount'));
-	}*/
+
 	
 	public function getTotalRevenueLocale()
 	{
@@ -194,8 +195,10 @@ class Revenue extends ActiveRecord
 		
 		$totalRevenue = Yii::app()->db->createCommand('SELECT sum(amount) 
 											FROM revenue
-											WHERE period_id = :period_id')->query(array(
-												'period_id'=>$period_id))->readColumn(0);
+											WHERE period_id = :period_id')
+											->query(array(
+												'period_id'=>$period_id
+											))->readColumn(0);
 												
 		return Yii::app()->locale->numberFormatter->formatCurrency($totalRevenue,'IDR');
 	}

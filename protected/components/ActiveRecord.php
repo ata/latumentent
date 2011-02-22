@@ -24,7 +24,7 @@ class ActiveRecord extends CActiveRecord
 	
 	protected function beforeSave()
 	{
-		if (isset($this->user_log_id) && !Yii::app()->user->isGuest) {
+		if (isset($this->user_log_id)) {
 			$this->user_log_id = Yii::app()->user->id;
 		}
 		return parent::beforeSave();
