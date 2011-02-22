@@ -44,7 +44,7 @@ class Cost extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('amount, period_id', 'required'),
-			array('period_id, service_id, status, customer_id, user_id', 'numerical', 'integerOnly'=>true),
+			array('period_id, user_log_id, service_id, status, customer_id, user_id', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
@@ -130,7 +130,7 @@ class Cost extends ActiveRecord
 		if($period_id !== 0){
 			$period = $period_id;
 		} else {
-			$period = Period::model()->last()->find()->id;
+			$period = Period::model()->getLastId();
 		}
 		
 		$criteria->group = 'service_id';
@@ -139,11 +139,6 @@ class Cost extends ActiveRecord
 		
 		return $this->findAll($criteria);
 		
-	}
-	
-	public function getTotalCost()
-	{
-		return array_sum(CHtml::listData($this->findByPeriod(),'id','amount'));
 	}
 	
 	public function getTotalCostLocale()
@@ -174,17 +169,19 @@ class Cost extends ActiveRecord
 		
 	}
 	
+	
 	public function getCostLocale()
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->amount,'IDR');
 	}
 	
-	public function getTotalCostPeriod($period)
+	
+	public function totalCostByPeriodId($period_id)
 	{
 		$total = Yii::app()->db->createCommand('
 									SELECT sum(amount) FROM cost 
-									WHERE period_id = :period')->query(array(
-										'period'=>$period
+									WHERE period_id = :period_id')->query(array(
+										'period_id'=>$period_id
 									))->readColumn(0);
 									
 		return Yii::app()->locale->numberFormatter->formatCurrency($total,'IDR');

@@ -252,7 +252,10 @@ class Period extends ActiveRecord
 	
 	public function open($name=null)
 	{
-		$this->last()->find()->close();
+		if ($lastPeriod = $this->last()->find()) {
+			$lastPeriod->close();
+		}
+		//$this->last()->find()->close();
 		if($newPeriod = $this->addPeriod($name)) {
 			$newPeriod->generateInvoices();
 			$newPeriod->generatePeriodicCost();
@@ -272,4 +275,19 @@ class Period extends ActiveRecord
 	{
 		return Invoice::model()->findAllPaidByPeriodId($this->id);
 	}
+	
+	private $_lastId = null;
+	public function getLastId()
+	{
+		if ($this->_lastId) {
+			return $this->_lastId;
+		}
+		return $this->_lastId = $this->last()->find() ? $this->last()->find():-9999;
+	}
+	
+	public function getLastPeriodId()
+	{
+		return $this->getLastId();
+	}
+	
 }

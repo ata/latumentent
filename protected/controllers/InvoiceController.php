@@ -44,20 +44,18 @@ class InvoiceController extends Controller
 		
 		$invoice = new Invoice('search');
 		$invoice->unsetAttributes();
-			
+		
+		$period_id = Period::model()->getLastPeriodId();
 		if (isset($_GET['Invoice'])) {
 			$invoice->attributes = $_GET['Invoice'];
 		} else {
 			$invoice->serviceIds = array_keys($serviceList);
-			$invoice->period_id = Period::model()->last()->find()->id;
+			$invoice->period_id = $period_id;
 		}
 		
-		
-		$period = Period::model()->last()->find()->id;
-		
-		$totalBill = Invoice::model()->getTotalBills($period);
-		$totalPaidBill = Invoice::model()->getTotalPaidBills($period);
-		$totalNotPaidBill = Invoice::model()->getTotalNotPaidBills($period);
+		$totalBill = Invoice::model()->getTotalBills($period_id);
+		$totalPaidBill = Invoice::model()->getTotalPaidBills($period_id);
+		$totalNotPaidBill = Invoice::model()->getTotalNotPaidBills($period_id);
 		
 		
 		$this->render('index',array(

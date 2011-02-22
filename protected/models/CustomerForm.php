@@ -102,6 +102,8 @@ class CustomerForm extends CFormModel
 			return false;
 		}
 		
+		Revenue::model()->createRegisterRevenue($customer);
+		
 		$transaction->commit();
 		return true;
 	}
