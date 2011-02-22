@@ -279,10 +279,10 @@ class Period extends ActiveRecord
 	private $_lastId = null;
 	public function getLastId()
 	{
-		if ($this->_lastId) {
+		if ($this->_lastId !== null) {
 			return $this->_lastId;
 		}
-		return $this->_lastId = $this->last()->find() ? $this->last()->find():-9999;
+		return $this->_lastId = $this->last()->find() ? $this->last()->find()->id:-9999;
 	}
 	
 	public function getLastPeriodId()
