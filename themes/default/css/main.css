@@ -1008,9 +1008,10 @@ background:#FFFFFF;
 
 }
 
-#bodysite-admin p{
+#bodysite-admin p, #bodysite-admin h2, #bodysite-admin h3{
 color : #000000;
 }
+ 
 /*
  FINISH ADMIN
  */
