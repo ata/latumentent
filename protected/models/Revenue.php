@@ -137,6 +137,11 @@ class Revenue extends ActiveRecord
 	
 	public function getTotalRevenueLocale()
 	{
+		return $this->getTotalLocale();
+	}
+	
+	public function getTotalLocale() 
+	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenue,'IDR');
 	}
 	
