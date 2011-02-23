@@ -4,13 +4,9 @@ class BalanceController extends Controller
 	public function actionIndex()
 	{
 	
-		if(isset($_GET['period'])){
-			$period = $_GET['period'];
-		} else {
-			$period = 0;
-		}
-		$revenue = Revenue::model()->findByPeriod($period);
-		$cost = Cost::model()->findByPeriod($period);
+		
+		$revenue = Revenue::model()->findByPeriod(Period::model()->getLastId());
+		$cost = Cost::model()->findByPeriod(Period::model()->getLastId());
 		
 		
 		$period = new Period('search');
@@ -28,19 +24,19 @@ class BalanceController extends Controller
 	public function actionFilter()
 	{
 		
-		if(isset($_GET['period'])){
-			$period = $_GET['period'];
+		if(isset($_GET['period_id'])){
+			$period_id = $_GET['period_id'];
 		} else {
-			$period = 0;
+			$period_id = Period::model()->getLastId()
 		}
 		
-		$revenue = Revenue::model()->findByPeriod($period);
-		$cost = Cost::model()->findByPeriod($period);
+		$revenue = Revenue::model()->findByPeriod($period_id);
+		$cost = Cost::model()->findByPeriod($period_id);
 		
 		$this->renderPartial('_data',array(
 			'revenue'=>$revenue,
 			'cost'=>$cost,
-		),false,true);
+		));
 	}
 }
 

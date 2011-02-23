@@ -134,21 +134,16 @@ class Revenue extends ActiveRecord
 		
 	}
 	
-	public function findByPeriod($period_id=false)
+	public function findByPeriod($period_id)
 	{
 		
 		$criteria = new CDbCriteria;
 		$criteria->select = 'SUM(amount) as amount,service_id,period_id';
 		
-		if($period_id !== 0){
-			$period = $period_id;
-		} else {
-			$period = Period::model()->getLastId();
-		}
 		
 		$criteria->group = 'service_id';
-		$criteria->condition = 'period_id = :period';
-		$criteria->params = array('period'=>$period);
+		$criteria->condition = 'period_id = :period_id';
+		$criteria->params = array('period'=>$period_id);
 		
 		return $this->findAll($criteria);
 	}
