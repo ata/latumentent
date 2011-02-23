@@ -1,10 +1,12 @@
 <?php $this->beginContent('//layouts/main'); ?>
-<div id="bodysite">
-	<div id="content">
-		<div class="container">
-			<?php echo $content; ?>
-		</div>
-	</div><!-- content -->
+<div class="container">
+	<div id="bodysite">
+		<div id="content">
+			<div class="container">
+				<?php echo $content; ?>
+			</div>
+		</div><!-- content -->
+	</div>
 </div>
 <div class="clear"></div>
 <!--<div id="footbar">

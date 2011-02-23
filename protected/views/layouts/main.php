@@ -23,7 +23,7 @@
 
 <div id="headersite">
 	<div class="container">
-		<div id="app-name" class="floatLeft"><h2><?php echo CHtml::link(Yii::app()->name,array('/'))?></h2></div>
+		<!--<div id="app-name" class="floatLeft"><h2><?php echo CHtml::link(Yii::app()->name,array('/'))?></h2></div>-->
 		<div id="login-status" class="floatRight">
 			<?php 
 			$this->widget('zii.widgets.CMenu', array(
