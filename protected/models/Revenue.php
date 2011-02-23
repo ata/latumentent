@@ -145,6 +145,14 @@ class Revenue extends ActiveRecord
 		return $this->service?$this->service->name:'--';
 	}
 	
+	public function getStatusRevenue()
+	{
+		if($this->status == self::STATUS_RECEIVED){
+			return Yii::t('app','Received');
+		} else {
+			return Yii::t('app','Not Received');
+		}
+	}
 	
 	public function findAllCustomerRevenueByPeriodId($period_id) 
 	{

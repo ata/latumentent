@@ -19,8 +19,16 @@ $this->menu=array(
 	'attributes'=>array(
 		'id',
 		'amount',
-		'period_id',
-		'service_id',
+		array(
+			'label'=>Yii::t('app','Period'),
+			'name'=>'period_id',
+			'value'=>CHtml::encode($cost->period->name),
+		),
+		array(
+			'label'=>Yii::t('app','Service'),
+			'name' => 'service_id',
+			'value'=>CHtml::encode($cost->service->name)
+		),
 		'user_id',
 	),
 )); ?>

@@ -176,6 +176,14 @@ class Cost extends ActiveRecord
 		
 	}
 	
+	public function getCostStatus()
+	{
+		if($this->status == self::STATUS_PAID){
+			return CHtml::encode(Yii::t('app','Paid'));
+		} else {
+			return CHtml::encode(Yii::t('app','Not Paid'));
+		}
+	}
 	
 	public function getCostLocale()
 	{
