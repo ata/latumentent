@@ -122,7 +122,7 @@ class Revenue extends ActiveRecord
 		$revenue->customer_id = $customer->id;
 		$revenue->status = self::STATUS_RECEIVED;
 		$revenue->amount = Setting::model()->get('REGISTER_FEE',200000);
-		$revenue->name = Yii::t('app','Registration fee from {name}',array(
+		$revenue->name = Yii::t('app','Registration Fee from {name}',array(
 			'{name}' => $customer->user->display,
 		));
 		if($revenue->save()) {
@@ -133,17 +133,15 @@ class Revenue extends ActiveRecord
 		}
 		
 	}
-	
+
 	public function findByPeriod($period_id)
 	{
 		
 		$criteria = new CDbCriteria;
 		$criteria->select = 'SUM(amount) as amount,service_id,period_id';
-		
-		
 		$criteria->group = 'service_id';
 		$criteria->condition = 'period_id = :period_id';
-		$criteria->params = array('period'=>$period_id);
+		$criteria->params = array('period_id'=>$period_id);
 		
 		return $this->findAll($criteria);
 	}
@@ -154,12 +152,17 @@ class Revenue extends ActiveRecord
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenue,'IDR');
 	}
 	
+	public function getServiceName()
+	{
+		return $this->service?$this->service->name:'--';
+	}
+	
 	public function getStatusRevenue()
 	{
 		if($this->status == self::STATUS_RECEIVED){
-			return CHtml::encode(Yii::t('app','Received'));
+			return Yii::t('app','Received');
 		} else {
-			return CHtml::encode(Yii::t('app','Not Received'));
+			return Yii::t('app','Not Received');
 		}
 	}
 	
@@ -170,42 +173,35 @@ class Revenue extends ActiveRecord
 		));
 	}
 	
-	public $total_amount;
-	
-	public function totalCustomerRevenueByPeriodId($period_id) 
+	public function totalCustomerRevenueByPeriodId($period_id)
 	{
-		return array_sum(CHtml::listData($this->findAllCustomerRevenueByPeriodId($period_id),'id','amount'));
-		/*
-		$criteria = new CDbCriteria;
-		$criteria->select = 'SUM(amount) AS total_amount';
-		$criteria->condition = 'period_id = :period_id AND customer_id != NULL';
-		$criteria->params = array('period_id' => $period_id);
-		return $this->find($criteria)->total_amount;
-		*/
+		return Yii::app()->db->createCommand('SELECT SUM(amount) 
+											FROM revenue
+											WHERE period_id = :period_id
+											AND customer_id IS NOT NULL')
+											->query(array(
+												'period_id'=>$period_id
+											))->readColumn(0);
 	}
 	
-	public function getAmountRevenue()
+	
+	public function getAmountLocale()
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->amount,'IDR');
 	}
 	
-	public function getTotalRevenuePeriod($period_id)
+	public function totalRevenueByPeriodId($period_id)
 	{
-		
-		
-		$totalRevenue = Yii::app()->db->createCommand('SELECT sum(amount) 
+		return Yii::app()->db->createCommand('SELECT SUM(amount) 
 											FROM revenue
 											WHERE period_id = :period_id')
 											->query(array(
 												'period_id'=>$period_id
 											))->readColumn(0);
-												
-		return Yii::app()->locale->numberFormatter->formatCurrency($totalRevenue,'IDR');
-	}
-	
-	public function getTotalRevenuePeriodLocale()
-	{
-		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenuePeriod,'IDR');
 	}
 
+	public function totalRevenueByPeriodIdLocale($period_id)
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenueByPeriodId($period_id),'IDR');
+	}
 }

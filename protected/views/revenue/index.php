@@ -28,11 +28,6 @@ $this->menu=array(
 ?>
 
 <h2><?php echo Yii::t('app','Manage Revenues'); ?></h2>
-<?php /*
-<div class="new-button last span-8">
-	<?php echo CHtml::link(Yii::t('app','Add Revenue'), array('create'));?>
-</div>
-*/?>
 
 <div class="filter span-24 last form" id="ticket">
 	<fieldset>
@@ -58,7 +53,7 @@ $this->menu=array(
 					<?php echo $form->dropDownList($revenue,'status',array(
 						Revenue::STATUS_RECEIVED => Yii::t('app','Received'),
 						Revenue::STATUS_NOT_RECEIVED => Yii::t('app','Not Received'),
-					),array('empty'=>'All'))?>
+					),array('empty'=>Yii::t('app','All')))?>
 				</div>
 			</div>
 			<?php $this->endWidget(); ?>
@@ -76,7 +71,7 @@ $this->menu=array(
 		'name',
 		array(
 			'name'=>'service_id',
-			'value'=>'$data->service->name',
+			'value'=>'$data->serviceName',
 		),
 		array(
 			'name'=>'statusRevenue',

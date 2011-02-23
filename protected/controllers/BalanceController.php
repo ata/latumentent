@@ -27,7 +27,7 @@ class BalanceController extends Controller
 		if(isset($_GET['period_id'])){
 			$period_id = $_GET['period_id'];
 		} else {
-			$period_id = Period::model()->getLastId()
+			$period_id = Period::model()->getLastId();
 		}
 		
 		$revenue = Revenue::model()->findByPeriod($period_id);
