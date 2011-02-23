@@ -101,7 +101,7 @@ class CustomerController extends Controller
 
 		if(isset($_POST['CustomerForm'])) {
 			$customerForm->attributes=$_POST['CustomerForm'];
-			if ($customerForm->submit()) {
+			if ($customerForm->validate() && $customerForm->submit()) {
 				$this->redirect(array('invoice/index'));
 			}
 		} else {

@@ -98,7 +98,7 @@ class CustomerForm extends CFormModel
 			return false;
 		}
 
-		if(!$customer->generateInvoices(Period::model()->last()->find()->id)) {
+		if(!$customer->generateInvoices(Period::model()->lastId)) {
 			return false;
 		}
 		

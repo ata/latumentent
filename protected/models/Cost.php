@@ -49,7 +49,7 @@ class Cost extends ActiveRecord
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, amount, period_id, service_id', 'safe', 'on'=>'search'),
+			array('id, amount, period_id, service_id,status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -98,6 +98,7 @@ class Cost extends ActiveRecord
 		$criteria->compare('amount',$this->amount);
 		$criteria->compare('period_id',$this->period_id);
 		$criteria->compare('service_id',$this->service_id);
+		$criteria->compare('status',$this->status);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
@@ -156,7 +157,13 @@ class Cost extends ActiveRecord
 	
 	public function totalCustomerCostByPeriodId($period_id) 
 	{
-		return array_sum(CHtml::listData($this->findAllCustomerCostByPeriodId($period_id),'id','amount'));
+		return Yii::app()->db->createCommand('SELECT SUM(amount) 
+											FROM cost
+											WHERE period_id = :period_id
+											AND customer_id IS NOT NULL')
+											->query(array(
+												'period_id'=>$period_id
+											))->readColumn(0);
 	}
 	
 	public function getServiceName()
@@ -169,6 +176,14 @@ class Cost extends ActiveRecord
 		
 	}
 	
+	public function getCostStatus()
+	{
+		if($this->status == self::STATUS_PAID){
+			return CHtml::encode(Yii::t('app','Paid'));
+		} else {
+			return CHtml::encode(Yii::t('app','Not Paid'));
+		}
+	}
 	
 	public function getCostLocale()
 	{

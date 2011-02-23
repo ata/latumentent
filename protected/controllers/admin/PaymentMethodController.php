@@ -1,6 +1,6 @@
 <?php
 
-class RevenueController extends Controller
+class PaymentMethodController extends AdminController
 {
 
 	/**
@@ -22,8 +22,8 @@ class RevenueController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view','delete','create','update','filter'),
-				'roles'=>array('admin','management','customer_services'),
+				'actions'=>array('index','view','delete','create','update'),
+				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -38,7 +38,7 @@ class RevenueController extends Controller
 	public function actionView($id)
 	{
 		$this->render('view',array(
-			'revenue'=>$this->loadRevenue($id),
+			'paymentMethod'=>$this->loadPaymentMethod($id),
 		));
 	}
 
@@ -48,27 +48,20 @@ class RevenueController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$revenue=new Revenue;
+		$paymentMethod=new PaymentMethod;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($revenue);
+		// $this->performAjaxValidation($paymentMethod);
 
-		if(isset($_POST['Revenue']))
+		if(isset($_POST['PaymentMethod']))
 		{
-			$revenue->attributes=$_POST['Revenue'];
-			if($revenue->save())
-				$this->redirect(array('view','id'=>$revenue->id));
-		} else {
-			$revenue->period_id = Period::model()->last()->find()->id;
+			$paymentMethod->attributes=$_POST['PaymentMethod'];
+			if($paymentMethod->save())
+				$this->redirect(array('view','id'=>$paymentMethod->id));
 		}
-		
-		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
-		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 
 		$this->render('create',array(
-			'revenue'=>$revenue,
-			'serviceList'=>$serviceList,
-			'periodList'=>$periodList,
+			'paymentMethod'=>$paymentMethod,
 		));
 	}
 
@@ -79,25 +72,20 @@ class RevenueController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$revenue=$this->loadRevenue($id);
+		$paymentMethod=$this->loadPaymentMethod($id);
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($revenue);
+		// $this->performAjaxValidation($paymentMethod);
 
-		if(isset($_POST['Revenue']))
+		if(isset($_POST['PaymentMethod']))
 		{
-			$revenue->attributes=$_POST['Revenue'];
-			if($revenue->save())
-				$this->redirect(array('view','id'=>$revenue->id));
+			$paymentMethod->attributes=$_POST['PaymentMethod'];
+			if($paymentMethod->save())
+				$this->redirect(array('view','id'=>$paymentMethod->id));
 		}
-		
-		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
-		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 
 		$this->render('update',array(
-			'revenue'=>$revenue,
-			'serviceList'=>$serviceList,
-			'periodList'=>$periodList,
+			'paymentMethod'=>$paymentMethod,
 		));
 	}
 
@@ -111,7 +99,7 @@ class RevenueController extends Controller
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$this->loadRevenue($id)->delete();
+			$this->loadPaymentMethod($id)->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
@@ -126,35 +114,13 @@ class RevenueController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$revenue=new Revenue('search');
-		$revenue->unsetAttributes(); 
-		 // clear any default values
-		if(isset($_GET['Revenue'])){
-			$revenue->attributes=$_GET['Revenue'];
-		} else {
-			$revenue->period_id = Period::model()->getLastId();
-		}
-		
-		
-		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
-		$totalRevenue = Revenue::model()->totalRevenueByPeriodIdLocale(Period::model()->lastId);
+		$paymentMethod=new PaymentMethod('search');
+		$paymentMethod->unsetAttributes();  // clear any default values
+		if(isset($_GET['PaymentMethod']))
+			$paymentMethod->attributes=$_GET['PaymentMethod'];
+
 		$this->render('index',array(
-			'revenue'=>$revenue,
-			'periodList'=>$periodList,
-			'totalRevenue'=>$totalRevenue,
-		));
-	}
-	
-	public function actionFilter()
-	{
-		if(isset($_GET['period_id'])){
-			$period_id = $_GET['period_id'];
-		} 
-		
-		$totalRevenue = Revenue::model()->totalRevenueByPeriodIdLocale($period_id);
-		
-		$this->renderPartial('_total',array(
-			'totalRevenue'=>$totalRevenue,
+			'paymentMethod'=>$paymentMethod,
 		));
 	}
 
@@ -163,23 +129,23 @@ class RevenueController extends Controller
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer the ID of the model to be loaded
 	 */
-	public function loadRevenue($id)
+	public function loadPaymentMethod($id)
 	{
-		$revenue=Revenue::model()->findByPk((int)$id);
-		if($revenue===null)
+		$paymentMethod=PaymentMethod::model()->findByPk((int)$id);
+		if($paymentMethod===null)
 			throw new CHttpException(404,Yii::t('app','The requested page does not exist.'));
-		return $revenue;
+		return $paymentMethod;
 	}
 
 	/**
 	 * Performs the AJAX validation.
 	 * @param CModel the model to be validated
 	 */
-	protected function performAjaxValidation($revenue)
+	protected function performAjaxValidation($paymentMethod)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='revenue-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='payment-method-form')
 		{
-			echo CActiveForm::validate($revenue);
+			echo CActiveForm::validate($paymentMethod);
 			Yii::app()->end();
 		}
 	}

@@ -7,11 +7,11 @@
 		});;
 	}
 	$("#revenue-filter select").change(update_revenue_list);
+	$("#Revenue_period_id").change(function(){
+		$("#total").load("index.php?r=revenue/filter&period_id="+$(this).val());
+	});
 })(jQuery)
 
-$("#Revenue_period_id").change(function(){
-		$("#total").load("index.php?r=revenue/filter&period="+$(this).val());
-	});
 ')
 ?>
 
@@ -28,11 +28,6 @@ $this->menu=array(
 ?>
 
 <h2><?php echo Yii::t('app','Manage Revenues'); ?></h2>
-<?php /*
-<div class="new-button last span-8">
-	<?php echo CHtml::link(Yii::t('app','Add Revenue'), array('create'));?>
-</div>
-*/?>
 
 <div class="filter span-24 last form" id="ticket">
 	<fieldset>
@@ -50,6 +45,17 @@ $this->menu=array(
 				</div>
 				<div class="clear"></div>
 			</div>
+			<div class="row select span-12" id="select status">
+				<div class="label floatLeft">
+					<?php echo $form->label($revenue,'status');?>
+				</div>
+				<div class="floatLeft">
+					<?php echo $form->dropDownList($revenue,'status',array(
+						Revenue::STATUS_RECEIVED => Yii::t('app','Received'),
+						Revenue::STATUS_NOT_RECEIVED => Yii::t('app','Not Received'),
+					),array('empty'=>Yii::t('app','All')))?>
+				</div>
+			</div>
 			<?php $this->endWidget(); ?>
 	</fieldset>
 </div>
@@ -65,7 +71,11 @@ $this->menu=array(
 		'name',
 		array(
 			'name'=>'service_id',
-			'value'=>'$data->service->name',
+			'value'=>'$data->serviceName',
+		),
+		array(
+			'name'=>'statusRevenue',
+			'header'=>Yii::t('app','Status'),
 		),
 		array(
 			'name'=>'amountRevenue',

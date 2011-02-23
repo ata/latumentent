@@ -1,21 +1,19 @@
 <?php
 
 /**
- * This is the model class for table "apartment".
+ * This is the model class for table "notification".
  *
- * The followings are the available columns in table 'apartment':
+ * The followings are the available columns in table 'notification':
  * @property integer $id
- * @property string $number
- * @property string $note
+ * @property integer $user
+ * @property string $message
  */
-class Apartment extends ActiveRecord
+class Notification extends ActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Apartment the static model class
+	 * @return Notification the static model class
 	 */
-	
-	
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -26,7 +24,7 @@ class Apartment extends ActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'apartment';
+		return 'notification';
 	}
 
 	/**
@@ -37,12 +35,12 @@ class Apartment extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('number', 'required'),
-			array('number', 'length', 'max'=>255),
-			array('note','safe'),
+			array('user, message', 'required'),
+			array('user', 'numerical', 'integerOnly'=>true),
+			array('message', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, number, note', 'safe', 'on'=>'search'),
+			array('id, user, message', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,8 +52,6 @@ class Apartment extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'occupant' => array(self::HAS_ONE,'Customer','apartment_id'),
-			'customer' => array(self::HAS_ONE,'Customer','apartment_id'),//alias
 		);
 	}
 
@@ -66,8 +62,8 @@ class Apartment extends ActiveRecord
 	{
 		return array(
 			'id' => Yii::t('app','ID'),
-			'number' => Yii::t('app','Apartment Number'),
-			'note' => Yii::t('app','Note'),
+			'user' => Yii::t('app','User'),
+			'message' => Yii::t('app','Message'),
 		);
 	}
 
@@ -83,38 +79,11 @@ class Apartment extends ActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('number',$this->number,true);
-		$criteria->compare('note',$this->note);
+		$criteria->compare('user',$this->user);
+		$criteria->compare('message',$this->message,true);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
-	}
-	
-	
-	public function findByNumber($number) 
-	{
-		return $this->findByAttributes(array(
-			'number' => $number,
-		));
-	}
-	
-	public function getDisplay()
-	{
-		return $this->number;
-	}
-	
-	public function getStatus()
-	{
-		if ($this->customer !== null) {
-			if (empty($this->customer->services)) {
-				return Yii::t('app','Idle');
-			}
-			return Yii::t('app','Hired by {name}',array(
-				'{name}' => $this->customer->user->fullname
-			));
-		} else {
-			return Yii::t('app','Empty');
-		}
 	}
 }

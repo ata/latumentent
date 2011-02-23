@@ -57,7 +57,7 @@ class Invoice extends ActiveRecord
 			array('status','default','value'=>self::STATUS_NOT_PAID),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, total_amount, total_compensation, period_id, customer_id, serviceIds', 'safe', 'on'=>'search'),
+			array('id, total_amount, total_compensation, period_id, customer_id, serviceIds,status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -109,6 +109,7 @@ class Invoice extends ActiveRecord
 		$criteria->compare('t.total_compensation',$this->total_compensation);
 		$criteria->compare('t.period_id',$this->period_id);
 		$criteria->compare('t.customer_id',$this->customer_id);
+		$criteria->compare('t.status',$this->status);
 		if($this->serviceIds !== null){
 			$serviceIds = !empty($this->serviceIds)?implode(',',$this->serviceIds):'0';
 			$criteria->addCondition('invoiceItems.service_id in ('. $serviceIds .')');
@@ -236,7 +237,7 @@ class Invoice extends ActiveRecord
 		$this->status = self::STATUS_PAID;
 		foreach($this->invoiceItems as $item) {
 			$revenue = new Revenue;
-			$revenue->name = Yii::t('app','{service} payment from {name}',array(
+			$revenue->name = Yii::t('app','{service} Payment from {name}',array(
 				'{service}' => $item->service->name,
 				'{name}' => $item->customer->user->display,
 			));
@@ -249,7 +250,7 @@ class Invoice extends ActiveRecord
 			$revenue->save();
 			if ($item->subtotal_compensation > 0) {
 				$cost = new Cost;
-				$cost->name = Yii::t('app','{service} compensation from {name}',array(
+				$cost->name = Yii::t('app','{service} Compensation for {name}',array(
 					'{service}' => $item->service->name,
 					'{name}' => $item->customer->user->display,
 				));
