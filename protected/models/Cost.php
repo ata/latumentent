@@ -157,7 +157,13 @@ class Cost extends ActiveRecord
 	
 	public function totalCustomerCostByPeriodId($period_id) 
 	{
-		return array_sum(CHtml::listData($this->findAllCustomerCostByPeriodId($period_id),'id','amount'));
+		return Yii::app()->db->createCommand('SELECT SUM(amount) 
+											FROM cost
+											WHERE period_id = :period_id
+											AND customer_id IS NOT NULL')
+											->query(array(
+												'period_id'=>$period_id
+											))->readColumn(0);
 	}
 	
 	public function getServiceName()

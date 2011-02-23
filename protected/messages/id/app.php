@@ -105,5 +105,16 @@ return array(
 	'Total Bills' => 'Total Tagihan',
 	'Received'=>'Telah Diterima',
 	'Not Received'=>'Belum Diterima',
-	
+	'Paid' => 'Telah Dibayar',
+	'Not Paid' => 'Belum Dibayar',
+	'Registration fee from {name}' => 'Biaya Registasi dari {name}',
+	'{service} Payment from {name}' => 'Pembayaran {service} dari {name}',
+	'{service} Compensation for {name}' => 'Kompensasi {service} untuk {name}',
+	'Not Paid ({link})' => 'Belum Bayar ({link})',
+	'Pay' => 'Bayar',
+	'Payment Method' => 'Metode Pembayaran',
+	'Add Payment Method' => 'Tambah Metode Pembayaran',
+	'Manage Payment Methods' => 'Kelola Metode Pembayaran',
+	'Hired by {name}' => 'Disewa oleh {name}',
+	'Empty' => 'Kosong',
 );

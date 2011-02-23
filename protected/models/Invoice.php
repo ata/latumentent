@@ -237,7 +237,7 @@ class Invoice extends ActiveRecord
 		$this->status = self::STATUS_PAID;
 		foreach($this->invoiceItems as $item) {
 			$revenue = new Revenue;
-			$revenue->name = Yii::t('app','{service} payment from {name}',array(
+			$revenue->name = Yii::t('app','{service} Payment from {name}',array(
 				'{service}' => $item->service->name,
 				'{name}' => $item->customer->user->display,
 			));
@@ -250,7 +250,7 @@ class Invoice extends ActiveRecord
 			$revenue->save();
 			if ($item->subtotal_compensation > 0) {
 				$cost = new Cost;
-				$cost->name = Yii::t('app','{service} compensation from {name}',array(
+				$cost->name = Yii::t('app','{service} Compensation for {name}',array(
 					'{service}' => $item->service->name,
 					'{name}' => $item->customer->user->display,
 				));
