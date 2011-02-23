@@ -134,6 +134,18 @@ class Revenue extends ActiveRecord
 		
 	}
 
+	public function findByPeriod($period_id)
+	{
+		
+		$criteria = new CDbCriteria;
+		$criteria->select = 'SUM(amount) as amount,service_id,period_id';
+		$criteria->group = 'service_id';
+		$criteria->condition = 'period_id = :period_id';
+		$criteria->params = array('period_id'=>$period_id);
+		
+		return $this->findAll($criteria);
+	}
+
 	
 	public function getTotalRevenueLocale()
 	{
