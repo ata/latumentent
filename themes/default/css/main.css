@@ -8,7 +8,7 @@
 
  body {
 	background: none repeat scroll 0 0 #F9EED4;
-	color: #FFFFFF;
+	color: #000;
 	font: 10pt Arial,Helvetica,sans-serif;
 	margin: 0;
 	padding: 0;
@@ -343,6 +343,7 @@ div.filter form#ticket-filter .row label{
 
 .post{
 	padding-left:10px;
+	color:#FFF;
 }
 
 .ptitle, .stitle {
@@ -359,6 +360,7 @@ div.filter form#ticket-filter .row label{
 	list-style-type: none;
 	border-bottom: 1px solid #CCCCCC;
 	padding: 5px;
+	color:#FFF;
 }
 
 #post-image {
@@ -368,6 +370,7 @@ div.filter form#ticket-filter .row label{
 .sidebar{
 	padding-right:10px;
 	width:300px;
+	color:#FFF;
 }
  
 
@@ -901,6 +904,7 @@ td {
 
 .ticket .body p{
 	padding:0 1em;
+	 
 }
 
 .ticket .body span.date{
@@ -988,3 +992,25 @@ ul.yiiPager .last
 {
 	display:none;
 }
+
+/*
+ START ADMIN
+ */
+
+#bodysite-admin{
+background:#FFFFFF;
+	/* background:-moz-linear-gradient(top, #003471, #448ccb);
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#003471), to(#448ccb));*/ 
+	border:10px solid #FFFFFF;
+	-moz-box-shadow:0 2px 5px #000000;
+	margin-top:20px;
+	padding:10px 0;
+
+}
+
+#bodysite-admin p{
+color : #000000;
+}
+/*
+ FINISH ADMIN
+ */

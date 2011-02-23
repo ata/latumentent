@@ -1,5 +1,5 @@
 <?php $this->beginContent('//layouts/main'); ?>
-<div class="container">
+<div class="container" id="frontend-page">
 	<div id="bodysite">
 		<div id="content">
 			<div class="container">
