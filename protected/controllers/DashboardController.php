@@ -26,7 +26,7 @@ class DashboardController extends Controller
 				'roles'=>array('admin','management','customer_services'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','customer','filter'),
+				'actions'=>array('index','customer','filter','notifyDelete'),
 				'roles'=>array('customer'),
 			),
 			array('deny',  // deny all users
@@ -75,11 +75,25 @@ class DashboardController extends Controller
 		$period = new Period;
 		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 		
+		$notificationList = Notification::model()->findAllStatusActive();
+		
+		//print_r($notificationList);
+		
 		$this->render('customer',array(
 			'invoice' => $invoice,
 			'period'=>$period,
 			'periodList'=>$periodList,
+			'notificationList'=>$notificationList,
 		));
+	}
+	
+	public function actionNotifyDelete()
+	{
+		if(isset($_POST['id'])){
+			$notifikasi = Notification::model()->findByPk($_POST['id']);
+			$notifikasi->changeStatus();
+			echo "success";
+		}
 	}
 	
 	public function actionFilter()

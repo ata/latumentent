@@ -122,7 +122,7 @@ class TicketController extends Controller
 					$reply->attributes = array();
 				}
 				if (isset($_POST['submit']['reply_close'])) {
-					if($ticket->close(Yii::app()->user-id)) {
+					if($ticket->close(Yii::app()->user->id)) {
 						$reply->attributes = array();
 					}
 				}
