@@ -1015,3 +1015,14 @@ color : #000000;
 /*
  FINISH ADMIN
  */
+
+/*START PAGE*/
+.page-content{
+padding:10px 25px 10px 10px;
+color:#FFF;
+}
+.page-content-title h1, .page-content-text{
+color:#FFF;
+}
+
+/*FINISH PAGE*/
