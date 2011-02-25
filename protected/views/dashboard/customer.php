@@ -2,6 +2,20 @@
 	$("#Period_name").change(function(){
 		$("#invoice").load("index.php?r=dashboard/filter&period="+$(this).val());
 	});
+	$(".hide_notification").live("click",function(){
+		var ID = $(this).attr("id");
+		$.post(
+			"'.Yii::app()->createUrl("dashboard/notifyDelete").'",
+			{id:ID},
+			function(response){
+				if(response == "success"){
+					$("#"+ID).slideUp();
+				} else {
+					alert("gagal menghapus");
+				}
+			}
+		);
+	});
 ')?>
 
 <?php
@@ -10,6 +24,14 @@ $this->breadcrumbs=array(
 	'View',
 );?>
 
+<?php if(count($notificationList) > 0):?>
+	<?php foreach($notificationList as $items):?>
+	<div class="notification" id="<?php echo $items->id?>"">
+		<?php echo $items->message?> <br>
+		<span class="delete_button"><a href="#" id="<?php echo $items->id?>" class="hide_notification">x</a></span>
+	</div>
+	<?php endforeach?>
+<?php endif;?>
 <h2><?php echo Yii::t('app','Detail Invoice') ?></h2>
 
 <div class="customer-info span-24" id="ticket">
@@ -46,8 +68,11 @@ $this->breadcrumbs=array(
 </div>
 <?php endif ?>
 
+
+
 <div id="invoice">
 	<?php if ($invoice):?>
 		<?php $this->renderPartial('_customerInvoice',array('invoice' => $invoice,));?>
 	<?php endif?>
 </div>
+

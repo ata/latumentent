@@ -93,4 +93,19 @@ class Notification extends ActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function findAllStatusActive()
+	{
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'user = :user AND status = :status';
+		$criteria->params = array('user'=>Yii::app()->user->id,'status'=>self::STATUS_NEW);
+		
+		return $this->findAll($criteria);
+	}
+	
+	public function changeStatus()
+	{
+		$this->status = self::STATUS_HIDE;
+		$this->save(false);
+	}
 }
