@@ -12,6 +12,7 @@
  * @property integer $customer_id
  * @property text $note
  * @property integer $status
+ * @property integer $user_log_id
  */
 class Cost extends ActiveRecord
 {
@@ -195,6 +196,11 @@ class Cost extends ActiveRecord
 									))->readColumn(0);
 									
 		return Yii::app()->locale->numberFormatter->formatCurrency($total,'IDR');
+	}
+	
+	public function totalCostByPeriodIdLocale($period_id) 
+	{
+		return $this->totalCostByPeriodId($period_id);
 	}
 
 }

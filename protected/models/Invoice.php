@@ -12,6 +12,7 @@
  * @property integer $payment_method_id
  * @property integer $status
  * @property integer $user_id
+ * @property integer $user_log_id
  *
  * The followings are the available model relations:
  * @property Customer $customer
@@ -144,7 +145,7 @@ class Invoice extends ActiveRecord
 	public function findByUserId($user_id,$period_id)
 	{
 		$criteria = new CDbCriteria;
-		$criteria->condition = 'customer.user_id = :user_id and period_id = :period_id';
+		$criteria->condition = 'customer.user_id = :user_id AND period_id = :period_id';
 		$criteria->with = array('customer');
 		$criteria->params = array('user_id' => $user_id,'period_id'=>$period_id);
 		

@@ -10,6 +10,7 @@
  * @property integer $period_id
  * @property integer $service_id
  * @property integer $status
+ * @property integer $user_log_id
  */
 class Revenue extends ActiveRecord
 {

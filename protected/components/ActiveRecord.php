@@ -21,12 +21,4 @@ class ActiveRecord extends CActiveRecord
 	{
 		return $this->getDisplay();
 	}
-	
-	protected function beforeSave()
-	{
-		if (isset($this->user_log_id)) {
-			$this->user_log_id = Yii::app()->user->id;
-		}
-		return parent::beforeSave();
-	}
 }
