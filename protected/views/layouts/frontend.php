@@ -17,7 +17,7 @@
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
-<body id="<?php echo $this->htmlId?>-page">
+<body id="<?php echo $this->htmlId?>-page" class="frontend-page">
 
 <div class="wrapper">
 

@@ -22,8 +22,8 @@ $this->menu=array(
 	'columns'=>array(
 		'id',
 		'name',
-		//'total_revenue',
-		//'total_outlay',
+		'start',
+		'end',
 		array(
 			'class'=>'CButtonColumn',
 		),

@@ -12,7 +12,10 @@
  * @property integer $payment_method_id
  * @property integer $status
  * @property integer $user_id
- *
+ * @property integer $user_log_id
+ * @property date $payment_date
+ * @property date $paying_date
+ * 
  * The followings are the available model relations:
  * @property Customer $customer
  * @property Period $period
@@ -55,6 +58,7 @@ class Invoice extends ActiveRecord
 			array('period_id, status, user_log_id, customer_id, user_id, payment_method_id', 'numerical', 'integerOnly'=>true),
 			array('total_amount, total_compensation', 'numerical'),
 			array('status','default','value'=>self::STATUS_NOT_PAID),
+			array('payment_date, paying_date','safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, total_amount, total_compensation, period_id, customer_id, serviceIds,status', 'safe', 'on'=>'search'),
@@ -144,7 +148,7 @@ class Invoice extends ActiveRecord
 	public function findByUserId($user_id,$period_id)
 	{
 		$criteria = new CDbCriteria;
-		$criteria->condition = 'customer.user_id = :user_id and period_id = :period_id';
+		$criteria->condition = 'customer.user_id = :user_id AND period_id = :period_id';
 		$criteria->with = array('customer');
 		$criteria->params = array('user_id' => $user_id,'period_id'=>$period_id);
 		

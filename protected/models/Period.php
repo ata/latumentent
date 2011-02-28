@@ -6,8 +6,9 @@
  * The followings are the available columns in table 'period':
  * @property integer $id
  * @property string $name
- * @property double total_revenue
- * @property double total_outlay
+ * @property date $start
+ * @property date $end
+ * 
  * The followings are the available model relations:
  * @property Invoice[] $invoices
  * @property InvoiceItem[] $invoiceItems
@@ -40,7 +41,7 @@ class Period extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'required'),
+			array('name, start, end', 'required'),
 			array('name', 'length', 'max'=>255),
 			array('total_revenue, total_outlay', 'numerical'),
 			// The following rule is used by search().
@@ -100,8 +101,8 @@ class Period extends ActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('total_revenue',$this->total_revenue);
-		$criteria->compare('total_outlay',$this->total_outlay);
+		$criteria->compare('start',$this->start);
+		$criteria->compare('end',$this->end);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

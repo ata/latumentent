@@ -9,6 +9,7 @@
  * @property double $amount
  * @property string $note
  * @property integer $service_id
+ * @property date $payment_date
  */
 class PeriodicCost extends ActiveRecord
 {
@@ -37,7 +38,7 @@ class PeriodicCost extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, amount', 'required'),
+			array('name, amount, payment_date', 'required'),
 			array('amount', 'numerical'),
 			array('service_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),

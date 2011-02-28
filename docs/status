@@ -36,3 +36,8 @@ Teknisi:
 - ganti status ticket
 
 
+Migrate:
+- Hapus billing_date dan paying_date di table invoice_item
+- tambahkan fine (denda) pada invoice
+- Tambahkan field start, end pada period, hilangkan total_revenue dan total_outlay
+- Tambahkan payment_date pada periodic_cost
