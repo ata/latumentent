@@ -53,7 +53,7 @@ class ServicePackage extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'services'=>array(self::MANY_MANY,'Service','service_package_has_service(service_id,service_package_id)','index'=>'id'),
+			'services'=>array(self::MANY_MANY,'Service','service_package_has_service(service_package_id,service_id)','index'=>'id')
 		);
 	}
 
@@ -124,7 +124,6 @@ class ServicePackage extends ActiveRecord
 	public function afterFind()
 	{
 		$this->serviceIds = array_keys($this->services);
-		print_r($this->serviceIds);
 		return parent::afterFind();
 	}
 	
