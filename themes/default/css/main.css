@@ -2,12 +2,12 @@
 	GLOBAL
  */
  
- html{
+html{
 	height:100%;
  }
 
- body {
-	background: none repeat scroll 0 0 #F9EED4;
+body {
+	background:#F9EED4 url(images/main_bg.jpg) top center;
 	color: #000;
 	font: 10pt Arial,Helvetica,sans-serif;
 	margin: 0;
@@ -37,13 +37,9 @@ p{
 }
 
 #bodysite {
-	/*background:#FFFFFF;*/
-	 background:-moz-linear-gradient(top, #003471, #448ccb);
-	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#003471), to(#448ccb)); 
-	border:10px solid #FFFFFF;
-	-moz-box-shadow:0 2px 5px #000000;
-	margin-top:20px;
-	padding:10px 0;
+	background:#FFFFFF;
+	/*-moz-box-shadow:0 2px 5px #000000;*/
+	 
 }
 
 .floatLeft {
@@ -65,7 +61,14 @@ p{
  
 #headersite {
 	background:#8E0D03;
+	background:-moz-linear-gradient(top, #BE0D21, #840F1E);
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from (#BE0D21), to(#840F1E));
 	height:110px;
+	border-bottom:5px solid #BE0D21;
+	/*-moz-box-shadow:0 2px 5px #000000;
+	-webkit-box-shadow:0 2px 5px #000000;
+	box-shadow:0 2px 5px #000000;*/
+	 
 }
 
 #headersite h2 {
@@ -108,16 +111,20 @@ p{
 div#content h2#login-title{
 	width:400px;
 	padding:5px 20px;
-	margin:10px auto 0 auto;
-	background-color:#99A47E;
-	background:-moz-linear-gradient(top, #ca6915, #99A47E);
-	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#BFC9A6), to(#99A47E));
+	margin:0 auto;
+	background:#6CAED1;
+	background:-moz-linear-gradient(top, #6CAED1, #2C68A4);
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from (#6CAED1), to(#2C68A4));
 	-moz-border-radius:5px 5px 0 0;
 	-webkit-border-radius:5px 5px 0 0;
 	border-radius:5px 5px 0 0;
 	color:#FFFFFF;
 	font-weight:bold;
 	text-shadow:1px 1px 1px #000000;
+}
+
+#login{
+	padding-top:20px;
 }
 
 div.form #login-form{
@@ -203,7 +210,7 @@ div.filter form#ticket-filter .row label{
 }
 
 #top-menu{
-	background:url(images/menu_bg.jpg) top left repeat-x;
+	background:url(images/menu_bg3.jpg) top left repeat-x;
 	height:50px;
 }
 
@@ -220,7 +227,7 @@ div.filter form#ticket-filter .row label{
 #top-menu li a{
 	text-decoration: none;
 	font-weight:bold;
-	background:#571009 url(images/nav_bg.jpg) top left repeat-x;
+	 
 	padding:10px 10px 9px 10px;
 	margin-top:-50px;
 	color:#FFFFFF;
@@ -230,8 +237,8 @@ div.filter form#ticket-filter .row label{
 }
 
 #top-menu li a:hover, #top-navigation li.active a{
-	background:#F4E4B8;
-	color:#571009;
+	background:#FFF;
+	color:#000;
 	-moz-box-shadow:1px -1px 1px #AAAE95;
 	-webkit-box-shadow:1px -1px 1px #AAAE95;
 	-moz-box-shadow:1px -1px 1px #AAAE95;
@@ -308,9 +315,9 @@ div.filter form#ticket-filter .row label{
 
 #slideshow .info{
 	position: absolute;
-	height: 275px;
-	width: 246px;
-	right:30px;
+	height: 290px;
+	width: 275px;
+	right:0;
 	top:0;
 	background-color: #000000;
 	opacity: 0.6;
@@ -329,7 +336,11 @@ div.filter form#ticket-filter .row label{
 #slideshow .info .row .value{
 }
 .image-container{
-	margin:0px 10px;
+	margin:0px 0px;
+	/*-moz-box-shadow:0 0px 5px #000000;
+	-webkit-box-shadow:0 2px 5px #000000;
+	box-shadow:0 2px 5px #000000;
+	z-index:-100;*/
 }
 
 
@@ -338,29 +349,35 @@ div.filter form#ticket-filter .row label{
  */
  
 .content {
-	padding: 20px 0;
+	
 }
 
 .post{
-	padding-left:10px;
-	color:#FFF;
+	color:#000;
+	margin:0 10px 20px 20px;
 }
 
 .ptitle, .stitle {
 	padding: 10px 0;
 	border-bottom: 1px solid #CCCCCC;
+	-moz-box-shadow:0 1px 0 #FFFFFF;
+	-webkit-box-shadow:0 1px 0 #FFFFFF;
+	box-shadow:0 1px 0 #FFFFFF;
 }
 
-.pcontent, .scontent {
+.pcontent, .testimonial-content {
 	padding: 20px 0;
 	/*border-top: 1px solid #FFFFFF;*/
 }
 
-.scontent li {
+.testimonial-content li {
 	list-style-type: none;
 	border-bottom: 1px solid #CCCCCC;
+	-moz-box-shadow:0 1px 0 #FFFFFF;
+	-webkit-box-shadow:0 1px 0 #FFFFFF;
+	box-shadow:0 1px 0 #FFFFFF;
 	padding: 5px;
-	color:#FFF;
+	color:#000;
 }
 
 #post-image {
@@ -368,9 +385,13 @@ div.filter form#ticket-filter .row label{
 }
 
 .sidebar{
-	padding-right:10px;
-	width:300px;
+	
 	color:#FFF;
+	background:#F2F2F2;
+}
+
+.scontent{
+	margin:20px;
 }
  
 
@@ -402,7 +423,6 @@ div.filter form#ticket-filter .row label{
 	color: #FFFFFF;
 	padding-top:15px;
 	z-index:-1;
-	margin-top:20px;
 }
 
 #footersite, #footer, .push{
@@ -415,14 +435,14 @@ div.filter form#ticket-filter .row label{
 
 #content h2{
 	margin:30px 0 10px 0;
-	color:#FFFFFF;
+	color:#666666;
 	font-weight:bold;
 	text-shadow:1px 1px 1px #7B7B7B;
 }
 
 #content h3{
 	margin:10px 0 10px 0;
-	color:#FFFFFF;
+	color:#000;
 	font-weight:bold;
 	text-shadow:1px 1px 1px #7B7B7B;
 }
@@ -1010,11 +1030,13 @@ ul.yiiPager .last
  */
 
 #bodysite-admin{
-background:#FFFFFF;
+background:#FFF;
 	/* background:-moz-linear-gradient(top, #003471, #448ccb);
 	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#003471), to(#448ccb));*/ 
 	border:10px solid #FFFFFF;
 	-moz-box-shadow:0 2px 5px #000000;
+	-webkit-box-shadow:0 2px 5px #000000;
+	box-shadow:0 2px 5px #000000;
 	margin-top:20px;
 	padding:10px 0;
 
