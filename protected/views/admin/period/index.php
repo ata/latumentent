@@ -12,7 +12,7 @@ $this->menu=array(
 <h2><?php echo Yii::t('app','Manage Periods'); ?></h2>
 
 <div class="new-button last span-8">
-	<?php echo CHtml::link(Yii::t('app','Open New Period'), array('open'));?>
+	<?php echo CHtml::link(Yii::t('app','Add New Period'), array('create'));?>
 </div>
 <div class="clear"></div>
 <?php $this->widget('zii.widgets.grid.CGridView', array(

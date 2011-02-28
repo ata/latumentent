@@ -78,9 +78,9 @@
 			</div>
 			<div class="row" id="hire-up" style="display:none">
 				<?php echo $form->labelEx($customerForm,'hire_up_to'); ?>
-				<?php
-				$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+				<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 					'name'=>'CustomerForm[hire_up_to]',
+					'value' => $customerForm->hire_up_to,
 					'options'=>array(
 						'changeYear'=>true,
 						'dateFormat' => 'yy-mm-dd'
