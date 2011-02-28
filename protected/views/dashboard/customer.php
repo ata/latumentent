@@ -47,5 +47,7 @@ $this->breadcrumbs=array(
 <?php endif ?>
 
 <div id="invoice">
-	<?php $this->renderPartial('_customerInvoice',array('invoice' => $invoice,));?>
+	<?php if ($invoice):?>
+		<?php $this->renderPartial('_customerInvoice',array('invoice' => $invoice,));?>
+	<?php endif?>
 </div>

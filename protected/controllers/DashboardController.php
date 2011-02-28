@@ -70,7 +70,7 @@ class DashboardController extends Controller
 	
 	public function actionCustomer()
 	{
-		$invoice = Invoice::model()->findByUserId(Yii::app()->user->id,Period::model()->last()->find()->id);
+		$invoice = Invoice::model()->findByUserId(Yii::app()->user->id,Period::model()->lastId);
 		
 		$period = new Period;
 		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');

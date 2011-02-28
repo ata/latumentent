@@ -7,9 +7,14 @@
  * @property integer $id
  * @property integer $user
  * @property string $message
+ * @property integer $status
  */
 class Notification extends ActiveRecord
 {
+	
+	const STATUS_NEW = 1;
+	const STATUS_HIDE = 2;
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Notification the static model class
@@ -35,12 +40,12 @@ class Notification extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user, message', 'required'),
-			array('user', 'numerical', 'integerOnly'=>true),
+			array('user, message, status', 'required'),
+			array('user, status', 'numerical', 'integerOnly'=>true),
 			array('message', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, user, message', 'safe', 'on'=>'search'),
+			array('id, user, message, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,6 +69,7 @@ class Notification extends ActiveRecord
 			'id' => Yii::t('app','ID'),
 			'user' => Yii::t('app','User'),
 			'message' => Yii::t('app','Message'),
+			'status' => Yii::t('app','Status'),
 		);
 	}
 
@@ -81,6 +87,7 @@ class Notification extends ActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('user',$this->user);
 		$criteria->compare('message',$this->message,true);
+		$criteria->compare('status',$this->status);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,

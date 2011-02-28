@@ -4,13 +4,9 @@ class BalanceController extends Controller
 	public function actionIndex()
 	{
 	
-		
 		$revenue = Revenue::model()->findByPeriod(Period::model()->getLastId());
 		$cost = Cost::model()->findByPeriod(Period::model()->getLastId());
-		
-		
 		$period = new Period('search');
-
 		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 		
 		$this->render('index',array(
