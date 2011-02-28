@@ -27,6 +27,10 @@ p, h1, h2, h3, h4, h5 {
 	padding: 0;
 }
 
+h1, h2, h3, h4, h5{
+	color:#666666;
+}
+
 h1{
 	margin-bottom:30px;
 }
@@ -39,7 +43,7 @@ p{
 #bodysite {
 	background:#FFFFFF;
 	/*-moz-box-shadow:0 2px 5px #000000;*/
-	padding: 20px 0;
+	padding:0;
 }
 
 .floatLeft {
@@ -239,9 +243,6 @@ div.filter form#ticket-filter .row label{
 #top-menu li a:hover, #top-navigation li.active a{
 	background:#FFF;
 	color:#000;
-	-moz-box-shadow:1px -1px 1px #AAAE95;
-	-webkit-box-shadow:1px -1px 1px #AAAE95;
-	-moz-box-shadow:1px -1px 1px #AAAE95;
 }
 
 #header {
@@ -435,16 +436,12 @@ div.filter form#ticket-filter .row label{
 
 #content h2{
 	margin:30px 0 10px 0;
-	color:#666666;
 	font-weight:bold;
-	text-shadow:1px 1px 1px #7B7B7B;
 }
 
 #content h3{
 	margin:10px 0 10px 0;
-	color:#000;
 	font-weight:bold;
-	text-shadow:1px 1px 1px #7B7B7B;
 }
 
 
@@ -562,7 +559,7 @@ div.search-form {
 }
 
 .portlet {
-
+	margin:20px 0;
 }
 .portlet-decoration {
 	background:#99A47E;
@@ -610,7 +607,7 @@ div.search-form {
 	color: #8C8E78;
 	display: block;
 	font: bold 12px/15px Arial;
-	padding: 2px 0 2px 8px;
+	padding: 5px 0 5px 8px;
 	text-decoration: none;
 }
 .operations li a:visited {
@@ -1026,7 +1023,7 @@ ul.yiiPager .last
 }
 
 #bodysite-admin p, #bodysite-admin h2, #bodysite-admin h3{
-color : #000000;
+
 }
  
 /*
@@ -1035,11 +1032,11 @@ color : #000000;
 
 /*START PAGE*/
 .page-content{
-padding:10px 25px 10px 10px;
-color:#FFF;
+padding:20px;
+
 }
 .page-content-title h1, .page-content-text{
-color:#FFF;
+
 }
 
 /*FINISH PAGE*/
