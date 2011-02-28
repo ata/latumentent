@@ -66,7 +66,6 @@ class Customer extends ActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, number, user_id, status, ownership, hire_up_to', 'safe', 'on'=>'search'),
-
 		);
 	}
 

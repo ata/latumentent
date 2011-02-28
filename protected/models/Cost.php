@@ -9,6 +9,7 @@
  * @property double $amount
  * @property integer $period_id
  * @property integer $service_id
+ * @property integer $user_id
  * @property integer $customer_id
  * @property text $note
  * @property integer $status

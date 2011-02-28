@@ -11,8 +11,6 @@
  * @property integer $period_id
  * @property integer $customer_id
  * @property integer $service_id
- * @property date $billing_date
- * @property date $paying_date
  * 
  * The followings are the available model relations:
  * @property Customer $customer
