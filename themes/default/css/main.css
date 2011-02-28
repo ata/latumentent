@@ -206,6 +206,15 @@ div.form form#customer-form .row label.title,
 	margin-right:10px;
 }
 
+div.form .errorMessage{
+	margin-left:160px;
+}
+
+div.form .errorSummary li{
+	list-style:square;
+	padding: 5px 0;
+}
+
 div.form form#customer-form .row div.errorMessage{
 	margin-left:160px;
 }
@@ -566,7 +575,7 @@ div.search-form {
 }
 .portlet-decoration {
 	background:#99A47E;
-	background:-moz-linear-gradient(top, #BFC9A6, #99A47E);
+	background:-moz-linear-gradient(top, #04738E, #164F62);
 	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#BFC9A6), to(#99A47E));
 	padding: 10px 8px;
 	-moz-border-radius:5px 5px 0 0;
@@ -586,7 +595,7 @@ div.search-form {
 	font-size: 0.9em;
 	margin: 0 0 15px;
 	padding: 5px 8px;
-	border:1px solid #DCDCDC;
+	border:1px solid #164F62;
 	border-top:none;
 }
 .portlet-content ul {
@@ -607,17 +616,17 @@ div.search-form {
 	border-bottom:1px dashed #DCDCDC;
 }
 .operations li a {
-	color: #8C8E78;
+	color: #04738E;
 	display: block;
 	font: bold 12px/15px Arial;
 	padding: 5px 0 5px 8px;
 	text-decoration: none;
 }
 .operations li a:visited {
-	color: #8C8E78;
+	color: #04738E;
 }
 .operations li a:hover {
-	color: #4B4E3C;
+	color: #164F62;
 }
 
 #customer-filter .row{
@@ -681,7 +690,7 @@ div.ticket .head{
 .summary-bills th.title,
 .summary-bills tfoot th.value,
 table.balance-data tfoot th.ar{
-	background:#B3B38A;
+	background:#394046;
 }
 
 .summary-bills th.value{
@@ -691,7 +700,7 @@ table.balance-data tfoot th.ar{
 
 .bills tfoot th.value,
 table.balance-data tfoot th.value{
-	color:#B70F02;
+	color:#F7931E;
 }
 
 div.ticket .head span.title h3{
@@ -717,20 +726,21 @@ div.ticket .head span.status{
 	text-decoration: none;
 	padding: 10px 20px;
 	margin-top: 50px;
-	background: #82845D;
-	background:-moz-linear-gradient(top, #B3B38A, #82845D);
+	background: #005500;
+	background:-moz-linear-gradient(top, #008800, #005500);
 	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#AEBA48), to(#82845D));
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+	border:1px solid #000;
+	-moz-box-shadow:inset 0 0 2px #00cc00;
+	-webkit-box-shadow:inset 0 0 2px #00cc00;
+	box-shadow:inset 0 0 2px #00cc00;
 	color:#CCCCCC;
 	text-shadow:1px 1px 1px #000000;
 	font-weight:bold;
 	border:none;
 	cursor:pointer;
-	-moz-box-shadow:0 0 3px #000000;
-	-webkit-box-shadow:0 0 3px #000000;
-	box-shadow:0 0 3px #000000;
 }
 
 .new-button a:hover,
@@ -755,6 +765,11 @@ td {
 	border: 1px solid #CCCCCC;
 	width: 300px;
 	height:35px;
+}
+
+.detail-view th{
+	text-align:right;
+	padding-right:20px;
 }
 
 
@@ -962,7 +977,7 @@ td {
 }
 
 tfoot tr th.title, tfoot tr th.value{
-	background:#82845D;
+	background:#394046;
 }
 
 ul.yiiPager
