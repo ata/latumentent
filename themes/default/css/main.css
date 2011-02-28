@@ -39,7 +39,7 @@ p{
 #bodysite {
 	background:#FFFFFF;
 	/*-moz-box-shadow:0 2px 5px #000000;*/
-	 
+	padding: 20px 0;
 }
 
 .floatLeft {
@@ -1030,15 +1030,10 @@ ul.yiiPager .last
  */
 
 #bodysite-admin{
-background:#FFF;
+	background:#FFF;
 	/* background:-moz-linear-gradient(top, #003471, #448ccb);
 	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#003471), to(#448ccb));*/ 
-	border:10px solid #FFFFFF;
-	-moz-box-shadow:0 2px 5px #000000;
-	-webkit-box-shadow:0 2px 5px #000000;
-	box-shadow:0 2px 5px #000000;
-	margin-top:20px;
-	padding:10px 0;
+	padding:20px 0;
 
 }
 
