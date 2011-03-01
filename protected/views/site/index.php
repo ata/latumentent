@@ -5,7 +5,8 @@
 			<h2 class="ptitle">Recent News</h2>
 			<div class="pcontent">
 				<div id="post-image" class="floatLeft">
-					<img src="<?php echo Yii::app()->request->baseUrl?>/images/news.jpg" alt="image" title="image"/>
+					<img src="<?php echo Yii::app()->request->baseUrl?>/images/news.jpg" 
+					alt="image" title="image" width="298px" height="180px"/>
 				</div>
 				
 				<div class="">
@@ -19,7 +20,8 @@
 			</div>
 			<div class="pcontent">
 				<div id="post-image" class="floatLeft">
-					<img src="<?php echo Yii::app()->request->baseUrl?>/images/news.jpg" alt="image" title="image"/>
+					<img src="<?php echo Yii::app()->request->baseUrl?>/images/news2.jpg" 
+					alt="image" title="image" width="298px" height="180px"/>
 				</div>
 				
 				<div class="">
@@ -33,21 +35,8 @@
 			</div>
 			<div class="pcontent">
 				<div id="post-image" class="floatLeft">
-					<img src="<?php echo Yii::app()->request->baseUrl?>/images/news.jpg" alt="image" title="image"/>
-				</div>
-				
-				<div class="">
-					<p>We've enhanced our new homes section so you can search our 
-					range of new home designs, apartment projects, house & land 
-					packages and land estates, faster and easier. NameSite offers 
-					the largest online directory of New Land Estates from Indonesia's 
-					leading property developers. We make finding and comparing 
-					land estates simple.<a href="#" class="read-more">Read More</a></p>
-				</div>
-			</div>
-			<div class="pcontent">
-				<div id="post-image" class="floatLeft">
-					<img src="<?php echo Yii::app()->request->baseUrl?>/images/news.jpg" alt="image" title="image"/>
+					<img src="<?php echo Yii::app()->request->baseUrl?>/images/news3.jpg" 
+					alt="image" title="image" width="298px" height="180px"/>
 				</div>
 				
 				<div class="">
