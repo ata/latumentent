@@ -31,7 +31,7 @@ p, h1, h2, h3, h4, h5 {
 }
 
 h1, h2, h3, h4, h5{
-	color:#666666;
+	color:#04738E;
 }
 
 h1{
@@ -68,11 +68,11 @@ p{
  
 #headersite {
 	background:#8E0D03;
-	background:-moz-linear-gradient(top, #BE0D21, #840F1E);
-	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from (#BE0D21), to(#840F1E));
 	height:110px;
 	border-bottom:5px solid #BE0D21;
-	/*-moz-box-shadow:0 2px 5px #000000;
+	background:-moz-linear-gradient(top, #BE0D21, #840F1E);
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from (#BE0D21), to(#840F1E));
+/*	-moz-box-shadow:0 2px 5px #000000;
 	-webkit-box-shadow:0 2px 5px #000000;
 	box-shadow:0 2px 5px #000000;*/
 	 
@@ -96,23 +96,23 @@ p{
 #login-status ul{
 	margin-top:0px;
 	padding:5px 10px;
-	background:#FFFFFF;
-	 
+	background:#F9EED4;
 	-moz-border-radius:0 0 5px 5px;
 	-webkit-border-radius:0 0 5px 5px;
 	border-radius:0 0 5px 5px;
 	list-style:none;
-	-moz-box-shadow:1px 1px 1px #000000;
+	/*-moz-box-shadow:1px 1px 1px #000000;
 	-webkit-box-shadow:1px 1px 1px #000000;
-	box-shadow:1px 1px 1px #000000;
+	box-shadow:1px 1px 1px #000000;*/
 }
 
 #login-status ul li a{
-	color:#000;
+	color:#04738E;
 }
 
 #login-status ul li a:hover{
-	color:#000000;
+	color:#04738E;
+	text-decoration:underline;
 }
 
 div#content h2#login-title{
@@ -254,7 +254,7 @@ div.filter form#ticket-filter .row label{
 
 #top-menu li a:hover, #top-navigation li.active a{
 	background:#FFF;
-	color:#000;
+	color:#164F62;
 }
 
 #header {
@@ -805,7 +805,6 @@ td {
 	background: #2C68A4;
 	background:-moz-linear-gradient(top, #6CAED1, #2C68A4);
 	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#6CAED1), to(#2C68A4));
-	
 	-moz-border-radius:5px 5px 0 0;
 	-webkit-border-radius:5px 5px 0 0;
 	border-radius:5px 5px 0 0;
@@ -910,12 +909,7 @@ td {
 .grid-view .filters input,
 .grid-view .filters select
 {
-	height:20px;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
-	border-radius:10px;
-	padding:0 7px;
-	width: 90%;
+	width: 100%;
 	border: 1px solid #ccc;
 }
 
