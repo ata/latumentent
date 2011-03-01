@@ -1,22 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "periodic_cost".
+ * This is the model class for table "service_package".
  *
- * The followings are the available columns in table 'periodic_cost':
+ * The followings are the available columns in table 'service_package':
  * @property integer $id
  * @property string $name
- * @property double $amount
  * @property string $note
- * @property integer $service_id
- * @property date $payment_date
  */
-class PeriodicCost extends ActiveRecord
+class ServicePackage extends ActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return PeriodicCost the static model class
+	 * @return ServicePackage the static model class
 	 */
+	public $serviceIds;
+	
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -27,7 +26,7 @@ class PeriodicCost extends ActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'periodic_cost';
+		return 'service_package';
 	}
 
 	/**
@@ -38,14 +37,11 @@ class PeriodicCost extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, amount, payment_date', 'required'),
-			array('amount', 'numerical'),
-			array('service_id', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>255),
-			array('note', 'safe'),
+			array('name, note', 'length', 'max'=>255),
+			array('name,note,serviceIds','required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, amount, note', 'safe', 'on'=>'search'),
+			array('id, name, note', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,7 +53,7 @@ class PeriodicCost extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'service' => array(self::BELONGS_TO, 'Service', 'service_id'),
+			'services'=>array(self::MANY_MANY,'Service','service_package_has_service(service_package_id,service_id)','index'=>'id')
 		);
 	}
 
@@ -69,9 +65,8 @@ class PeriodicCost extends ActiveRecord
 		return array(
 			'id' => Yii::t('app','ID'),
 			'name' => Yii::t('app','Name'),
-			'amount' => Yii::t('app','Amount'),
-			'service_id' => Yii::t('app','Service'),
 			'note' => Yii::t('app','Note'),
+			'serviceIds' => Yii::t('app','Service'),
 		);
 	}
 
@@ -88,7 +83,6 @@ class PeriodicCost extends ActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('amount',$this->amount);
 		$criteria->compare('note',$this->note,true);
 
 		return new CActiveDataProvider(get_class($this), array(
@@ -96,40 +90,42 @@ class PeriodicCost extends ActiveRecord
 		));
 	}
 	
-	public function getDates()
+	protected function beforeSave()
 	{
-		return array (
-			1 => 1,
-			2 => 2,
-			3 => 3,
-			4 => 4,
-			5 => 5,
-			6 => 6,
-			7 => 7,
-			8 => 8,
-			9 => 9,
-			10 => 10,
-			11 => 11,
-			12 => 12,
-			13 => 13,
-			14 => 14,
-			15 => 15,
-			16 => 16,
-			17 => 17,
-			18 => 18,
-			19 => 19,
-			20 => 20,
-			21 => 21,
-			22 => 22,
-			23 => 23,
-			24 => 24,
-			25 => 25,
-			26 => 26,
-			27 => 27,
-			28 => 28,
-			29 => 29,
-			30 => 30,
-			31 => 31,
-		);
+		if(!$this->isNewRecord){
+			$this->deleteServicePackageHasService();
+		}
+		return parent::beforeSave();
 	}
+	
+	protected function afterSave()
+	{
+		$this->saveServicePackageHasService();
+	}
+	
+	private function saveServicePackageHasService()
+	{
+		foreach($this->serviceIds as $serviceIds){
+			$this->dbConnection->createCommand("
+				INSERT IGNORE into service_package_has_service (service_id,service_package_id)
+				VALUES (:service_id,:service_package_id)
+			")->query(array('service_id'=>$serviceIds,'service_package_id'=>$this->id));
+		}
+	}
+	
+	private function deleteServicePackageHasService()
+	{
+		$this->dbConnection->createCommand(
+			'DELETE FROM service_package_has_service 
+			 WHERE service_package_id = :service_package_id'
+			)->query(array('service_package_id'=>$this->id));
+	}
+	
+	public function afterFind()
+	{
+		$this->serviceIds = array_keys($this->services);
+		return parent::afterFind();
+	}
+	
+	
 }

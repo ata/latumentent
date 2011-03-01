@@ -33,10 +33,18 @@
 			),array('empty' => Yii::t('app','All')));?>
 		</div>
 		
+		<div class="row select">
+			<?php echo $form->label($customer, 'service_package_id') ?>
+			<?php echo $form->dropDownList($customer,'service_package_id',$servicePackageList, array('empty' => Yii::t('app','All')));?>
+		</div>
+		
+		<?php /*
 		<div class="row checkbox" id="service">
 			<?php echo $form->label($customer,'serviceIds');?>
 			<?php echo $form->checkBoxList($customer,'serviceIds',$serviceList,array('separator'=>''))?>
 		</div>
+		*/?>
+		
 		<?php $this->endWidget(); ?>
 	</fieldset>
 </div>
@@ -64,10 +72,17 @@
 				'header'=>Yii::t('app','Full Name'),
 				'value'=>'$data->user->fullname',
 			),
+			/*
 			array(
 				'header'=>Yii::t('app','Services'),
 				'value'=>'$data->rawServices'
 			),
+			*/
+			array(
+				'header'=>Yii::t('app','Service Package'),
+				'name' => 'servicePackage.name',
+			),
+			
 			array(
 				'name' => 'ownership',
 				'header'=>Yii::t('app','Apartment Ownership'),

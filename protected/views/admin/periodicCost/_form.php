@@ -20,6 +20,13 @@
 		<?php echo $form->textField($periodicCost,'amount'); ?>
 		<?php echo $form->error($periodicCost,'amount'); ?>
 	</div>
+	
+	
+	<div class="row">
+		<?php echo $form->labelEx($periodicCost,'payment_date'); ?>
+		<?php echo $form->dropDownList($periodicCost,'payment_date',array_map(function($v){return $v + 1;},array_flip(range(1,31)))); ?>
+		<?php echo $form->error($periodicCost,'payment_date'); ?>
+	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($periodicCost,'note'); ?>

@@ -78,7 +78,7 @@ $this->menu=array(
 			'header'=>Yii::t('app','Status'),
 		),
 		array(
-			'name'=>'amountRevenue',
+			'name'=>'amountLocale',
 			'header'=>Yii::t('app','Amount'),
 		),
 	),

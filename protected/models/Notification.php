@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'notification':
  * @property integer $id
- * @property integer $user
+ * @property integer $user_id
  * @property string $message
  * @property integer $status
  */
@@ -38,14 +38,14 @@ class Notification extends ActiveRecord
 	public function rules()
 	{
 		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
+		// will receive user_id inputs.
 		return array(
-			array('user, message, status', 'required'),
-			array('user, status', 'numerical', 'integerOnly'=>true),
+			array('user_id, message, status', 'required'),
+			array('user_id, status', 'numerical', 'integerOnly'=>true),
 			array('message', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, user, message, status', 'safe', 'on'=>'search'),
+			array('id, user_id, message, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,7 +67,7 @@ class Notification extends ActiveRecord
 	{
 		return array(
 			'id' => Yii::t('app','ID'),
-			'user' => Yii::t('app','User'),
+			'user_id' => Yii::t('app','User'),
 			'message' => Yii::t('app','Message'),
 			'status' => Yii::t('app','Status'),
 		);
@@ -85,7 +85,7 @@ class Notification extends ActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('user',$this->user);
+		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('message',$this->message,true);
 		$criteria->compare('status',$this->status);
 
@@ -97,8 +97,8 @@ class Notification extends ActiveRecord
 	public function findAllStatusActive()
 	{
 		$criteria = new CDbCriteria;
-		$criteria->condition = 'user = :user AND status = :status';
-		$criteria->params = array('user'=>Yii::app()->user->id,'status'=>self::STATUS_NEW);
+		$criteria->condition = 'user_id = :user_id AND status = :status';
+		$criteria->params = array('user_id'=>Yii::app()->user->id,'status'=>self::STATUS_NEW);
 		
 		return $this->findAll($criteria);
 	}

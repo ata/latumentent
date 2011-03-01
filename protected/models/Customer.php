@@ -13,6 +13,7 @@
  * @property integer $rating
  * @property integer $delay_count
  * @property integer $advance_count
+ * @property integer $service_package_id
  * 
  
  * The followings are the available model relations:
@@ -58,14 +59,14 @@ class Customer extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, serviceIds, contact_number, apartment_id, ownership,hire_up_to', 'required'),
+			array('user_id, serviceIds, service_package_id, contact_number, apartment_id, ownership,hire_up_to', 'required'),
 			array('user_id, status', 'numerical', 'integerOnly'=>true),
 			array('rating, delay_count, advance_count', 'length', 'max'=>255),
 			array('status','default','value'=>self::STATUS_ACTIVE),
 			array('hire_up_to', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, number, user_id, status, ownership, hire_up_to', 'safe', 'on'=>'search'),
+			array('id, number, user_id, status, service_package_id, ownership, hire_up_to', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -82,7 +83,8 @@ class Customer extends ActiveRecord
 			'invoices' => array(self::HAS_MANY, 'Invoice', 'customer_id'),
 			'invoiceItems' => array(self::HAS_MANY, 'InvoiceItem', 'customer_id'),
 			'tickets' => array(self::HAS_MANY, 'Ticket', 'customer_id'),
-			'services'=>array(self::MANY_MANY,'Service','customer_has_service(customer_id,service_id)','index'=>'id')
+			'services'=>array(self::MANY_MANY,'Service','customer_has_service(customer_id,service_id)','index'=>'id'),
+			'servicePackage' => array(self::BELONGS_TO, 'ServicePackage', 'service_package_id'),
 		);
 	}
 	
@@ -104,6 +106,7 @@ class Customer extends ActiveRecord
 			'ownership' => Yii::t('app','Apartement Ownership'),
 			'hire_up_to' => Yii::t('app','Hire Up To'),
 			'serviceIds'=>Yii::t('app','Service'),
+			'service_package_id'=>Yii::t('app','Service Package'),
 			'contact_number' => Yii::t('app','Contact Number'),
 		);
 	}
@@ -125,6 +128,7 @@ class Customer extends ActiveRecord
 		$criteria->compare('t.status',$this->status);
 		$criteria->compare('ownership',$this->ownership);
 		$criteria->compare('hire_up_to',$this->hire_up_to);
+		$criteria->compare('service_package_id',$this->service_package_id);
 		if (!$all) {
 			$criteria->compare('t.status', self::STATUS_ACTIVE);
 		}
@@ -139,6 +143,12 @@ class Customer extends ActiveRecord
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	protected function beforeValidate()
+	{
+		$this->serviceIds = array_keys($this->servicePackage->services);
+		return parent::beforeValidate();
 	}
 	
 	protected function beforeSave()

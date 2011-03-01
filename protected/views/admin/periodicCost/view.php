@@ -20,6 +20,7 @@ $this->menu=array(
 		'id',
 		'name',
 		'amount',
+		'payment_date',
 		'note',
 	),
 )); ?>

@@ -22,7 +22,7 @@ $this->menu=array(
 		'id',
 		'name',
 		'amount',
-		'note',
+		'payment_date',
 		array(
 			'class'=>'CButtonColumn',
 		),

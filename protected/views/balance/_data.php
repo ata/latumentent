@@ -51,7 +51,7 @@
 			<?php if(count($revenue) > 0):?>
 				<?php foreach($revenue as $data):?>
 				<tr>
-					<td class="title"><?php echo $data->service->name;?></td>
+					<td class="title"><?php echo $data->serviceName;?></td>
 					<td class="value ar"><?php echo Yii::app()->locale->numberFormatter->formatCurrency($data->amount,'IDR');?></td>
 				</tr>
 				<?php $total_revenue += $data->amount;?>

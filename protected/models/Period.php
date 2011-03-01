@@ -43,10 +43,10 @@ class Period extends ActiveRecord
 		return array(
 			array('name, start, end', 'required'),
 			array('name', 'length', 'max'=>255),
-			array('total_revenue, total_outlay', 'numerical'),
+			array('name','unique'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, total_revenue, total_outlay', 'safe', 'on'=>'search'),
+			array('id, name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -112,6 +112,7 @@ class Period extends ActiveRecord
 	public function addPeriod($name=null)
 	{
 		$_name = $name==null?date('F Y'):$name;
+		
 		if (!$this->findByAttributes(array('name' => $_name))) {
 			$period = new Period();
 			$period->name = $_name;
@@ -121,12 +122,47 @@ class Period extends ActiveRecord
 		return false;
 	}
 	
+	private function getMonths()
+	{
+		return array(
+			1 => Yii::t('app','January'),
+			2 => Yii::t('app','February'),
+			3 => Yii::t('app','March'),
+			4 => Yii::t('app','April'),
+			5 => Yii::t('app','May'),
+			6 => Yii::t('app','June'),
+			7 => Yii::t('app','July'),
+			8 => Yii::t('app','August'),
+			9 => Yii::t('app','September'),
+			10 => Yii::t('app','October'),
+			11 => Yii::t('app','November'),
+			12 => Yii::t('app','December'),
+		);
+	}
+	
+	public function createAutoPeriod()
+	{
+		$monthNames = $this->getMonths();
+		$thisMonth = (int) date('n');
+		$nextMonth = $thisMonth == 12 ? 1 : $thisMonth + 1;
+		$thisYear = (int) date('Y');
+		$nextYear = $thisMonth == 12 ? $thisYear + 1 : $thisYear;
+		$startDate = Setting::model()->get('PERIOD_START_DATE',21);
+		$endDate = Setting::model()->get('PERIOD_END_DATE',20);
+		$period = new Period;
+		$period->start = sprintf('%s-%s-%s',$thisYear, $thisMonth, $startDate);
+		$period->end = sprintf('%s-%s-%s',$nextYear, $nextMonth, $endDate);
+		$period->name = sprintf('%s %s %s - %s %s %s', $startDate, 
+								$monthNames[$thisMonth], $thisYear, $endDate,
+								$monthNames[$nextMonth], $nextYear);
+		return $period;
+	}
+	
 	public function generateInvoices()
 	{
 		foreach(Customer::model()->findAllActive() as $customer) {
 			$customer->generateInvoices($this->id);
 		}
-		
 	}
 	
 	/**
@@ -256,7 +292,6 @@ class Period extends ActiveRecord
 		if ($lastPeriod = $this->last()->find()) {
 			$lastPeriod->close();
 		}
-		//$this->last()->find()->close();
 		if($newPeriod = $this->addPeriod($name)) {
 			$newPeriod->generateInvoices();
 			$newPeriod->generatePeriodicCost();

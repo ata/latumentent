@@ -1,6 +1,6 @@
 <?php
 
-class PeriodController extends AdminController
+class ServicePackageController extends AdminController
 {
 
 	/**
@@ -22,8 +22,8 @@ class PeriodController extends AdminController
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view','delete','Open','create','update'),
-				'users'=>array('admin'),
+				'actions'=>array('index','view','delete','create','update'),
+				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -38,7 +38,7 @@ class PeriodController extends AdminController
 	public function actionView($id)
 	{
 		$this->render('view',array(
-			'period'=>$this->loadPeriod($id),
+			'servicePackage'=>$this->loadServicePackage($id),
 		));
 	}
 
@@ -48,39 +48,23 @@ class PeriodController extends AdminController
 	 */
 	public function actionCreate()
 	{
-		$period = Period::model()->createAutoPeriod();
+		$servicePackage=new ServicePackage;
 
 		// Uncomment the following line if AJAX validation is needed
-		$this->performAjaxValidation($period);
+		// $this->performAjaxValidation($servicePackage);
 
-		if(isset($_POST['Period']))
+		if(isset($_POST['ServicePackage']))
 		{
-			$period->attributes=$_POST['Period'];
-			if ($period->save()) {
-				$period->generateInvoices();
-				$period->generatePeriodicCost();
-				$period->updateStatistics();
-				$this->redirect(array('index'));
-			}
+			$servicePackage->attributes=$_POST['ServicePackage'];
+			if($servicePackage->save())
+				$this->redirect(array('view','id'=>$servicePackage->id));
 		}
+		
+		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
 
 		$this->render('create',array(
-			'period'=>$period,
-		));
-	}
-	
-	public function actionOpen()
-	{
-		$period = new Period;
-		if (isset($_POST['Period'])) {
-			//die($_POST['Period']['name']);
-			Period::model()->open($_POST['Period']['name']);
-			$this->redirect(array('index'));
-		} else {
-			$period->name = date('F Y');
-		}
-		$this->render('open',array(
-			'period'=>$period,
+			'servicePackage'=>$servicePackage,
+			'serviceList'=>$serviceList,
 		));
 	}
 
@@ -91,20 +75,23 @@ class PeriodController extends AdminController
 	 */
 	public function actionUpdate($id)
 	{
-		$period=$this->loadPeriod($id);
+		$servicePackage=$this->loadServicePackage($id);
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($period);
+		// $this->performAjaxValidation($servicePackage);
 
-		if(isset($_POST['Period']))
+		if(isset($_POST['ServicePackage']))
 		{
-			$period->attributes=$_POST['Period'];
-			if($period->save())
-				$this->redirect(array('view','id'=>$period->id));
+			$servicePackage->attributes=$_POST['ServicePackage'];
+			if($servicePackage->save())
+				$this->redirect(array('view','id'=>$servicePackage->id));
 		}
+		
+		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
 
 		$this->render('update',array(
-			'period'=>$period,
+			'servicePackage'=>$servicePackage,
+			'serviceList'=>$serviceList,
 		));
 	}
 
@@ -118,7 +105,7 @@ class PeriodController extends AdminController
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$this->loadPeriod($id)->delete();
+			$this->loadServicePackage($id)->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
@@ -133,13 +120,13 @@ class PeriodController extends AdminController
 	 */
 	public function actionIndex()
 	{
-		$period=new Period('search');
-		$period->unsetAttributes();  // clear any default values
-		if(isset($_GET['Period']))
-			$period->attributes=$_GET['Period'];
+		$servicePackage=new ServicePackage('search');
+		$servicePackage->unsetAttributes();  // clear any default values
+		if(isset($_GET['ServicePackage']))
+			$servicePackage->attributes=$_GET['ServicePackage'];
 
 		$this->render('index',array(
-			'period'=>$period,
+			'servicePackage'=>$servicePackage,
 		));
 	}
 
@@ -148,23 +135,23 @@ class PeriodController extends AdminController
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer the ID of the model to be loaded
 	 */
-	public function loadPeriod($id)
+	public function loadServicePackage($id)
 	{
-		$period=Period::model()->findByPk((int)$id);
-		if($period===null)
+		$servicePackage=ServicePackage::model()->findByPk((int)$id);
+		if($servicePackage===null)
 			throw new CHttpException(404,Yii::t('app','The requested page does not exist.'));
-		return $period;
+		return $servicePackage;
 	}
 
 	/**
 	 * Performs the AJAX validation.
 	 * @param CModel the model to be validated
 	 */
-	protected function performAjaxValidation($period)
+	protected function performAjaxValidation($servicePackage)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='period-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='service-package-form')
 		{
-			echo CActiveForm::validate($period);
+			echo CActiveForm::validate($servicePackage);
 			Yii::app()->end();
 		}
 	}
