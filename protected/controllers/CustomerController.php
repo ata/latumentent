@@ -54,6 +54,7 @@ class CustomerController extends Controller
 		$this->render('index',array(
 			'serviceList'=>$serviceList,
 			'customer'=>$customer,
+			'servicePackageList' => CHtml::listData(ServicePackage::model()->findAll(),'id','display'),
 		));
 	}
 	
@@ -102,14 +103,13 @@ class CustomerController extends Controller
 		if(isset($_POST['CustomerForm'])) {
 			$customerForm->attributes=$_POST['CustomerForm'];
 			if ($customerForm->validate() && $customerForm->submit()) {
-				$this->redirect(array('invoice/index'));
+				$this->redirect(array('index'));
 			}
-		} else {
-			$customerForm->serviceIds = array_keys($serviceList);
-		}
+		} 
 		$this->render('create',array(
 			'customerForm' => $customerForm,
 			'serviceList' => $serviceList,
+			'servicePackageList' => CHtml::listData(ServicePackage::model()->findAll(),'id','display'),
 		));
 	}
 	

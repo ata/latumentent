@@ -13,7 +13,7 @@ class CustomerForm extends CFormModel
 	public $password;
 	public $confirmPassword;
 	public $apartmentNumber;
-	public $serviceIds;
+	public $service_package_id;
 	public $contact_number;
 	public $ownership;
 	public $hire_up_to;
@@ -25,7 +25,7 @@ class CustomerForm extends CFormModel
 	{
 		return array(
 			// name, email, subject and body are required
-			array('fullname, contact_number, hire_up_to, ownership, username, password, apartmentNumber, confirmPassword, serviceIds', 'required'),
+			array('fullname, contact_number, hire_up_to, ownership, username, password, apartmentNumber, confirmPassword, service_package_id', 'required'),
 			array('confirmPassword', 'compare', 'compareAttribute'=>'password'),
 			array('username', 'unique', 'className' => 'User'),
 			array('apartmentNumber', 'exist', 'className' => 'Apartment', 'attributeName' => 'number'),
@@ -50,7 +50,7 @@ class CustomerForm extends CFormModel
 			'confirmPassword' => Yii::t('app','Confirm Password'),
 			'email' => Yii::t('app','Email'),
 			'apartmentNumber' => Yii::t('app','Apartment Number'),
-			'serviceIds' => Yii::t('app','Services'),
+			'service_package_id' => Yii::t('app','Service Package'),
 			'contact_number' => Yii::t('app','Contact Number'),
 			'hire_up_to' => Yii::t('app','Hire Up To'),
 			'ownership' => Yii::t('app','Apartment Ownership'),
@@ -87,7 +87,7 @@ class CustomerForm extends CFormModel
 		$customer = new Customer;
 		$customer->user_id = $user->id;
 		$customer->apartment_id = Apartment::model()->findByNumber($this->apartmentNumber)->id;
-		$customer->serviceIds = $this->serviceIds;
+		$customer->service_package_id = $this->service_package_id;
 		$customer->contact_number = $this->contact_number;
 		$customer->ownership = $this->ownership;
 		$customer->hire_up_to = $this->hire_up_to;

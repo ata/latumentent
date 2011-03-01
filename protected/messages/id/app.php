@@ -129,4 +129,8 @@ return array(
 	'October' => 'Oktober',
 	'November' => 'November',
 	'December' => 'Desember',
+	'Service Package' => 'Paket Layanan',
+	'Add Service Package' => 'Tambah Paket Layanan',
+	'Manage Service Packages' => 'Kelola Paket Layanan',
+	'All' => 'Semua',
 );

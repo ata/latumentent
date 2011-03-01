@@ -18,7 +18,7 @@
 						'items'=>array(
 							array('label'=>Yii::t('app','Period'), 'url'=>array('admin/period')),
 							//array('label'=>Yii::t('app','Apartment'), 'url'=>array('admin/apartment')),
-							array('label'=>Yii::t('app','Compensation Schema'), 'url'=>array('admin/compensationSchema')),
+							//array('label'=>Yii::t('app','Compensation Schema'), 'url'=>array('admin/compensationSchema')),
 							//array('label'=>Yii::t('app','Cost'), 'url'=>array('admin/cost')),
 							//array('label'=>Yii::t('app','Customer'), 'url'=>array('admin/customer')),
 							//array('label'=>Yii::t('app','Invoice'), 'url'=>array('admin/invoice')),

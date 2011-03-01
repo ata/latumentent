@@ -63,11 +63,13 @@
 				<?php echo $form->error($customerForm,'contact_number'); ?>
 			</div>
 			
+			
 			<div class="checkbox row">
-				<?php echo $form->labelEx($customerForm,'serviceIds',array('class' => 'title')); ?>
-				<?php echo $form->checkBoxList($customerForm, 'serviceIds', $serviceList, array('separator' => '')); ?>
-				<?php echo $form->error($customerForm,'serviceIds'); ?>
+				<?php echo $form->labelEx($customerForm,'service_package_id',array('class' => 'title')); ?>
+				<?php echo $form->dropDownList($customerForm, 'service_package_id', $servicePackageList); ?>
+				<?php echo $form->error($customerForm,'service_package_id'); ?>
 			</div>
+			
 			<div class="row" id="ownership">
 				<?php echo $form->labelEx($customerForm,'ownership'); ?>
 				<?php echo $form->dropDownList($customerForm, 'ownership', array(

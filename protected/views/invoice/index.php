@@ -1,18 +1,18 @@
 <?php Yii::app()->clientScript->registerScript('invoice-filter','
-	(function($){
-		var update_invoice_list = function(){
-			$("#invoice-grid").yiiGridView.update("invoice-grid",{
-				url:$(this).attr("action"),
-				data:$("#invoice-filter").serialize(),
-			});
-		}
-		$("#invoice-filter select").change(update_invoice_list);
-		$("#invoice-filter input[type=checkbox]").click(update_invoice_list);
-		$("#Invoice_status").change(update_invoice_list);
-		$("#Invoice_period_id").change(function(){
+(function($){
+	var update_invoice_list = function(){
+		$("#invoice-grid").yiiGridView.update("invoice-grid",{
+			url:$(this).attr("action"),
+			data:$("#invoice-filter").serialize(),
+		});
+	}
+	$("#invoice-filter select").change(update_invoice_list);
+	$("#invoice-filter input[type=checkbox]").click(update_invoice_list);
+	$("#Invoice_status").change(update_invoice_list);
+	$("#Invoice_period_id").change(function(){
 		$("#total_invoice").load("index.php?r=invoice/filter&period_id="+$(this).val());
 	});
-	})(jQuery)
+})(jQuery)
 ')
 ?>
 
@@ -26,17 +26,13 @@ $this->breadcrumbs=array(
 	<h2><?php echo Yii::t('app','Invoices'); ?></h2>
 </div>
 
-<div class="span-8 new-button">
-	<?php echo CHtml::link(Yii::t('app','Add New Customer'), array('customer/create'));?>
-</div>
-
-<div class="filter span-16 last form" id="customer-filter">
+<div class="filter span-24 last form" id="customer-filter">
 	<fieldset>
 		<legend><?php echo Yii::t('app','filter'); ?></legend>
 		<?php $form=$this->beginWidget('CActiveForm', array(
 			'id'=>'invoice-filter'
 		)); ?>
-		<div class="row">
+		<div class="row span-12">
 			<?php echo $form->labelEx($invoice,'period_id');?>
 			<?php echo $form->dropDownList($invoice,'period_id',$periodList);?>
 		</div>
@@ -47,10 +43,12 @@ $this->breadcrumbs=array(
 				Invoice::STATUS_PAID => Yii::t('app','Paid'),
 				),array('empty'=>'All'))?>
 		</div>
+		<?php /*
 		<div class="row checkbox">
 			<?php echo $form->label($invoice,'serviceIds');?>
-			<?php echo $form->checkBoxList($invoice,'serviceIds',$serviceList,array('separator'=>''))?>
+			<?php echo $form->checkBoxList($invoice,'serviceIds',$serviceList,array('separator'=>'<br/>'))?>
 		</div>
+		*/?>
 		<?php $this->endWidget(); ?>
 	</fieldset>
 </div>

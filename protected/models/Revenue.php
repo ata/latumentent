@@ -210,4 +210,5 @@ class Revenue extends ActiveRecord
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenueByPeriodId($period_id),'IDR');
 	}
+	
 }
