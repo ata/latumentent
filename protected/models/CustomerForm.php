@@ -97,10 +97,11 @@ class CustomerForm extends CFormModel
 			die();
 			return false;
 		}
-
+		/*
 		if(!$customer->generateInvoices(Period::model()->lastId)) {
 			return false;
 		}
+		*/
 		
 		Revenue::model()->createRegisterRevenue($customer);
 		
