@@ -14,6 +14,8 @@ class ServicePackage extends ActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * @return ServicePackage the static model class
 	 */
+	public $serviceIds;
+	
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -36,6 +38,7 @@ class ServicePackage extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, note', 'length', 'max'=>255),
+			array('name,note,serviceIds','required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, note', 'safe', 'on'=>'search'),
@@ -50,6 +53,7 @@ class ServicePackage extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'services'=>array(self::MANY_MANY,'Service','service_package_has_service(service_package_id,service_id)','index'=>'id')
 		);
 	}
 
@@ -62,6 +66,7 @@ class ServicePackage extends ActiveRecord
 			'id' => Yii::t('app','ID'),
 			'name' => Yii::t('app','Name'),
 			'note' => Yii::t('app','Note'),
+			'serviceIds' => Yii::t('app','Service'),
 		);
 	}
 
@@ -84,4 +89,43 @@ class ServicePackage extends ActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	protected function beforeSave()
+	{
+		if(!$this->isNewRecord){
+			$this->deleteServicePackageHasService();
+		}
+		return parent::beforeSave();
+	}
+	
+	protected function afterSave()
+	{
+		$this->saveServicePackageHasService();
+	}
+	
+	private function saveServicePackageHasService()
+	{
+		foreach($this->serviceIds as $serviceIds){
+			$this->dbConnection->createCommand("
+				INSERT IGNORE into service_package_has_service (service_id,service_package_id)
+				VALUES (:service_id,:service_package_id)
+			")->query(array('service_id'=>$serviceIds,'service_package_id'=>$this->id));
+		}
+	}
+	
+	private function deleteServicePackageHasService()
+	{
+		$this->dbConnection->createCommand(
+			'DELETE FROM service_package_has_service 
+			 WHERE service_package_id = :service_package_id'
+			)->query(array('service_package_id'=>$this->id));
+	}
+	
+	public function afterFind()
+	{
+		$this->serviceIds = array_keys($this->services);
+		return parent::afterFind();
+	}
+	
+	
 }

@@ -11,4 +11,7 @@ $this->menu=array(
 
 <h2><?php echo Yii::t('app','Create ServicePackage'); ?></h2>
 
-<?php echo $this->renderPartial('_form', array('servicePackage'=>$servicePackage)); ?>
+<?php echo $this->renderPartial('_form', array(
+	'servicePackage'=>$servicePackage,
+	'serviceList'=>$serviceList
+	)); ?>

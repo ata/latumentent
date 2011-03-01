@@ -59,9 +59,12 @@ class ServicePackageController extends AdminController
 			if($servicePackage->save())
 				$this->redirect(array('view','id'=>$servicePackage->id));
 		}
+		
+		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
 
 		$this->render('create',array(
 			'servicePackage'=>$servicePackage,
+			'serviceList'=>$serviceList,
 		));
 	}
 
@@ -83,9 +86,12 @@ class ServicePackageController extends AdminController
 			if($servicePackage->save())
 				$this->redirect(array('view','id'=>$servicePackage->id));
 		}
+		
+		$serviceList = CHtml::listData(Service::model()->findAll(),'id','name');
 
 		$this->render('update',array(
 			'servicePackage'=>$servicePackage,
+			'serviceList'=>$serviceList,
 		));
 	}
 

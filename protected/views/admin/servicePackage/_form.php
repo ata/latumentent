@@ -20,6 +20,12 @@
 		<?php echo $form->textField($servicePackage,'note',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($servicePackage,'note'); ?>
 	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($servicePackage,'serviceIds');?>
+		<?php echo $form->checkBoxList($servicePackage,'serviceIds',$serviceList);?>
+		<?php echo $form->error($servicePackage,'serviceIds')?>
+	</div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($servicePackage->isNewRecord ? 'Create' : 'Save'); ?>
