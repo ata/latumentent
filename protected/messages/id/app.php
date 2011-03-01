@@ -133,5 +133,6 @@ return array(
 	'Add Service Package' => 'Tambah Paket Layanan',
 	'Manage Service Packages' => 'Kelola Paket Layanan',
 	'All' => 'Semua',
-	'Are you sure to delete this item?' => 'Anda yakin ingin menghapus item ini?'
+	'Are you sure to delete this item?' => 'Anda yakin ingin menghapus item ini?',
+	'Back' => 'Kembali',
 );
