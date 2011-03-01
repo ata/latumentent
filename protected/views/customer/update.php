@@ -48,9 +48,9 @@
 			</div>
 
 			<div class="checkbox row">
-				<?php echo $form->labelEx($customer,'serviceIds',array('class' => 'title')); ?>
-				<?php echo $form->checkBoxList($customer, 'serviceIds', $serviceList, array('separator' => '')); ?>
-				<?php echo $form->error($customer,'serviceIds'); ?>
+				<?php echo $form->labelEx($customer,'service_package_id',array('class' => 'title')); ?>
+				<?php echo $form->dropDownList($customer, 'service_package_id', $servicePackageList); ?>
+				<?php echo $form->error($customer,'service_package_id'); ?>
 			</div>
 			
 			<div class="row" id="ownership">

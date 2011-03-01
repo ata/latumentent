@@ -85,6 +85,7 @@ class CustomerController extends Controller
 			$this->render('update',array(
 				'customer'=>$customer,
 				'serviceList'=>$serviceList,
+				'servicePackageList' => CHtml::listData(ServicePackage::model()->findAll(),'id','display'),
 			));
 		}
 	}
