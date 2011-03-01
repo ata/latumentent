@@ -53,7 +53,7 @@ return array(
 		),
 		*/
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=billing',
+			'connectionString' => 'mysql:host=localhost;dbname=billing_dev',
 			'emulatePrepare' => true,
 			'username' => 'billing',
 			'password' => 'billing',
