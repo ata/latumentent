@@ -20,8 +20,8 @@ class BalanceController extends Controller
 	public function actionFilter()
 	{
 		
-		if(isset($_GET['period_id'])){
-			$period_id = $_GET['period_id'];
+		if(isset($_POST['period_id'])){
+			$period_id = $_POST['period_id'];
 		} else {
 			$period_id = Period::model()->getLastId();
 		}

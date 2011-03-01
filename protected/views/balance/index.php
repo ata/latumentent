@@ -1,6 +1,7 @@
 <?php Yii::app()->clientScript->registerScript('period-filter',' 
 	$("#Period_name").change(function(){
-		$("#data").load("index.php?r=balance/filter&period_id="+$(this).val());
+		$("#data").load("'.Yii::app()->createUrl("balance/filter").'",
+		{period_id:$(this).val()});
 	});
 ')?>
 

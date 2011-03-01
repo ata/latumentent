@@ -23,3 +23,7 @@ $this->menu=array(
 		'down',
 	),
 )); ?>
+
+<div class="span-8 new-button">
+	<?php echo CHtml::link(Yii::t('app','Index'), array('admin/problemType/index'));?>
+</div>

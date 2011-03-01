@@ -10,7 +10,8 @@
 	$("#invoice-filter input[type=checkbox]").click(update_invoice_list);
 	$("#Invoice_status").change(update_invoice_list);
 	$("#Invoice_period_id").change(function(){
-		$("#total_invoice").load("index.php?r=invoice/filter&period_id="+$(this).val());
+		$("#total_invoice").load("'.Yii::app()->createUrl("invoice/filter").'",
+		{period_id:$(this).val()});
 	});
 })(jQuery)
 ')

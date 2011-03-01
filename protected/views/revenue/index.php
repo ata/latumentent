@@ -8,7 +8,8 @@
 	}
 	$("#revenue-filter select").change(update_revenue_list);
 	$("#Revenue_period_id").change(function(){
-		$("#total").load("index.php?r=revenue/filter&period_id="+$(this).val());
+		$("#total").load("'.Yii::app()->createUrl("revenue/filter").'",
+		{period_id:$(this).val()});
 	});
 })(jQuery)
 
