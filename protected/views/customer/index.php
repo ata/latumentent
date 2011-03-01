@@ -98,13 +98,18 @@
 						'url'=>'"#"',
 						'imageUrl'=>Yii::app()->request->baseUrl.'/images/delete.png',
 						'click'=>'function(){ 
-							$.fn.yiiGridView.update("customer-list",{
-								url:"'.Yii::app()->createUrl("customer/softDelete").'",
-								data:{id:$(this).parent().parent().children(":first-child").text()},
-								success: function(){
-									$.fn.yiiGridView.update("customer-list");
-								}
-							})
+							if(confirm("'.Yii::t("app","Are you sure to delete this item?").'")){
+								$.fn.yiiGridView.update("customer-list",{
+									url:"'.Yii::app()->createUrl("customer/softDelete").'",
+									data:{id:$(this).parent().parent().children(":first-child").text()},
+									success: function(){
+										$.fn.yiiGridView.update("customer-list");
+									}
+								})
+								return false;
+							} else {
+								return false;
+							}
 						}',
 						'type'=>'raw',
 					),
