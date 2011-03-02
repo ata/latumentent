@@ -219,6 +219,33 @@ div.form form#customer-form .row div.errorMessage{
 	margin-left:160px;
 }
 
+div.form select{
+	background:#2C68A4;
+	border:1px solid #023D5F;
+	color:#FFF;
+}
+
+div.form select:hover{
+	background:#6CAED1;
+	border:1px solid #2C68A4;
+}
+
+div.form .success select{
+	color:#000;
+}
+
+div.form option{
+	color:#FFF;
+}
+
+div.form option:hover{
+	background:#2C68A4;
+}
+
+div.form .success option{
+	color:#000;
+}
+
 div.filter form#ticket-filter .row label{
 	margin-top:5px;
 	text-align:right;
@@ -503,6 +530,10 @@ div.form div.row label{
 	margin:5px 10px 0 0;
 }
 
+div.form div.row input{
+	margin-top:5px;
+}
+
 div.form div.checkbox label{
 	display:inline;
 	float:none;
@@ -513,10 +544,6 @@ div.form div.checkbox .title{
 	display:block;
 	float:left;
 	padding-right:0;
-}
-
-div.form div.row input{
-	
 }
 
 div.form div.buttons input{
@@ -549,8 +576,6 @@ div.form div.buttons a.cancel{
 div.form div.buttons a.cancel:hover{
 	color:#DB8981;
 }
-
-
 
 div.view {
 	border: 1px solid #C9E0ED;
@@ -698,7 +723,6 @@ table.balance-data tfoot th.ar{
 	font-size:24px;
 }
 
-.bills tfoot th.value,
 table.balance-data tfoot th.value{
 	color:#F7931E;
 }
@@ -761,8 +785,11 @@ tr {
 	background: #F8F8F8;
 }
 
+th, td {
+	padding-left:10px;
+}
+
 td {
-	border: 1px solid #CCCCCC;
 	width: 300px;
 	height:35px;
 }
@@ -770,6 +797,61 @@ td {
 .detail-view th{
 	text-align:right;
 	padding-right:20px;
+	width:70px;
+	background:#FFF;
+}
+
+.detail-view td {
+	border:none;
+	background:#FFF;
+}
+
+.cost tfoot tr th.title,
+.cost tfoot tr th.value{
+	background:#ffdddd;
+	color:#990000;
+	text-shadow:1px 1px 0 #FFF;
+	font-size:1.5em;
+}
+
+.revenue tfoot tr th.title,
+.revenue tfoot tr th.value{
+	background:#dfd;
+	color:#090;
+	text-shadow:1px 1px 0 #FFF;
+	font-size:1.5em;
+}
+
+.bills thead tr th.title,
+.bills thead tr th.value{
+	background:#ddf;
+	color:#009;
+	text-shadow:1px 1px 0 #FFF;
+	font-size:2em;
+}
+
+#total_invoice table thead tr.pbills th.title,
+#total_invoice table thead tr.pbills th.value{
+	background:#ffdddd;
+	color:#090;
+	text-shadow:1px 1px 0 #FFF;
+	font-size:1.5em;
+}
+
+#total_invoice table thead tr.ybills th.title,
+#total_invoice table thead tr.ybills th.value{
+	background:#ffdddd;
+	color:#990000;
+	text-shadow:1px 1px 0 #FFF;
+	font-size:1.5em;
+}
+
+#total_invoice table thead tr.tbills th.title,
+#total_invoice table thead tr.tbills th.value{
+	background:#ffdddd;
+	color:#009;
+	text-shadow:1px 1px 0 #FFF;
+	font-size:2em;
 }
 
 
@@ -789,19 +871,25 @@ td {
 	border: 1px #93978C solid;
 }
 
-.grid-view table.items th, .grid-view table.items td
+.grid-view table.items th,
+.grid-view table.items td
 {
 	font-size: 0.9em;
 	/*border: 1px white solid;*/
 	border-bottom:1px solid #93978C;
 	border-left:none;
 	border-right:none;
-	padding: 0.3em;
+	padding: 10px;
 	margin-top:1px;
-	text-align:center;
+	text-align:left;
 }
 
-.grid-view table.items thead tr, .grid-view table.items thead tr:hover{
+.grid-view table.items td.button-column{
+	text-align:right;
+}
+
+.grid-view table.items thead tr,
+.grid-view table.items thead tr:hover{
 	background: #2C68A4;
 	background:-moz-linear-gradient(top, #6CAED1, #2C68A4);
 	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#6CAED1), to(#2C68A4));
@@ -813,13 +901,6 @@ td {
 .grid-view table.items thead tr.filters{
 	background:#E6E6E6;
 	height:40px;
-}
-
-.grid-view table.items th{
-	color: white;
-	background:transparent;
-	text-align: center;
-	padding:10px 0;
 }
 
 .grid-view table.items th a
@@ -968,10 +1049,6 @@ td {
 
 .chart{
 	margin-bottom:50px;
-}
-
-tfoot tr th.title, tfoot tr th.value{
-	background:#394046;
 }
 
 ul.yiiPager
