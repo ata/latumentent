@@ -751,35 +751,8 @@ div.ticket .head span.status{
 
 .back-button {
 	padding: 20px 0;
-	float:right;
+	float:left;
 }
-
-.back-button a , .buttons input{
-	text-decoration: none;
-	padding: 10px 20px;
-	margin-top: 50px;
-	background: #005500;
-	background:-moz-linear-gradient(top, #008800, #005500);
-	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#AEBA48), to(#82845D));
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	border:1px solid #000;
-	-moz-box-shadow:inset 0 0 2px #00cc00;
-	-webkit-box-shadow:inset 0 0 2px #00cc00;
-	box-shadow:inset 0 0 2px #00cc00;
-	color:#CCCCCC;
-	text-shadow:1px 1px 1px #000000;
-	font-weight:bold;
-	border:none;
-	cursor:pointer;
-}
-
-.back-button a:hover,
-.buttons input:hover{
-	color:#FFFFFF;
-}
-
 
 
 .invoice {

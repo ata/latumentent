@@ -139,10 +139,12 @@ class Revenue extends ActiveRecord
 	{
 		
 		$criteria = new CDbCriteria;
+		$criteria->with = array('service');
 		$criteria->select = 'SUM(amount) as amount,service_id,period_id';
-		$criteria->group = 'service_id';
 		$criteria->condition = 'period_id = :period_id';
 		$criteria->params = array('period_id'=>$period_id);
+		$criteria->group = 'service_id,service.parent_id';
+		$criteria->order = 'service_id DESC';
 		
 		return $this->findAll($criteria);
 	}
