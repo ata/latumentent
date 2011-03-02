@@ -90,13 +90,13 @@ return array(
 	'Other Cost' => 'Pengeluaran lain-lain',
 	'Add Compensation Schema' => 'Tambah Skema Kompensasi',
 	'Add Problem Type' => 'Tambah Tipe Permasalahan',
-	'Add Periodic Cost' => 'Tambah Pengeluaran Rutin',
+	'Add Periodic Cost' => 'Tambah Pengeluaran Berkala',
 	'Add Service' => 'Tambah Layanan',
 	'Add User' => 'Tambah Pengguna',
 	'Add New Role' => 'Tambah Role Baru',
 	'Create Compensation Schema' => 'Tambah Skema Kompensasi',
 	'Create Problem Type' => 'Tambah Tipe Permasalahan',
-	'Create Periodic Cost' => 'Tambah Pengeluaran Rutin',
+	'Create Periodic Cost' => 'Tambah Pengeluaran Berkala',
 	'Create Service' => 'Tambah Layanan',
 	'Create User' => 'Tambah Pengguna',
 	'Create Role' => 'Tambah Role',
@@ -133,5 +133,6 @@ return array(
 	'Add Service Package' => 'Tambah Paket Layanan',
 	'Manage Service Packages' => 'Kelola Paket Layanan',
 	'All' => 'Semua',
-	'Are you sure to delete this item?' => 'Anda yakin ingin menghapus item ini?'
+	'Are you sure to delete this item?' => 'Anda yakin ingin menghapus item ini?',
+	'Payment Date' => 'Tanggal Pembayaran',
 );

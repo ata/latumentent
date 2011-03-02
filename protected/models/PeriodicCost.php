@@ -71,6 +71,7 @@ class PeriodicCost extends ActiveRecord
 			'name' => Yii::t('app','Name'),
 			'amount' => Yii::t('app','Amount'),
 			'service_id' => Yii::t('app','Service'),
+			'payment_date' => Yii::t('app','Payment Date'),
 			'note' => Yii::t('app','Note'),
 		);
 	}

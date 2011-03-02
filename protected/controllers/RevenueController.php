@@ -22,7 +22,7 @@ class RevenueController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view','delete','create','update','filter'),
+				'actions'=>array('index','view','create','update','filter','cancel'),
 				'roles'=>array('admin','management','customer_services'),
 			),
 			array('deny',  // deny all users
@@ -106,12 +106,12 @@ class RevenueController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	public function actionCancel($id)
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$this->loadRevenue($id)->delete();
+			$this->loadRevenue($id)->cancel();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
@@ -157,7 +157,6 @@ class RevenueController extends Controller
 			'totalRevenue'=>$totalRevenue,
 		));
 	}
-
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
@@ -170,6 +169,8 @@ class RevenueController extends Controller
 			throw new CHttpException(404,Yii::t('app','The requested page does not exist.'));
 		return $revenue;
 	}
+	
+	
 
 	/**
 	 * Performs the AJAX validation.

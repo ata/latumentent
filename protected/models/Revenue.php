@@ -17,6 +17,7 @@ class Revenue extends ActiveRecord
 {
 	const STATUS_RECEIVED = 1;
 	const STATUS_NOT_RECEIVED = 0;
+	const STATUS_CANCEL = -1;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Revenue the static model class
@@ -138,6 +139,15 @@ class Revenue extends ActiveRecord
 		}
 		
 	}
+	
+	public function cancel()
+	{
+		if ($this->status == self::STATUS_RECEIVED) {
+			return false;
+		}
+		$this->status = self::STATUS_CANCEL;
+		return $this->save();
+	}
 
 	public function findByPeriod($period_id)
 	{
@@ -190,9 +200,11 @@ class Revenue extends ActiveRecord
 		return Yii::app()->db->createCommand('SELECT SUM(amount) 
 											FROM revenue
 											WHERE period_id = :period_id
+											AND status = :status
 											AND customer_id IS NOT NULL')
 											->query(array(
-												'period_id'=>$period_id
+												'period_id' => $period_id,
+												'status' => self::STATUS_RECEIVED,
 											))->readColumn(0);
 	}
 	
@@ -206,9 +218,11 @@ class Revenue extends ActiveRecord
 	{
 		return Yii::app()->db->createCommand('SELECT SUM(amount) 
 											FROM revenue
-											WHERE period_id = :period_id')
+											WHERE period_id = :period_id
+											AND status = :status')
 											->query(array(
-												'period_id'=>$period_id
+												'period_id' => $period_id,
+												'status' => self::STATUS_RECEIVED,
 											))->readColumn(0);
 	}
 

@@ -21,6 +21,7 @@ class Cost extends ActiveRecord
 	
 	const STATUS_NOT_PAID = 0;
 	const STATUS_PAID = 1;
+	const STATUS_CANCEL = -1;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Outlay the static model class
@@ -141,6 +142,15 @@ class Cost extends ActiveRecord
 		
 	}
 	
+	public function cancel()
+	{
+		if ($this->status == self::STATUS_PAID) {
+			return false;
+		}
+		$this->status = self::STATUS_CANCEL;
+		return $this->save();
+	}
+	
 	public function getTotalCostLocale()
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalCost,'IDR');
@@ -159,9 +169,11 @@ class Cost extends ActiveRecord
 		return Yii::app()->db->createCommand('SELECT SUM(amount) 
 											FROM cost
 											WHERE period_id = :period_id
+											AND status = :status
 											AND customer_id IS NOT NULL')
 											->query(array(
-												'period_id'=>$period_id
+												'period_id'=>$period_id,
+												'status' => STATUS_PAID,
 											))->readColumn(0);
 	}
 	
@@ -196,8 +208,10 @@ class Cost extends ActiveRecord
 	{
 		$total = Yii::app()->db->createCommand('
 									SELECT sum(amount) FROM cost 
-									WHERE period_id = :period_id')->query(array(
-										'period_id'=>$period_id
+									WHERE period_id = :period_id
+									AND status = :status')->query(array(
+										'period_id'=>$period_id,
+										'status' => self::STATUS_PAID,
 									))->readColumn(0);
 									
 		return Yii::app()->locale->numberFormatter->formatCurrency($total,'IDR');
