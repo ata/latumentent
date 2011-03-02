@@ -14,7 +14,7 @@
  * @property integer $delay_count
  * @property integer $advance_count
  * @property integer $service_package_id
- * 
+ * @property date $registered_date
  
  * The followings are the available model relations:
  * @property User $user
@@ -63,7 +63,7 @@ class Customer extends ActiveRecord
 			array('user_id, status', 'numerical', 'integerOnly'=>true),
 			array('rating, delay_count, advance_count', 'length', 'max'=>255),
 			array('status','default','value'=>self::STATUS_ACTIVE),
-			array('hire_up_to', 'safe'),
+			array('hire_up_to, registered_date', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, number, user_id, status, service_package_id, ownership, hire_up_to', 'safe', 'on'=>'search'),
@@ -90,7 +90,12 @@ class Customer extends ActiveRecord
 	
 	public function scopes()
 	{
-		return array();
+		return array(
+			'active' => array(
+				'condition' => 'status = :status',
+				'params' => array('status' => self::STATUS_ACTIVE),
+			),
+		);
 	}
 
 	/**
@@ -156,6 +161,8 @@ class Customer extends ActiveRecord
 		$this->user->status = $this->status;
 		if(!$this->isNewRecord){
 			$this->deleteCustomerHasService();
+		} else {
+			$this->registered_date = date('Y-m-d');
 		}
 		return parent::beforeSave();
 	}
@@ -207,6 +214,19 @@ class Customer extends ActiveRecord
 	public function findAllActive()
 	{
 		return $this->findAllByAttributes(array('status' => self::STATUS_ACTIVE));
+	}
+	
+	public function findAllActiveBefore($date)
+	{
+		$criteria = new CDbCriteria;
+		$criteria->condition = 'status = :status AND registered_date <= :date';
+		$criteria->params = array(
+			'status' => self::STATUS_ACTIVE,
+			'date' => $date,
+		);
+		
+		return $this->findAll($criteria);
+		
 	}
 	
 	public function softDelete()

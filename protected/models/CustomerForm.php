@@ -65,7 +65,7 @@ class CustomerForm extends CFormModel
 		return parent::afterValidate();
 	}
 	
-	public function submit()
+	public function submit($user_id=null)
 	{
 		$transaction = Yii::app()->db->beginTransaction();
 		if (!$this->validate()) {
@@ -97,13 +97,8 @@ class CustomerForm extends CFormModel
 			die();
 			return false;
 		}
-		/*
-		if(!$customer->generateInvoices(Period::model()->lastId)) {
-			return false;
-		}
-		*/
 		
-		Revenue::model()->createRegisterRevenue($customer);
+		Revenue::model()->createRegisterRevenue($customer, $user_id);
 		
 		$transaction->commit();
 		return true;

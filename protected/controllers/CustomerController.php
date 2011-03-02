@@ -103,7 +103,7 @@ class CustomerController extends Controller
 
 		if(isset($_POST['CustomerForm'])) {
 			$customerForm->attributes=$_POST['CustomerForm'];
-			if ($customerForm->validate() && $customerForm->submit()) {
+			if ($customerForm->validate() && $customerForm->submit(Yii::app()->user->id)) {
 				$this->redirect(array('index'));
 			}
 		} 

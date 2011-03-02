@@ -64,6 +64,18 @@ class Service extends ActiveRecord
 			'name' => Yii::t('app','Name'),
 		);
 	}
+	
+	public function scopes()
+	{
+		return array(
+			'parents' => array(
+				'condition' => 'parent_id IS NULL',
+			),
+			'childs' => array(
+				'condition' => 'parent_id IS NOT NULL',
+			)
+		);
+	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

@@ -85,6 +85,11 @@ class Period extends ActiveRecord
 		return array(
 			'desc' => array('order' => 'id DESC'),
 			'last' => array('order' => 'id DESC', 'limit' => 1),
+			'previous' => array(
+				'condition' => 'id < (SELECT MAX(id) FROM period)',
+				'order' => 'id DESC', 
+				'limit' => 1
+			),
 		);
 	}
 
@@ -160,7 +165,12 @@ class Period extends ActiveRecord
 	
 	public function generateInvoices()
 	{
-		foreach(Customer::model()->findAllActive() as $customer) {
+		if ($this->count() < 2) {
+			return false;
+		}
+		$previousPeriod = Period::model()->previous()->find();
+		$custumers = Customer::model()->model()->findAllActiveBefore($previousPeriod->start);
+		foreach($custumers as $customer) {
 			$customer->generateInvoices($this->id);
 		}
 	}
@@ -252,6 +262,9 @@ class Period extends ActiveRecord
 	
 	public function updateStatistics()
 	{
+		if ($this->countCustomer() == 0) {
+			return false;
+		}
 		$totalPeriodCustomerRevenue = Revenue::model()->totalCustomerRevenueByPeriodId($this->id);
 		$totalPeriodCustomerCost = Cost::model()->totalCustomerCostByPeriodId($this->id);
 		
@@ -282,29 +295,24 @@ class Period extends ActiveRecord
 		
 	}
 	
+	private $_customerCount;
 	public function countCustomer()
 	{
-		return count($this->invoices);
+		if ($this->_customerCount !== null) {
+			return $this->_customerCount;
+		}
+		return $this->_customerCount = Customer::model()->active()->count();
 	}
 	
-	public function open($name=null)
+	protected function afterSave()
 	{
-		if ($lastPeriod = $this->last()->find()) {
-			$lastPeriod->close();
-		}
-		if($newPeriod = $this->addPeriod($name)) {
-			$newPeriod->generateInvoices();
-			$newPeriod->generatePeriodicCost();
-			$newPeriod->updateStatistics();
+		if ($this->isNewRecord) {
+			$this->generateInvoices();
+			$this->generatePeriodicCost();
+			$this->updateStatistics();
 		}
 	}
 	
-	public function close()
-	{
-		//$this->generateCustomerRevenues();
-		//$this->generateCustomerCosts();
-		//$this->generateStatistics();
-	}
 	
 	
 	public function getPaidInvoices()
@@ -318,7 +326,17 @@ class Period extends ActiveRecord
 		if ($this->_lastId !== null) {
 			return $this->_lastId;
 		}
-		return $this->_lastId = $this->last()->find()?$this->last()->find()->id:-9999;
+		return $this->_lastId = $this->last()->find()?$this->last()->find()->id:null;
+	}
+	
+	private $_previousId = null;
+	
+	public function getPreviousId()
+	{
+		if ($this->_previousId !== null) {
+			return $this->_previousId;
+		}
+		return $this->_previousId = $this->previous()->find()?$this->previous()->find()->id:null;
 	}
 	
 	public function getLastPeriodId()

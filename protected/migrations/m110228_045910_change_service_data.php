@@ -7,7 +7,7 @@ class m110228_045910_change_service_data extends CDbMigration
 		$this->truncateTable('service');
 		$this->insert('service',array(
 			'id' => 1,
-			'name' => 'My TV',
+			'name' => 'TV',
 			'price' => 0,
 			'description' => 'Paket TV 50'
 		));
@@ -23,7 +23,7 @@ class m110228_045910_change_service_data extends CDbMigration
 		$this->insert('service',array(
 			'id' => 4,
 			'parent_id' => 1,
-			'name' => 'TV',
+			'name' => 'My TV (include)',
 			'price' => 150000,
 			'description' => 'Paket TV 50 Channel'
 		));

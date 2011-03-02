@@ -30,7 +30,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($cost,'service_id'); ?>
 		<?php echo $form->dropDownList($cost,'service_id',
-			CHtml::listData(Service::model()->findAll(),'id','display'),
+			CHtml::listData(Service::model()->parents()->findAll(),'id','display'),
 			array('empty' => Yii::t('app','Choose Service'))); ?>
 		<?php echo $form->error($cost,'service_id'); ?>
 	</div>

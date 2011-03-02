@@ -10,7 +10,8 @@
  * @property integer $period_id
  * @property integer $service_id
  * @property integer $status
- * @property integer $user_log_id
+ * @property integer $user_handle_id
+ * @property date $received_date
  */
 class Revenue extends ActiveRecord
 {
@@ -42,12 +43,13 @@ class Revenue extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('amount, period_id', 'required'),
-			array('period_id, service_id, user_log_id, status, user_id, customer_id', 'numerical', 'integerOnly'=>true),
+			array('period_id, service_id, user_handle_id, status, user_id, customer_id', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
 			array('name', 'length', 'max'=>255),
+			array('received_date','safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, amount, period_id, service_id,user_id,status', 'safe', 'on'=>'search'),
+			array('id, amount, period_id, service_id, user_id,status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -115,7 +117,7 @@ class Revenue extends ActiveRecord
 	}
 	
 	
-	public function createRegisterRevenue($customer)
+	public function createRegisterRevenue($customer, $user_id = null)
 	{
 		$revenue = new Revenue;
 		$revenue->period_id = Period::model()->getLastId();
@@ -123,6 +125,8 @@ class Revenue extends ActiveRecord
 		$revenue->customer_id = $customer->id;
 		$revenue->status = self::STATUS_RECEIVED;
 		$revenue->amount = Setting::model()->get('REGISTER_FEE',200000);
+		$revenue->user_handle_id = $user_id;
+		$revenue->received_date = date('Y-m-d H:i:s');
 		$revenue->name = Yii::t('app','Registration Fee from {name}',array(
 			'{name}' => $customer->user->display,
 		));
@@ -163,10 +167,12 @@ class Revenue extends ActiveRecord
 		return $this->service?$this->service->name:'--';
 	}
 	
-	public function getStatusRevenue()
+	public function getStatusLabel()
 	{
 		if($this->status == self::STATUS_RECEIVED){
-			return Yii::t('app','Received');
+			return Yii::t('app','Received at {date}',array(
+				'{date}' => Yii::app()->locale->dateFormatter->formatDateTime($this->received_date),
+			));
 		} else {
 			return Yii::t('app','Not Received');
 		}

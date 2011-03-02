@@ -100,7 +100,7 @@ class InvoiceController extends Controller
 		$invoice = $this->loadInvoice();
 		if (isset($_POST['Invoice'])) {
 			$invoice->attributes = $_POST['Invoice'];
-			if ($invoice->pay()) {
+			if ($invoice->pay(Yii::app()->user->id)) {
 				$this->redirect(array('index'));
 			}
 		}

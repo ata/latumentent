@@ -57,9 +57,6 @@ class PeriodController extends AdminController
 		{
 			$period->attributes=$_POST['Period'];
 			if ($period->save()) {
-				$period->generateInvoices();
-				$period->generatePeriodicCost();
-				$period->updateStatistics();
 				$this->redirect(array('index'));
 			}
 		}

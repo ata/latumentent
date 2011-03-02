@@ -83,7 +83,7 @@ $this->menu=array(
 				'header'=> Yii::t('app','Service'),
 			),
 			array(
-				'name'=>'costStatus',
+				'name'=>'statusLabel',
 				'header'=>Yii::t('app','Status'),
 			),
 			array(
@@ -92,14 +92,16 @@ $this->menu=array(
 			),
 			array(
 				'class'=>'CButtonColumn',
-				'template'=>'{detailCost}',
+				'template'=>'{cancel}',
 				'buttons'=>array(
-					'detailCost'=>array(
-						'label'=>Yii::t('app','Detail Cost'),
-						'url'=>'Yii::app()->createUrl("/cost/view",array("id"=>$data->id))',
-						'imageUrl'=>Yii::app()->request->baseUrl.'/images/view.png',
-					),
+					'cancel' => array(
+						'label'=>Yii::t('app','Cancel Cost'),
+						'url' => 'Yii::app()->createUrl("/cost/cancel",array("id"=>$data->id))',
+						'imageUrl'=>Yii::app()->request->baseUrl.'/images/delete.png',
+						'visible' => '$data->status == Cost::STATUS_NOT_PAID',
+					)
 				),
+				
 			),
 	))); 
 ?>

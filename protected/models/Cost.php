@@ -13,7 +13,8 @@
  * @property integer $customer_id
  * @property text $note
  * @property integer $status
- * @property integer $user_log_id
+ * @property integer $user_handle_id
+ * @property date $paying_date
  */
 class Cost extends ActiveRecord
 {
@@ -46,9 +47,10 @@ class Cost extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('amount, period_id', 'required'),
-			array('period_id, user_log_id, service_id, status, customer_id, user_id', 'numerical', 'integerOnly'=>true),
+			array('period_id, user_handle_id, service_id, status, customer_id, user_id', 'numerical', 'integerOnly'=>true),
 			array('amount', 'numerical'),
 			array('name', 'length', 'max'=>255),
+			array('paying_date','safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, amount, period_id, service_id,status', 'safe', 'on'=>'search'),
@@ -173,10 +175,12 @@ class Cost extends ActiveRecord
 		
 	}
 	
-	public function getCostStatus()
+	public function getStatusLabel()
 	{
 		if($this->status == self::STATUS_PAID){
-			return CHtml::encode(Yii::t('app','Paid'));
+			return Yii::t('app','Paid at {date}',array(
+				'{date}' => Yii::app()->locale->dateFormatter->formatDateTime($this->paying_date),
+			));
 		} else {
 			return CHtml::encode(Yii::t('app','Not Paid'));
 		}
@@ -203,6 +207,7 @@ class Cost extends ActiveRecord
 	{
 		return $this->totalCostByPeriodId($period_id);
 	}
+	
 
 }
 

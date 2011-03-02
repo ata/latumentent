@@ -12,7 +12,7 @@
  * @property integer $payment_method_id
  * @property integer $status
  * @property integer $user_id
- * @property integer $user_log_id
+ * @property integer $user_handle_id
  * @property date $payment_date
  * @property date $paying_date
  * 
@@ -55,7 +55,7 @@ class Invoice extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('total_amount, total_compensation, period_id, customer_id', 'required'),
-			array('period_id, status, user_log_id, customer_id, user_id, payment_method_id', 'numerical', 'integerOnly'=>true),
+			array('period_id, status, user_handle_id, customer_id, user_id, payment_method_id', 'numerical', 'integerOnly'=>true),
 			array('total_amount, total_compensation', 'numerical'),
 			array('status','default','value'=>self::STATUS_NOT_PAID),
 			array('payment_date, paying_date','safe'),
@@ -235,9 +235,10 @@ class Invoice extends ActiveRecord
 		return Yii::t('app','Paid');
 	}
 	
-	public function pay()
+	public function pay($user_id)
 	{
 		$this->status = self::STATUS_PAID;
+		$this->user_handle_id = $user_id; 
 		foreach($this->invoiceItems as $item) {
 			$revenue = new Revenue;
 			$revenue->name = Yii::t('app','{service} Payment from {name}',array(
@@ -250,6 +251,8 @@ class Invoice extends ActiveRecord
 			$revenue->period_id  = $item->period_id;
 			$revenue->service_id = $item->service_id;
 			$revenue->status = $this->status;
+			$revenue->user_handle_id = $this->user_handle_id;
+			$revenue->received_date = date('Y-m-d H:i:s');
 			$revenue->save();
 			if ($item->subtotal_compensation > 0) {
 				$cost = new Cost;

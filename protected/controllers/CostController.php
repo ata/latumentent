@@ -67,6 +67,8 @@ class CostController extends Controller
 		));
 	}
 	
+	
+	
 	public function actionFilter()
 	{
 		if(isset($_GET['period_id'])){

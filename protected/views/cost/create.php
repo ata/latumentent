@@ -9,6 +9,6 @@ $this->menu=array(
 );
 ?>
 
-<h2><?php echo Yii::t('app','Create Cost'); ?></h2>
+<h2><?php echo Yii::t('app','Add Cost'); ?></h2>
 
 <?php echo $this->renderPartial('_form', array('cost'=>$cost)); ?>
