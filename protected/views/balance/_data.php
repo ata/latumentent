@@ -80,7 +80,7 @@
 				<?php if($total_revenue < $total_cost):?>
 					<th class="title"><?php echo Yii::t('app','Loss')?></th>
 				<?php else:?>
-					<th class="titile"><?php echo Yii::t('app','Net Profit')?></th>
+					<th class="title"><?php echo Yii::t('app','Net Profit')?></th>
 				<?php endif?>
 				<th class="value ar"><?php echo (Yii::app()->locale->numberFormatter->formatCurrency(abs($total_revenue-$total_cost),'IDR'))?></th>
 			</tr>
