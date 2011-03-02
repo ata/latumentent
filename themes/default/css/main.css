@@ -854,6 +854,22 @@ td {
 	font-size:2em;
 }
 
+#total table thead tr.trevenue th.title,
+#total table thead tr.trevenue th.value{
+	background:#dfd;
+	color:#090;
+	text-shadow:1px 1px 0 #FFF;
+	font-size:2em;
+}
+
+#total table thead tr.tcost th.title,
+#total table thead tr.tcost th.value{
+	background:#ffdddd;
+	color:#990000;
+	text-shadow:1px 1px 0 #FFF;
+	font-size:2em;
+}
+
 
 /*
 	STYLE.CSS
