@@ -748,6 +748,13 @@ div.ticket .head span.status{
 	color:#FFFFFF;
 }
 
+
+.back-button {
+	padding: 20px 0;
+	float:left;
+}
+
+
 .invoice {
 	padding: 10px 0;
 }

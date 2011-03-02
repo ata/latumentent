@@ -9,7 +9,8 @@
 	$("#cost-filter select").change(update_cost_list);
 	$("#Cost_status").change(update_cost_list);
 	$("#Cost_period_id").change(function(){
-	$("#total").load("index.php?r=cost/filter&period_id="+$(this).val());
+		$("#total").load("'.Yii::app()->createUrl("cost/filter").'",
+			{period_id:$(this).val()});
 	});
 })(jQuery)
 ')

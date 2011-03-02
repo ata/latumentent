@@ -22,3 +22,6 @@ $this->menu=array(
 		'display',
 	),
 )); ?>
+<div class="span-8 back-button">
+	<?php echo CHtml::link(Yii::t('app','Back'), array('index'));?>
+</div>

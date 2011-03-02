@@ -135,4 +135,5 @@ return array(
 	'All' => 'Semua',
 	'Are you sure to delete this item?' => 'Anda yakin ingin menghapus item ini?',
 	'Payment Date' => 'Tanggal Pembayaran',
+	'Back' => 'Kembali',
 );
