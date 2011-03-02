@@ -77,9 +77,15 @@ class CostController extends Controller
 			$period_id = Period::model()->getLastId();
 		}
 
-		$totalCost = Cost::model()->totalCostByPeriodId($period_id);
+		$totalCostNotPaid = Cost::model()->totalCostByPeriodNotPaidLocale($period_id);
+		$totalCostPaid = Cost::model()->totalCostByPeriodPaidLocale($period_id);
+		$totalCostAll = Cost::model()->totalCostByPeriodAllLocale(Period::model()->lastId);
 		
-		$this->renderPartial('_total',array('totalCost'=>$totalCost));
+		$this->renderPartial('_total',array(
+			'totalCostNotPaid'=>$totalCostNotPaid,
+			'totalCostPaid'=>$totalCostPaid,
+			'totalCostAll'=>$totalCostAll,
+			));
 	}
 
 	/**
@@ -141,14 +147,19 @@ class CostController extends Controller
 		}
 		
 		
-		$totalCost = Cost::model()->totalCostByPeriodId(Period::model()->getLastId());
+		
+		$totalCostNotPaid = Cost::model()->totalCostByPeriodNotPaidLocale(Period::model()->lastId);
+		$totalCostPaid = Cost::model()->totalCostByPeriodPaidLocale(Period::model()->lastId);
+		$totalCostAll = Cost::model()->totalCostByPeriodAllLocale(Period::model()->lastId);
 		
 		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 		
 		$this->render('index',array(
 			'cost'=>$cost,
 			'periodList'=>$periodList,
-			'totalCost'=>$totalCost,
+			'totalCostNotPaid'=>$totalCostNotPaid,
+			'totalCostPaid'=>$totalCostPaid,
+			'totalCostAll'=>$totalCostAll,
 		));
 	}
 

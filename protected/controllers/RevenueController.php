@@ -138,6 +138,7 @@ class RevenueController extends Controller
 		
 		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 		$totalRevenue = Revenue::model()->totalRevenueByPeriodIdLocale(Period::model()->lastId);
+		
 		$this->render('index',array(
 			'revenue'=>$revenue,
 			'periodList'=>$periodList,

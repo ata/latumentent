@@ -222,6 +222,50 @@ class Cost extends ActiveRecord
 		return $this->totalCostByPeriodId($period_id);
 	}
 	
-
+	public function totalCostByPeriodNotPaid($period_id)
+	{
+		return Yii::app()->db->createCommand('
+									SELECT sum(amount) FROM cost 
+									WHERE period_id = :period_id
+									AND status = :status')->query(array(
+										'period_id'=>$period_id,
+										'status' => self::STATUS_NOT_PAID,
+									))->readColumn(0);
+	}
+	
+	public function totalCostByPeriodPaid($period_id)
+	{
+		return Yii::app()->db->createCommand('
+									SELECT sum(amount) FROM cost 
+									WHERE period_id = :period_id
+									AND status = :status')->query(array(
+										'period_id'=>$period_id,
+										'status' => self::STATUS_PAID,
+									))->readColumn(0);
+	}
+	
+	public function totalCostByPeriodAll($period_id)
+	{
+		return Yii::app()->db->createCommand('
+									SELECT sum(amount) FROM cost 
+									WHERE period_id = :period_id')->query(array(
+										'period_id'=>$period_id
+									))->readColumn(0);
+	}
+	
+	public function totalCostByPeriodNotPaidLocale($period_id)
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalCostByPeriodNotPaid($period_id),'IDR');
+	}
+	
+	public function totalCostByPeriodPaidLocale($period_id)
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalCostByPeriodPaid($period_id),'IDR');
+	}
+	
+	public function totalCostByPeriodAllLocale($period_id)
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalCostByPeriodAll($period_id),'IDR');
+	}
 }
 

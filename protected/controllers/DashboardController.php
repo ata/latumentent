@@ -72,6 +72,8 @@ class DashboardController extends Controller
 	{
 		$invoice = Invoice::model()->findByUserId(Yii::app()->user->id,Period::model()->lastId);
 		
+		$user = User::model()->findByPK(Yii::app()->user->id);
+		
 		$period = new Period;
 		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 		
@@ -84,6 +86,7 @@ class DashboardController extends Controller
 			'period'=>$period,
 			'periodList'=>$periodList,
 			'notificationList'=>$notificationList,
+			'user'=>$user,
 		));
 	}
 	

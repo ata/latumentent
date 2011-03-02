@@ -122,5 +122,9 @@ $this->menu=array(
 </div>
 
 <div class="span-24 bills" id="total">
-	<?php $this->renderPartial('_total',array('totalCost'=>$totalCost))?>
+	<?php $this->renderPartial('_total',array(
+		'totalCostNotPaid'=>$totalCostNotPaid,
+		'totalCostPaid'=>$totalCostPaid,
+		'totalCostAll'=>$totalCostAll,
+		))?>
 </div>

@@ -126,7 +126,7 @@ class InvoiceItem extends ActiveRecord
 		$criteria->condition = 'customer.user_id = :user_id AND period_id = :period_id';
 		$criteria->params = array(
 			'user_id' => $user_id,
-			'period_id' => Period::model()->last()->find()->id,
+			'period_id' => Period::model()->lastId,
 		);
 		
 		$criteria->with = array('customer');

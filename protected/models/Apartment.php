@@ -107,12 +107,15 @@ class Apartment extends ActiveRecord
 	public function getStatus()
 	{
 		if ($this->customer !== null) {
-			if (empty($this->customer->services)) {
-				return Yii::t('app','Idle');
+			if ($this->customer->ownership == Customer::OWNERSHIP_OWNER ) {
+				return Yii::t('app','Owned by {name}',array(
+					'{name}'=>$this->customer->user->fullname
+				));
+			} else {
+				return Yii::t('app','Hired by {name}',array(
+					'{name}' => $this->customer->user->fullname
+				));
 			}
-			return Yii::t('app','Hired by {name}',array(
-				'{name}' => $this->customer->user->fullname
-			));
 		} else {
 			return Yii::t('app','Empty');
 		}

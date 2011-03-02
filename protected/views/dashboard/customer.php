@@ -35,15 +35,26 @@ $this->breadcrumbs=array(
 <h2><?php echo Yii::t('app','Detail Invoice') ?></h2>
 
 <div class="customer-info span-24" id="ticket">
-	<div class="row">
-		<span class="title"><?php echo CHtml::activeLabel($invoice->customer->user, 'fullname') ?>:</span>
-		<span class="value"><?php echo $invoice->customer->user->fullname?>:</span>
-	</div>
-	
-	<div class="row">
-		<span class="title"><?php echo CHtml::activeLabel($invoice->customer->apartment, 'number') ?>:</span>
-		<span class="value"><?php echo $invoice->customer->apartment->number ?></span>
-	</div>
+	<?php if($invoice == null):?>
+		<div class="row">
+			<span class="title"><?php echo CHtml::activeLabel($user, 'fullname') ?>:</span>
+			<span class="value"><?php echo $user->fullname?>:</span>
+		</div>
+		
+		<div class="row">
+			<span class="title"><?php echo CHtml::activeLabel($user, 'number') ?>:</span>
+			<span class="value"><?php echo $user->customer->apartment->number ?></span>
+		</div>
+	<?php else:?>
+		<div class="row">
+			<span class="title"><?php echo CHtml::activeLabel($invoice->customer->user, 'fullname') ?>:</span>
+			<span class="value"><?php echo $invoice->customer->fullname?>:</span>
+		</div>
+		
+		<div class="row">
+			<span class="title"><?php echo CHtml::activeLabel($invoice->customer->apartment, 'number') ?>:</span>
+			<span class="value"><?php echo $invoice->customer->apartment->number ?></span>
+	<?php endif?>
 	
 	<div class="row">
 		<?php $form=$this->beginWidget('CActiveForm', array(
@@ -69,10 +80,12 @@ $this->breadcrumbs=array(
 <?php endif ?>
 
 
-
-<div id="invoice">
-	<?php if ($invoice):?>
-		<?php $this->renderPartial('_customerInvoice',array('invoice' => $invoice,));?>
-	<?php endif?>
-</div>
-
+<?php if($invoice !== null):?>
+	<div id="invoice">
+		<?php if ($invoice):?>
+			<?php $this->renderPartial('_customerInvoice',array('invoice' => $invoice,));?>
+		<?php endif?>
+	</div>
+<?php else:?>
+	<?php echo Yii::t('app','Not Yet Invoice Item')?>
+<?php endif;?>

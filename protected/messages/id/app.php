@@ -136,4 +136,8 @@ return array(
 	'Are you sure to delete this item?' => 'Anda yakin ingin menghapus item ini?',
 	'Payment Date' => 'Tanggal Pembayaran',
 	'Back' => 'Kembali',
+	'Not Yet Invoice Item' => 'Belum Ada Data Tagihan',
+	'Total Cost Not Paid' => 'Total Cost Belum Bayar',
+	'Total Cost Paid' => 'Total Cost Sudah Bayar',
+	'Total Cost All' => 'Total Cost Keseluruhan',
 );
