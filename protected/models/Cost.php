@@ -21,7 +21,6 @@ class Cost extends ActiveRecord
 	
 	const STATUS_NOT_PAID = 0;
 	const STATUS_PAID = 1;
-	const STATUS_CANCEL = -1;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Outlay the static model class
@@ -104,6 +103,7 @@ class Cost extends ActiveRecord
 		$criteria->compare('period_id',$this->period_id);
 		$criteria->compare('service_id',$this->service_id);
 		$criteria->compare('status',$this->status);
+		
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
@@ -147,8 +147,8 @@ class Cost extends ActiveRecord
 		if ($this->status == self::STATUS_PAID) {
 			return false;
 		}
-		$this->status = self::STATUS_CANCEL;
-		return $this->save();
+	
+		return $this->delete();
 	}
 	
 	public function getTotalCostLocale()
@@ -173,7 +173,7 @@ class Cost extends ActiveRecord
 											AND customer_id IS NOT NULL')
 											->query(array(
 												'period_id'=>$period_id,
-												'status' => STATUS_PAID,
+												'status' => self::STATUS_PAID,
 											))->readColumn(0);
 	}
 	

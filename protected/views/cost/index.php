@@ -100,6 +100,19 @@ $this->menu=array(
 						'url' => 'Yii::app()->createUrl("/cost/cancel",array("id"=>$data->id))',
 						'imageUrl'=>Yii::app()->request->baseUrl.'/images/delete.png',
 						'visible' => '$data->status == Cost::STATUS_NOT_PAID',
+						'click' => 'function() {
+										if (!confirm("'. Yii::t('app','Are you sure to cancel this cost?') .'")) {
+											return false;
+										}
+										$.fn.yiiGridView.update("cost-grid", {
+											type:"POST",
+											url:$(this).attr("href"),
+											success:function() {
+												$.fn.yiiGridView.update("cost-grid");
+											}
+										});
+										return false;
+									}'
 					)
 				),
 				

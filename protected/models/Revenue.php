@@ -17,7 +17,6 @@ class Revenue extends ActiveRecord
 {
 	const STATUS_RECEIVED = 1;
 	const STATUS_NOT_RECEIVED = 0;
-	const STATUS_CANCEL = -1;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Revenue the static model class
@@ -145,8 +144,7 @@ class Revenue extends ActiveRecord
 		if ($this->status == self::STATUS_RECEIVED) {
 			return false;
 		}
-		$this->status = self::STATUS_CANCEL;
-		return $this->save();
+		return $this->delete();
 	}
 
 	public function findByPeriod($period_id)
