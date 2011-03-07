@@ -52,7 +52,7 @@ class Service extends ActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 		'childs'=>array(self::HAS_MANY,'Service','parent_id'),
-		'parent'=>array(self::BELONGS_TO,'Service','parent_id'),
+		'parents'=>array(self::BELONGS_TO,'Service','parent_id'),
 		);
 	}
 

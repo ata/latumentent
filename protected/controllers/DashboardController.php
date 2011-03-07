@@ -22,8 +22,8 @@ class DashboardController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','management','customer_services'),
-				'roles'=>array('admin','management','customer_services'),
+				'actions'=>array('index','management','customer_services','technical_support'),
+				'roles'=>array('admin','management','customer_services','technical_support'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('index','customer','filter','notifyDelete'),
@@ -60,7 +60,11 @@ class DashboardController extends Controller
 
 	public function actionTechnical_support()
 	{
-		$this->render('technical_support');
+		$ticketList = new Ticket('search');
+		
+		$this->render('technical_support',array(
+			'ticketList'=>$ticketList
+		));
 	}
 	
 	public function actionCustomer_services()

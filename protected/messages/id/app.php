@@ -140,4 +140,7 @@ return array(
 	'Total Cost Not Paid' => 'Total Cost Belum Bayar',
 	'Total Cost Paid' => 'Total Cost Sudah Bayar',
 	'Total Cost All' => 'Total Cost Keseluruhan',
+	'Total Revenue Not Received' => 'Total Pendapatan Belum Diterima',
+	'Total Revenue Received' => 'Total Pendapatan Sudah Diterima',
+	'Total Revenue All' => 'Total Pendapatan Keseluruhan',
 );

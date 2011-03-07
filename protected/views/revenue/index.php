@@ -87,6 +87,8 @@ $this->menu=array(
 </div>
 <div class="span-24 bills" id="total">
 	<?php $this->renderPartial('_total',array(
-		'totalRevenue'=>$totalRevenue
+		'totalRevenueNotReceived'=>$totalRevenueNotReceived,
+		'totalRevenueReceived'=>$totalRevenueReceived,
+		'totalRevenueAll'=>$totalRevenueAll,
 	))?>
 </div>

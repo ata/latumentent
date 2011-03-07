@@ -177,6 +177,11 @@ class Revenue extends ActiveRecord
 		return $this->service?$this->service->name:'--';
 	}
 	
+	public function getParentServiceName()
+	{
+		return $this->service->parents->name;
+	}
+	
 	public function getStatusLabel()
 	{
 		if($this->status == self::STATUS_RECEIVED){
@@ -225,7 +230,57 @@ class Revenue extends ActiveRecord
 												'status' => self::STATUS_RECEIVED,
 											))->readColumn(0);
 	}
+	
+	public function totalRevenueByPeriodNotReceived($period_id)
+	{
+		return Yii::app()->db->createCommand('SELECT SUM(amount) 
+											FROM revenue
+											WHERE period_id = :period_id
+											AND status = :status')
+											->query(array(
+												'period_id' => $period_id,
+												'status' => self::STATUS_NOT_RECEIVED,
+											))->readColumn(0);
+	}
+	
+	public function totalRevenueByPeriodReceived($period_id)
+	{
+		return Yii::app()->db->createCommand('SELECT SUM(amount) 
+											FROM revenue
+											WHERE period_id = :period_id
+											AND status = :status')
+											->query(array(
+												'period_id' => $period_id,
+												'status' => self::STATUS_RECEIVED,
+											))->readColumn(0);
+	}
 
+	public function totalRevenueByPeriodAll($period_id)
+	{
+		return Yii::app()->db->createCommand('SELECT SUM(amount) 
+											FROM revenue
+											WHERE period_id = :period_id
+											')
+											->query(array(
+												'period_id' => $period_id,
+											))->readColumn(0);
+	}
+	
+	public function totalRevenueByPeriodNotReceivedLocale($period_id)
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenueByPeriodNotReceived($period_id),'IDR');
+	}
+	
+	public function totalRevenueByPeriodReceivedLocale($period_id)
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenueByPeriodReceived($period_id),'IDR');
+	}
+	
+	public function totalRevenueByPeriodAllLocale($period_id)
+	{
+		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenueByPeriodAll($period_id),'IDR');
+	}
+	
 	public function totalRevenueByPeriodIdLocale($period_id)
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalRevenueByPeriodId($period_id),'IDR');

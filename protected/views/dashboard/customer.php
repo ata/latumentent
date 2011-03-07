@@ -48,7 +48,7 @@ $this->breadcrumbs=array(
 	<?php else:?>
 		<div class="row">
 			<span class="title"><?php echo CHtml::activeLabel($invoice->customer->user, 'fullname') ?>:</span>
-			<span class="value"><?php echo $invoice->customer->fullname?>:</span>
+			<span class="value"><?php echo $invoice->customer->user->fullname?>:</span>
 		</div>
 		
 		<div class="row">

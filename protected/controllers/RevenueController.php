@@ -137,12 +137,16 @@ class RevenueController extends Controller
 		
 		
 		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
-		$totalRevenue = Revenue::model()->totalRevenueByPeriodIdLocale(Period::model()->lastId);
+		$totalRevenueNotReceived = Revenue::model()->totalRevenueByPeriodNotReceivedLocale(Period::model()->lastId);
+		$totalRevenueReceived = Revenue::model()->totalRevenueByPeriodReceivedLocale(Period::model()->lastId);
+		$totalRevenueAll = Revenue::model()->totalRevenueByPeriodAllLocale(Period::model()->lastId);
 		
 		$this->render('index',array(
 			'revenue'=>$revenue,
 			'periodList'=>$periodList,
-			'totalRevenue'=>$totalRevenue,
+			'totalRevenueNotReceived'=>$totalRevenueNotReceived,
+			'totalRevenueReceived'=>$totalRevenueReceived,
+			'totalRevenueAll'=>$totalRevenueAll,
 		));
 	}
 	
@@ -152,10 +156,14 @@ class RevenueController extends Controller
 			$period_id = $_POST['period_id'];
 		} 
 		
-		$totalRevenue = Revenue::model()->totalRevenueByPeriodIdLocale($period_id);
+		$totalRevenueNotReceived = Revenue::model()->totalRevenueByPeriodNotReceivedLocale($period_id);
+		$totalRevenueReceived = Revenue::model()->totalRevenueByPeriodReceivedLocale($period_id);
+		$totalRevenueAll = Revenue::model()->totalRevenueByPeriodAllLocale($period_id);
 		
 		$this->renderPartial('_total',array(
-			'totalRevenue'=>$totalRevenue,
+			'totalRevenueNotReceived'=>$totalRevenueNotReceived,
+			'totalRevenueReceived'=>$totalRevenueReceived,
+			'totalRevenueAll'=>$totalRevenueAll,
 		));
 	}
 	/**
