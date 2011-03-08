@@ -49,7 +49,6 @@
 		</thead>
 		<tbody>
 			<?php if(count($revenue) > 0):?>
-			<?php var_dump($revenue['service']['parents'])?>
 				<?php foreach($revenue as $data):?>
 					<tr>
 						<td class="title"><?php echo $data->serviceName;?></td>

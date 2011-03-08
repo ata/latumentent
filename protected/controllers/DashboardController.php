@@ -40,6 +40,10 @@ class DashboardController extends Controller
 		if (Yii::app()->user->role == 'customer') {
 			$this->redirect(array('customer'));
 		}
+		
+		if(Yii::app()->user->role == 'technical_support'){
+			$this->redirect(array('ticket/index'));
+		}
 		$periodListJSON = CJSON::encode(array_values(CHtml::listData(Period::model()->findAll(),'id','name')));
 		$arpuListJSON = '[' . implode(',',CHtml::listData(StatisticArpu::model()->findAll(),'id','value')) . ']';
 		$clientListJSON = '[' . implode(',',CHtml::listData(StatisticClient::model()->findAll(),'id','value')) . ']';

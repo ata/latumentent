@@ -1,3 +1,4 @@
+<?php var_dump($invoice->invoiceItems)?>
 <div class="span-24 bills">
 	<?php foreach($invoice->invoiceItems as $item):?>
 	<h3><?php echo $item->service->name ?></h3>

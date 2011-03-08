@@ -9,6 +9,8 @@ class BalanceController extends Controller
 		$period = new Period('search');
 		$periodList = CHtml::listData(Period::model()->desc()->findAll(),'id','name');
 		
+		//print_r($revenue);
+		
 		$this->render('index',array(
 			'revenue'=>$revenue,
 			'cost'=>$cost,

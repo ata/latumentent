@@ -177,11 +177,6 @@ class Revenue extends ActiveRecord
 		return $this->service?$this->service->name:'--';
 	}
 	
-	public function getParentServiceName()
-	{
-		return $this->service->parents->name;
-	}
-	
 	public function getStatusLabel()
 	{
 		if($this->status == self::STATUS_RECEIVED){
