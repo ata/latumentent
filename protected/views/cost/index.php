@@ -12,6 +12,20 @@
 		$("#total").load("'.Yii::app()->createUrl("cost/filter").'",
 			{period_id:$(this).val()});
 	});
+	$(".status").click(function(){
+		if(!confirm("'.Yii::t('app','Are sure to pay this cost?').'")){
+			return false;
+		} else {
+			$.fn.yiiGridView.update("cost-grid",{
+				type:"POST",
+				url:$(this).attr("href"),
+				success:function() {
+					$.fn.yiiGridView.update("cost-grid");
+				}
+			});
+			return false;
+		}
+	});
 })(jQuery)
 ')
 ?>
@@ -84,8 +98,10 @@ $this->menu=array(
 				'header'=> Yii::t('app','Service'),
 			),
 			array(
-				'name'=>'statusLabel',
+				'name'=>'statusDisplay',
 				'header'=>Yii::t('app','Status'),
+				'type'=>'raw',
+				'htmlOptions'=>array('class'=>'statusDisplay'),
 			),
 			array(
 				'name'=>'costLocale',

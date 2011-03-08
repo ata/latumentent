@@ -22,7 +22,7 @@ class CostController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view','create','update','filter','cancel'),
+				'actions'=>array('index','view','create','update','filter','cancel','pay'),
 				'roles'=>array('admin','management','customer_service'),
 			),
 			array('deny',  // deny all users
@@ -161,6 +161,21 @@ class CostController extends Controller
 			'totalCostPaid'=>$totalCostPaid,
 			'totalCostAll'=>$totalCostAll,
 		));
+	}
+	
+	public function actionPay($id)
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow deletion via POST request
+			$this->loadCost($id)->payCost(Yii::app()->user->id);
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		}
+		else
+			throw new CHttpException(400,Yii::t('app','Invalid request. Please do not repeat this request again.'));
 	}
 
 	/**

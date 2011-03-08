@@ -267,5 +267,23 @@ class Cost extends ActiveRecord
 	{
 		return Yii::app()->locale->numberFormatter->formatCurrency($this->totalCostByPeriodAll($period_id),'IDR');
 	}
+	
+	public function getStatusDisplay()
+	{
+		if($this->status == self::STATUS_NOT_PAID){
+			return Yii::t('app','Not Paid ({link})',array(
+				'{link}'=>CHtml::link(Yii::t('app','Pay'),array('cost/pay','id'=>$this->id),array('class'=>'status'))
+			));
+		} else {
+			return Yii::t('app','Paid');
+		}
+	}
+	
+	public function payCost($user_id)
+	{
+		$this->status = self::STATUS_PAID;
+		$this->user_handle_id = $user_id;
+		$this->save();
+	}
 }
 
