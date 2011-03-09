@@ -79,6 +79,10 @@ $this->menu=array(
 			'header'=>Yii::t('app','Status'),
 		),
 		array(
+			'name'=>'user_handle_id',
+			'value'=>'$data->userHandle'
+		),
+		array(
 			'name'=>'amountLocale',
 			'header'=>Yii::t('app','Amount'),
 		),

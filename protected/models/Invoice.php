@@ -232,13 +232,16 @@ class Invoice extends ActiveRecord
 				'{link}' => CHtml::link(Yii::t('app','Pay'),array('invoice/pay','id' => $this->id))
 			));
 		}
-		return Yii::t('app','Paid');
+		return Yii::t('app','Paid on {date}',array(
+			'{date}'=>Yii::app()->locale->dateFormatter->formatDateTime($this->paying_date)
+		));
 	}
 	
 	public function pay($user_id)
 	{
 		$this->status = self::STATUS_PAID;
 		$this->user_handle_id = $user_id; 
+		$this->paying_date = date('Y-m-d H:i:s');
 		foreach($this->invoiceItems as $item) {
 			$revenue = new Revenue;
 			$revenue->name = Yii::t('app','{service} Payment from {name}',array(

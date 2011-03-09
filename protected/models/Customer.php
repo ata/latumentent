@@ -304,7 +304,9 @@ class Customer extends ActiveRecord
 	public function getDisplayOwnership()
 	{
 		if($this->ownership == self::OWNERSHIP_RENTER){
-			return CHtml::encode(Yii::t('app','Hire Up To {hire_up}',array('{hire_up}'=>$this->hire_up_to)));
+			return CHtml::encode(Yii::t('app','Hire Up To {hire_up}',array(
+				'{hire_up}'=>date('j F Y',strtotime($this->hire_up_to)
+			))));
 		} else {
 			return CHtml::encode(Yii::t('app','Owner'));
 		}

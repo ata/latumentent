@@ -859,6 +859,14 @@ td {
 	font-size:1.5em;
 }
 
+#total table thead tr.ybills th.title,
+#total table thead tr.ybills th.value{
+	background:#ffdddd;
+	color:#990000;
+	text-shadow:1px 1px 0 #FFF;
+	font-size:1.5em;
+}
+
 #total_invoice table thead tr.tbills th.title,
 #total_invoice table thead tr.tbills th.value{
 	background:#ffdddd;
@@ -867,14 +875,22 @@ td {
 	font-size:2em;
 }
 
-#total table thead tr.trevenue th.title,
+#total table thead tr.tbills th.title,
+#total table thead tr.tbills th.value{
+	background:#ffdddd;
+	color:#009;
+	text-shadow:1px 1px 0 #FFF;
+	font-size:2em;
+}
+
+/*#total table thead tr.trevenue th.title,
 #total table thead tr.trevenue th.value{
 	background:#dfd;
 	color:#090;
 	text-shadow:1px 1px 0 #FFF;
 	font-size:1.3em;
 }
-
+*/
 #total table thead tr.tcost th.title,
 #total table thead tr.tcost th.value{
 	background:#ffdddd;

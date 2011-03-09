@@ -12,7 +12,7 @@
 		$("#total").load("'.Yii::app()->createUrl("cost/filter").'",
 			{period_id:$(this).val()});
 	});
-	$(".status").click(function(){
+	$("#cost-grid a.status").live("click",function(){
 		if(!confirm("'.Yii::t('app','Are sure to pay this cost?').'")){
 			return false;
 		} else {

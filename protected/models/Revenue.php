@@ -65,6 +65,7 @@ class Revenue extends ActiveRecord
 			'period'=>array(self::BELONGS_TO,'Period','period_id'),
 			'customer' => array(self::BELONGS_TO,'Customer','customer_id'),
 			'user'=>array(self::BELONGS_TO,'User','user_id'),
+			'handle'=>array(self::BELONGS_TO,'User','user_handle_id'),
 			
 		);
 	}
@@ -81,6 +82,7 @@ class Revenue extends ActiveRecord
 			'period_id' => Yii::t('app','Period'),
 			'service_id' => Yii::t('app','Service'),
 			'user_id' => Yii::t('app','User'),
+			'user_handle_id'=>Yii::t('app','Handled'),
 		);
 	}
 
@@ -101,6 +103,7 @@ class Revenue extends ActiveRecord
 		$criteria->compare('service_id',$this->service_id);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('status',$this->status);
+		$criteria->compare('user_handle_id',$this->user_handle_id);
 
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
@@ -186,6 +189,14 @@ class Revenue extends ActiveRecord
 		} else {
 			return Yii::t('app','Not Received');
 		}
+	}
+	
+	public function getUserHandle()
+	{
+		return Yii::t('app','Received by {name}({role})',array(
+			'{name}'=>$this->handle->fullname,
+			'{role}'=>$this->handle->role->name,
+		));
 	}
 	
 	public function findAllCustomerRevenueByPeriodId($period_id) 
