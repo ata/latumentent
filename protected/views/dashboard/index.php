@@ -17,14 +17,61 @@
 	
 </div>
 
+<div class="chart span-24 last" id="statisc-pie-service-package">
+
+</div>
+
 
 <script type="text/javascript">
 	var period_list = <?php echo $periodListJSON ?>;
 	var arpu_list = <?php echo $arpuListJSON ?>;
 	var client_list = <?php echo $clientListJSON ?>;
 	var cost_client_list = <?php echo $costClientListJSON ?>;
-	
+	/*var customerServicePackage = <?php foreach($customerService as $a=>$k){
+									echo "['$a',$k]";
+									}?>*/
+									
 	jQuery(document).ready(function() {
+		//Service Package
+		new Highcharts.Chart({
+			chart:{
+				renderTo: 'statisc-pie-service-package',
+				plotBackgroundColor: null,
+				plotBorderWidth: null,
+				plotShadow: false
+			},
+			title: {
+				text: '<?php echo Yii::t('app','Service Package Customer Usage')?>'
+			},
+			tooltip: {
+				formatter: function() {
+					return '<b>'+ this.point.name +'</b>: '+ this.y;
+				}
+			},
+			plotOptions: {
+				pie: {
+					allowPointSelect: true,
+					cursor: 'pointer',
+					dataLabels: {
+						enabled: true,
+						/*color: Highcharts.theme.textColor || '#000000',
+						connectorColor: Highcharts.theme.textColor || '#000000',*/
+						formatter: function() {
+							return '<b>'+ this.point.name +'</b>: '+ this.y;
+						}
+					}
+				}
+			},
+			series: [{
+				type: 'pie',
+				name: '<?php echo Yii::t('app','Service Package Customer Usage')?>',
+				data: [<?php foreach($customerService as $a=>$k){
+								echo "['$a',$k],";
+						}?>]
+			}]
+
+
+		});
 		// ARPU
 		new Highcharts.Chart({
 			chart: {

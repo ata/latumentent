@@ -44,16 +44,21 @@ class DashboardController extends Controller
 		if(Yii::app()->user->role == 'technical_support'){
 			$this->redirect(array('ticket/index'));
 		}
+		
+		$customerService =CHtml::listData(Customer::model()->findAll(),'displayServicePackage','servicePackage.customerCount');
+		
 		$periodListJSON = CJSON::encode(array_values(CHtml::listData(Period::model()->findAll(),'id','name')));
 		$arpuListJSON = '[' . implode(',',CHtml::listData(StatisticArpu::model()->findAll(),'id','value')) . ']';
 		$clientListJSON = '[' . implode(',',CHtml::listData(StatisticClient::model()->findAll(),'id','value')) . ']';
 		$costClientListJSON = '[' . implode(',',CHtml::listData(StatisticCostClient::model()->findAll(),'id','value')) . ']';
+	
 		
 		$this->render('index',array(
 			'periodListJSON' => $periodListJSON,
 			'arpuListJSON' => $arpuListJSON,
 			'clientListJSON' => $clientListJSON,
 			'costClientListJSON' => $costClientListJSON,
+			'customerService'=>$customerService,
 		));
 	}
 

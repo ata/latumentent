@@ -205,7 +205,7 @@ class Customer extends ActiveRecord
 		sort($services);
 		return implode(', ', $services);
 	}
-
+	
 	public function afterFind() {
 		$this->serviceIds = array_keys($this->services);
 		return parent::afterFind();
@@ -317,4 +317,22 @@ class Customer extends ActiveRecord
 		return $this->user->fullname;
 	}
 	
+	public function getDisplayServicePackage()
+	{
+		return $this->servicePackage->name;
+	}
+	
+	public function getDisplayCountService()
+	{
+		return $this->countService;
+	}
+	
+	public function findServicePackage()
+	{
+		$criteria = new CDbCriteria;
+		$criteria->select = 'service_package_id,count(service_package_id) as countService';
+		$criteria->group = 'service_package_id';
+		
+		return $this->findAll($criteria);
+	}
 }

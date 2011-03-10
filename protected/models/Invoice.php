@@ -27,6 +27,7 @@ class Invoice extends ActiveRecord
 	
 	const STATUS_NOT_PAID = 0;
 	const STATUS_PAID = 1;
+	const NOT_FINE = 0;
 	
 	public $serviceIds;
 	/**
@@ -237,6 +238,21 @@ class Invoice extends ActiveRecord
 		));
 	}
 	
+	public function getFineLocale()
+	{
+		return Yii::app()->numberFormatter->formatCurrency($this->fine,'IDR');
+	}
+	
+	public function getAllTotalAmountLocale()
+	{
+		if($this->fine == self::NOT_FINE){
+			return Yii::app()->numberFormatter->formatCurrency($this->total_amount,'IDR');
+		} else {
+			$totalAmountFine = $this->fine + $this->total_amount;
+			return Yii::app()->numberFormatter->formatCurrency($totalAmountFine,'IDR');
+		}
+	}
+	
 	public function pay($user_id)
 	{
 		$this->status = self::STATUS_PAID;
@@ -283,5 +299,47 @@ class Invoice extends ActiveRecord
 			'status' => self::STATUS_PAID,
 			'period_id' => $period_id,
 		));
+	}
+	
+	public function addFine($customer_id,$amount,$period_id,$fine)
+	{
+		$fineAmount = $fine + ((Setting::model()->get('INVOICE_FINE_PERCENT',10)/100) * $amount);
+		$command = Yii::app()->db->createCommand();
+		$command->update('invoice',array('fine'=>$fineAmount,),
+				'customer_id =:customer_id AND period_id = :period_id 
+				AND status = :status',array(
+								':customer_id'=>$customer_id,
+								':period_id'=>$period_id,
+								':status'=>self::STATUS_NOT_PAID));
+	}
+	
+	public function payLateNow($period_id)
+	{
+		$customer = Yii::app()->db->createCommand(array(
+			'select'=>array('customer_id','total_amount','period_id','fine'),
+			'from'=>'invoice',
+			'where'=>'status = :status AND period_id = :period_id',
+			'params'=>array(':status'=>self::STATUS_NOT_PAID,':period_id'=>$period_id),
+		))->query();
+		
+		foreach($customer as $items)
+		{
+			$this->addFine($items['customer_id'],$items['total_amount'],$items['period_id'],$items['fine']);
+		}
+	}
+	
+	public function payLateBefore($period_id)
+	{
+		$customer = Yii::app()->db->createCommand(array(
+			'select'=>array('customer_id','total_amount','period_id','fine'),
+			'from'=>'invoice',
+			'where'=>'status = :status AND period_id < :period_id',
+			'params'=>array(':status'=>self::STATUS_NOT_PAID,':period_id'=>$period_id),
+		))->query();
+		
+		foreach($customer as $items)
+		{
+			$this->addFine($items['customer_id'],$items['total_amount'],$items['period_id'],$items['fine']);
+		}
 	}
 }

@@ -8,7 +8,7 @@
 		
 		<div class="row">
 			<?php echo $form->labelEx($invoice,'amount'); ?>
-			<span class="value"><?php echo $invoice->totalAmountLocale?></span>
+			<span class="value"><?php echo $invoice->allTotalAmountLocale?></span>
 		</div>
 		
 		<div class="row">

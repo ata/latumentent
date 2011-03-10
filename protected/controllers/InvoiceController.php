@@ -22,7 +22,7 @@ class InvoiceController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view','pay','filter'),
+				'actions'=>array('index','view','pay','fine','filter'),
 				'roles'=>array('admin','management','customer_services'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -112,6 +112,18 @@ class InvoiceController extends Controller
 		));
 	}
 	
+	public function actionFine()
+	{
+		$limitDate = Setting::model()->get('INVOICE_LIMIT_DATE',10);
+		$dateNow = date('d');
+		$period_id = Period::model()->last()->find()->id;
+		if($dateNow > $limitDate){
+			Invoice::model()->payLateNow($period_id);
+			Invoice::model()->payLateBefore($period_id);
+		} else {
+			Invoice::model()->payLateBefore($period_id);
+		}
+	}
 	
 	public function loadInvoice()
 	{

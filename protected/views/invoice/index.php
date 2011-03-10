@@ -72,8 +72,8 @@ $this->breadcrumbs=array(
 				'htmlOptions' => array('class' => 'ar'),
 			),
 			array(
-				'name' => 'totalCompensationLocale',
-				'header' => Yii::t('app','Total Compensation'),
+				'name' => 'fineLocale',
+				'header' => Yii::t('app','Fine'),
 				'htmlOptions' => array('class' => 'ar'),
 			),
 			array(

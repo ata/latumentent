@@ -127,5 +127,8 @@ class ServicePackage extends ActiveRecord
 		return parent::afterFind();
 	}
 	
-	
+	public function getCustomerCount()
+	{
+		return Customer::model()->count('service_package_id = :id',array('id'=>$this->id));
+	}
 }
